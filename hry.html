@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hraj sa a uč sa – Ľudsky o AI</title>
+<meta name="description" content="Novinky o AI po slovensky – krátko, zrozumiteľne a vždy so zdrojom a dátumom. Rady, návody a hry pre deti, rodičov aj seniorov.">
+<meta property="og:title" content="Hraj sa a uč sa – Ľudsky o AI">
+<meta property="og:description" content="Umelá inteligencia, vysvetlená ľudsky. Novinky so zdrojom a dátumom, rady, návody a hry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/hry.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F5FB}
+a{color:#17153B}a:hover{color:#3A3770}
+button{font-family:inherit}
+.big{zoom:1.15;width:86.9565%!important}
+.btn{transition:transform .12s ease, box-shadow .12s ease}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 #17153B!important}
+.btn:focus-visible,.gcard:focus-visible{outline:3px solid #FEBC2E;outline-offset:3px}
+.gcard{transition:transform .2s ease, box-shadow .2s ease}
+.gcard:hover{transform:translate(-4px,-4px) rotate(-.5deg);box-shadow:12px 12px 0 #17153B!important}
+@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
+.pop{animation:popIn .45s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes popIn2{0%{transform:scale(.6) rotate(-6deg);opacity:0}70%{transform:scale(1.06) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+.pop2{animation:popIn2 .45s cubic-bezier(.2,.9,.3,1.3) both}
+.dragcard{cursor:grab;touch-action:manipulation}
+.dragcard:active{cursor:grabbing}
+.basket{transition:transform .15s ease, background .15s ease}
+.basket:hover{transform:translateY(-3px)}
+.basket:focus-visible{outline:3px solid #FEBC2E;outline-offset:3px}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+.wiggle{animation:wiggle .5s ease-in-out}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.slide{animation:slideUp .4s ease-out both}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-12px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(4px)}}
+.shake{animation:shake .45s ease both}
+@keyframes floatUp{0%{transform:translateY(10px) scale(.8);opacity:0}25%{opacity:1;transform:translateY(0) scale(1.15)}100%{transform:translateY(-46px) scale(1);opacity:0}}
+.plus{animation:floatUp 1.3s ease-out both}
+@keyframes fall{0%{transform:translateY(-30px) rotate(0);opacity:1}100%{transform:translateY(520px) rotate(540deg);opacity:0}}
+.confetti{position:absolute;top:0;width:10px;height:16px;border-radius:3px;animation-name:fall;animation-timing-function:cubic-bezier(.25,.6,.5,1);animation-fill-mode:both;pointer-events:none}
+@keyframes timer{0%{width:100%;background:#28C840}60%{background:#FEBC2E}100%{width:0;background:#FF5F57}}
+.tbar{height:100%;border-radius:999px;animation-name:timer;animation-timing-function:linear;animation-fill-mode:forwards}
+@keyframes starIn{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.25) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+.star{display:inline-block;animation:starIn .5s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.bob{animation:bob 3s ease-in-out infinite}
+@keyframes ludkoWave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(14deg)}}
+.arm{transform-box:fill-box;transform-origin:0% 100%;animation:ludkoWave 1.4s ease-in-out infinite}
+@keyframes blinkC{0%,100%{opacity:1}50%{opacity:0}}
+.caret{animation:blinkC 1s step-end infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(254,188,46,.7)}50%{box-shadow:0 0 0 10px rgba(254,188,46,0)}}
+.glow{animation:glow 1.6s ease-in-out infinite}
+@media (max-width: 720px){
+.sec{padding-top:28px!important;padding-bottom:40px!important}
+.hide-m{display:none!important}
+.stage{padding:18px!important;border-radius:22px!important;box-shadow:6px 6px 0 #17153B!important}
+.qtext{font-size:21px!important}
+.ludko-side{flex-basis:100%!important;flex-direction:row!important;align-items:center!important}
+.ludko-svg{width:96px!important}
+.h1{font-size:34px!important}
+}
+@media (prefers-reduced-motion: reduce){.pop,.slide,.shake,.plus,.confetti,.tbar,.star,.bob,.arm,.caret,.glow{animation:none!important}.btn,.gcard{transition:none}.confetti{display:none}}
+</style>
+<style>[v-cloak]{display:none}</style>
+</head>
+<body>
+<div id="app" v-cloak>
+<div :class="rootClass" style="font-family: Montserrat, system-ui, sans-serif; color: #17153B; background: #F6F5FB; width: 100%; min-height: 100vh; box-sizing: border-box; overflow-x: clip">
+
+<!-- Hlavička -->
+<header style="background: #17153B; color: #FFFFFF">
+<div style="max-width: 1180px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="./" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFFFFF">
+<span style="display: flex; gap: 6px" aria-hidden="true"><span style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28C840"></span></span>
+<span style="font-weight: 800; font-size: 19px">Ľudsky o AI</span>
+</a>
+<div style="display: flex; align-items: center; gap: 10px">
+<span aria-label="Získané hviezdičky" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 999px; background: #2C2960; font-weight: 800; font-size: 16px"><span style="color: #FEBC2E; font-size: 20px">★</span>{{totalStars}} / {{maxStars}}</span>
+<button type="button" class="btn" @click="toggleBig" :aria-pressed="bigPressed" aria-label="Väčšie písmo" :style="`min-width: 44px; height: 44px; padding: 0 12px; border: 2px solid #FFFFFF; border-radius: 999px; background: ${bigBg}; color: ${bigFg}; font-weight: 800; font-size: 15px; cursor: pointer`">{{bigLabel}}</button>
+</div>
+</div>
+</header>
+
+<!-- ===== ROZCESTNÍK ===== -->
+<template v-if="isHub">
+<section style="background: #17153B; color: #FFFFFF">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 48px 24px 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+<div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #FEBC2E">ARKÁDA ĽUDKA · BEZ REGISTRÁCIE</span>
+<h1 class="h1" style="margin: 0; font-size: 56px; line-height: 1.02; font-weight: 900; color: #FFFFFF">Hraj sa a uč sa</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #D6D4EA; max-width: 560px">Zbieraj hviezdičky, prekonaj svoj rekord a odomkni všetkých 6 odznakov. Každé kolo má iné otázky.</p>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 460px">
+<div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 15px"><span>Tvoj postup</span><span>{{totalStars}} z {{maxStars}} ★</span></div>
+<div style="height: 14px; background: #2C2960; border-radius: 999px; overflow: hidden"><div :style="`height: 100%; width: ${progressPct}; background: #FEBC2E; border-radius: 999px; transition: width .6s ease`"></div></div>
+</div>
+</div>
+<div class="bob hide-m" style="flex: 1 1 220px; display: flex; justify-content: center">
+<svg viewBox="0 0 300 250" width="230" aria-hidden="true" style="overflow: visible">
+<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<path class="arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE"></rect><rect x="70" y="108" width="160" height="108" rx="30" fill="#FFFFFF"></rect><rect x="70" y="108" width="160" height="40" fill="#FFFFFF"></rect>
+<circle cx="97" cy="89" r="6.5" fill="#FF5F57"></circle><circle cx="117" cy="89" r="6.5" fill="#FEBC2E"></circle><circle cx="137" cy="89" r="6.5" fill="#28C840"></circle>
+<ellipse cx="114" cy="174" rx="9" ry="4.5" fill="#FFB8B8"></ellipse><ellipse cx="186" cy="174" rx="9" ry="4.5" fill="#FFB8B8"></ellipse>
+<ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="130" cy="147" r="3.4" fill="#FFFFFF"></circle>
+<ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="174" cy="147" r="3.4" fill="#FFFFFF"></circle>
+<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round"></path>
+<text x="262" y="62" text-anchor="middle" font-size="40" fill="#FEBC2E">★</text>
+</svg>
+</div>
+</div>
+</section>
+
+<section>
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 48px 24px 32px; display: flex; flex-direction: column; gap: 36px">
+<template v-for="(g, $index) in groups">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; display: inline-flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 900"><span :style="`width: 18px; height: 18px; border-radius: 6px; background: ${g.color}; border: 2px solid #17153B`"></span>{{g.name}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<template v-for="(t, $index) in g.games">
+<button type="button" class="gcard" @click="t.open" style="text-align: left; padding: 0; border: 3px solid #17153B; border-radius: 24px; background: #FFFFFF; color: #17153B; cursor: pointer; overflow: hidden; display: flex; flex-direction: column; box-shadow: 8px 8px 0 #17153B">
+<div :style="`background: ${g.color}; padding: 20px 22px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; border-bottom: 3px solid #17153B; width: 100%; box-sizing: border-box`">
+<span style="font-size: 44px; line-height: 1; font-weight: 900; font-family: 'JetBrains Mono', monospace">{{t.glyph}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; background: #17153B; color: #FFFFFF; border-radius: 999px; padding: 6px 10px">{{t.tag}}</span>
+</div>
+<div style="padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box">
+<strong style="font-size: 23px; font-weight: 900">{{t.title}}</strong>
+<span style="font-size: 15px; line-height: 1.45; color: #36335E">{{t.desc}}</span>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 4px">
+<span :aria-label="t.starsLabel" style="font-size: 24px; letter-spacing: 2px"><span style="color: #E8A400">{{t.starsOn}}</span><span style="color: #D6D4EA">{{t.starsOff}}</span></span>
+<span style="font-size: 14px; font-weight: 700; color: #4A4775">{{t.bestText}}</span>
+</div>
+<span style="margin-top: 4px; display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border-radius: 14px; background: #17153B; color: #FFFFFF; font-weight: 800; font-size: 17px">{{t.cta}}</span>
+</div>
+</button>
+</template>
+</div>
+</div>
+</template>
+
+<!-- Odznaky -->
+<div style="background: #FFFFFF; border: 3px solid #17153B; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 22px; font-weight: 900">Tvoje odznaky</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px">
+<template v-for="(b, $index) in badges">
+<div :style="`display: flex; align-items: center; gap: 12px; opacity: ${b.opacity}`">
+<span :class="b.cls" :style="`flex: none; width: 52px; height: 52px; border-radius: 50%; background: ${b.bg}; border: 3px solid #17153B; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px`">{{b.glyph}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 15px">{{b.name}}</strong><span style="font-size: 13px; color: #4A4775">{{b.state}}</span></span>
+</div>
+</template>
+</div>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A4775">Hry nič neodosielajú. Hviezdičky a rekordy sa ukladajú len v tvojom prehliadači. Ukážkové texty a správy sú vytvorené pre tieto hry.</p>
+</div>
+</section>
+</template>
+
+<!-- ===== HRA ===== -->
+<template v-if="isPlay">
+<section>
+<div class="sec" style="max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; display: flex; flex-direction: column; gap: 18px">
+
+<!-- Horná lišta -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<button type="button" class="btn" @click="goHub" style="min-height: 44px; padding: 0 18px; border: 2px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; font-weight: 700; font-size: 15px; cursor: pointer">← Všetky hry</button>
+<div style="display: flex; align-items: center; gap: 10px">
+<template v-if="hud.showStreak">
+<span class="pop" style="height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; background: #FF5F57; border: 2px solid #17153B; font-weight: 900; font-size: 15px">Séria ×{{hud.streak}}</span>
+</template>
+<span style="position: relative; height: 44px; display: inline-flex; align-items: center; gap: 6px; padding: 0 16px; border-radius: 999px; background: #17153B; color: #FFFFFF; font-weight: 900; font-size: 17px">{{hud.points}} b.
+<template v-if="hud.showGain"><span class="plus" style="position: absolute; right: 6px; top: -6px; color: #28C840; font-weight: 900; font-size: 20px; text-shadow: 0 2px 0 #17153B">+{{hud.gain}}</span></template>
+</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: #4A4775">{{cur.tag}}</span>
+<h1 class="h1" style="margin: 0; font-size: 40px; font-weight: 900; line-height: 1.05">{{cur.title}}</h1>
+</div>
+
+<!-- Postup -->
+<template v-if="hud.showDots">
+<div style="display: flex; gap: 8px" :aria-label="hud.dotsLabel">
+<template v-for="(d, $index) in hud.dots">
+<span :style="`flex: 1; height: 12px; border-radius: 999px; background: ${d.bg}; border: 2px solid #17153B`"></span>
+</template>
+</div>
+</template>
+
+<!-- Javisko -->
+<div class="stage" style="position: relative; overflow: hidden; background: #FFFFFF; border: 3px solid #17153B; border-radius: 28px; box-shadow: 10px 10px 0 #17153B; padding: 28px; display: flex; flex-wrap: wrap; gap: 24px">
+
+<template v-if="fx.confetti">
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
+<template v-for="(c, $index) in fx.pieces">
+<span class="confetti" :style="`left: ${c.left}; background: ${c.color}; animation-delay: ${c.delay}; animation-duration: ${c.dur}`"></span>
+</template>
+</div>
+</template>
+
+<!-- Ľudko -->
+<div class="ludko-side" style="flex: 0 0 170px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<svg :class="`ludko-svg ${ludko.cls}`" viewBox="40 30 260 200" width="160" aria-hidden="true" style="overflow: visible; flex: none">
+<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<path class="arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE"></rect><rect x="70" y="108" width="160" height="108" rx="30" fill="#FFFFFF"></rect><rect x="70" y="108" width="160" height="40" fill="#FFFFFF"></rect>
+<circle cx="97" cy="89" r="6.5" fill="#FF5F57"></circle><circle cx="117" cy="89" r="6.5" fill="#FEBC2E"></circle><circle cx="137" cy="89" r="6.5" fill="#28C840"></circle>
+<ellipse cx="114" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="ludko.cheeks"></ellipse><ellipse cx="186" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="ludko.cheeks"></ellipse>
+<ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="130" cy="147" r="3.4" fill="#FFFFFF"></circle>
+<ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="174" cy="147" r="3.4" fill="#FFFFFF"></circle>
+<line x1="164" y1="131" x2="184" y2="126" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="ludko.brow"></line>
+<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round" :opacity="ludko.smile"></path>
+<ellipse cx="150" cy="182" rx="6" ry="7" fill="#17153B" :opacity="ludko.o"></ellipse>
+<line x1="139" y1="186" x2="160" y2="181" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="ludko.flat"></line>
+<g :opacity="ludko.bOk"><circle cx="258" cy="60" r="22" fill="#28C840"></circle><path d="M247 60 l8 8 l14 -15" stroke="#17153B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+<g :opacity="ludko.bPozor"><circle cx="258" cy="60" r="22" fill="#FF5F57"></circle><line x1="258" y1="48" x2="258" y2="62" stroke="#17153B" stroke-width="6" stroke-linecap="round"></line><circle cx="258" cy="72" r="3.6" fill="#17153B"></circle></g>
+<g :opacity="ludko.bHmm"><circle cx="258" cy="60" r="22" fill="#A29BFE"></circle><text x="258" y="70" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="28" font-weight="800" fill="#17153B">?</text></g>
+<g :opacity="ludko.bStar"><text x="258" y="74" text-anchor="middle" font-size="46" fill="#FEBC2E" stroke="#17153B" stroke-width="2">★</text></g>
+</svg>
+<div class="pop" aria-live="polite" :style="`background: ${ludko.bubble}; border: 2px solid #17153B; border-radius: 16px; padding: 10px 14px; font-weight: 800; font-size: 15px; line-height: 1.3; text-align: center`">{{ludko.say}}</div>
+</div>
+
+<!-- Obsah hry -->
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+
+<template v-if="showTimer">
+<div aria-hidden="true" style="height: 12px; background: #EEECFF; border-radius: 999px; overflow: hidden"><div class="tbar" :style="`animation-duration: ${timerDur}`"></div></div>
+</template>
+
+<!-- Binárne otázky -->
+<template v-if="bin.on">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div :class="bin.cardCls" style="background: #F6F5FB; border: 3px solid #17153B; border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<span style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; background: #17153B; color: #FFFFFF; border-radius: 999px; padding: 6px 12px">{{bin.kind}}</span>
+<p class="qtext" style="margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; white-space: pre-line">{{bin.text}}</p>
+</div>
+<template v-if="asking">
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<button type="button" class="btn" @click="bin.pickA" :style="`flex: 1 1 160px; min-height: 68px; border: 3px solid #17153B; border-radius: 18px; background: ${bin.colA}; color: #17153B; font-size: 21px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B`">{{bin.labelA}}</button>
+<button type="button" class="btn" @click="bin.pickB" :style="`flex: 1 1 160px; min-height: 68px; border: 3px solid #17153B; border-radius: 18px; background: ${bin.colB}; color: #17153B; font-size: 21px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B`">{{bin.labelB}}</button>
+</div>
+</template>
+</div>
+</template>
+
+<!-- Vyber vymyslenú vetu -->
+<template v-if="pick.on">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: #4A4775">OTÁZKA PRE AI</span>
+<strong class="qtext" style="font-size: 22px">„{{pick.q}}“</strong>
+</div>
+<span style="font-weight: 700; font-size: 16px; color: #36335E">Jedna veta v odpovedi nie je pravda. Ťukni na ňu:</span>
+<template v-for="(s, $index) in pick.sentences">
+<button type="button" :class="`btn ${s.cls}`" @click="s.choose" :style="`text-align: left; min-height: 56px; padding: 12px 18px; border: 3px solid #17153B; border-radius: 16px; background: ${s.bg}; color: #17153B; font-size: 18px; font-weight: 600; line-height: 1.4; cursor: pointer; box-shadow: ${s.shadow}`">{{s.text}}</button>
+</template>
+</div>
+</template>
+
+<!-- Nauč Ľudka -->
+<template v-if="nc.train">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px">
+<div :class="`dragcard ${nc.cardCls}`" draggable="true" @dragstart="nc.dragStart" style="width: 200px; background: #FFFFFF; border: 4px solid #17153B; border-radius: 26px; box-shadow: 8px 8px 0 #17153B; padding: 14px 14px 16px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+<svg viewBox="0 0 100 100" width="130" height="130" role="img" :aria-label="nc.name">
+<g :opacity="nc.p.round"><circle cx="50" cy="58" r="30" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><path d="M50 30 Q52 18 58 12" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"></path><ellipse cx="64" cy="20" rx="9" ry="5" fill="#28C840" stroke="#17153B" stroke-width="2" transform="rotate(-25 64 20)"></ellipse></g>
+<g :opacity="nc.p.pear"><path d="M50 22 C40 22 38 40 40 48 C28 58 28 88 50 88 C72 88 72 58 60 48 C62 40 60 22 50 22 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M50 24 Q52 14 56 10" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"></path></g>
+<g :opacity="nc.p.cherry"><path d="M36 58 Q42 30 54 14 M64 60 Q60 34 54 14" stroke="#6B4A2B" stroke-width="3" fill="none"></path><circle cx="36" cy="68" r="15" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="64" cy="70" r="15" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle></g>
+<g :opacity="nc.p.grape"><path d="M50 22 Q52 12 58 8" stroke="#6B4A2B" stroke-width="4" fill="none"></path><circle cx="40" cy="34" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="60" cy="34" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="30" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="50" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="70" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="40" cy="70" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="60" cy="70" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="50" cy="86" r="10" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle></g>
+<g :opacity="nc.p.banana"><path d="M18 30 Q26 82 82 76 Q88 72 84 66 Q40 66 32 26 Q26 22 18 30 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path></g>
+<g :opacity="nc.p.straw"><path d="M50 90 C20 72 18 42 30 34 C40 28 46 32 50 36 C54 32 60 28 70 34 C82 42 80 72 50 90 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M32 32 L50 18 L68 32 L58 30 L50 24 L42 30 Z" fill="#28C840" stroke="#17153B" stroke-width="2"></path><circle cx="40" cy="50" r="2.5" fill="#FFE9A8"></circle><circle cx="58" cy="48" r="2.5" fill="#FFE9A8"></circle><circle cx="48" cy="62" r="2.5" fill="#FFE9A8"></circle><circle cx="62" cy="64" r="2.5" fill="#FFE9A8"></circle><circle cx="50" cy="76" r="2.5" fill="#FFE9A8"></circle></g>
+<g :opacity="nc.p.carrot"><path d="M50 32 L42 12 M50 32 L50 8 M50 32 L58 12" stroke="#28C840" stroke-width="5" stroke-linecap="round"></path><path d="M36 32 L64 32 L52 92 Q50 96 48 92 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M44 48 L52 48 M46 62 L54 62 M48 76 L53 76" stroke="#17153B" stroke-width="2"></path></g>
+<g :opacity="nc.p.long"><rect x="14" y="38" width="72" height="26" rx="13" :fill="nc.p.c" stroke="#17153B" stroke-width="3" transform="rotate(-25 50 51)"></rect><circle cx="40" cy="56" r="2" fill="#17153B"></circle><circle cx="54" cy="48" r="2" fill="#17153B"></circle><circle cx="64" cy="42" r="2" fill="#17153B"></circle></g>
+<g :opacity="nc.p.onion"><path d="M50 14 C52 30 76 44 76 64 C76 82 64 90 50 90 C36 90 24 82 24 64 C24 44 48 30 50 14 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M50 30 Q38 60 50 88 M50 30 Q62 60 50 88" stroke="#17153B" stroke-width="2" fill="none"></path></g>
+<g :opacity="nc.p.cabbage"><circle cx="50" cy="56" r="34" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><path d="M50 22 Q30 56 50 90 M50 22 Q70 56 50 90 M18 50 Q50 40 82 50" stroke="#17153B" stroke-width="2" fill="none"></path></g>
+<g :opacity="nc.p.potato"><ellipse cx="50" cy="58" rx="36" ry="25" :fill="nc.p.c" stroke="#17153B" stroke-width="3" transform="rotate(-10 50 58)"></ellipse><circle cx="36" cy="54" r="2.5" fill="#6B4A2B"></circle><circle cx="58" cy="50" r="2.5" fill="#6B4A2B"></circle><circle cx="64" cy="66" r="2.5" fill="#6B4A2B"></circle><circle cx="44" cy="68" r="2.5" fill="#6B4A2B"></circle></g>
+<g :opacity="nc.p.pepper"><path d="M28 40 Q24 88 42 90 Q50 82 58 90 Q76 88 72 40 Q50 30 28 40 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M50 36 L50 18 Q50 12 58 12" stroke="#28C840" stroke-width="6" fill="none" stroke-linecap="round"></path></g>
+<g :opacity="nc.p.brocc"><rect x="42" y="56" width="16" height="34" rx="5" fill="#9BD77A" stroke="#17153B" stroke-width="3"></rect><circle cx="34" cy="46" r="17" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="66" cy="46" r="17" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="50" cy="32" r="19" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle></g>
+</svg>
+<strong class="qtext" style="font-size: 26px; font-weight: 900">{{nc.name}}</strong>
+</div>
+<span style="font-size: 15px; font-weight: 700; color: #4A4775; text-align: center">{{nc.hint}}</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; width: 100%">
+<button type="button" class="basket" @click="nc.ovocie" @dragover="nc.overO" @dragleave="nc.leave" @drop="nc.dropO" aria-label="Košík Ovocie" :style="`min-height: 150px; border: 4px ${nc.borderO} #17153B; border-radius: 22px; background: ${nc.bgO}; color: #17153B; cursor: pointer; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 5px 5px 0 #17153B`">
+<svg width="46" height="34" viewBox="0 0 46 34" aria-hidden="true"><path d="M3 10 L43 10 L37 32 L9 32 Z" fill="#FFFFFF" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M12 10 Q23 -6 34 10" stroke="#17153B" stroke-width="3" fill="none"></path></svg>
+<strong style="font-size: 21px; font-weight: 900">Ovocie</strong>
+<span style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px">
+<template v-for="(x, $index) in nc.inO"><span class="pop" style="font-size: 13px; font-weight: 700; background: #FFFFFF; border: 2px solid #17153B; border-radius: 999px; padding: 3px 9px">{{x}}</span></template>
+</span>
+</button>
+<button type="button" class="basket" @click="nc.zelenina" @dragover="nc.overZ" @dragleave="nc.leave" @drop="nc.dropZ" aria-label="Košík Zelenina" :style="`min-height: 150px; border: 4px ${nc.borderZ} #17153B; border-radius: 22px; background: ${nc.bgZ}; color: #17153B; cursor: pointer; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 5px 5px 0 #17153B`">
+<svg width="46" height="34" viewBox="0 0 46 34" aria-hidden="true"><path d="M3 10 L43 10 L37 32 L9 32 Z" fill="#FFFFFF" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M12 10 Q23 -6 34 10" stroke="#17153B" stroke-width="3" fill="none"></path></svg>
+<strong style="font-size: 21px; font-weight: 900">Zelenina</strong>
+<span style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px">
+<template v-for="(x, $index) in nc.inZ"><span class="pop" style="font-size: 13px; font-weight: 700; background: #FFFFFF; border: 2px solid #17153B; border-radius: 999px; padding: 3px 9px">{{x}}</span></template>
+</span>
+</button>
+</div>
+</div>
+</template>
+<template v-if="nc.exam">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<strong style="font-size: 22px; font-weight: 900">Ľudkova skúška: háda nové veci</strong>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<template v-for="(r, $index) in nc.results">
+<div class="pop" :style="`animation-delay: ${r.delay}; border: 3px solid #17153B; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: ${r.bg}`">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg viewBox="0 0 100 100" width="56" height="56" role="img" :aria-label="r.name" style="flex: none">
+<g :opacity="r.p.round"><circle cx="50" cy="58" r="30" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle><path d="M50 30 Q52 18 58 12" stroke="#6B4A2B" stroke-width="5" fill="none"></path></g>
+<g :opacity="r.p.pear"><path d="M50 22 C40 22 38 40 40 48 C28 58 28 88 50 88 C72 88 72 58 60 48 C62 40 60 22 50 22 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.cherry"><path d="M36 58 Q42 30 54 14 M64 60 Q60 34 54 14" stroke="#6B4A2B" stroke-width="4" fill="none"></path><circle cx="36" cy="68" r="15" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle><circle cx="64" cy="70" r="15" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle></g>
+<g :opacity="r.p.grape"><circle cx="40" cy="38" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="62" cy="38" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="51" cy="60" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="51" cy="82" r="11" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle></g>
+<g :opacity="r.p.banana"><path d="M18 30 Q26 82 82 76 Q88 72 84 66 Q40 66 32 26 Q26 22 18 30 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.straw"><path d="M50 90 C20 72 18 42 30 34 C40 28 46 32 50 36 C54 32 60 28 70 34 C82 42 80 72 50 90 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.carrot"><path d="M36 32 L64 32 L52 92 Q50 96 48 92 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.long"><rect x="14" y="38" width="72" height="26" rx="13" :fill="r.p.c" stroke="#17153B" stroke-width="4" transform="rotate(-25 50 51)"></rect></g>
+<g :opacity="r.p.onion"><path d="M50 14 C52 30 76 44 76 64 C76 82 64 90 50 90 C36 90 24 82 24 64 C24 44 48 30 50 14 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.cabbage"><circle cx="50" cy="56" r="34" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle></g>
+<g :opacity="r.p.potato"><ellipse cx="50" cy="58" rx="36" ry="25" :fill="r.p.c" stroke="#17153B" stroke-width="4"></ellipse></g>
+<g :opacity="r.p.pepper"><path d="M28 40 Q24 88 42 90 Q50 82 58 90 Q76 88 72 40 Q50 30 28 40 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
+<g :opacity="r.p.brocc"><rect x="42" y="56" width="16" height="34" rx="5" fill="#9BD77A" stroke="#17153B" stroke-width="3"></rect><circle cx="34" cy="46" r="17" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="66" cy="46" r="17" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="50" cy="32" r="19" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle></g>
+</svg>
+<strong style="font-size: 19px">{{r.name}}</strong></div>
+<span style="font-size: 15px">Ľudko dal do košíka: <strong>{{r.guess}}</strong></span>
+<strong style="font-size: 16px">{{r.verdict}}</strong>
+</div>
+</template>
+</div>
+<div class="slide" style="animation-delay: 1.2s; background: #EEECFF; border-radius: 18px; padding: 18px; font-size: 17px; line-height: 1.55">{{nc.lesson}}</div>
+<button type="button" class="btn slide" @click="nc.finish" style="animation-delay: 1.4s; align-self: flex-start; min-height: 56px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Pozrieť hviezdičky →</button>
+</div>
+</template>
+
+<!-- Seniori: prvý rozhovor -->
+<template v-if="sn.on">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<strong style="font-size: 21px">Ťukni na otázku a pozri, čo odpovie AI:</strong>
+<template v-for="(q, $index) in sn.questions">
+<button type="button" class="btn" @click="q.ask" :style="`text-align: left; min-height: 66px; padding: 14px 20px; border: 3px solid #17153B; border-radius: 18px; background: ${q.bg}; color: #17153B; font-size: 20px; font-weight: 700; line-height: 1.35; cursor: pointer; box-shadow: 5px 5px 0 #17153B; display: flex; justify-content: space-between; gap: 12px; align-items: center`"><span>{{q.text}}</span><span style="flex: none; font-size: 22px; color: #E8A400">{{q.mark}}</span></button>
+</template>
+<template v-if="sn.has">
+<div style="border: 3px solid #17153B; border-radius: 22px; overflow: hidden">
+<div style="background: #A29BFE; padding: 10px 16px; display: flex; gap: 8px; border-bottom: 3px solid #17153B" aria-hidden="true"><span style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28C840"></span></div>
+<div style="padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="align-self: flex-end; max-width: 85%; background: #17153B; color: #FFFFFF; border-radius: 18px 18px 4px 18px; padding: 12px 16px; font-size: 19px; line-height: 1.45">{{sn.q}}</div>
+<div aria-live="polite" style="align-self: flex-start; max-width: 94%; background: #F6F5FB; border-radius: 18px 18px 18px 4px; padding: 14px 18px; font-size: 20px; line-height: 1.55">{{sn.typed}}<template v-if="sn.typing"><span class="caret">▍</span></template></div>
+<template v-if="sn.done"><div class="pop" style="background: #FFF3CF; border-radius: 16px; padding: 14px 16px; font-size: 18px; line-height: 1.5"><strong>Ľudkov tip: </strong>{{sn.tip}}</div></template>
+</div>
+</div>
+</template>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+<div style="background: #C9F2D2; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Pýtaj sa normálne,</strong> ako by si sa pýtal človeka.</div>
+<div style="background: #FFF3CF; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Dôležité veci si over</strong> – zdravie, peniaze, úrady.</div>
+<div style="background: #FFD6D3; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Nikdy nezadávaj</strong> heslá, PIN ani čísla kariet.</div>
+</div>
+<span style="font-size: 17px; line-height: 1.55; color: #36335E">Vyskúšať môžeš napríklad ChatGPT (chatgpt.com), Gemini (gemini.google.com) alebo Copilot (copilot.microsoft.com). Základné verzie sú zadarmo.</span>
+<template v-if="sn.canFinish">
+<button type="button" class="btn" @click="sn.finish" style="align-self: flex-start; min-height: 58px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 19px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Hotovo – pozrieť hviezdičky</button>
+</template>
+</div>
+</template>
+
+<!-- Vyhodnotenie odpovede -->
+<template v-if="fb.on">
+<div class="slide" aria-live="polite" :style="`background: ${fb.bg}; border: 3px solid #17153B; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 10px`">
+<strong style="font-size: 22px; font-weight: 900">{{fb.title}}</strong>
+<span style="font-size: 17px; line-height: 1.55">{{fb.why}}</span>
+<template v-if="fb.hasSigns"><span style="font-size: 16px; line-height: 1.5"><strong>Znaky: </strong>{{fb.signs}}</span></template>
+<template v-if="fb.hasSrc"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">Zdroj: {{fb.src}}</span></template>
+</div>
+<button type="button" class="btn" @click="fb.next" style="align-self: flex-start; min-height: 58px; padding: 0 30px; border: 3px solid #17153B; border-radius: 999px; background: #17153B; color: #FFFFFF; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #A29BFE">{{fb.nextLabel}}</button>
+</template>
+
+<!-- Koniec kola -->
+<template v-if="end.on">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 8px 0">
+<div :aria-label="end.starsLabel" style="display: flex; gap: 10px; font-size: 64px; line-height: 1">
+<template v-for="(st, $index) in end.stars">
+<span class="star" :style="`animation-delay: ${st.delay}; color: ${st.color}; text-shadow: 0 3px 0 #17153B`">★</span>
+</template>
+</div>
+<strong style="font-size: 30px; font-weight: 900">{{end.title}}</strong>
+<span style="font-size: 18px; color: #36335E">{{end.sub}}</span>
+<span style="font-size: 44px; font-weight: 900">{{end.points}} b.</span>
+<template v-if="end.record"><span class="pop glow" style="animation-delay: .9s; background: #FEBC2E; border: 3px solid #17153B; border-radius: 999px; padding: 8px 18px; font-weight: 900; font-size: 17px">Nový rekord!</span></template>
+<template v-if="end.badgeNew"><span class="pop" style="animation-delay: 1.1s; display: inline-flex; align-items: center; gap: 10px; background: #EEECFF; border: 3px solid #17153B; border-radius: 18px; padding: 10px 16px; font-weight: 800; font-size: 16px"><span :style="`width: 36px; height: 36px; border-radius: 50%; background: ${end.badgeBg}; border: 2px solid #17153B; display: inline-flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace`">{{end.badgeGlyph}}</span>Odomkol si odznak {{end.badgeName}}!</span></template>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E; max-width: 520px">{{end.lesson}}</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
+<button type="button" class="btn" @click="end.again" style="min-height: 58px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Hrať znova (nové otázky)</button>
+<button type="button" class="btn" @click="end.nextGame" style="min-height: 58px; padding: 0 24px; border: 3px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Ďalšia hra: {{end.nextTitle}} →</button>
+<button type="button" class="btn" @click="end.share" style="min-height: 58px; padding: 0 24px; border: 3px solid #17153B; border-radius: 999px; background: #A29BFE; color: #17153B; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 5px 5px 0 #17153B">{{end.shareLabel}}</button>
+</div>
+</div>
+</template>
+
+</div>
+</div>
+</div>
+</section>
+</template>
+
+<footer style="border-top: 1px solid #E6E5F0; background: #FFFFFF">
+<div style="max-width: 1180px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 15px; color: #36335E">
+<a href="./">← Späť na úvod</a>
+<span style="display: flex; flex-wrap: wrap; gap: 6px 18px"><a href="opravy.html">Opravy</a><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></span>
+</div>
+</footer>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.5.45/dist/vue.global.prod.js" integrity="sha384-K2FjvpG1y48yCE+7CBPhnKc16ShPmT3dlNwvoA3dhjV18+L5ugI0P8PWPvdjm/Fa" crossorigin="anonymous"></script>
+<script src="assets/dc-shim.js"></script>
+<script>
+var GAMES = [
+  { id: 'nauc', group: 0, tag: 'PRE DETI · 6+', glyph: 'AI', title: 'Nauč Ľudka', desc: 'Ukáž mu príklady a pozri, ako sa AI učí.', type: 'nauc', timer: 0 },
+  { id: 'prezradit', group: 0, tag: 'PRE DETI · 6+', glyph: '?!', title: 'Čo prezradiť AI?', desc: 'Môžeš to povedať, alebo si to nechaj pre seba?', type: 'bin', size: 6, timer: 0, labels: ['Môžem povedať', 'Nechám si to'], cols: ['#28C840', '#FF5F57'] },
+  { id: 'robot', group: 0, tag: 'PRE DETI · 8+', glyph: '01', title: 'Robot, či človek?', desc: 'Spoznáš, kto napísal text?', type: 'bin', size: 4, timer: 0, labels: ['Človek', 'AI'], cols: ['#FEBC2E', '#A29BFE'] },
+  { id: 'podvod', group: 1, tag: 'NÁSTRAHY · NA ČAS', glyph: '!!', title: 'Odhaľ podvod', desc: 'Falošné videá, hlas aj správy. Rozhodni rýchlo!', type: 'bin', size: 5, timer: 15, labels: ['Podvod', 'V poriadku'], cols: ['#FF5F57', '#28C840'] },
+  { id: 'halu', group: 1, tag: 'NÁSTRAHY · NA ČAS', glyph: '≠', title: 'Vymyslela si to AI?', desc: 'Nájdi vetu, ktorá nie je pravda.', type: 'pick', size: 3, timer: 25 },
+  { id: 'senior', group: 2, tag: 'AI A SENIORI', glyph: '…', title: 'Prvý rozhovor s AI', desc: 'Vyskúšaj si to bez registrácie, s veľkým písmom.', type: 'senior', timer: 0 }
+];
+var GROUPS = [{ name: 'Pre deti', color: '#28C840' }, { name: 'Nástrahy AI', color: '#FF5F57' }, { name: 'AI a seniori', color: '#FEBC2E' }];
+var BADGES = { nauc: 'Ľudkov učiteľ', prezradit: 'Strážca súkromia', robot: 'Detektív textov', podvod: 'Lovec podvodov', halu: 'Overovač faktov', senior: 'Prvý rozhovor' };
+var COLORS = { cervena: '#FF5F57', zlta: '#FEBC2E', oranzova: '#FF9F43', zelena: '#28C840', biela: '#F4F1E8', hneda: '#B07A4F', fialova: '#8E5BD6' };
+var TRAIN_POOL = [
+  { name: 'Jablko', shape: 'round', f: [1, 'cervena', 1], ok: 'Ovocie' }, { name: 'Banán', shape: 'banana', f: [1, 'zlta', 1], ok: 'Ovocie' },
+  { name: 'Jahoda', shape: 'straw', f: [1, 'cervena', 0], ok: 'Ovocie' }, { name: 'Slivka', shape: 'round', f: [1, 'fialova', 1], ok: 'Ovocie' },
+  { name: 'Mrkva', shape: 'carrot', f: [0, 'oranzova', 0], ok: 'Zelenina' }, { name: 'Uhorka', shape: 'long', f: [0, 'zelena', 0], ok: 'Zelenina' },
+  { name: 'Cibuľa', shape: 'onion', f: [0, 'biela', 0], ok: 'Zelenina' }, { name: 'Kapusta', shape: 'cabbage', f: [0, 'zelena', 0], ok: 'Zelenina' }
+];
+var TEST_POOL = [
+  { name: 'Hruška', shape: 'pear', f: [1, 'zlta', 1], ok: 'Ovocie' }, { name: 'Čerešňa', shape: 'cherry', f: [1, 'cervena', 1], ok: 'Ovocie' },
+  { name: 'Broskyňa', shape: 'round', f: [1, 'oranzova', 1], ok: 'Ovocie' }, { name: 'Hrozno', shape: 'grape', f: [1, 'fialova', 0], ok: 'Ovocie' },
+  { name: 'Zemiak', shape: 'potato', f: [0, 'hneda', 0], ok: 'Zelenina' }, { name: 'Paprika', shape: 'pepper', f: [0, 'cervena', 0], ok: 'Zelenina' },
+  { name: 'Brokolica', shape: 'brocc', f: [0, 'zelena', 0], ok: 'Zelenina' }, { name: 'Cesnak', shape: 'onion', f: [0, 'biela', 0], ok: 'Zelenina' }
+];
+var SHAPES = ['round', 'pear', 'cherry', 'grape', 'banana', 'straw', 'carrot', 'long', 'onion', 'cabbage', 'potato', 'pepper', 'brocc'];
+function pic(item) { var p = { c: COLORS[item.f[1]] }; SHAPES.forEach(function (k) { p[k] = k === item.shape ? 1 : 0; }); return p; }
+var POOLS = {
+  prezradit: [
+    { kind: 'KARTIČKA', text: 'Tvoje obľúbené zviera', a: true, why: 'Pokojne. Je to bežná vec, ktorú by si povedal aj spolužiakovi.' },
+    { kind: 'KARTIČKA', text: 'Heslo do hry alebo do mobilu', a: false, why: 'Heslo nepatrí nikomu – ani AI. Ak treba, pozná ho len rodič.' },
+    { kind: 'KARTIČKA', text: 'Adresa, kde bývaš', a: false, why: 'Kde bývaš, nepotrebuje vedieť nikto na internete.' },
+    { kind: 'KARTIČKA', text: 'Otázka, prečo je obloha modrá', a: true, why: 'Presne na takéto otázky je AI výborná. Pýtaj sa!' },
+    { kind: 'KARTIČKA', text: 'Tvoje celé meno a škola, do ktorej chodíš', a: false, why: 'Podľa mena a školy sa dá zistiť, kde ťa nájsť.' },
+    { kind: 'KARTIČKA', text: 'Fotka kamaráta', a: false, why: 'Fotka patrí kamarátovi. Bez jeho dovolenia a dovolenia rodiča ju nikam nenahrávaj.' },
+    { kind: 'KARTIČKA', text: 'Že ťa niečo veľmi trápi', a: false, why: 'S tým ti najlepšie pomôže mama, ocko, učiteľ alebo iný dospelý, ktorému veríš.' },
+    { kind: 'KARTIČKA', text: 'Že ste práve celá rodina na dovolenke', a: false, why: 'Prezradil by si, že doma nikto nie je.' },
+    { kind: 'KARTIČKA', text: 'Vtip, ktorý si dnes počul v škole', a: true, why: 'Smiech je v poriadku! AI ti možno povie ďalší.' },
+    { kind: 'KARTIČKA', text: 'Telefónne číslo mamy alebo ocka', a: false, why: 'Čísla rodiny sú súkromné. Nepíš ich do aplikácií ani chatov.' }
+  ],
+  robot: [
+    { kind: 'TEXT', text: 'Včera sme s dedkom chytali ryby a ja som chytil najväčšiu! Teda skoro. Ušla mi.', a: true, why: 'Napísal to človek – je tam zážitok a vtip. Ale AI vie vymyslieť aj takýto príbeh, len ho nikdy nezažila.' },
+    { kind: 'TEXT', text: 'Ryby sú vodné živočíchy, ktoré dýchajú žiabrami. Na svete žije viac ako 30 000 druhov rýb.', a: false, why: 'Toto napísala AI. Znie to ako z encyklopédie – rovnako by to však mohol napísať aj učiteľ.' },
+    { kind: 'TEXT', text: 'Ahoj Ema, zajtra nezabudni pastelky, budeme kresliť jeseň. Pani učiteľka', a: true, why: 'Napísal to človek – krátka správa pre konkrétnu Emu.' },
+    { kind: 'TEXT', text: 'Tu sú 3 nápady na daždlivé popoludnie:\n1. Postav pevnosť z vankúšov.\n2. Zahraj sa na detektíva.\n3. Upeč s rodičmi muffiny.', a: false, why: 'Toto napísala AI – rada robí očíslované zoznamy. Ale aj ľudia ich robia!' },
+    { kind: 'TEXT', text: 'Mami, kúpila si mlieko? Ja som zabudla. A Dorka ma dnes celý deň ignoruje :(', a: true, why: 'Napísal to človek – je to osobné a trochu chaotické, ako bežná správa.' },
+    { kind: 'TEXT', text: 'Mačky spia v priemere 12 až 16 hodín denne. Väčšinu dňa teda trávia odpočinkom.', a: false, why: 'Toto napísala AI – vecný fakt bez osobného zážitku.' }
+  ],
+  podvod: [
+    { kind: 'SMS', text: 'Ahoj mami, mám nový mobil, starý sa mi pokazil. Ulož si ma a napíš mi radšej na WhatsApp.', a: true, why: 'Podvodník sa vydáva za tvoje dieťa a čoskoro bude chcieť peniaze alebo zaplatiť „súrnu faktúru“.', signs: 'neznáme číslo, „nový mobil“, presun na WhatsApp.', src: 'Ministerstvo vnútra SR a Polícia SR' },
+    { kind: 'REKLAMA', text: 'Video: známy politik odporúča investovať 250 € do novej platformy. „Garantovaný zisk už o mesiac!“', a: true, why: 'Takéto videá bývajú upravené umelou inteligenciou (deepfake) – osobnosť to nikdy nepovedala.', signs: 'známa tvár, garantovaný zisk, malý vklad.', src: 'ESET Threat Report H2 2024, Národná banka Slovenska' },
+    { kind: 'TELEFONÁT', text: 'Hlas, ktorý znie presne ako tvoj vnuk: „Babka, mal som nehodu, potrebujem hneď peniaze. Nehovor to rodičom!“', a: true, why: 'AI dnes vie napodobniť hlas z krátkej nahrávky. Hovor ukonči a zavolaj vnukovi na číslo, ktoré poznáš.', signs: 'naliehanie, peniaze, tajnosť. Dohodnite sa v rodine na „bezpečnom slove“.', src: 'Európsky orgán pre bankovníctvo (EBA), 2026' },
+    { kind: 'TELEFONÁT', text: 'Hlas po anglicky: „Tu je slovenská polícia, oddelenie medzinárodnej kriminality. Váš účet je v ohrození.“', a: true, why: 'Polícia SR komunikuje s občanmi po slovensky. Hovor zlož a nič neprezrádzaj.', signs: 'cudzí jazyk, strašenie, otázky na účet či kartu.', src: 'Polícia SR' },
+    { kind: 'TELEFONÁT', text: 'Déra ti volá zo svojho čísla, ktoré máš uložené: „Ahoj mami, prídete v nedeľu na obed?“', a: false, why: 'V poriadku. Známe číslo, žiadne peniaze, žiadny zhon.', signs: '', src: '' },
+    { kind: 'WEB', text: 'Stránka sľubuje zisk 300 % za mesiac pri investovaní do kryptomien. Stačí sa zaregistrovať a vložiť peniaze.', a: true, why: 'Takéto weby často vznikajú pomocou AI a nemajú povolenie. Každú firmu si over na subjekty.nbs.sk.', signs: 'nereálny zisk, registrácia, vklad.', src: 'Národná banka Slovenska, 24. 3. 2026' },
+    { kind: 'APLIKÁCIA BANKY', text: 'Banka ti v svojej aplikácii ukáže platbu 23,40 € v obchode, kde si pred chvíľou sám nakupoval.', a: false, why: 'V poriadku. Platba, o ktorej vieš, v oficiálnej aplikácii.', signs: '', src: '' },
+    { kind: 'SMS', text: 'Vaša zásielka nemohla byť doručená. Doplaťte 1,99 € na odkaze: dorucenie-balik.info', a: true, why: 'Falošný kuriér. Odkaz vedie na stránku, ktorá chce údaje z tvojej karty.', signs: 'malá suma, neznámy odkaz, správa, ktorú si nečakal.', src: 'Polícia SR' }
+  ],
+  halu: [
+    { q: 'Povedz mi niečo o najvyššom vrchu Slovenska.', s: ['Najvyšší vrch Slovenska je Gerlachovský štít.', 'Má výšku približne 2 655 metrov nad morom.', 'Leží v Nízkych Tatrách.', 'Je to zároveň najvyšší vrch celých Karpát.'], wrong: 2, why: 'Gerlachovský štít leží vo Vysokých Tatrách, nie v Nízkych.' },
+    { q: 'Čo vieš o Dunaji?', s: ['Dunaj preteká cez Bratislavu.', 'Je to najdlhšia rieka Európy.', 'Vlieva sa do Čierneho mora.', 'Preteká aj Viedňou a Budapešťou.'], wrong: 1, why: 'Najdlhšia rieka Európy je Volga. Dunaj je až druhý.' },
+    { q: 'Čo je ChatGPT?', s: ['ChatGPT vytvorila firma OpenAI.', 'Verejnosti ho sprístupnili v novembri 2022.', 'Každú odpoveď si vždy overí na internete, preto sa nemýli.', 'Pod oknom chatu upozorňuje, že sa môže mýliť.'], wrong: 2, why: 'ChatGPT si odpovede vždy neoveruje a môže sa mýliť – preto to sám píše pod oknom chatu.' },
+    { q: 'Povedz mi pár faktov o Slovensku.', s: ['Slovensko vstúpilo do Európskej únie v roku 2004.', 'Euro zaviedlo v roku 2009.', 'Má viac ako 10 miliónov obyvateľov.', 'Hlavným mestom je Bratislava.'], wrong: 2, why: 'Slovensko má približne 5,4 milióna obyvateľov.' },
+    { q: 'Čo vieš o Mesiaci?', s: ['Mesiac obieha okolo Zeme.', 'Svetlo z Mesiaca k nám letí len o niečo viac ako sekundu.', 'Prví ľudia na ňom pristáli v roku 1969.', 'Na Mesiaci je rovnaká gravitácia ako na Zemi.'], wrong: 3, why: 'Gravitácia na Mesiaci je asi šesťkrát slabšia ako na Zemi.' }
+  ]
+};
+var SENIOR = [
+  { q: 'Ako dlho variť vajce natvrdo?', a: 'Vajce vlož do vriacej vody a var ho asi 9 až 10 minút. Potom ho daj na chvíľu do studenej vody – lepšie sa bude šúpať.', tip: 'Pri recepte nič nepokazíš. Ak by išlo o zdravie, peniaze alebo úrady, over si odpoveď ešte inde.' },
+  { q: 'Čo je to umelá inteligencia?', a: 'Je to počítačový program, ktorý sa naučil z obrovského množstva textov. Vie odpovedať na otázky, písať a prekladať. Nerozmýšľa však ako človek a niekedy sa pomýli.', tip: 'Môžeš sa pýtať aj ďalej, napríklad: „Vysvetli mi to jednoduchšie.“' },
+  { q: 'Volal mi vnuk z nového čísla, že potrebuje peniaze. Čo mám robiť?', a: 'Hovor ukonči a zavolaj vnukovi na číslo, ktoré poznáš. Podvodníci dnes vedia napodobniť aj hlas. Peniaze ani údaje z karty neposielaj, kým si to neoveríš.', tip: 'Dohodnite sa v rodine na tajnom „bezpečnom slove“. Odporúča to aj Európsky orgán pre bankovníctvo.' }
+];
+var CHEERS = ['Super!', 'Presne tak!', 'Výborne!', 'Si šikovný!', 'Bravo!', 'Paráda!'];
+var OOPS = ['Ups! Pozri prečo.', 'Nevadí, učíme sa!', 'Tesne vedľa!'];
+var PIECES = (function () { var c = ['#FF5F57', '#FEBC2E', '#28C840', '#A29BFE', '#17153B']; var a = []; for (var i = 0; i < 22; i++) { a.push({ left: ((i * 37) % 100) + '%', color: c[i % 5], delay: ((i * 7) % 10) / 25 + 's', dur: (1.2 + ((i * 13) % 10) / 12) + 's' }); } return a; })();
+var STORE = 'ludskyoai-hry-v1';
+
+function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function sampleIdx(n, k) { return shuffle(Array.from({ length: n }, function (_, i) { return i; })).slice(0, k); }
+function loadSave() { try { var r = window.localStorage.getItem(STORE); return r ? JSON.parse(r) : { best: {}, stars: {} }; } catch (e) { return { best: {}, stars: {} }; } }
+function writeSave(s) { try { window.localStorage.setItem(STORE, JSON.stringify(s)); } catch (e) {} }
+function guess(item, train, labels) {
+  var best = -1, votes = {};
+  train.forEach(function (t, i) {
+    var sc = (t.f[0] === item.f[0] ? 1 : 0) + (t.f[1] === item.f[1] ? 1 : 0) + (t.f[2] === item.f[2] ? 1 : 0);
+    if (sc > best) { best = sc; votes = {}; }
+    if (sc === best) { votes[labels[i]] = (votes[labels[i]] || 0) + 1; }
+  });
+  return (votes['Ovocie'] || 0) > (votes['Zelenina'] || 0) ? 'Ovocie' : ((votes['Zelenina'] || 0) > (votes['Ovocie'] || 0) ? 'Zelenina' : labels[0]);
+}
+function starStr(n) { return { on: '★★★'.slice(0, n), off: '★★★'.slice(0, 3 - n) }; }
+
+class Component extends DCLogic {
+constructor(props) {
+  super(props);
+  this.state = { big: false, screen: 'hub', game: null, phase: 'q', r: null, save: { best: {}, stars: {} }, result: null, shared: '' };
+  this.timer = 0;
+}
+componentDidMount() { this.setState({ save: loadSave() }); }
+componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
+game() { var id = this.state.game; return GAMES.filter(function (g) { return g.id === id; })[0]; }
+start(id) {
+  if (this.timer) { clearInterval(this.timer); this.timer = 0; }
+  var g = GAMES.filter(function (x) { return x.id === id; })[0];
+  var r = { i: 0, pick: null, points: 0, correct: 0, streak: 0, gain: 0, t0: Date.now(), ok: false };
+  if (g.type === 'bin' || g.type === 'pick') r.items = sampleIdx(POOLS[id].length, g.size);
+  if (g.type === 'nauc') {
+    var fr = shuffle(TRAIN_POOL.filter(function (t) { return t.ok === 'Ovocie'; })).slice(0, 3);
+    var vg = shuffle(TRAIN_POOL.filter(function (t) { return t.ok === 'Zelenina'; })).slice(0, 3);
+    r.train = shuffle(fr.concat(vg)); r.labels = [];
+    r.test = shuffle(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Ovocie'; })).slice(0, 2).concat(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Zelenina'; })).slice(0, 2)));
+  }
+  if (g.type === 'senior') { r.q = null; r.chars = 0; r.asked = {}; }
+  this.setState({ screen: 'play', game: id, phase: 'q', r: r, result: null, shared: '' });
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+}
+answer(v) {
+  var s = this.state, g = this.game(), r = s.r;
+  if (s.phase !== 'q') return;
+  var item = POOLS[g.id][r.items[r.i]];
+  var ok = g.type === 'pick' ? v === item.wrong : v === item.a;
+  var secs = (Date.now() - r.t0) / 1000;
+  var tb = g.timer ? Math.max(0, Math.round((g.timer - secs) / g.timer * 50)) : 0;
+  var streak = ok ? r.streak + 1 : 0;
+  var gain = ok ? 100 + Math.min(100, (streak - 1) * 25) + tb : 0;
+  this.setState({ phase: 'a', r: Object.assign({}, r, { pick: v, ok: ok, streak: streak, gain: gain, points: r.points + gain, correct: r.correct + (ok ? 1 : 0) }) });
+}
+next() {
+  var r = this.state.r;
+  if (r.i + 1 < r.items.length) this.setState({ phase: 'q', r: Object.assign({}, r, { i: r.i + 1, pick: null, gain: 0, t0: Date.now() }) });
+  else this.finish(r.correct, r.items.length, r.points);
+}
+finish(correct, total, points) {
+  var id = this.state.game, save = JSON.parse(JSON.stringify(this.state.save));
+  var stars = correct === total ? 3 : (correct / total >= 0.6 ? 2 : (correct > 0 ? 1 : 0));
+  var prevBest = save.best[id] || 0, prevStars = save.stars[id] || 0;
+  save.best[id] = Math.max(prevBest, points); save.stars[id] = Math.max(prevStars, stars);
+  writeSave(save);
+  this.setState({ phase: 'end', save: save, result: { stars: stars, correct: correct, total: total, points: points, record: points > prevBest && prevBest > 0, badgeNew: stars === 3 && prevStars < 3 } });
+}
+nauLabel(l) {
+  var r = this.state.r, labels = r.labels.concat([l]);
+  if (labels.length < r.train.length) { this.setState({ r: Object.assign({}, r, { labels: labels }) }); return; }
+  var res = r.test.map(function (t) { return guess(t, r.train, labels) === t.ok; });
+  var c = res.filter(Boolean).length;
+  this.setState({ phase: 'a', r: Object.assign({}, r, { labels: labels, correct: c, points: c * 100, ok: c >= 3 }) });
+}
+ask(i) {
+  var self = this, r = this.state.r;
+  if (this.timer) clearInterval(this.timer);
+  var full = SENIOR[i].a.length, asked = Object.assign({}, r.asked); asked[i] = true;
+  var reduce = false; try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  this.setState({ r: Object.assign({}, r, { q: i, chars: reduce ? full : 0, asked: asked }) });
+  if (reduce) return;
+  this.timer = setInterval(function () {
+    var rr = self.state.r; if (!rr) return;
+    var c = Math.min(full, rr.chars + 3);
+    if (c >= full) { clearInterval(self.timer); self.timer = 0; }
+    self.setState({ r: Object.assign({}, rr, { chars: c }) });
+  }, 30);
+}
+share(text) {
+  var self = this, url = ''; try { url = window.location.href; } catch (e) {}
+  try {
+    if (navigator.share) { navigator.share({ text: text, url: url }).catch(function () {}); return; }
+    navigator.clipboard.writeText(text + ' ' + url).then(function () { self.setState({ shared: 'Skopírované – pošli to kamarátovi!' }); }, function () {});
+  } catch (e) {}
+}
+renderVals() {
+  var self = this, s = this.state, save = s.save, g = s.game ? this.game() : null, r = s.r;
+  var totalStars = GAMES.reduce(function (a, x) { return a + (save.stars[x.id] || 0); }, 0);
+  var vals = {
+    rootClass: s.big ? 'big' : '', bigLabel: s.big ? 'A−' : 'A+', bigPressed: s.big ? 'true' : 'false',
+    bigBg: s.big ? '#FEBC2E' : 'transparent', bigFg: s.big ? '#17153B' : '#FFFFFF',
+    toggleBig: function () { self.setState({ big: !self.state.big }); },
+    totalStars: totalStars, maxStars: GAMES.length * 3, progressPct: Math.round(totalStars / (GAMES.length * 3) * 100) + '%',
+    isHub: s.screen === 'hub', isPlay: s.screen === 'play',
+    goHub: function () { if (self.timer) { clearInterval(self.timer); self.timer = 0; } self.setState({ screen: 'hub', game: null, r: null }); },
+    groups: GROUPS.map(function (gr, gi) {
+      return { name: gr.name, color: gr.color, games: GAMES.filter(function (x) { return x.group === gi; }).map(function (x) {
+        var st = save.stars[x.id] || 0, ss = starStr(st), best = save.best[x.id] || 0;
+        return { title: x.title, desc: x.desc, tag: x.tag, glyph: x.glyph, starsOn: ss.on, starsOff: ss.off, starsLabel: st + ' z 3 hviezdičiek',
+          bestText: best ? 'Rekord: ' + best + ' b.' : 'Ešte nehrané', cta: st ? (st === 3 ? 'Hrať znova' : 'Získaj viac hviezd') : 'Hrať', open: function () { self.start(x.id); } };
+      }) };
+    }),
+    badges: GAMES.map(function (x) { var got = (save.stars[x.id] || 0) === 3; return { name: BADGES[x.id], glyph: x.glyph, bg: got ? GROUPS[x.group].color : '#EEECFF', opacity: got ? 1 : 0.55, cls: got ? 'glow' : '', state: got ? 'Odomknutý' : 'Získaj 3 ★ v hre ' + x.title }; })
+  };
+  // defaults for play screen
+  var none = { on: false };
+  vals.cur = g ? { title: g.title, tag: g.tag } : { title: '', tag: '' };
+  vals.hud = { points: 0, gain: 0, showGain: false, streak: 0, showStreak: false, showDots: false, dots: [], dotsLabel: '' };
+  vals.bin = none; vals.pick = none; vals.nc = { train: false, exam: false }; vals.sn = none; vals.fb = none; vals.end = none;
+  vals.asking = false; vals.showTimer = false; vals.timerDur = '0s';
+  vals.fx = { confetti: false, pieces: PIECES };
+  vals.ludko = { smile: 1, o: 0, flat: 0, brow: 0, cheeks: 1, bOk: 0, bPozor: 0, bHmm: 0, bStar: 0, say: 'Ahoj!', bubble: '#EEECFF', cls: '' };
+  if (!g || !r) return vals;
+
+  var face = function (kind, say, bubble) {
+    var f = { smile: 0, o: 0, flat: 0, brow: 0, cheeks: 0, bOk: 0, bPozor: 0, bHmm: 0, bStar: 0, say: say, bubble: bubble, cls: '' };
+    if (kind === 'think') { f.flat = 1; f.brow = 1; f.bHmm = 1; }
+    if (kind === 'happy') { f.smile = 1; f.cheeks = 1; f.bOk = 1; f.cls = 'pop'; }
+    if (kind === 'oops') { f.o = 1; f.bPozor = 1; f.cls = 'shake'; }
+    if (kind === 'star') { f.smile = 1; f.cheeks = 1; f.bStar = 1; f.cls = 'bob'; }
+    if (kind === 'learn') { f.smile = 1; f.cheeks = 1; f.bHmm = 1; }
+    return f;
+  };
+
+  vals.hud.points = r.points || 0;
+  vals.hud.gain = r.gain || 0;
+  vals.hud.showGain = s.phase === 'a' && r.gain > 0;
+  vals.hud.streak = r.streak || 0;
+  vals.hud.showStreak = (r.streak || 0) >= 2 && s.phase !== 'end';
+
+  if (s.phase === 'end') {
+    var res = s.result, stars = [0, 1, 2].map(function (i) { return { delay: (0.2 + i * 0.25) + 's', color: i < res.stars ? '#FEBC2E' : '#D6D4EA' }; });
+    var gi = GAMES.indexOf(g), nx = GAMES[(gi + 1) % GAMES.length];
+    var titles = ['Skús to ešte raz!', 'Dobrý začiatok!', 'Skvelá práca!', 'Perfektné!'];
+    var lessons = {
+      nauc: 'AI sa učí z príkladov. Keď sú príklady zlé, aj AI sa naučí zle.',
+      prezradit: 'Ľudkovo pravidlo: AI povedz len to, čo by si pokojne povedal aj cudziemu človeku.',
+      robot: 'Rozoznať text od AI je často veľmi ťažké. Preto je dôležité vedieť, odkiaľ text pochádza.',
+      podvod: 'Znaky podvodu: naliehanie, peniaze, neznáme číslo a sľuqby, ktoré sú príliš dobré. Ak ťa okradli, volaj políciu na 158.',
+      halu: 'AI píše plynule aj vtedy, keď sa mýli. Dôležité fakty si over a pýtaj sa: „Z akého zdroja to máš?“',
+      senior: 'Teraz už vieš, ako vyzerá rozhovor s AI. Skús si to naozaj – a dôležité veci si vždy over.'
+    };
+    vals.end = { on: true, stars: stars, starsLabel: res.stars + ' z 3 hviezdičiek', title: titles[res.stars], sub: g.type === 'senior' ? 'Vyskúšal si ' + res.correct + ' z ' + res.total + ' otázok' : (g.type === 'nauc' ? 'Ľudko uhádol ' + res.correct + ' z ' + res.total : 'Správne ' + res.correct + ' z ' + res.total),
+      points: res.points, record: res.record, badgeNew: res.badgeNew, badgeName: '„' + BADGES[g.id] + '“', badgeGlyph: g.glyph, badgeBg: GROUPS[g.group].color,
+      lesson: lessons[g.id], again: function () { self.start(g.id); }, nextGame: function () { self.start(nx.id); }, nextTitle: nx.title,
+      shareLabel: s.shared || 'Vyzvi kamaráta',
+      share: function () { self.share('Získal som ' + res.points + ' bodov v hre „' + g.title + '“ na Ľudsky o AI. Prekonáš ma?'); } };
+    vals.ludko = face('star', res.stars === 3 ? 'Si hviezda!' : 'Ide ti to!', '#FFF3CF');
+    vals.fx.confetti = res.stars >= 2;
+    return vals;
+  }
+
+  if (g.type === 'bin' || g.type === 'pick') {
+    var pool = POOLS[g.id], item = pool[r.items[r.i]];
+    vals.hud.showDots = true; vals.hud.dotsLabel = 'Otázka ' + (r.i + 1) + ' z ' + r.items.length;
+    vals.hud.dots = r.items.map(function (_, i) { return { bg: i < r.i ? '#28C840' : (i === r.i ? '#FEBC2E' : '#FFFFFF') }; });
+    vals.asking = s.phase === 'q';
+    vals.showTimer = !!g.timer && s.phase === 'q'; vals.timerDur = g.timer + 's';
+    if (g.type === 'bin') {
+      vals.bin = { on: true, kind: item.kind, text: item.text, labelA: g.labels[0], labelB: g.labels[1], colA: g.cols[0], colB: g.cols[1],
+        cardCls: s.phase === 'a' ? (r.ok ? 'pop' : 'shake') : 'slide',
+        pickA: function () { self.answer(true); }, pickB: function () { self.answer(false); } };
+    } else {
+      vals.pick = { on: true, q: item.q, sentences: item.s.map(function (t, i) {
+        var ans = s.phase === 'a', isW = i === item.wrong, picked = i === r.pick;
+        return { text: t, bg: ans && isW ? '#FFD6D3' : (ans && picked ? '#EEECFF' : '#FFFFFF'), shadow: ans && isW ? '5px 5px 0 #FF5F57' : '4px 4px 0 #17153B',
+          cls: ans && isW ? (r.ok ? 'pop' : 'shake') : '', choose: function () { self.answer(i); } };
+      }) };
+    }
+    if (s.phase === 'q') vals.ludko = face('think', g.type === 'pick' ? 'Hmm… kde je chyba?' : (r.streak >= 2 ? 'Séria! Pokračuj!' : 'Čo myslíš?'), '#EEECFF');
+    else {
+      vals.ludko = r.ok ? face('happy', CHEERS[(r.i + r.streak) % CHEERS.length], '#C9F2D2') : face('oops', OOPS[r.i % OOPS.length], '#FFD6D3');
+      vals.fx.confetti = r.ok;
+      var title;
+      if (g.id === 'podvod') title = (r.ok ? 'Správne! ' : 'Pozor! ') + (item.a ? 'Je to podvod.' : 'Toto je v poriadku.');
+      else if (g.id === 'robot') title = (r.ok ? 'Správne! ' : 'Nie celkom. ') + (item.a ? 'Napísal to človek.' : 'Napísala to AI.');
+      else if (g.id === 'prezradit') title = (r.ok ? 'Správne! ' : 'Hmm, zamysli sa. ') + (item.a ? 'Toto môžeš povedať.' : 'Toto si nechaj pre seba.');
+      else title = r.ok ? 'Našiel si ju!' : 'Táto veta bola pravdivá. Vymyslená je tá červená.';
+      vals.fb = { on: true, bg: r.ok ? '#C9F2D2' : '#FFD6D3', title: title + (r.ok ? '  +' + r.gain + ' b.' : ''), why: item.why,
+        hasSigns: !!item.signs, signs: item.signs || '', hasSrc: !!item.src, src: item.src || '',
+        nextLabel: r.i + 1 < r.items.length ? 'Ďalej →' : 'Výsledok →', next: function () { self.next(); } };
+    }
+    return vals;
+  }
+
+  if (g.type === 'nauc') {
+    var total = r.train.length, n = r.labels.length;
+    vals.hud.showDots = true; vals.hud.dotsLabel = 'Príklad ' + Math.min(n + 1, total) + ' z ' + total;
+    vals.hud.dots = r.train.map(function (_, i) { return { bg: i < n ? '#28C840' : (i === n ? '#FEBC2E' : '#FFFFFF') }; });
+    if (s.phase === 'q') {
+      var it = r.train[n], over = s.over || null;
+      var inO = [], inZ = [];
+      r.labels.forEach(function (l, i) { (l === 'Ovocie' ? inO : inZ).push(r.train[i].name); });
+      var drop = function (l) { return function (e) { try { e.preventDefault(); } catch (x) {} self.setState({ over: null }); self.nauLabel(l); }; };
+      var dragOver = function (l) { return function (e) { try { e.preventDefault(); } catch (x) {} if (self.state.over !== l) self.setState({ over: l }); }; };
+      vals.nc = { train: true, exam: false, name: it.name, p: pic(it), cardCls: n % 2 ? 'pop2' : 'pop',
+        hint: n === 0 ? 'Potiahni obrázok do správneho košíka (alebo ťukni na košík)' : 'Ďalší! Ešte ' + (total - n) + (total - n === 1 ? ' príklad' : (total - n < 5 ? ' príklady' : ' príkladov')),
+        inO: inO, inZ: inZ,
+        bgO: over === 'Ovocie' ? '#FFB3AE' : '#FFD6D3', bgZ: over === 'Zelenina' ? '#9BE5AB' : '#C9F2D2',
+        borderO: over === 'Ovocie' ? 'dashed' : 'solid', borderZ: over === 'Zelenina' ? 'dashed' : 'solid',
+        dragStart: function (e) { try { e.dataTransfer.setData('text/plain', it.name); e.dataTransfer.effectAllowed = 'move'; } catch (x) {} },
+        overO: dragOver('Ovocie'), overZ: dragOver('Zelenina'), leave: function () { self.setState({ over: null }); },
+        dropO: drop('Ovocie'), dropZ: drop('Zelenina'),
+        ovocie: function () { self.nauLabel('Ovocie'); }, zelenina: function () { self.nauLabel('Zelenina'); } };
+      vals.ludko = face('learn', n === 0 ? 'Nauč ma to!' : (n < 3 ? 'Aha, zapamätám si!' : 'Už to skoro viem!'), '#EEECFF');
+    } else {
+      var mistakes = r.labels.filter(function (l, i) { return l !== r.train[i].ok; }).length;
+      var results = r.test.map(function (t, i) { var gu = guess(t, r.train, r.labels), ok = gu === t.ok;
+        return { name: t.name, p: pic(t), guess: gu, verdict: ok ? 'Správne!' : 'Chyba! Je to ' + t.ok.toLowerCase() + '.', bg: ok ? '#C9F2D2' : '#FFD6D3', delay: (0.15 + i * 0.35) + 's' }; });
+      vals.nc = { train: false, exam: true, results: results,
+        lesson: mistakes > 0 ? 'Ľudka si ' + mistakes + '× naučil zle – a on sa to tak naozaj naučil. AI je taká dobrá, aké dobré sú príklady.' : 'Ľudko porovnáva farbu, sladkosť a či to rastie na strome. Takto sa z príkladov učí aj skutočná AI.',
+        finish: function () { self.finish(r.correct, r.test.length, r.points); } };
+      vals.ludko = r.ok ? face('happy', 'Naučil si ma dobre!', '#C9F2D2') : face('oops', 'Ups, popletil som sa!', '#FFD6D3');
+      vals.fx.confetti = r.correct === 4;
+    }
+    return vals;
+  }
+
+  if (g.type === 'senior') {
+    var sq = r.q === null ? null : SENIOR[r.q], askedN = Object.keys(r.asked).length;
+    vals.sn = { on: true, has: !!sq, q: sq ? sq.q : '', typed: sq ? sq.a.slice(0, r.chars) : '', typing: !!sq && r.chars < sq.a.length, done: !!sq && r.chars >= sq.a.length, tip: sq ? sq.tip : '',
+      canFinish: askedN > 0 && (!sq || r.chars >= sq.a.length),
+      finish: function () { self.finish(askedN, SENIOR.length, askedN * 100); },
+      questions: SENIOR.map(function (x, i) { return { text: x.q, bg: r.q === i ? '#FEBC2E' : '#FFFFFF', mark: r.asked[i] ? '★' : '', ask: function () { self.ask(i); } }; }) };
+    vals.hud.showDots = true; vals.hud.dotsLabel = askedN + ' z 3 otázok';
+    vals.hud.dots = SENIOR.map(function (_, i) { return { bg: r.asked[i] ? '#28C840' : '#FFFFFF' }; });
+    vals.ludko = sq ? (r.chars < sq.a.length ? face('think', 'Píšem odpoveď…', '#EEECFF') : face('happy', 'Skús ďalšiu otázku!', '#C9F2D2')) : face('learn', 'Opýtaj sa ma!', '#EEECFF');
+    return vals;
+  }
+  return vals;
+}
+}
+mountPage(Component);
+</script>
+</body>
+</html>
