@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ľudsky o AI – AI po slovensky</title>
+<meta name="description" content="Novinky o AI po slovensky – krátko, zrozumiteľne a vždy so zdrojom a dátumom. Rady, návody a hry pre deti, rodičov aj seniorov.">
+<meta property="og:title" content="Ľudsky o AI – AI po slovensky">
+<meta property="og:description" content="Umelá inteligencia, vysvetlená ľudsky. Novinky so zdrojom a dátumom, rady, návody a hry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#17153B}a:hover{color:#3A3770}
+@keyframes ludkoFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
+.ludko-float{animation:ludkoFloat 4.5s ease-in-out infinite}
+.ludko-float:focus-visible{outline:3px solid #17153B;outline-offset:10px;border-radius:32px}
+.ludko-svg{transition:transform .2s ease}
+.ludko-float:hover .ludko-svg{transform:scale(1.03)}
+.ludko-float:active .ludko-svg{transform:scale(.96)}
+@keyframes ludkoWave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(14deg)}}
+.ludko-arm{transform-box:fill-box;transform-origin:0% 100%;animation:ludkoWave 1.4s ease-in-out infinite}
+@keyframes ludkoBlink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.08)}}
+.ludko-eye{transform-box:fill-box;transform-origin:center;animation:ludkoBlink 4.8s infinite}
+.ludko-eye2{animation-delay:.04s}
+@keyframes ludkoDot{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.ludko-dot{transform-box:fill-box;transform-origin:center;animation:ludkoDot 1.8s ease-in-out infinite}
+.d2{animation-delay:.3s}.d3{animation-delay:.6s}
+@keyframes popA{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes popB{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+.pop-a{animation:popA .5s cubic-bezier(.2,.9,.3,1.3) both;transform-origin:bottom left}
+.pop-b{animation:popB .5s cubic-bezier(.2,.9,.3,1.3) both;transform-origin:bottom left}
+.badge-a{transform-box:fill-box;transform-origin:center;animation:popA .5s cubic-bezier(.2,.9,.3,1.3) both}
+.badge-b{transform-box:fill-box;transform-origin:center;animation:popB .5s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes logoDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.logo-dot{animation:logoDot 2.4s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero-in{animation:fadeUp .8s ease-out both}
+.hero-in2{animation:fadeUp .8s ease-out .15s both}
+.hero-in3{animation:fadeUp .8s ease-out .3s both}
+.lift{transition:transform .2s ease, box-shadow .2s ease}
+.lift:hover{transform:translateY(-6px);box-shadow:0 12px 0 -4px #17153B}
+.quiz-btn{transition:transform .15s ease}
+.quiz-btn:hover{transform:translateY(-3px)}
+.quiz-btn:focus-visible,.cta:focus-visible{outline:3px solid #17153B;outline-offset:3px}
+.big{zoom:1.15;width:86.9565%!important}
+.burger-big:focus-visible{outline:3px solid #17153B;outline-offset:3px}
+.burger{display:none}
+.burger:focus-visible{outline:3px solid #17153B;outline-offset:3px}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (max-width: 720px){
+.sec{padding-top:56px!important;padding-bottom:56px!important;gap:28px!important}
+.hdr-row{padding-top:12px!important;padding-bottom:12px!important}
+.nav{display:none!important;order:3;width:100%;flex-direction:column;gap:0!important;border-top:1px solid #E6E5F0}
+.nav.open{display:flex!important;animation:menuIn .2s ease-out}
+.nav a{padding:16px 4px!important;font-size:18px!important;border-bottom:1px solid #F0EFF7}
+.nav a:last-child{border-bottom:none}
+.burger{display:inline-flex}
+.hdr-cta-txt{display:none}
+.hdr-cta{padding:0!important;width:44px;justify-content:center}
+.hero-lead{font-size:18px!important}
+.ludko-btn{width:240px!important}
+.tile{min-height:0!important;padding:24px!important}
+.tile-title{font-size:24px!important}
+.card{padding:24px!important}
+.quiz-card{padding:22px!important;box-shadow:6px 6px 0 #17153B!important;border-radius:22px!important}
+.quiz-q{font-size:21px!important}
+.tz-item{padding:18px!important;gap:14px!important}
+.cta-card{padding:32px 24px!important;border-radius:24px!important}
+.big-btn{width:100%}
+}
+@media (prefers-reduced-motion: reduce){.ludko-float,.ludko-arm,.ludko-eye,.ludko-dot,.pop-a,.pop-b,.badge-a,.badge-b,.logo-dot,.hero-in,.hero-in2,.hero-in3{animation:none}.lift,.ludko-svg,.quiz-btn{transition:none}}
+</style>
+<style>[v-cloak]{display:none}</style>
+</head>
+<body>
+<div id="app" v-cloak>
+<div :class="rootClass" style="font-family: Montserrat, system-ui, sans-serif; color: #17153B; background: #FFFFFF; width: 100%; box-sizing: border-box; overflow-x: clip">
+
+<!-- Hlavička -->
+<header style="border-bottom: 1px solid #E6E5F0; background: #FFFFFF">
+<div class="hdr-row" style="max-width: 1180px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<span style="display: flex; gap: 6px" aria-hidden="true">
+<span class="logo-dot" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57"></span>
+<span class="logo-dot d2" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E"></span>
+<span class="logo-dot d3" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840"></span>
+</span>
+<span style="font-weight: 800; font-size: 20px; color: #17153B">Ľudsky o AI</span>
+</a>
+<nav id="menu" :class="`nav ${menuClass}`" aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px 22px; font-weight: 600; font-size: 15px">
+<a href="#najnovsie" @click="closeMenu" style="text-decoration: none; padding: 12px 0">Najnovšie</a>
+<a href="#tyzden" @click="closeMenu" style="text-decoration: none; padding: 12px 0">Týždeň v AI</a>
+<a href="#kviz" @click="closeMenu" style="text-decoration: none; padding: 12px 0">Mýtus, či fakt</a>
+<a href="#zadarmo" @click="closeMenu" style="text-decoration: none; padding: 12px 0">PDF zadarmo</a>
+<a href="#rodicia" @click="closeMenu" style="text-decoration: none; padding: 12px 0">Pre rodičov</a>
+<a href="hry.html" style="text-decoration: none; padding: 12px 0">Hry</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 10px">
+<button type="button" class="burger-big" @click="toggleBig" :aria-pressed="bigPressed" aria-label="Väčšie písmo" :style="`min-width: 44px; height: 44px; padding: 0 12px; border: 2px solid #17153B; border-radius: 999px; background: ${bigBg}; color: #17153B; font-family: inherit; font-weight: 800; font-size: 15px; cursor: pointer`">{{bigLabel}}</button>
+<a class="cta hdr-cta" href="https://www.instagram.com/ludskyoai/" aria-label="Sleduj @ludskyoai na Instagrame" style="display: inline-flex; align-items: center; gap: 10px; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 15px; padding: 12px 20px; border-radius: 999px; min-height: 44px; box-sizing: border-box">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6"></circle></svg>
+<span class="hdr-cta-txt">Sleduj @ludskyoai</span>
+</a>
+<button type="button" class="burger" @click="toggleMenu" aria-controls="menu" :aria-expanded="menuExpanded" :aria-label="menuLabel" style="width: 44px; height: 44px; align-items: center; justify-content: center; border: 2px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; cursor: pointer; padding: 0">
+<template v-if="menuOpen">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+</template>
+<template v-if="menuClosed">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+</template>
+</button>
+</div>
+</div>
+</header>
+
+<!-- Hero -->
+<section id="top" style="background: #F6F5FB">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 80px 24px 88px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span class="hero-in" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #4A4775">AI po slovensky</span>
+<h1 class="hero-in2" style="margin: 0; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em">Umelá inteligencia, vysvetlená ľudsky.</h1>
+<p class="hero-in3 hero-lead" style="margin: 0; font-size: 20px; line-height: 1.55; max-width: 560px; color: #36335E">Novinky o AI nástrojoch, modeloch a trendoch – krátko, zrozumiteľne a vždy so zdrojom a dátumom. Aby si vedel, čo sa zmenilo a ako to môžeš využiť.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
+<a class="cta" href="https://www.instagram.com/ludskyoai/" style="display: inline-flex; align-items: center; justify-content: center; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; padding: 16px 28px; border-radius: 999px; min-height: 44px; box-sizing: border-box">Sleduj na Instagrame</a>
+<a class="cta" href="#zadarmo" style="display: inline-flex; align-items: center; justify-content: center; background: #FFFFFF; color: #17153B; text-decoration: none; font-weight: 700; font-size: 17px; padding: 16px 28px; border-radius: 999px; border: 2px solid #17153B; min-height: 44px; box-sizing: border-box">Získaj PDF zadarmo</a>
+</div>
+</div>
+
+<!-- Ľudko -->
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div :class="bubbleClass" aria-live="polite" :style="`align-self: center; max-width: 320px; background: ${bubbleColor}; border: 3px solid #17153B; border-radius: 18px 18px 18px 4px; padding: 12px 20px; font-weight: 800; font-size: 19px; line-height: 1.3; box-sizing: border-box`">{{line}}</div>
+<button type="button" class="ludko-float ludko-btn" @click="nextLine" :ref="ludkoRef" aria-label="Maskot Ľudko – klikni a povie ti niečo nové" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer; display: block; width: 340px; max-width: 100%">
+<svg class="ludko-svg" viewBox="0 0 300 250" width="100%" aria-hidden="true" style="display: block; overflow: visible">
+<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<path class="ludko-arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
+<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE"></rect>
+<rect x="70" y="108" width="160" height="108" rx="30" fill="#FFFFFF"></rect>
+<rect x="70" y="108" width="160" height="40" fill="#FFFFFF"></rect>
+<circle class="ludko-dot" cx="97" cy="89" r="6.5" fill="#FF5F57"></circle>
+<circle class="ludko-dot d2" cx="117" cy="89" r="6.5" fill="#FEBC2E"></circle>
+<circle class="ludko-dot d3" cx="137" cy="89" r="6.5" fill="#28C840"></circle>
+<ellipse cx="114" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="face.cheeks"></ellipse>
+<ellipse cx="186" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="face.cheeks"></ellipse>
+<g class="ludko-eye">
+<ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse>
+<circle cx="130" cy="147" r="3.4" fill="#FFFFFF" :transform="hl"></circle>
+</g>
+<g class="ludko-eye ludko-eye2">
+<ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse>
+<circle cx="174" cy="147" r="3.4" fill="#FFFFFF" :transform="hl"></circle>
+</g>
+<line x1="164" y1="131" x2="184" y2="126" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="face.brow"></line>
+<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round" :opacity="face.smile"></path>
+<ellipse cx="150" cy="182" rx="6" ry="7" fill="#17153B" :opacity="face.o"></ellipse>
+<line x1="139" y1="186" x2="160" y2="181" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="face.flat"></line>
+<g :class="badgeClass">
+<path d="M236 60 q9 -10 18 0 q9 10 18 0" stroke="#A29BFE" stroke-width="5" fill="none" stroke-linecap="round" :opacity="face.bWave"></path>
+<g :opacity="face.bPozor"><circle cx="258" cy="60" r="22" fill="#FF5F57"></circle><line x1="258" y1="48" x2="258" y2="62" stroke="#17153B" stroke-width="6" stroke-linecap="round"></line><circle cx="258" cy="72" r="3.6" fill="#17153B"></circle></g>
+<g :opacity="face.bHmm"><circle cx="258" cy="60" r="22" fill="#A29BFE"></circle><text x="258" y="70" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="28" font-weight="800" fill="#17153B">?</text></g>
+<g :opacity="face.bOk"><circle cx="258" cy="60" r="22" fill="#28C840"></circle><path d="M247 60 l8 8 l14 -15" stroke="#17153B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+<g :opacity="face.bNove"><rect x="222" y="44" width="72" height="30" rx="15" fill="#FF5F57"></rect><text x="258" y="65" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="15" font-weight="800" fill="#17153B">NOVÉ</text></g>
+<g :opacity="face.bTip"><line x1="258" y1="26" x2="258" y2="34" stroke="#FEBC2E" stroke-width="4" stroke-linecap="round"></line><line x1="236" y1="40" x2="242" y2="45" stroke="#FEBC2E" stroke-width="4" stroke-linecap="round"></line><line x1="280" y1="40" x2="274" y2="45" stroke="#FEBC2E" stroke-width="4" stroke-linecap="round"></line><circle cx="258" cy="56" r="15" fill="#FEBC2E"></circle><rect x="251" y="70" width="14" height="8" rx="2" fill="#FFFFFF" stroke="#17153B" stroke-width="2"></rect></g>
+</g>
+</svg>
+</button>
+<span style="font-size: 14px; color: #4A4775; font-weight: 600">Klikni na Ľudka</span>
+</div>
+</div>
+</section>
+
+<!-- Najnovšie na Instagrame -->
+<section id="najnovsie">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 680px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #4A4775">NAJNOVŠIE NA INSTAGRAME · {{triad.date}}</span>
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em">Každý deň trojica: novinka, rada a návod</h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 15px; font-weight: 600">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FF5F57"></span>Novinka</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #28C840"></span>AI rada</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FEBC2E"></span>Návod</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px">
+<template v-for="(p, $index) in triad.posts">
+<a class="lift tile" :href="p.link" :style="`background: ${p.color}; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: #17153B; min-height: 400px; box-sizing: border-box`">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">{{p.tag}}</span>
+<span class="tile-title" style="font-size: 28px; line-height: 1.15; font-weight: 800">{{p.title}}</span>
+<span style="font-size: 16px; line-height: 1.55">{{p.body}}</span>
+<template v-if="p.hasPrompt">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.55; background: #FFFFFF; border-radius: 12px; padding: 14px 16px">{{p.prompt}}</span>
+</template>
+<span style="margin-top: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 14px; font-weight: 600; padding-top: 16px; border-top: 2px solid #17153B">
+<span>{{p.meta}}</span>
+<span>Pozrieť →</span>
+</span>
+</a>
+</template>
+</div>
+</div>
+</section>
+
+<!-- Týždeň v AI -->
+<section id="tyzden" style="background: #17153B; color: #FFFFFF">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #FF8A84">KAŽDÚ NEDEĽU</span>
+<h2 style="margin: 0; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; font-weight: 800; color: #FFFFFF">Týždeň v AI</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #D6D4EA">Päť noviniek, ktoré stoja za tvoj čas. Každá v jednej vete, so zdrojom a dátumom.</p>
+<template v-if="tyzden.has">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #D6D4EA">{{tyzden.range}} · overené {{tyzden.verified}}</span>
+</template>
+</div>
+<div style="flex: 999 1 560px; min-width: 0">
+<template v-if="tyzden.has">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+<template v-for="(n, $index) in tyzden.items">
+<li class="tz-item" style="display: flex; gap: 20px; align-items: flex-start; padding: 22px 24px; border: 2px solid #3A3770; border-radius: 20px">
+<span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #FF5F57; color: #17153B; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700">{{n.num}}</span>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<strong style="font-size: 19px; color: #FFFFFF">{{n.h}}</strong>
+<span style="font-size: 16px; line-height: 1.55; color: #D6D4EA">{{n.t}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B9B6DA">{{n.meta}}</span>
+</div>
+</li>
+</template>
+</ol>
+</template>
+<template v-if="tyzden.empty">
+<div style="border: 2px dashed #4A4775; border-radius: 24px; padding: 40px 32px; display: flex; flex-direction: column; gap: 14px">
+<strong style="font-size: 22px; color: #FFFFFF">Prvé vydanie pripravujeme</strong>
+<span style="font-size: 17px; line-height: 1.6; color: #D6D4EA">Hneď ako vyjde na Instagrame, objaví sa aj tu – päť noviniek so zdrojmi.</span>
+<a class="cta" href="https://www.instagram.com/ludskyoai/" style="align-self: flex-start; display: inline-flex; align-items: center; background: #FF5F57; color: #17153B; text-decoration: none; font-weight: 700; font-size: 16px; padding: 14px 24px; border-radius: 999px; min-height: 44px; box-sizing: border-box">Nezmeškaj ho na Instagrame</a>
+</div>
+</template>
+</div>
+</div>
+</section>
+
+<!-- Kvíz -->
+<section id="kviz" style="background: #EEECFF">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #4A4775">KVÍZ · KAŽDÚ STREDU NA INSTAGRAME</span>
+<h2 style="margin: 0; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; font-weight: 800">Mýtus, či fakt?</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Tipni si a hneď uvidíš, ako to naozaj je – aj so zdrojom.</p>
+</div>
+<div class="quiz-card" style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 3px solid #17153B; border-radius: 28px; box-shadow: 10px 10px 0 #17153B; padding: 36px; display: flex; flex-direction: column; gap: 24px; box-sizing: border-box">
+<template v-if="quiz.playing">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; color: #4A4775">OTÁZKA {{quiz.num}} / {{quiz.total}}</span>
+<p class="quiz-q" style="margin: 0; font-size: 26px; line-height: 1.3; font-weight: 800">„{{quiz.q}}“</p>
+<template v-if="quiz.asking">
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<button type="button" class="quiz-btn" @click="quiz.pickMytus" style="flex: 1 1 120px; min-height: 64px; border: 3px solid #17153B; border-radius: 18px; background: #FF5F57; color: #17153B; font-family: inherit; font-size: 20px; font-weight: 800; cursor: pointer">Mýtus</button>
+<button type="button" class="quiz-btn" @click="quiz.pickFakt" style="flex: 1 1 120px; min-height: 64px; border: 3px solid #17153B; border-radius: 18px; background: #28C840; color: #17153B; font-family: inherit; font-size: 20px; font-weight: 800; cursor: pointer">Fakt</button>
+</div>
+</template>
+<template v-if="quiz.answered">
+<div :class="quiz.anim" aria-live="polite" :style="`background: ${quiz.verdictBg}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px`">
+<strong style="font-size: 22px">{{quiz.verdict}}</strong>
+<span style="font-size: 17px; line-height: 1.55">{{quiz.why}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">Zdroj: {{quiz.src}}</span>
+</div>
+<button type="button" class="quiz-btn" @click="quiz.next" style="align-self: flex-start; min-height: 52px; padding: 0 28px; border: none; border-radius: 999px; background: #17153B; color: #FFFFFF; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">{{quiz.nextLabel}}</button>
+</template>
+</div>
+</template>
+<template v-if="quiz.done">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; color: #4A4775">VÝSLEDOK</span>
+<p style="margin: 0; font-size: 32px; font-weight: 800">{{quiz.score}} z {{quiz.total}} správne</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #36335E">{{quiz.scoreText}} Nové otázky nájdeš každú stredu v príbehoch na Instagrame.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button type="button" class="quiz-btn" @click="quiz.restart" style="min-height: 52px; padding: 0 28px; border: 2px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Skúsiť znova</button>
+<a class="cta" href="https://www.instagram.com/ludskyoai/" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; background: #17153B; color: #FFFFFF; text-decoration: none; font-size: 17px; font-weight: 700; box-sizing: border-box">Sleduj @ludskyoai</a>
+</div>
+</div>
+</template>
+</div>
+</div>
+</section>
+
+<!-- Hraj sa a uč sa -->
+<section id="hry">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #4A4775">HRY · BEZ REGISTRÁCIE</span>
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em">Hraj sa a uč sa</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Krátke hry pre deti, rodičov aj starých rodičov – ako AI funguje, kde ťa môže oklamať a ako ju bezpečne vyskúšať.</p>
+</div>
+<a class="cta" href="hry.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; box-sizing: border-box">Všetky hry →</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+<a class="lift card" href="hry.html" style="background: #28C840; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #17153B">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">PRE DETI · 3 HRY</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Nauč Ľudka</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Ukáž Ľudkovi príklady a uvidíš, ako sa AI učí. Plus: Čo prezradiť AI? a Robot, či človek?</p>
+</a>
+<a class="lift card" href="hry.html" style="background: #FF5F57; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #17153B">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">NÁSTRAHY AI · 2 HRY</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Odhaľ podvod</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Falošné videá, napodobnený hlas, „Ahoj mami, mám nové číslo“. Plus: Vymyslela si to AI?</p>
+</a>
+<a class="lift card" href="hry.html" style="background: #FEBC2E; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #17153B">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">AI A SENIORI</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Prvý rozhovor s AI</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Vyskúšaj si to krok za krokom, s veľkým písmom a bez registrácie.</p>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Rubriky -->
+<section id="rubriky">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em">Pravidelné rubriky</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+<div class="lift card" style="border: 2px solid #17153B; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #28C840"></span>PONDELOK</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Ľudkov tip týždňa</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #36335E">Jedna užitočná rada alebo ťahák do začiatku týždňa.</p>
+</div>
+<a class="lift card" href="#kviz" style="border: 2px solid #17153B; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #A29BFE"></span>STREDA</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Mýtus, či fakt?</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #36335E">Interaktívny príbeh: tipni si a dozvieš sa, ako to s AI naozaj je.</p>
+</a>
+<a class="lift card" href="#tyzden" style="border: 2px solid #17153B; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FF5F57"></span>NEDEĽA</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 800">Týždeň v AI</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #36335E">Päť najdôležitejších noviniek týždňa, každá jednou vetou, so zdrojom a dátumom.</p>
+</a>
+</div>
+</div>
+</section>
+
+<!-- PDF zadarmo -->
+<section id="zadarmo" style="background: #F6F5FB">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em">Ťaháky v PDF zadarmo</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Napíš kľúčové slovo do komentára pod ktorýkoľvek príspevok na Instagrame a PDF ti pošleme do správ. Ak ho nevidíš, pozri priečinok Žiadosti o správu.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">PROMPTY</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">20 promptov po slovensky</span>
+</div>
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">RADY</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">13 AI rád</span>
+</div>
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">EMAILY</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">10 promptov na e-maily</span>
+</div>
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">SUKROMIE</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">Súkromie v ChatGPT</span>
+</div>
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">RODICIA</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">AI a deti – sprievodca pre rodičov</span>
+</div>
+<div class="lift" style="background: #FFFFFF; border: 2px solid #17153B; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px">FIRMA</span>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">7 promptov pre tvoje podnikanie</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Pre rodičov -->
+<section id="rodicia">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #4A4775">SÉRIA PRE RODIČOV</span>
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; font-weight: 800">AI a deti</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Deti stretávajú AI v mobile, v škole aj v hrách. Pomôžeme ti zorientovať sa, nastaviť bezpečné pravidlá a vysvetliť im, čo AI je a čo nie je.</p>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+<div class="lift" style="background: #FEBC2E; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">NÁVOD</span>
+<h3 style="margin: 0; font-size: 22px; font-weight: 800">Rodičovská kontrola v AI aplikáciách</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Krok za krokom, kde ju nájdeš a čo nastaviť.</p>
+</div>
+<div class="lift" style="background: #28C840; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">RADA</span>
+<h3 style="margin: 0; font-size: 22px; font-weight: 800">AI a deti – 5 vecí, ktoré treba vedieť</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Podľa odporúčaní AACAP (7/2026) a Common Sense Media (6/2026).</p>
+</div>
+<div style="grid-column: 1 / -1; border: 2px solid #17153B; border-radius: 24px; padding: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 300px">
+<strong style="font-size: 20px">Sprievodca pre rodičov v PDF</strong>
+<span style="font-size: 16px; line-height: 1.5; color: #36335E">Napíš do komentára na Instagrame slovo <strong style="font-family: 'JetBrains Mono', monospace; color: #17153B">RODICIA</strong> a pošleme ti ho do správ.</span>
+</div>
+<a class="cta" href="https://www.instagram.com/ludskyoai/" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 16px; box-sizing: border-box">Na Instagram</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Ako overujeme -->
+<section id="overujeme" style="background: #F6F5FB">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em">Ako overujeme</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Chceme, aby sa vo svete umelej inteligencie vyznal každý, nielen technici. Preto stavíme na dôveru.</p>
+<a href="opravy.html" style="align-self: flex-start; font-weight: 700; font-size: 17px; padding: 10px 0">Pozri všetky opravy →</a>
+</div>
+<ol style="flex: 999 1 520px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px">
+<li style="display: flex; gap: 20px; align-items: flex-start; padding: 24px; background: #FFFFFF; border: 2px solid #E6E5F0; border-radius: 20px">
+<span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #FF5F57; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700">1</span>
+<div style="display: flex; flex-direction: column; gap: 6px"><strong style="font-size: 19px">Zdroj a dátum pri každej novinke</strong><span style="font-size: 16px; line-height: 1.55; color: #36335E">Čerpáme z oficiálnych oznámení firiem a dôveryhodných médií. Odkaz si môžeš vždy overiť sám.</span></div>
+</li>
+<li style="display: flex; gap: 20px; align-items: flex-start; padding: 24px; background: #FFFFFF; border: 2px solid #E6E5F0; border-radius: 20px">
+<span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #FEBC2E; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700">2</span>
+<div style="display: flex; flex-direction: column; gap: 6px"><strong style="font-size: 19px">Vysvetlené, nie len preložené</strong><span style="font-size: 16px; line-height: 1.55; color: #36335E">Ku každej správe pridáme, čo sa zmenilo a ako to môžeš využiť v práci aj doma.</span></div>
+</li>
+<li style="display: flex; gap: 20px; align-items: flex-start; padding: 24px; background: #FFFFFF; border: 2px solid #E6E5F0; border-radius: 20px">
+<span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #28C840; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700">3</span>
+<div style="display: flex; flex-direction: column; gap: 6px"><strong style="font-size: 19px">Chyby opravujeme verejne</strong><span style="font-size: 16px; line-height: 1.55; color: #36335E">Ak sa pomýlime, zverejníme opravu s dátumom a tým, čo bolo zle – tu na webe aj v príbehu Opravy.</span></div>
+</li>
+</ol>
+</div>
+</section>
+
+<!-- Výzva -->
+<section class="sec" style="padding: 96px 24px">
+<div class="cta-card" style="max-width: 1132px; margin: 0 auto; background: #28C840; border-radius: 32px; padding: 56px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+<div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: clamp(28px, 3.5vw, 40px); font-weight: 800">Pomôžeš nám?</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6">Novinky, rady a návody dávame zadarmo a vždy so zdrojom. Ak ti to dáva zmysel, pošli profil priateľom, rodine alebo kolegom. Pre malý účet je to najväčšia pomoc.</p>
+</div>
+<a class="cta" href="https://www.instagram.com/ludskyoai/" style="flex: none; display: inline-flex; align-items: center; justify-content: center; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 32px; border-radius: 999px; min-height: 44px; box-sizing: border-box">Otvoriť @ludskyoai</a>
+</div>
+</section>
+
+<!-- Pätička -->
+<footer style="border-top: 1px solid #E6E5F0">
+<div style="max-width: 1180px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px; color: #36335E">
+<span><strong style="color: #17153B">Ľudsky o AI</strong> · AI po slovensky</span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px 18px"><a href="opravy.html">Opravy</a><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></span>
+</div>
+</footer>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.5.45/dist/vue.global.prod.js" integrity="sha384-K2FjvpG1y48yCE+7CBPhnKc16ShPmT3dlNwvoA3dhjV18+L5ugI0P8PWPvdjm/Fa" crossorigin="anonymous"></script>
+<script src="assets/dc-shim.js"></script>
+<script>
+/* Obsah stránky. Na živom webe sa načíta zo súboru data.json, ktorý aktualizuje naplánovaná úloha. */
+var DATA = {
+  triad: {
+    date: '16. 11. 2026',
+    posts: [
+      { color: '#FF5F57', tag: 'NOVINKA', title: 'Hľadáš cez ChatGPT namiesto Googlu?', body: 'OpenAI tvrdí, že ChatGPT už zvláda pätinu toľkých vyhľadávaní ako Google. Nezávislé odhady sú však nižšie.', prompt: '', meta: 'bigtechnology.com · 3. 11. 2026', link: 'https://www.instagram.com/ludskyoai/' },
+      { color: '#28C840', tag: 'AI RADA #5', title: 'Pýtaj si 3 verzie naraz', body: 'Z troch možností si vyberieš rýchlejšie ako z jednej. Hodí sa na e-mail, pozvánku či odpoveď na recenziu.', prompt: 'Napíš mi [čo potrebuješ] v troch verziách: formálne, priateľsky a úplne stručne.', meta: 'Ľudkov tip', link: 'https://www.instagram.com/ludskyoai/' },
+      { color: '#FEBC2E', tag: 'NÁVOD · 1 MINÚTA', title: 'Pozri, čo si o tebe ChatGPT pamätá', body: 'Nastavenia → Personalizácia → Pamäť. Pozor: keď zmažeš chat, spomienka z neho v Pamäti zostane.', prompt: '', meta: 'help.openai.com · overené 13. 11. 2026', link: 'https://www.instagram.com/ludskyoai/' }
+    ]
+  },
+  tyzden: { range: '', verified: '', items: [] },
+  tyzdenUkazka: {
+    range: '[DD.–DD. MM. RRRR]', verified: '[DD. MM. RRRR]',
+    items: [1, 2, 3, 4, 5].map(function (i) { return { num: i, h: '[Novinka ' + i + ' – titulok do 8 slov]', t: '[Čo sa stalo a čo to znamená pre teba – jedna veta.]', meta: '[zdroj] · [DD. MM.]' }; })
+  },
+  quiz: [
+    { q: 'Keď zmažeš chat, ChatGPT zabudne aj všetko, čo si z neho zapamätal.', fakt: false, why: 'Uložená spomienka zostáva. Treba ju zmazať aj v Nastaveniach → Personalizácia → Pamäť.', src: 'help.openai.com · overené 13. 11. 2026' },
+    { q: 'Tvoje rozhovory s ChatGPT sa môžu použiť na zlepšovanie modelov, ale dá sa to vypnúť.', fakt: true, why: 'V nastaveniach Ovládanie údajov môžeš vypnúť možnosť „Zlepšovať model pre všetkých“.', src: 'help.openai.com' },
+    { q: 'Keď AI odpovedá sebaisto, odpoveď je určite pravdivá.', fakt: false, why: 'Jazykové modely sa môžu mýliť aj vtedy, keď znejú presvedčivo. Dôležité informácie si vždy over.', src: 'upozornenie pod oknom chatu v ChatGPT' },
+    { q: 'Gemini je AI asistent od Googlu.', fakt: true, why: 'Gemini vyvíja Google. Asistent od OpenAI je ChatGPT a od Microsoftu Copilot.', src: 'gemini.google.com' }
+  ]
+};
+var FACES = [
+  { text: 'Ahoj, som Ľudko!', color: '#28C840', smile: 1, o: 0, flat: 0, brow: 0, cheeks: 1, badge: 'bWave' },
+  { text: 'Novinky vždy so zdrojom a dátumom.', color: '#FF5F57', smile: 0, o: 1, flat: 0, brow: 0, cheeks: 0, badge: 'bNove' },
+  { text: 'Tip: pýtaj si 3 verzie naraz.', color: '#FEBC2E', smile: 1, o: 0, flat: 0, brow: 0, cheeks: 1, badge: 'bTip' },
+  { text: 'Mýtus, či fakt? Tipni si nižšie.', color: '#A29BFE', smile: 0, o: 0, flat: 1, brow: 1, cheeks: 0, badge: 'bHmm' },
+  { text: 'Každú novinku si overujeme.', color: '#28C840', smile: 1, o: 0, flat: 0, brow: 0, cheeks: 1, badge: 'bOk' },
+  { text: 'Pozor! Zmazaný chat ≠ zmazaná pamäť.', color: '#FF5F57', smile: 0, o: 1, flat: 0, brow: 0, cheeks: 0, badge: 'bPozor' }
+];
+class Component extends DCLogic {
+constructor(props) {
+  super(props);
+  this.state = { i: 0, px: 0, py: 0, qi: 0, pick: null, score: 0, round: 0, menu: false, big: false };
+  this.el = null;
+  this.raf = 0;
+  this.onMove = this.onMove.bind(this);
+}
+componentDidMount() { window.addEventListener('mousemove', this.onMove); }
+componentWillUnmount() {
+  window.removeEventListener('mousemove', this.onMove);
+  if (this.raf) cancelAnimationFrame(this.raf);
+}
+onMove(e) {
+  var self = this, x = e.clientX, y = e.clientY;
+  if (this.raf) return;
+  this.raf = requestAnimationFrame(function () {
+    self.raf = 0;
+    if (!self.el) return;
+    var r = self.el.getBoundingClientRect();
+    var dx = x - (r.left + r.width / 2), dy = y - (r.top + r.height * 0.55);
+    var d = Math.sqrt(dx * dx + dy * dy) || 1, k = Math.min(1, d / 260);
+    self.setState({ px: Math.round(dx / d * 4 * k), py: Math.round(dy / d * 5 * k) });
+  });
+}
+answer(isFakt) {
+  var q = DATA.quiz[this.state.qi];
+  var ok = q.fakt === isFakt;
+  this.setState({ pick: isFakt, score: this.state.score + (ok ? 1 : 0) });
+}
+renderVals() {
+  var self = this, s = this.state;
+  var f = FACES[s.i % FACES.length];
+  var face = { smile: f.smile, o: f.o, flat: f.flat, brow: f.brow, cheeks: f.cheeks, bWave: 0, bNove: 0, bTip: 0, bHmm: 0, bOk: 0, bPozor: 0 };
+  face[f.badge] = 1;
+
+  var preview = this.props.showTyzdenPreview ?? false;
+  var t = (DATA.tyzden.items.length || !preview) ? DATA.tyzden : DATA.tyzdenUkazka;
+  var has = t.items.length > 0;
+
+  var total = DATA.quiz.length, done = s.qi >= total;
+  var q = done ? DATA.quiz[0] : DATA.quiz[s.qi];
+  var answered = s.pick !== null;
+  var ok = answered && q.fakt === s.pick;
+  var scoreText = s.score === total ? 'Výborne, si v obraze!' : (s.score >= total / 2 ? 'Dobrá práca!' : 'Nevadí, preto to robíme.');
+
+  return {
+    rootClass: s.big ? 'big' : '',
+    bigLabel: s.big ? 'A−' : 'A+',
+    bigPressed: s.big ? 'true' : 'false',
+    bigBg: s.big ? '#FEBC2E' : '#FFFFFF',
+    toggleBig: function () { self.setState({ big: !self.state.big }); },
+    menuOpen: s.menu,
+    menuClosed: !s.menu,
+    menuClass: s.menu ? 'open' : '',
+    menuExpanded: s.menu ? 'true' : 'false',
+    menuLabel: s.menu ? 'Zavrieť menu' : 'Otvoriť menu',
+    toggleMenu: function () { self.setState({ menu: !self.state.menu }); },
+    closeMenu: function () { self.setState({ menu: false }); },
+    line: f.text,
+    bubbleColor: f.color,
+    bubbleClass: s.i % 2 ? 'pop-b' : 'pop-a',
+    badgeClass: s.i % 2 ? 'badge-b' : 'badge-a',
+    face: face,
+    hl: 'translate(' + s.px + ' ' + s.py + ')',
+    nextLine: function () { self.setState({ i: self.state.i + 1 }); },
+    ludkoRef: function (el) { self.el = el; },
+    triad: DATA.triad.posts ? { date: DATA.triad.date, posts: DATA.triad.posts.map(function (p) { return Object.assign({}, p, { hasPrompt: !!p.prompt }); }) } : DATA.triad,
+    tyzden: { has: has, empty: !has, range: t.range, verified: t.verified, items: t.items },
+    quiz: {
+      playing: !done, done: done, num: s.qi + 1, total: total, q: q.q,
+      asking: !answered, answered: answered,
+      verdict: (ok ? 'Správne! ' : 'Nie celkom. ') + 'Je to ' + (q.fakt ? 'fakt.' : 'mýtus.'),
+      verdictBg: ok ? '#C9F2D2' : '#FFD6D3',
+      anim: s.qi % 2 ? 'pop-b' : 'pop-a',
+      why: q.why, src: q.src,
+      nextLabel: s.qi + 1 < total ? 'Ďalšia otázka' : 'Zobraziť výsledok',
+      score: s.score, scoreText: scoreText,
+      pickMytus: function () { self.answer(false); },
+      pickFakt: function () { self.answer(true); },
+      next: function () { self.setState({ qi: self.state.qi + 1, pick: null }); },
+      restart: function () { self.setState({ qi: 0, pick: null, score: 0 }); }
+    }
+  };
+}
+}
+mountPage(Component);
+</script>
+</body>
+</html>
