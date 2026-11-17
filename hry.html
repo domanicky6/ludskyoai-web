@@ -4,426 +4,456 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hraj sa a uč sa – Ľudsky o AI</title>
-<meta name="description" content="Novinky o AI po slovensky – krátko, zrozumiteľne a vždy so zdrojom a dátumom. Rady, návody a hry pre deti, rodičov aj seniorov.">
+<meta name="description" content="Krátke hry o umelej inteligencii pre deti, rodičov aj seniorov. Ako sa AI učí, čo jej neprezrádzať a ako spoznať podvod. Bez registrácie, po slovensky.">
 <meta property="og:title" content="Hraj sa a uč sa – Ľudsky o AI">
-<meta property="og:description" content="Umelá inteligencia, vysvetlená ľudsky. Novinky so zdrojom a dátumom, rady, návody a hry.">
+<meta property="og:description" content="Hry o AI pre celú rodinu: nauč Ľudka, uhádni slovo ako AI, odhaľ podvod. Bez registrácie.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ludskyoai.sk/hry.html">
+<meta name="theme-color" content="#17153B">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
 <style>
-body{margin:0;background:#F6F5FB}
-a{color:#17153B}a:hover{color:#3A3770}
-button{font-family:inherit}
-.big{zoom:1.15;width:86.9565%!important}
-.btn{transition:transform .12s ease, box-shadow .12s ease}
-.btn:hover{transform:translate(-2px,-2px)}
-.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 #17153B!important}
-.btn:focus-visible,.gcard:focus-visible{outline:3px solid #FEBC2E;outline-offset:3px}
-.gcard{transition:transform .2s ease, box-shadow .2s ease}
-.gcard:hover{transform:translate(-4px,-4px) rotate(-.5deg);box-shadow:12px 12px 0 #17153B!important}
-@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
-.pop{animation:popIn .45s cubic-bezier(.2,.9,.3,1.3) both}
-@keyframes popIn2{0%{transform:scale(.6) rotate(-6deg);opacity:0}70%{transform:scale(1.06) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
-.pop2{animation:popIn2 .45s cubic-bezier(.2,.9,.3,1.3) both}
-.dragcard{cursor:grab;touch-action:manipulation}
-.dragcard:active{cursor:grabbing}
-.basket{transition:transform .15s ease, background .15s ease}
-.basket:hover{transform:translateY(-3px)}
-.basket:focus-visible{outline:3px solid #FEBC2E;outline-offset:3px}
-@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
-.wiggle{animation:wiggle .5s ease-in-out}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
-.slide{animation:slideUp .4s ease-out both}
+:root{--ink:#17153B;--ink2:#36335E;--mut:#4A4775;--bg:#F6F5FB;--lil:#A29BFE;--lil2:#EEECFF;--red:#FF5F57;--red2:#FFD6D3;--yel:#FEBC2E;--yel2:#FFF3CF;--grn:#28C840;--grn2:#C9F2D2;--sh:6px 6px 0 var(--ink)}
+html{font-size:100%;-webkit-text-size-adjust:100%}
+html.big{font-size:118%}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+a{color:var(--ink)}
+button{font-family:inherit;color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--yel);outline-offset:3px}
+
+/* ---------- tlačidlá ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.5rem;padding:0 1.6rem;border:3px solid var(--ink);border-radius:999px;background:#fff;font-weight:900;font-size:1.1rem;cursor:pointer;box-shadow:5px 5px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;text-decoration:none;color:var(--ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn.yel{background:var(--yel)}.btn.dark{background:var(--ink);color:#fff;box-shadow:5px 5px 0 var(--lil)}.btn.lil{background:var(--lil)}
+.btn.sm{min-height:2.9rem;font-size:.95rem;padding:0 1.1rem;box-shadow:3px 3px 0 var(--ink)}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:.4rem;height:2.75rem;padding:0 .9rem;border-radius:999px;font-weight:800;font-size:1rem;white-space:nowrap}
+.tog{min-width:2.75rem;height:2.75rem;padding:0 .75rem;border:2px solid #fff;border-radius:999px;background:transparent;color:#fff;font-weight:800;font-size:.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;transition:background .15s}
+.tog[aria-pressed="true"]{background:var(--yel);color:var(--ink);border-color:var(--yel)}
+.tog .lbl{display:none}
+@media (min-width:760px){.tog .lbl{display:inline}}
+
+/* ---------- hlavička ---------- */
+header.top{background:var(--ink);color:#fff;position:sticky;top:0;z-index:40}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding-top:.6rem;padding-bottom:.6rem}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:#fff;font-weight:800;font-size:1.15rem}
+.dots3{display:flex;gap:6px}.dots3 i{width:12px;height:12px;border-radius:50%;display:block}
+.tools{display:flex;align-items:center;gap:.45rem}
+.starpill{background:#2C2960;color:#fff}
+.starpill b{color:var(--yel);font-size:1.2rem}
+.starpill.bump{animation:bump .5s ease}
+@media (max-width:420px){.logo span.t{display:none}}
+
+/* ---------- animácie ---------- */
+@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+@keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-12px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(4px)}}
-.shake{animation:shake .45s ease both}
-@keyframes floatUp{0%{transform:translateY(10px) scale(.8);opacity:0}25%{opacity:1;transform:translateY(0) scale(1.15)}100%{transform:translateY(-46px) scale(1);opacity:0}}
-.plus{animation:floatUp 1.3s ease-out both}
-@keyframes fall{0%{transform:translateY(-30px) rotate(0);opacity:1}100%{transform:translateY(520px) rotate(540deg);opacity:0}}
-.confetti{position:absolute;top:0;width:10px;height:16px;border-radius:3px;animation-name:fall;animation-timing-function:cubic-bezier(.25,.6,.5,1);animation-fill-mode:both;pointer-events:none}
-@keyframes timer{0%{width:100%;background:#28C840}60%{background:#FEBC2E}100%{width:0;background:#FF5F57}}
-.tbar{height:100%;border-radius:999px;animation-name:timer;animation-timing-function:linear;animation-fill-mode:forwards}
-@keyframes starIn{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.25) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
-.star{display:inline-block;animation:starIn .5s cubic-bezier(.2,.9,.3,1.4) both}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes jump{0%,100%{transform:translateY(0)}30%{transform:translateY(-22px) rotate(-4deg)}60%{transform:translateY(0) scale(1.05,.95)}}
+@keyframes wave{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(16deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}}
+@keyframes starIn{0%{transform:scale(0) rotate(-60deg);opacity:0}70%{transform:scale(1.3) rotate(10deg);opacity:1}100%{transform:none;opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(254,188,46,.75)}50%{box-shadow:0 0 0 12px rgba(254,188,46,0)}}
+@keyframes floatUp{0%{transform:translateY(8px) scale(.7);opacity:0}25%{opacity:1;transform:translateY(0) scale(1.2)}100%{transform:translateY(-44px);opacity:0}}
+@keyframes stampIn{0%{transform:scale(2.4) rotate(-14deg);opacity:0}60%{transform:scale(.92) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-8deg);opacity:1}}
+@keyframes caret{50%{opacity:0}}
+@keyframes think{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-6px);opacity:1}}
+@keyframes hintLR{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(6px,-10px) rotate(8deg)}}
+@keyframes dash{to{stroke-dashoffset:-40}}
+.pop{animation:popIn .45s cubic-bezier(.2,.9,.3,1.3) both}
+.slide{animation:slideUp .4s ease-out both}
+.shake{animation:shake .45s ease both}
 .bob{animation:bob 3s ease-in-out infinite}
-@keyframes ludkoWave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(14deg)}}
-.arm{transform-box:fill-box;transform-origin:0% 100%;animation:ludkoWave 1.4s ease-in-out infinite}
-@keyframes blinkC{0%,100%{opacity:1}50%{opacity:0}}
-.caret{animation:blinkC 1s step-end infinite}
-@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(254,188,46,.7)}50%{box-shadow:0 0 0 10px rgba(254,188,46,0)}}
+.jump{animation:jump .7s ease both}
 .glow{animation:glow 1.6s ease-in-out infinite}
-@media (max-width: 720px){
-.sec{padding-top:28px!important;padding-bottom:40px!important}
-.hide-m{display:none!important}
-.stage{padding:18px!important;border-radius:22px!important;box-shadow:6px 6px 0 #17153B!important}
-.qtext{font-size:21px!important}
-.ludko-side{flex-basis:100%!important;flex-direction:row!important;align-items:center!important}
-.ludko-svg{width:96px!important}
-.h1{font-size:34px!important}
+
+/* ---------- Ľudko ---------- */
+.ludko{overflow:visible;display:block}
+.ludko .arm{transform-box:fill-box;transform-origin:0% 100%;animation:wave 1.5s ease-in-out infinite}
+.ludko .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 4.2s infinite}
+.ludko .pupil{transition:transform .12s ease-out}
+.ludko .badge{transform-box:fill-box;transform-origin:50% 50%;animation:popIn .45s cubic-bezier(.2,.9,.3,1.4) both}
+
+/* ---------- rozcestník ---------- */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:2rem;padding-top:2.6rem;padding-bottom:3.2rem;position:relative;z-index:1}
+.hero h1{margin:0;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.02;font-weight:900}
+.hero p{margin:0;font-size:1.15rem;line-height:1.55;color:#D6D4EA;max-width:36rem}
+.kicker{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:var(--yel)}
+.prog{height:14px;background:#2C2960;border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--yel);border-radius:999px;transition:width .8s cubic-bezier(.2,.9,.3,1)}
+.hero-ludko{flex:1 1 220px;display:flex;justify-content:center}
+.sparkle{position:absolute;color:var(--yel);opacity:.55;animation:drift 6s ease-in-out infinite;pointer-events:none;font-size:1.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .8rem;border-radius:999px;font-weight:700;font-size:.9rem;background:#2C2960;color:#fff;text-decoration:none;border:2px solid transparent}
+.chip:hover{border-color:var(--yel)}
+.sec{padding-top:2.8rem;padding-bottom:1rem}
+.sec h2{margin:0 0 .4rem;font-size:clamp(1.5rem,3.5vw,2rem);font-weight:900;display:flex;align-items:center;gap:.7rem}
+.sec h2 .sq{width:18px;height:18px;border-radius:6px;border:2px solid var(--ink);flex:none}
+.sec .lead{margin:0 0 1.4rem;color:var(--ink2);font-size:1.05rem;line-height:1.5;max-width:44rem}
+
+/* Ľudkova cesta */
+.path{margin:0;padding:1.6rem 1rem 1.2rem;position:relative;background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.path::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 85%,#C9F2D2 0 60px,transparent 61px),radial-gradient(circle at 92% 18%,#FFF3CF 0 70px,transparent 71px),radial-gradient(circle at 55% 110%,#EEECFF 0 90px,transparent 91px);pointer-events:none}
+.stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative}
+.path svg.road{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.path svg.road path{animation:dash 3s linear infinite}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.45rem;padding-top:2.2rem}
+.stop:nth-of-type(even){margin-top:3.2rem}
+.stop-btn{position:relative;width:7.6rem;height:7.6rem;border-radius:50%;border:4px solid var(--ink);background:var(--c);box-shadow:6px 6px 0 var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:3.4rem;transition:transform .18s cubic-bezier(.2,.9,.3,1.4),box-shadow .18s}
+.stop-btn:hover{transform:translate(-3px,-3px) scale(1.06) rotate(-4deg);box-shadow:9px 9px 0 var(--ink)}
+.stop-btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.stop-btn .num{position:absolute;top:-.4rem;left:-.4rem;width:2.3rem;height:2.3rem;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;border:3px solid #fff}
+.stop-btn .done{position:absolute;bottom:-.3rem;right:-.3rem;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--grn);border:3px solid var(--ink);font-size:1rem;display:flex;align-items:center;justify-content:center}
+.stop strong{font-size:1.15rem;font-weight:900;line-height:1.2}
+.stop .sub{font-size:.88rem;color:var(--mut);font-weight:600;line-height:1.35;max-width:13rem}
+.stars{font-size:1.35rem;letter-spacing:2px;line-height:1}
+.stars .on{color:#E8A400}.stars .off{color:#D6D4EA}
+.stop.has-here{padding-top:4.2rem}
+.here{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;align-items:flex-end;gap:.2rem;pointer-events:none;z-index:2}
+.here .say{background:var(--yel);border:2px solid var(--ink);border-radius:12px 12px 12px 2px;padding:.2rem .55rem;font-weight:900;font-size:.8rem;white-space:nowrap;margin-bottom:1.6rem}
+@media (max-width:820px){
+  .path{padding:1.2rem}.stops{grid-template-columns:1fr}.path svg.road{display:none}
+  .stop{flex-direction:row;text-align:left;padding:.6rem 0;gap:1rem;margin-top:0!important}
+  .stop:nth-of-type(even){flex-direction:row-reverse;text-align:right}
+  .stop:nth-of-type(even) .txt{align-items:flex-end}
+  .stop .txt{display:flex;flex-direction:column;gap:.3rem;flex:1}
+  .stop-btn{width:6.2rem;height:6.2rem;font-size:2.7rem;flex:none}
+  .stop.has-here{padding-top:3.4rem}
+  .here{top:.2rem;left:auto;right:0;transform:none}
+  .stop:nth-of-type(even) .here{right:auto;left:0}
+  .here .say{margin-bottom:1.6rem}
+  .agetag{align-self:flex-start}
+  .stop:nth-of-type(even) .agetag{align-self:flex-end}
+  .hero-ludko svg{width:150px}
+  .bars .brow{grid-template-columns:5.2rem minmax(0,1fr) 2.9rem;gap:.45rem}
+  .choice{min-height:4.2rem;flex-direction:column;gap:.15rem;font-size:1.05rem}
+  .choice .i{font-size:1.6rem}
 }
-@media (prefers-reduced-motion: reduce){.pop,.slide,.shake,.plus,.confetti,.tbar,.star,.bob,.arm,.caret,.glow{animation:none!important}.btn,.gcard{transition:none}.confetti{display:none}}
+@media (min-width:821px){.stop .txt{display:flex;flex-direction:column;align-items:center;gap:.45rem}}
+
+/* karty hier */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.3rem}
+.gcard{text-align:left;padding:0;border:3px solid var(--ink);border-radius:24px;background:#fff;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;box-shadow:8px 8px 0 var(--ink);transition:transform .2s ease,box-shadow .2s ease}
+.gcard:hover{transform:translate(-4px,-4px) rotate(-.5deg);box-shadow:12px 12px 0 var(--ink)}
+.gcard .head{background:var(--c);padding:1.1rem 1.3rem;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--ink);width:100%}
+.gcard .emo{font-size:2.8rem;line-height:1}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.75rem;background:var(--ink);color:#fff;border-radius:999px;padding:.35rem .7rem;white-space:nowrap}
+.gcard .body{padding:1rem 1.3rem 1.3rem;display:flex;flex-direction:column;gap:.6rem;width:100%}
+.gcard strong{font-size:1.4rem;font-weight:900}
+.gcard .desc{font-size:.95rem;line-height:1.45;color:var(--ink2)}
+.gcard .row{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.gcard .best{font-size:.85rem;font-weight:700;color:var(--mut)}
+.gcard .cta{display:flex;justify-content:center;align-items:center;min-height:3rem;border-radius:14px;background:var(--ink);color:#fff;font-weight:800;font-size:1.05rem}
+
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.9rem}
+.bdg{display:flex;align-items:center;gap:.75rem}
+.bdg .ico{flex:none;width:3.4rem;height:3.4rem;border-radius:50%;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:var(--lil2)}
+.bdg.off .ico{filter:grayscale(1);opacity:.45}
+.bdg .t{display:flex;flex-direction:column;gap:2px}
+.bdg .t b{font-size:.95rem}.bdg .t span{font-size:.8rem;color:var(--mut);line-height:1.3}
+.panel{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:1.5rem}
+
+.parents{background:var(--yel2);border:3px solid var(--ink);border-radius:28px;padding:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem}
+.parents .tip{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;line-height:1.5}
+.parents .tip .n{flex:none;width:2.4rem;height:2.4rem;border-radius:12px;background:#fff;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+
+/* ---------- intro hry ---------- */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.6rem;align-items:stretch}
+@media (max-width:820px){.intro{grid-template-columns:1fr}}
+.intro .art{background:var(--c);border:3px solid var(--ink);border-radius:28px;box-shadow:8px 8px 0 var(--ink);padding:1.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;position:relative;overflow:hidden;min-height:18rem}
+.intro .art .big-emo{font-size:5.5rem;line-height:1;animation:bob 3s ease-in-out infinite}
+.intro .info{display:flex;flex-direction:column;gap:1.1rem}
+.intro h1{margin:0;font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.05}
+.say-box{position:relative;background:#fff;border:3px solid var(--ink);border-radius:20px;padding:1rem 3.6rem 1rem 1.2rem;font-size:1.15rem;line-height:1.55;font-weight:600}
+.say-box::before{content:"";position:absolute;left:-14px;top:22px;border:12px solid transparent;border-right-color:var(--ink);border-left:0}
+.say-box::after{content:"";position:absolute;left:-9px;top:24px;border:10px solid transparent;border-right-color:#fff;border-left:0}
+@media (max-width:820px){.say-box::before,.say-box::after{display:none}}
+.spk{position:absolute;right:.6rem;top:.6rem;width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--ink);background:var(--lil2);cursor:pointer;font-size:1.15rem;display:flex;align-items:center;justify-content:center}
+.spk:hover{background:var(--yel)}
+.spk.on{background:var(--yel);animation:bump .6s ease infinite}
+.how{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.how li{display:flex;gap:.8rem;align-items:center;font-size:1.05rem;line-height:1.4;font-weight:600}
+.how li .n{flex:none;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+.learn{display:flex;gap:.7rem;align-items:center;background:var(--grn2);border:2px solid var(--ink);border-radius:16px;padding:.8rem 1rem;font-weight:700;line-height:1.4}
+.switch{display:flex;align-items:center;gap:.8rem;cursor:pointer;font-weight:700;font-size:1rem;user-select:none}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch .sw{flex:none;width:3.4rem;height:2rem;border-radius:999px;background:#D6D4EA;border:2px solid var(--ink);position:relative;transition:background .2s}
+.switch .sw::after{content:"";position:absolute;top:2px;left:2px;width:1.5rem;height:1.5rem;border-radius:50%;background:#fff;border:2px solid var(--ink);transition:transform .2s cubic-bezier(.2,.9,.3,1.4)}
+.switch input:checked+.sw{background:var(--grn)}
+.switch input:checked+.sw::after{transform:translateX(1.35rem)}
+.switch input:focus-visible+.sw{outline:3px solid var(--yel);outline-offset:3px}
+
+/* ---------- hra ---------- */
+.play{max-width:960px;margin:0 auto;padding:1.4rem 1.2rem 5rem;display:flex;flex-direction:column;gap:1rem}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.7rem}
+.hud{display:flex;align-items:center;gap:.5rem}
+.pts{position:relative;background:var(--ink);color:#fff;font-weight:900;font-size:1.05rem}
+.gain{position:absolute;right:.3rem;top:-.4rem;color:var(--grn);font-weight:900;font-size:1.25rem;text-shadow:0 2px 0 var(--ink);animation:floatUp 1.3s ease-out both;pointer-events:none}
+.streak{background:var(--red);border:2px solid var(--ink)}
+.ptitle{display:flex;align-items:center;gap:.8rem}
+.ptitle .e{font-size:2.4rem}
+.ptitle h1{margin:0;font-size:clamp(1.6rem,4.5vw,2.4rem);font-weight:900;line-height:1.05}
+.pdots{display:flex;gap:.45rem}
+.pdots i{flex:1;height:.8rem;border-radius:999px;border:2px solid var(--ink);background:#fff;transition:background .3s}
+.pdots i.ok{background:var(--grn)}.pdots i.bad{background:var(--red)}.pdots i.cur{background:var(--yel);animation:bump .6s ease}
+.stage{scroll-margin-top:5rem;position:relative;background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:10px 10px 0 var(--ink);padding:1.6rem;display:flex;gap:1.5rem}
+.side{flex:0 0 10.5rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
+.bubble{position:relative;background:var(--bb,#EEECFF);border:2px solid var(--ink);border-radius:16px;padding:.6rem .8rem;font-weight:800;font-size:.98rem;line-height:1.3;text-align:center;min-height:2.6rem}
+.bubble::before{content:"";position:absolute;top:-11px;left:50%;margin-left:-9px;border:9px solid transparent;border-bottom-color:var(--ink);border-top:0}
+.bubble::after{content:"";position:absolute;top:-7px;left:50%;margin-left:-7px;border:7px solid transparent;border-bottom-color:var(--bb,#EEECFF);border-top:0}
+.bubble .dots i{display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:var(--ink);margin:0 2px;animation:think 1s infinite}
+.bubble .dots i:nth-child(2){animation-delay:.15s}.bubble .dots i:nth-child(3){animation-delay:.3s}
+.content{flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1rem}
+@media (max-width:720px){
+  .play{padding:1rem .9rem 4rem}
+  .stage{flex-direction:column;padding:1rem;border-radius:22px;box-shadow:6px 6px 0 var(--ink);gap:1rem}
+  .side{flex-direction:row;flex-basis:auto;align-items:center;gap:.6rem}
+  .side .lk svg{width:84px!important}
+  .bubble{flex:1;text-align:left}
+  .bubble::before{top:50%;left:-11px;margin:-9px 0 0;border:9px solid transparent;border-right-color:var(--ink);border-left:0}
+  .bubble::after{top:50%;left:-7px;margin:-7px 0 0;border:7px solid transparent;border-right-color:var(--bb,#EEECFF);border-left:0}
+}
+.timer{height:.8rem;background:var(--lil2);border-radius:999px;overflow:hidden;border:2px solid var(--ink)}
+.timer i{display:block;height:100%;width:100%;background:var(--grn);border-radius:999px}
+
+/* karta otázky */
+.qcard{position:relative;background:var(--bg);border:3px solid var(--ink);border-radius:22px;padding:1.3rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.8rem;touch-action:pan-y;user-select:none;transition:border-color .2s}
+.qcard.swipe{cursor:grab}
+.qcard.dragging{transition:none;cursor:grabbing}
+.qcard .k{align-self:flex-start;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.8rem;background:var(--ink);color:#fff;border-radius:999px;padding:.35rem .75rem}
+.qtext{margin:0;font-size:clamp(1.25rem,3.2vw,1.55rem);line-height:1.4;font-weight:700;white-space:pre-line;padding-right:2.4rem}
+.qcard .spk{top:.9rem;right:.9rem}
+.qcard .lean{position:absolute;top:1rem;padding:.3rem .8rem;border:3px solid var(--ink);border-radius:12px;font-weight:900;font-size:1rem;opacity:0;pointer-events:none;background:#fff}
+.qcard .lean.l{left:1rem;transform:rotate(-8deg)}.qcard .lean.r{right:3.6rem;transform:rotate(8deg)}
+.stamp{position:absolute;right:1rem;bottom:-.9rem;padding:.35rem 1rem;border:4px solid var(--ink);border-radius:12px;font-weight:900;font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em;animation:stampIn .45s cubic-bezier(.2,.9,.3,1.3) both;box-shadow:3px 3px 0 var(--ink)}
+.swipehint{display:none;align-items:center;justify-content:center;gap:.5rem;font-weight:700;color:var(--mut);font-size:.9rem}
+.swipehint span{display:inline-block;animation:hintLR 1.6s ease-in-out infinite}
+@media (hover:none){.swipehint{display:flex}}
+.choices{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.9rem}
+.choice{min-height:4.6rem;border:3px solid var(--ink);border-radius:20px;background:var(--c);font-size:clamp(1.05rem,3vw,1.3rem);font-weight:900;cursor:pointer;box-shadow:5px 5px 0 var(--ink);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.4rem .8rem;transition:transform .12s ease,box-shadow .12s ease;line-height:1.15}
+.choice .i{font-size:1.8rem}
+.choice:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.choice:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.choice kbd{display:none}
+@media (hover:hover) and (pointer:fine){.choice kbd{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.7rem;background:rgba(255,255,255,.7);border:1.5px solid var(--ink);border-radius:6px;padding:0 .35rem;margin-left:.2rem}}
+
+.fb{border:3px solid var(--ink);border-radius:20px;padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:.6rem;animation:slideUp .4s ease-out both}
+.fb.ok{background:var(--grn2)}.fb.bad{background:var(--red2)}
+.fb .t{font-size:1.35rem;font-weight:900;display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .5rem;line-height:1.25}
+.fb .w{font-size:1.08rem;line-height:1.55}
+.fb .s{font-size:1rem;line-height:1.5}
+.fb .src{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--ink2)}
+.nextrow{display:flex;justify-content:flex-start}
+
+/* vymyslená veta */
+.sent{text-align:left;min-height:3.6rem;padding:.8rem 1.1rem;border:3px solid var(--ink);border-radius:16px;background:#fff;font-size:1.12rem;font-weight:600;line-height:1.4;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .2s;display:flex;gap:.7rem;align-items:flex-start}
+.sent:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.sent .n{flex:none;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--lil2);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem}
+.sent.wrong{background:var(--red2);box-shadow:4px 4px 0 var(--red)}
+.sent.wrong .tx{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:3px}
+.sent.mine{background:var(--lil2)}
+.sent[disabled]{cursor:default}
+
+/* doplň slovo */
+.typed{background:var(--ink);color:#fff;border-radius:22px;padding:1.4rem 1.5rem;font-size:clamp(1.35rem,3.6vw,1.8rem);font-weight:800;line-height:1.45;position:relative}
+.typed .blank{display:inline-block;min-width:5.5rem;border-bottom:4px dashed var(--yel);color:var(--yel);text-align:center;padding:0 .3rem}
+.typed .caret{display:inline-block;width:.6rem;height:1.4em;vertical-align:-.25em;background:var(--yel);animation:caret 1s steps(1) infinite;margin-left:2px}
+.typed .lbl{display:block;font-family:"JetBrains Mono",monospace;font-size:.75rem;letter-spacing:.08em;color:var(--lil);margin-bottom:.5rem;font-weight:700}
+.words{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.8rem}
+.word{min-height:3.8rem;border:3px solid var(--ink);border-radius:18px;background:#fff;font-size:1.2rem;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;padding:.3rem .6rem}
+.word:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:6px 6px 0 var(--ink);background:var(--yel2)}
+.word.special{background:var(--lil2);font-size:1rem}
+.bars{display:flex;flex-direction:column;gap:.55rem}
+.brow{display:grid;grid-template-columns:8rem minmax(0,1fr) 3.2rem;align-items:center;gap:.6rem;font-weight:800}
+.brow .nm{font-size:1rem;line-height:1.2;display:flex;flex-direction:column}
+.brow .nm small{font-size:.72rem;font-weight:800;color:var(--mut)}
+.brow .tr{height:1.6rem;background:var(--lil2);border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.brow .tr i{display:block;height:100%;width:0;background:var(--lil);border-radius:999px;transition:width .9s cubic-bezier(.2,.9,.3,1)}
+.brow.top .tr i{background:var(--grn)}
+.brow .pc{font-family:"JetBrains Mono",monospace;font-weight:700;text-align:right}
+.note{font-size:.82rem;color:var(--mut);line-height:1.4}
+
+/* Nauč Ľudka */
+.train{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.fcard{position:relative;width:13rem;background:#fff;border:4px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);padding:.9rem .9rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;touch-action:none;cursor:grab;user-select:none;z-index:5}
+.fcard.dragging{cursor:grabbing;box-shadow:14px 14px 0 rgba(23,21,59,.35);transition:none}
+.fcard .nm{font-size:1.6rem;font-weight:900}
+.feat{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem}
+.feat span{font-size:.75rem;font-weight:800;background:var(--bg);border:1.5px solid var(--ink);border-radius:999px;padding:.15rem .5rem;display:inline-flex;align-items:center;gap:.25rem}
+.feat .cdot{width:.7rem;height:.7rem;border-radius:50%;border:1.5px solid var(--ink);display:inline-block}
+.baskets{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;width:100%}
+.basket{min-height:10rem;border:4px solid var(--ink);border-radius:24px;background:var(--c);cursor:pointer;padding:.9rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;box-shadow:5px 5px 0 var(--ink);transition:transform .15s cubic-bezier(.2,.9,.3,1.4),background .15s}
+.basket:hover{transform:translateY(-3px)}
+.basket.over{transform:scale(1.06);border-style:dashed;background:var(--c2)}
+.basket strong{font-size:1.35rem;font-weight:900}
+.basket .bi{font-size:2.4rem;line-height:1}
+.basket .got{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem}
+.basket .got span{font-size:.8rem;font-weight:800;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:.15rem .55rem;animation:popIn .4s cubic-bezier(.2,.9,.3,1.4) both}
+.basket .got span.x{background:var(--yel2)}
+.hint{font-size:1rem;font-weight:700;color:var(--mut);text-align:center}
+.brain{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:1.4rem 0;text-align:center}
+.brain .gear{font-size:3.6rem;animation:bob 1s ease-in-out infinite}
+.brain .lines{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;max-width:30rem}
+.brain .lines span{font-size:.85rem;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:.2rem .6rem;background:var(--lil2);animation:popIn .4s both}
+.exam{display:grid;grid-template-columns:repeat(auto-fit,minmax(12.5rem,1fr));gap:.8rem}
+.res{border:3px solid var(--ink);border-radius:18px;padding:.9rem;display:flex;flex-direction:column;gap:.45rem;background:#fff;animation:popIn .45s cubic-bezier(.2,.9,.3,1.3) both;transition:background .3s}
+.res.ok{background:var(--grn2)}.res.bad{background:var(--red2)}
+.res .top{display:flex;align-items:center;gap:.6rem}
+.res .top strong{font-size:1.15rem}
+.res .g{font-size:.95rem;line-height:1.35}
+.res .v{font-weight:900;font-size:1rem}
+.res .wait{font-size:.95rem;font-weight:800;color:var(--mut)}
+
+/* koniec */
+.end{display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center}
+.bigstars{display:flex;gap:.6rem;font-size:4.2rem;line-height:1}
+.bigstars span{display:inline-block;color:#D6D4EA;text-shadow:0 4px 0 var(--ink)}
+.bigstars span.on{color:var(--yel);animation:starIn .55s cubic-bezier(.2,.9,.3,1.4) both}
+.end .tt{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:900}
+.end .score{font-size:2.6rem;font-weight:900}
+.flag{background:var(--yel);border:3px solid var(--ink);border-radius:999px;padding:.45rem 1.1rem;font-weight:900;font-size:1.05rem}
+.newbadge{display:inline-flex;align-items:center;gap:.7rem;background:var(--lil2);border:3px solid var(--ink);border-radius:18px;padding:.6rem 1rem;font-weight:800}
+.newbadge .ico{width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.lesson{background:var(--lil2);border-radius:18px;padding:1rem 1.2rem;font-size:1.05rem;line-height:1.55;max-width:38rem;text-align:left}
+.talk{background:var(--yel2);border:2px dashed var(--ink);border-radius:18px;padding:1rem 1.2rem;font-size:1.02rem;line-height:1.55;max-width:38rem;text-align:left}
+.talk b{display:block;font-family:"JetBrains Mono",monospace;font-size:.75rem;letter-spacing:.06em;margin-bottom:.25rem}
+.endbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:.3rem}
+
+/* seniori */
+.sqq{text-align:left;min-height:4.2rem;padding:.9rem 1.2rem;border:3px solid var(--ink);border-radius:18px;background:#fff;font-size:1.25rem;font-weight:700;line-height:1.35;cursor:pointer;box-shadow:5px 5px 0 var(--ink);display:flex;justify-content:space-between;gap:.8rem;align-items:center;transition:transform .12s,box-shadow .12s}
+.sqq:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.sqq.cur{background:var(--yel)}
+.chat{border:3px solid var(--ink);border-radius:22px;overflow:hidden}
+.chat .tb{background:var(--lil);padding:.6rem 1rem;display:flex;gap:.5rem;border-bottom:3px solid var(--ink)}
+.chat .in{padding:1.1rem;display:flex;flex-direction:column;gap:.8rem}
+.me{align-self:flex-end;max-width:85%;background:var(--ink);color:#fff;border-radius:18px 18px 4px 18px;padding:.8rem 1rem;font-size:1.2rem;line-height:1.45;animation:slideUp .3s both}
+.ai{align-self:flex-start;max-width:94%;background:var(--bg);border-radius:18px 18px 18px 4px;padding:.9rem 1.1rem;font-size:1.25rem;line-height:1.55}
+.ai .caret{display:inline-block;width:.5rem;height:1.2em;vertical-align:-.2em;background:var(--ink);animation:caret 1s steps(1) infinite}
+.tips3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem}
+.tips3 div{border-radius:16px;padding:1rem;font-size:1.08rem;line-height:1.5}
+
+footer.bot{border-top:1px solid #E6E5F0;background:#fff;margin-top:3rem}
+footer.bot .wrap{padding-top:1.5rem;padding-bottom:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;font-size:.95rem;color:var(--ink2)}
+footer.bot nav{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
+
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+.fly{position:fixed;z-index:70;pointer-events:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
-<style>[v-cloak]{display:none}</style>
 </head>
 <body>
-<div id="app" v-cloak>
-<div :class="rootClass" style="font-family: Montserrat, system-ui, sans-serif; color: #17153B; background: #F6F5FB; width: 100%; min-height: 100vh; box-sizing: border-box; overflow-x: clip">
-
-<!-- Hlavička -->
-<header style="background: #17153B; color: #FFFFFF">
-<div style="max-width: 1180px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
-<a href="./" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFFFFF">
-<span style="display: flex; gap: 6px" aria-hidden="true"><span style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28C840"></span></span>
-<span style="font-weight: 800; font-size: 19px">Ľudsky o AI</span>
-</a>
-<div style="display: flex; align-items: center; gap: 10px">
-<span aria-label="Získané hviezdičky" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 999px; background: #2C2960; font-weight: 800; font-size: 16px"><span style="color: #FEBC2E; font-size: 20px">★</span>{{totalStars}} / {{maxStars}}</span>
-<button type="button" class="btn" @click="toggleBig" :aria-pressed="bigPressed" aria-label="Väčšie písmo" :style="`min-width: 44px; height: 44px; padding: 0 12px; border: 2px solid #FFFFFF; border-radius: 999px; background: ${bigBg}; color: ${bigFg}; font-weight: 800; font-size: 15px; cursor: pointer`">{{bigLabel}}</button>
-</div>
-</div>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Ľudsky o AI – úvod"><span class="dots3" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="t">Ľudsky o AI</span></a>
+    <div class="tools">
+      <span class="pill starpill" id="starpill" aria-label="Získané hviezdičky"><b aria-hidden="true">★</b><span id="starcount">0 / 0</span></span>
+      <button type="button" class="tog" id="tSound" aria-pressed="true" title="Zvuky"><span aria-hidden="true" id="iSound">🔊</span><span class="lbl">Zvuky</span></button>
+      <button type="button" class="tog" id="tRead" aria-pressed="false" title="Čítať nahlas" hidden><span aria-hidden="true">🗣️</span><span class="lbl">Čítať nahlas</span></button>
+      <button type="button" class="tog" id="tBig" aria-pressed="false" title="Väčšie písmo">A+</button>
+    </div>
+  </div>
 </header>
 
-<!-- ===== ROZCESTNÍK ===== -->
-<template v-if="isHub">
-<section style="background: #17153B; color: #FFFFFF">
-<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 48px 24px 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
-<div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #FEBC2E">ARKÁDA ĽUDKA · BEZ REGISTRÁCIE</span>
-<h1 class="h1" style="margin: 0; font-size: 56px; line-height: 1.02; font-weight: 900; color: #FFFFFF">Hraj sa a uč sa</h1>
-<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #D6D4EA; max-width: 560px">Zbieraj hviezdičky, prekonaj svoj rekord a odomkni všetkých 6 odznakov. Každé kolo má iné otázky.</p>
-<div style="display: flex; flex-direction: column; gap: 8px; max-width: 460px">
-<div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 15px"><span>Tvoj postup</span><span>{{totalStars}} z {{maxStars}} ★</span></div>
-<div style="height: 14px; background: #2C2960; border-radius: 999px; overflow: hidden"><div :style="`height: 100%; width: ${progressPct}; background: #FEBC2E; border-radius: 999px; transition: width .6s ease`"></div></div>
-</div>
-</div>
-<div class="bob hide-m" style="flex: 1 1 220px; display: flex; justify-content: center">
-<svg viewBox="0 0 300 250" width="230" aria-hidden="true" style="overflow: visible">
-<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
-<path class="arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
-<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE"></rect><rect x="70" y="108" width="160" height="108" rx="30" fill="#FFFFFF"></rect><rect x="70" y="108" width="160" height="40" fill="#FFFFFF"></rect>
-<circle cx="97" cy="89" r="6.5" fill="#FF5F57"></circle><circle cx="117" cy="89" r="6.5" fill="#FEBC2E"></circle><circle cx="137" cy="89" r="6.5" fill="#28C840"></circle>
-<ellipse cx="114" cy="174" rx="9" ry="4.5" fill="#FFB8B8"></ellipse><ellipse cx="186" cy="174" rx="9" ry="4.5" fill="#FFB8B8"></ellipse>
-<ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="130" cy="147" r="3.4" fill="#FFFFFF"></circle>
-<ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="174" cy="147" r="3.4" fill="#FFFFFF"></circle>
-<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round"></path>
-<text x="262" y="62" text-anchor="middle" font-size="40" fill="#FEBC2E">★</text>
-</svg>
-</div>
-</div>
-</section>
+<main id="main" tabindex="-1"></main>
+<div id="live" class="sr" aria-live="polite"></div>
 
-<section>
-<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 48px 24px 32px; display: flex; flex-direction: column; gap: 36px">
-<template v-for="(g, $index) in groups">
-<div style="display: flex; flex-direction: column; gap: 16px">
-<h2 style="margin: 0; display: inline-flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 900"><span :style="`width: 18px; height: 18px; border-radius: 6px; background: ${g.color}; border: 2px solid #17153B`"></span>{{g.name}}</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
-<template v-for="(t, $index) in g.games">
-<button type="button" class="gcard" @click="t.open" style="text-align: left; padding: 0; border: 3px solid #17153B; border-radius: 24px; background: #FFFFFF; color: #17153B; cursor: pointer; overflow: hidden; display: flex; flex-direction: column; box-shadow: 8px 8px 0 #17153B">
-<div :style="`background: ${g.color}; padding: 20px 22px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; border-bottom: 3px solid #17153B; width: 100%; box-sizing: border-box`">
-<span style="font-size: 44px; line-height: 1; font-weight: 900; font-family: 'JetBrains Mono', monospace">{{t.glyph}}</span>
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; background: #17153B; color: #FFFFFF; border-radius: 999px; padding: 6px 10px">{{t.tag}}</span>
-</div>
-<div style="padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box">
-<strong style="font-size: 23px; font-weight: 900">{{t.title}}</strong>
-<span style="font-size: 15px; line-height: 1.45; color: #36335E">{{t.desc}}</span>
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 4px">
-<span :aria-label="t.starsLabel" style="font-size: 24px; letter-spacing: 2px"><span style="color: #E8A400">{{t.starsOn}}</span><span style="color: #D6D4EA">{{t.starsOff}}</span></span>
-<span style="font-size: 14px; font-weight: 700; color: #4A4775">{{t.bestText}}</span>
-</div>
-<span style="margin-top: 4px; display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border-radius: 14px; background: #17153B; color: #FFFFFF; font-weight: 800; font-size: 17px">{{t.cta}}</span>
-</div>
-</button>
-</template>
-</div>
-</div>
-</template>
-
-<!-- Odznaky -->
-<div style="background: #FFFFFF; border: 3px solid #17153B; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<h2 style="margin: 0; font-size: 22px; font-weight: 900">Tvoje odznaky</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px">
-<template v-for="(b, $index) in badges">
-<div :style="`display: flex; align-items: center; gap: 12px; opacity: ${b.opacity}`">
-<span :class="b.cls" :style="`flex: none; width: 52px; height: 52px; border-radius: 50%; background: ${b.bg}; border: 3px solid #17153B; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px`">{{b.glyph}}</span>
-<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 15px">{{b.name}}</strong><span style="font-size: 13px; color: #4A4775">{{b.state}}</span></span>
-</div>
-</template>
-</div>
-</div>
-<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A4775">Hry nič neodosielajú. Hviezdičky a rekordy sa ukladajú len v tvojom prehliadači. Ukážkové texty a správy sú vytvorené pre tieto hry.</p>
-</div>
-</section>
-</template>
-
-<!-- ===== HRA ===== -->
-<template v-if="isPlay">
-<section>
-<div class="sec" style="max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; display: flex; flex-direction: column; gap: 18px">
-
-<!-- Horná lišta -->
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
-<button type="button" class="btn" @click="goHub" style="min-height: 44px; padding: 0 18px; border: 2px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; font-weight: 700; font-size: 15px; cursor: pointer">← Všetky hry</button>
-<div style="display: flex; align-items: center; gap: 10px">
-<template v-if="hud.showStreak">
-<span class="pop" style="height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; background: #FF5F57; border: 2px solid #17153B; font-weight: 900; font-size: 15px">Séria ×{{hud.streak}}</span>
-</template>
-<span style="position: relative; height: 44px; display: inline-flex; align-items: center; gap: 6px; padding: 0 16px; border-radius: 999px; background: #17153B; color: #FFFFFF; font-weight: 900; font-size: 17px">{{hud.points}} b.
-<template v-if="hud.showGain"><span class="plus" style="position: absolute; right: 6px; top: -6px; color: #28C840; font-weight: 900; font-size: 20px; text-shadow: 0 2px 0 #17153B">+{{hud.gain}}</span></template>
-</span>
-</div>
-</div>
-
-<div style="display: flex; flex-direction: column; gap: 6px">
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: #4A4775">{{cur.tag}}</span>
-<h1 class="h1" style="margin: 0; font-size: 40px; font-weight: 900; line-height: 1.05">{{cur.title}}</h1>
-</div>
-
-<!-- Postup -->
-<template v-if="hud.showDots">
-<div style="display: flex; gap: 8px" :aria-label="hud.dotsLabel">
-<template v-for="(d, $index) in hud.dots">
-<span :style="`flex: 1; height: 12px; border-radius: 999px; background: ${d.bg}; border: 2px solid #17153B`"></span>
-</template>
-</div>
-</template>
-
-<!-- Javisko -->
-<div class="stage" style="position: relative; overflow: hidden; background: #FFFFFF; border: 3px solid #17153B; border-radius: 28px; box-shadow: 10px 10px 0 #17153B; padding: 28px; display: flex; flex-wrap: wrap; gap: 24px">
-
-<template v-if="fx.confetti">
-<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
-<template v-for="(c, $index) in fx.pieces">
-<span class="confetti" :style="`left: ${c.left}; background: ${c.color}; animation-delay: ${c.delay}; animation-duration: ${c.dur}`"></span>
-</template>
-</div>
-</template>
-
-<!-- Ľudko -->
-<div class="ludko-side" style="flex: 0 0 170px; display: flex; flex-direction: column; align-items: center; gap: 10px">
-<svg :class="`ludko-svg ${ludko.cls}`" viewBox="40 30 260 200" width="160" aria-hidden="true" style="overflow: visible; flex: none">
-<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
-<path class="arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"></path>
-<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE"></rect><rect x="70" y="108" width="160" height="108" rx="30" fill="#FFFFFF"></rect><rect x="70" y="108" width="160" height="40" fill="#FFFFFF"></rect>
-<circle cx="97" cy="89" r="6.5" fill="#FF5F57"></circle><circle cx="117" cy="89" r="6.5" fill="#FEBC2E"></circle><circle cx="137" cy="89" r="6.5" fill="#28C840"></circle>
-<ellipse cx="114" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="ludko.cheeks"></ellipse><ellipse cx="186" cy="174" rx="9" ry="4.5" fill="#FFB8B8" :opacity="ludko.cheeks"></ellipse>
-<ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="130" cy="147" r="3.4" fill="#FFFFFF"></circle>
-<ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"></ellipse><circle cx="174" cy="147" r="3.4" fill="#FFFFFF"></circle>
-<line x1="164" y1="131" x2="184" y2="126" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="ludko.brow"></line>
-<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round" :opacity="ludko.smile"></path>
-<ellipse cx="150" cy="182" rx="6" ry="7" fill="#17153B" :opacity="ludko.o"></ellipse>
-<line x1="139" y1="186" x2="160" y2="181" stroke="#17153B" stroke-width="5" stroke-linecap="round" :opacity="ludko.flat"></line>
-<g :opacity="ludko.bOk"><circle cx="258" cy="60" r="22" fill="#28C840"></circle><path d="M247 60 l8 8 l14 -15" stroke="#17153B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
-<g :opacity="ludko.bPozor"><circle cx="258" cy="60" r="22" fill="#FF5F57"></circle><line x1="258" y1="48" x2="258" y2="62" stroke="#17153B" stroke-width="6" stroke-linecap="round"></line><circle cx="258" cy="72" r="3.6" fill="#17153B"></circle></g>
-<g :opacity="ludko.bHmm"><circle cx="258" cy="60" r="22" fill="#A29BFE"></circle><text x="258" y="70" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="28" font-weight="800" fill="#17153B">?</text></g>
-<g :opacity="ludko.bStar"><text x="258" y="74" text-anchor="middle" font-size="46" fill="#FEBC2E" stroke="#17153B" stroke-width="2">★</text></g>
-</svg>
-<div class="pop" aria-live="polite" :style="`background: ${ludko.bubble}; border: 2px solid #17153B; border-radius: 16px; padding: 10px 14px; font-weight: 800; font-size: 15px; line-height: 1.3; text-align: center`">{{ludko.say}}</div>
-</div>
-
-<!-- Obsah hry -->
-<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-
-<template v-if="showTimer">
-<div aria-hidden="true" style="height: 12px; background: #EEECFF; border-radius: 999px; overflow: hidden"><div class="tbar" :style="`animation-duration: ${timerDur}`"></div></div>
-</template>
-
-<!-- Binárne otázky -->
-<template v-if="bin.on">
-<div style="display: flex; flex-direction: column; gap: 18px">
-<div :class="bin.cardCls" style="background: #F6F5FB; border: 3px solid #17153B; border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
-<span style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; background: #17153B; color: #FFFFFF; border-radius: 999px; padding: 6px 12px">{{bin.kind}}</span>
-<p class="qtext" style="margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; white-space: pre-line">{{bin.text}}</p>
-</div>
-<template v-if="asking">
-<div style="display: flex; flex-wrap: wrap; gap: 14px">
-<button type="button" class="btn" @click="bin.pickA" :style="`flex: 1 1 160px; min-height: 68px; border: 3px solid #17153B; border-radius: 18px; background: ${bin.colA}; color: #17153B; font-size: 21px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B`">{{bin.labelA}}</button>
-<button type="button" class="btn" @click="bin.pickB" :style="`flex: 1 1 160px; min-height: 68px; border: 3px solid #17153B; border-radius: 18px; background: ${bin.colB}; color: #17153B; font-size: 21px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B`">{{bin.labelB}}</button>
-</div>
-</template>
-</div>
-</template>
-
-<!-- Vyber vymyslenú vetu -->
-<template v-if="pick.on">
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 6px">
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: #4A4775">OTÁZKA PRE AI</span>
-<strong class="qtext" style="font-size: 22px">„{{pick.q}}“</strong>
-</div>
-<span style="font-weight: 700; font-size: 16px; color: #36335E">Jedna veta v odpovedi nie je pravda. Ťukni na ňu:</span>
-<template v-for="(s, $index) in pick.sentences">
-<button type="button" :class="`btn ${s.cls}`" @click="s.choose" :style="`text-align: left; min-height: 56px; padding: 12px 18px; border: 3px solid #17153B; border-radius: 16px; background: ${s.bg}; color: #17153B; font-size: 18px; font-weight: 600; line-height: 1.4; cursor: pointer; box-shadow: ${s.shadow}`">{{s.text}}</button>
-</template>
-</div>
-</template>
-
-<!-- Nauč Ľudka -->
-<template v-if="nc.train">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 18px">
-<div :class="`dragcard ${nc.cardCls}`" draggable="true" @dragstart="nc.dragStart" style="width: 200px; background: #FFFFFF; border: 4px solid #17153B; border-radius: 26px; box-shadow: 8px 8px 0 #17153B; padding: 14px 14px 16px; display: flex; flex-direction: column; align-items: center; gap: 6px">
-<svg viewBox="0 0 100 100" width="130" height="130" role="img" :aria-label="nc.name">
-<g :opacity="nc.p.round"><circle cx="50" cy="58" r="30" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><path d="M50 30 Q52 18 58 12" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"></path><ellipse cx="64" cy="20" rx="9" ry="5" fill="#28C840" stroke="#17153B" stroke-width="2" transform="rotate(-25 64 20)"></ellipse></g>
-<g :opacity="nc.p.pear"><path d="M50 22 C40 22 38 40 40 48 C28 58 28 88 50 88 C72 88 72 58 60 48 C62 40 60 22 50 22 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M50 24 Q52 14 56 10" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"></path></g>
-<g :opacity="nc.p.cherry"><path d="M36 58 Q42 30 54 14 M64 60 Q60 34 54 14" stroke="#6B4A2B" stroke-width="3" fill="none"></path><circle cx="36" cy="68" r="15" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="64" cy="70" r="15" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle></g>
-<g :opacity="nc.p.grape"><path d="M50 22 Q52 12 58 8" stroke="#6B4A2B" stroke-width="4" fill="none"></path><circle cx="40" cy="34" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="60" cy="34" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="30" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="50" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="70" cy="52" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="40" cy="70" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="60" cy="70" r="11" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle><circle cx="50" cy="86" r="10" :fill="nc.p.c" stroke="#17153B" stroke-width="2.5"></circle></g>
-<g :opacity="nc.p.banana"><path d="M18 30 Q26 82 82 76 Q88 72 84 66 Q40 66 32 26 Q26 22 18 30 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path></g>
-<g :opacity="nc.p.straw"><path d="M50 90 C20 72 18 42 30 34 C40 28 46 32 50 36 C54 32 60 28 70 34 C82 42 80 72 50 90 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M32 32 L50 18 L68 32 L58 30 L50 24 L42 30 Z" fill="#28C840" stroke="#17153B" stroke-width="2"></path><circle cx="40" cy="50" r="2.5" fill="#FFE9A8"></circle><circle cx="58" cy="48" r="2.5" fill="#FFE9A8"></circle><circle cx="48" cy="62" r="2.5" fill="#FFE9A8"></circle><circle cx="62" cy="64" r="2.5" fill="#FFE9A8"></circle><circle cx="50" cy="76" r="2.5" fill="#FFE9A8"></circle></g>
-<g :opacity="nc.p.carrot"><path d="M50 32 L42 12 M50 32 L50 8 M50 32 L58 12" stroke="#28C840" stroke-width="5" stroke-linecap="round"></path><path d="M36 32 L64 32 L52 92 Q50 96 48 92 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M44 48 L52 48 M46 62 L54 62 M48 76 L53 76" stroke="#17153B" stroke-width="2"></path></g>
-<g :opacity="nc.p.long"><rect x="14" y="38" width="72" height="26" rx="13" :fill="nc.p.c" stroke="#17153B" stroke-width="3" transform="rotate(-25 50 51)"></rect><circle cx="40" cy="56" r="2" fill="#17153B"></circle><circle cx="54" cy="48" r="2" fill="#17153B"></circle><circle cx="64" cy="42" r="2" fill="#17153B"></circle></g>
-<g :opacity="nc.p.onion"><path d="M50 14 C52 30 76 44 76 64 C76 82 64 90 50 90 C36 90 24 82 24 64 C24 44 48 30 50 14 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></path><path d="M50 30 Q38 60 50 88 M50 30 Q62 60 50 88" stroke="#17153B" stroke-width="2" fill="none"></path></g>
-<g :opacity="nc.p.cabbage"><circle cx="50" cy="56" r="34" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><path d="M50 22 Q30 56 50 90 M50 22 Q70 56 50 90 M18 50 Q50 40 82 50" stroke="#17153B" stroke-width="2" fill="none"></path></g>
-<g :opacity="nc.p.potato"><ellipse cx="50" cy="58" rx="36" ry="25" :fill="nc.p.c" stroke="#17153B" stroke-width="3" transform="rotate(-10 50 58)"></ellipse><circle cx="36" cy="54" r="2.5" fill="#6B4A2B"></circle><circle cx="58" cy="50" r="2.5" fill="#6B4A2B"></circle><circle cx="64" cy="66" r="2.5" fill="#6B4A2B"></circle><circle cx="44" cy="68" r="2.5" fill="#6B4A2B"></circle></g>
-<g :opacity="nc.p.pepper"><path d="M28 40 Q24 88 42 90 Q50 82 58 90 Q76 88 72 40 Q50 30 28 40 Z" :fill="nc.p.c" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M50 36 L50 18 Q50 12 58 12" stroke="#28C840" stroke-width="6" fill="none" stroke-linecap="round"></path></g>
-<g :opacity="nc.p.brocc"><rect x="42" y="56" width="16" height="34" rx="5" fill="#9BD77A" stroke="#17153B" stroke-width="3"></rect><circle cx="34" cy="46" r="17" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="66" cy="46" r="17" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="50" cy="32" r="19" :fill="nc.p.c" stroke="#17153B" stroke-width="3"></circle></g>
-</svg>
-<strong class="qtext" style="font-size: 26px; font-weight: 900">{{nc.name}}</strong>
-</div>
-<span style="font-size: 15px; font-weight: 700; color: #4A4775; text-align: center">{{nc.hint}}</span>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; width: 100%">
-<button type="button" class="basket" @click="nc.ovocie" @dragover="nc.overO" @dragleave="nc.leave" @drop="nc.dropO" aria-label="Košík Ovocie" :style="`min-height: 150px; border: 4px ${nc.borderO} #17153B; border-radius: 22px; background: ${nc.bgO}; color: #17153B; cursor: pointer; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 5px 5px 0 #17153B`">
-<svg width="46" height="34" viewBox="0 0 46 34" aria-hidden="true"><path d="M3 10 L43 10 L37 32 L9 32 Z" fill="#FFFFFF" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M12 10 Q23 -6 34 10" stroke="#17153B" stroke-width="3" fill="none"></path></svg>
-<strong style="font-size: 21px; font-weight: 900">Ovocie</strong>
-<span style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px">
-<template v-for="(x, $index) in nc.inO"><span class="pop" style="font-size: 13px; font-weight: 700; background: #FFFFFF; border: 2px solid #17153B; border-radius: 999px; padding: 3px 9px">{{x}}</span></template>
-</span>
-</button>
-<button type="button" class="basket" @click="nc.zelenina" @dragover="nc.overZ" @dragleave="nc.leave" @drop="nc.dropZ" aria-label="Košík Zelenina" :style="`min-height: 150px; border: 4px ${nc.borderZ} #17153B; border-radius: 22px; background: ${nc.bgZ}; color: #17153B; cursor: pointer; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 5px 5px 0 #17153B`">
-<svg width="46" height="34" viewBox="0 0 46 34" aria-hidden="true"><path d="M3 10 L43 10 L37 32 L9 32 Z" fill="#FFFFFF" stroke="#17153B" stroke-width="3" stroke-linejoin="round"></path><path d="M12 10 Q23 -6 34 10" stroke="#17153B" stroke-width="3" fill="none"></path></svg>
-<strong style="font-size: 21px; font-weight: 900">Zelenina</strong>
-<span style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px">
-<template v-for="(x, $index) in nc.inZ"><span class="pop" style="font-size: 13px; font-weight: 700; background: #FFFFFF; border: 2px solid #17153B; border-radius: 999px; padding: 3px 9px">{{x}}</span></template>
-</span>
-</button>
-</div>
-</div>
-</template>
-<template v-if="nc.exam">
-<div style="display: flex; flex-direction: column; gap: 14px">
-<strong style="font-size: 22px; font-weight: 900">Ľudkova skúška: háda nové veci</strong>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
-<template v-for="(r, $index) in nc.results">
-<div class="pop" :style="`animation-delay: ${r.delay}; border: 3px solid #17153B; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: ${r.bg}`">
-<div style="display: flex; align-items: center; gap: 10px">
-<svg viewBox="0 0 100 100" width="56" height="56" role="img" :aria-label="r.name" style="flex: none">
-<g :opacity="r.p.round"><circle cx="50" cy="58" r="30" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle><path d="M50 30 Q52 18 58 12" stroke="#6B4A2B" stroke-width="5" fill="none"></path></g>
-<g :opacity="r.p.pear"><path d="M50 22 C40 22 38 40 40 48 C28 58 28 88 50 88 C72 88 72 58 60 48 C62 40 60 22 50 22 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.cherry"><path d="M36 58 Q42 30 54 14 M64 60 Q60 34 54 14" stroke="#6B4A2B" stroke-width="4" fill="none"></path><circle cx="36" cy="68" r="15" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle><circle cx="64" cy="70" r="15" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle></g>
-<g :opacity="r.p.grape"><circle cx="40" cy="38" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="62" cy="38" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="51" cy="60" r="13" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="51" cy="82" r="11" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle></g>
-<g :opacity="r.p.banana"><path d="M18 30 Q26 82 82 76 Q88 72 84 66 Q40 66 32 26 Q26 22 18 30 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.straw"><path d="M50 90 C20 72 18 42 30 34 C40 28 46 32 50 36 C54 32 60 28 70 34 C82 42 80 72 50 90 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.carrot"><path d="M36 32 L64 32 L52 92 Q50 96 48 92 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.long"><rect x="14" y="38" width="72" height="26" rx="13" :fill="r.p.c" stroke="#17153B" stroke-width="4" transform="rotate(-25 50 51)"></rect></g>
-<g :opacity="r.p.onion"><path d="M50 14 C52 30 76 44 76 64 C76 82 64 90 50 90 C36 90 24 82 24 64 C24 44 48 30 50 14 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.cabbage"><circle cx="50" cy="56" r="34" :fill="r.p.c" stroke="#17153B" stroke-width="4"></circle></g>
-<g :opacity="r.p.potato"><ellipse cx="50" cy="58" rx="36" ry="25" :fill="r.p.c" stroke="#17153B" stroke-width="4"></ellipse></g>
-<g :opacity="r.p.pepper"><path d="M28 40 Q24 88 42 90 Q50 82 58 90 Q76 88 72 40 Q50 30 28 40 Z" :fill="r.p.c" stroke="#17153B" stroke-width="4"></path></g>
-<g :opacity="r.p.brocc"><rect x="42" y="56" width="16" height="34" rx="5" fill="#9BD77A" stroke="#17153B" stroke-width="3"></rect><circle cx="34" cy="46" r="17" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="66" cy="46" r="17" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle><circle cx="50" cy="32" r="19" :fill="r.p.c" stroke="#17153B" stroke-width="3"></circle></g>
-</svg>
-<strong style="font-size: 19px">{{r.name}}</strong></div>
-<span style="font-size: 15px">Ľudko dal do košíka: <strong>{{r.guess}}</strong></span>
-<strong style="font-size: 16px">{{r.verdict}}</strong>
-</div>
-</template>
-</div>
-<div class="slide" style="animation-delay: 1.2s; background: #EEECFF; border-radius: 18px; padding: 18px; font-size: 17px; line-height: 1.55">{{nc.lesson}}</div>
-<button type="button" class="btn slide" @click="nc.finish" style="animation-delay: 1.4s; align-self: flex-start; min-height: 56px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Pozrieť hviezdičky →</button>
-</div>
-</template>
-
-<!-- Seniori: prvý rozhovor -->
-<template v-if="sn.on">
-<div style="display: flex; flex-direction: column; gap: 16px">
-<strong style="font-size: 21px">Ťukni na otázku a pozri, čo odpovie AI:</strong>
-<template v-for="(q, $index) in sn.questions">
-<button type="button" class="btn" @click="q.ask" :style="`text-align: left; min-height: 66px; padding: 14px 20px; border: 3px solid #17153B; border-radius: 18px; background: ${q.bg}; color: #17153B; font-size: 20px; font-weight: 700; line-height: 1.35; cursor: pointer; box-shadow: 5px 5px 0 #17153B; display: flex; justify-content: space-between; gap: 12px; align-items: center`"><span>{{q.text}}</span><span style="flex: none; font-size: 22px; color: #E8A400">{{q.mark}}</span></button>
-</template>
-<template v-if="sn.has">
-<div style="border: 3px solid #17153B; border-radius: 22px; overflow: hidden">
-<div style="background: #A29BFE; padding: 10px 16px; display: flex; gap: 8px; border-bottom: 3px solid #17153B" aria-hidden="true"><span style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28C840"></span></div>
-<div style="padding: 18px; display: flex; flex-direction: column; gap: 12px">
-<div style="align-self: flex-end; max-width: 85%; background: #17153B; color: #FFFFFF; border-radius: 18px 18px 4px 18px; padding: 12px 16px; font-size: 19px; line-height: 1.45">{{sn.q}}</div>
-<div aria-live="polite" style="align-self: flex-start; max-width: 94%; background: #F6F5FB; border-radius: 18px 18px 18px 4px; padding: 14px 18px; font-size: 20px; line-height: 1.55">{{sn.typed}}<template v-if="sn.typing"><span class="caret">▍</span></template></div>
-<template v-if="sn.done"><div class="pop" style="background: #FFF3CF; border-radius: 16px; padding: 14px 16px; font-size: 18px; line-height: 1.5"><strong>Ľudkov tip: </strong>{{sn.tip}}</div></template>
-</div>
-</div>
-</template>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
-<div style="background: #C9F2D2; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Pýtaj sa normálne,</strong> ako by si sa pýtal človeka.</div>
-<div style="background: #FFF3CF; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Dôležité veci si over</strong> – zdravie, peniaze, úrady.</div>
-<div style="background: #FFD6D3; border-radius: 16px; padding: 16px; font-size: 17px; line-height: 1.5"><strong>Nikdy nezadávaj</strong> heslá, PIN ani čísla kariet.</div>
-</div>
-<span style="font-size: 17px; line-height: 1.55; color: #36335E">Vyskúšať môžeš napríklad ChatGPT (chatgpt.com), Gemini (gemini.google.com) alebo Copilot (copilot.microsoft.com). Základné verzie sú zadarmo.</span>
-<template v-if="sn.canFinish">
-<button type="button" class="btn" @click="sn.finish" style="align-self: flex-start; min-height: 58px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 19px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Hotovo – pozrieť hviezdičky</button>
-</template>
-</div>
-</template>
-
-<!-- Vyhodnotenie odpovede -->
-<template v-if="fb.on">
-<div class="slide" aria-live="polite" :style="`background: ${fb.bg}; border: 3px solid #17153B; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 10px`">
-<strong style="font-size: 22px; font-weight: 900">{{fb.title}}</strong>
-<span style="font-size: 17px; line-height: 1.55">{{fb.why}}</span>
-<template v-if="fb.hasSigns"><span style="font-size: 16px; line-height: 1.5"><strong>Znaky: </strong>{{fb.signs}}</span></template>
-<template v-if="fb.hasSrc"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">Zdroj: {{fb.src}}</span></template>
-</div>
-<button type="button" class="btn" @click="fb.next" style="align-self: flex-start; min-height: 58px; padding: 0 30px; border: 3px solid #17153B; border-radius: 999px; background: #17153B; color: #FFFFFF; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #A29BFE">{{fb.nextLabel}}</button>
-</template>
-
-<!-- Koniec kola -->
-<template v-if="end.on">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 8px 0">
-<div :aria-label="end.starsLabel" style="display: flex; gap: 10px; font-size: 64px; line-height: 1">
-<template v-for="(st, $index) in end.stars">
-<span class="star" :style="`animation-delay: ${st.delay}; color: ${st.color}; text-shadow: 0 3px 0 #17153B`">★</span>
-</template>
-</div>
-<strong style="font-size: 30px; font-weight: 900">{{end.title}}</strong>
-<span style="font-size: 18px; color: #36335E">{{end.sub}}</span>
-<span style="font-size: 44px; font-weight: 900">{{end.points}} b.</span>
-<template v-if="end.record"><span class="pop glow" style="animation-delay: .9s; background: #FEBC2E; border: 3px solid #17153B; border-radius: 999px; padding: 8px 18px; font-weight: 900; font-size: 17px">Nový rekord!</span></template>
-<template v-if="end.badgeNew"><span class="pop" style="animation-delay: 1.1s; display: inline-flex; align-items: center; gap: 10px; background: #EEECFF; border: 3px solid #17153B; border-radius: 18px; padding: 10px 16px; font-weight: 800; font-size: 16px"><span :style="`width: 36px; height: 36px; border-radius: 50%; background: ${end.badgeBg}; border: 2px solid #17153B; display: inline-flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace`">{{end.badgeGlyph}}</span>Odomkol si odznak {{end.badgeName}}!</span></template>
-<span style="font-size: 16px; line-height: 1.5; color: #36335E; max-width: 520px">{{end.lesson}}</span>
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
-<button type="button" class="btn" @click="end.again" style="min-height: 58px; padding: 0 28px; border: 3px solid #17153B; border-radius: 999px; background: #FEBC2E; color: #17153B; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Hrať znova (nové otázky)</button>
-<button type="button" class="btn" @click="end.nextGame" style="min-height: 58px; padding: 0 24px; border: 3px solid #17153B; border-radius: 999px; background: #FFFFFF; color: #17153B; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 5px 5px 0 #17153B">Ďalšia hra: {{end.nextTitle}} →</button>
-<button type="button" class="btn" @click="end.share" style="min-height: 58px; padding: 0 24px; border: 3px solid #17153B; border-radius: 999px; background: #A29BFE; color: #17153B; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 5px 5px 0 #17153B">{{end.shareLabel}}</button>
-</div>
-</div>
-</template>
-
-</div>
-</div>
-</div>
-</section>
-</template>
-
-<footer style="border-top: 1px solid #E6E5F0; background: #FFFFFF">
-<div style="max-width: 1180px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 15px; color: #36335E">
-<a href="./">← Späť na úvod</a>
-<span style="display: flex; flex-wrap: wrap; gap: 6px 18px"><a href="opravy.html">Opravy</a><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></span>
-</div>
+<footer class="bot">
+  <div class="wrap">
+    <a href="./">← Späť na úvod</a>
+    <nav><a href="hry.html#">Všetky hry</a><a href="opravy.html">Opravy</a><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></nav>
+  </div>
 </footer>
+<canvas id="fx" aria-hidden="true"></canvas>
 
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@3.5.45/dist/vue.global.prod.js" integrity="sha384-K2FjvpG1y48yCE+7CBPhnKc16ShPmT3dlNwvoA3dhjV18+L5ugI0P8PWPvdjm/Fa" crossorigin="anonymous"></script>
-<script src="assets/dc-shim.js"></script>
 <script>
+(function () {
+'use strict';
+
+/* =====================================================================
+   OBSAH HIER
+   ===================================================================== */
 var GAMES = [
-  { id: 'nauc', group: 0, tag: 'PRE DETI · 6+', glyph: 'AI', title: 'Nauč Ľudka', desc: 'Ukáž mu príklady a pozri, ako sa AI učí.', type: 'nauc', timer: 0 },
-  { id: 'prezradit', group: 0, tag: 'PRE DETI · 6+', glyph: '?!', title: 'Čo prezradiť AI?', desc: 'Môžeš to povedať, alebo si to nechaj pre seba?', type: 'bin', size: 6, timer: 0, labels: ['Môžem povedať', 'Nechám si to'], cols: ['#28C840', '#FF5F57'] },
-  { id: 'robot', group: 0, tag: 'PRE DETI · 8+', glyph: '01', title: 'Robot, či človek?', desc: 'Spoznáš, kto napísal text?', type: 'bin', size: 4, timer: 0, labels: ['Človek', 'AI'], cols: ['#FEBC2E', '#A29BFE'] },
-  { id: 'podvod', group: 1, tag: 'NÁSTRAHY · NA ČAS', glyph: '!!', title: 'Odhaľ podvod', desc: 'Falošné videá, hlas aj správy. Rozhodni rýchlo!', type: 'bin', size: 5, timer: 15, labels: ['Podvod', 'V poriadku'], cols: ['#FF5F57', '#28C840'] },
-  { id: 'halu', group: 1, tag: 'NÁSTRAHY · NA ČAS', glyph: '≠', title: 'Vymyslela si to AI?', desc: 'Nájdi vetu, ktorá nie je pravda.', type: 'pick', size: 3, timer: 25 },
-  { id: 'senior', group: 2, tag: 'AI A SENIORI', glyph: '…', title: 'Prvý rozhovor s AI', desc: 'Vyskúšaj si to bez registrácie, s veľkým písmom.', type: 'senior', timer: 0 }
+  { id: 'nauc', aud: 'kids', type: 'nauc', emoji: '🍎', color: '#28C840', light: '#C9F2D2', age: '6+', min: 3,
+    title: 'Nauč Ľudka', short: 'Ukáž mu príklady a pozri, ako sa AI učí.',
+    intro: 'Ahoj! Ja som Ľudko, malá umelá inteligencia. Neviem, čo je ovocie a čo zelenina. Naučíš ma to?',
+    how: ['Potiahni obrázok do správneho košíka. Alebo ťukni na košík.', 'Ukáž mi 6 vecí.', 'Potom skúsim sám hádať nové veci. Uvidíme, či som sa to naučil!'],
+    learn: 'AI sa učí z príkladov – ako dieťa.',
+    badge: 'Ľudkov učiteľ', badgeIco: '🎓',
+    lesson: 'AI sa učí z príkladov. Keď sú príklady dobré, učí sa dobre. Keď sú zlé, naučí sa zle.',
+    talk: 'Čo by si Ľudko myslel o zelenom jablku, keby videl len červené jablká? Prečo je dôležité ukázať AI veľa rôznych príkladov?' },
+  { id: 'slovo', aud: 'kids', type: 'word', emoji: '💬', color: '#A29BFE', light: '#EEECFF', age: '8+', min: 3, size: 5,
+    title: 'Doplň ako AI', short: 'Uhádni, ktoré slovo AI napíše ako ďalšie.',
+    intro: 'Vieš, ako píše AI? Háda, ktoré slovo príde ďalej. Skúsme to spolu!',
+    how: ['Prečítaj si vetu. Na konci chýba slovo.', 'Ťukni na slovo, ktoré by AI vybrala najskôr.', 'Potom uvidíš, ako veľmi si AI pri každom slove verí.'],
+    learn: 'Prečo AI znie múdro, aj keď sa niekedy mýli.',
+    badge: 'Slovný mág', badgeIco: '🪄',
+    lesson: 'AI nepíše tak, že by premýšľala ako človek. Vždy háda, ktoré slovo sa najviac hodí. Väčšinou trafí – ale keď niečo nevie, aj tak niečo napíše. Preto dôležité veci overuj.',
+    talk: 'Keď ti AI niečo povie, ako zistíš, či je to pravda? Koho sa môžeš opýtať alebo kde to môžeš overiť?' },
+  { id: 'prezradit', aud: 'kids', type: 'bin', emoji: '🤫', color: '#FEBC2E', light: '#FFF3CF', age: '6+', min: 2, size: 6,
+    title: 'Čo prezradiť AI?', short: 'Môžeš to povedať, alebo si to nechaj pre seba?',
+    intro: 'S AI sa dá rozprávať ako s kamarátom. Ale niektoré veci jej radšej nehovor! Pomôžeš mi ich roztriediť?',
+    how: ['Prečítaj si kartičku.', 'Rozhodni: môžeš to povedať, alebo si to necháš?', 'Na mobile môžeš kartičku aj potiahnuť doľava alebo doprava.'],
+    learn: 'Čo je súkromné a nepatrí do chatu.',
+    labels: [{ t: 'Môžem povedať', i: '👍', c: '#28C840', s: 'MÔŽEŠ' }, { t: 'Nechám si to', i: '🤐', c: '#FF5F57', s: 'NEPREZRÁDZAJ' }],
+    badge: 'Strážca súkromia', badgeIco: '🛡️',
+    lesson: 'Ľudkovo pravidlo: AI povedz len to, čo by si pokojne povedal aj cudziemu človeku na ulici.',
+    talk: 'Ktoré veci o našej rodine by sme nepovedali nikomu cudziemu? A komu povieš, keď ťa niečo trápi?' },
+  { id: 'robot', aud: 'kids', type: 'bin', emoji: '🤖', color: '#FF9F43', light: '#FFE3C7', age: '8+', min: 2, size: 5,
+    title: 'Robot, či človek?', short: 'Spoznáš, kto napísal text?',
+    intro: 'Niektoré texty píšu ľudia, iné umelá inteligencia. Spoznáš rozdiel? Pozor, niekedy je to fakt ťažké!',
+    how: ['Prečítaj si text.', 'Tipni si: napísal ho človek, alebo AI?', 'Ľudko ti potom prezradí, podľa čoho sa to dá spoznať.'],
+    learn: 'Ako vyzerajú texty od AI – a prečo je ťažké ich spoznať.',
+    labels: [{ t: 'Človek', i: '🧒', c: '#FEBC2E', s: 'ČLOVEK' }, { t: 'AI', i: '🤖', c: '#A29BFE', s: 'AI' }],
+    badge: 'Detektív textov', badgeIco: '🔎',
+    lesson: 'Rozoznať text od AI je často veľmi ťažké – niekedy to nevedia ani dospelí. Preto je dôležité vedieť, odkiaľ text pochádza.',
+    talk: 'Je v poriadku, keď ti s domácou úlohou pomôže AI? Kedy áno – a kedy by to už bolo podvádzanie?' },
+  { id: 'podvod', aud: 'trap', type: 'bin', emoji: '🚨', color: '#FF5F57', light: '#FFD6D3', age: 'pre všetkých', min: 3, size: 5, timer: 15,
+    title: 'Odhaľ podvod', short: 'Falošné videá, hlas aj správy. Rozhodni rýchlo!',
+    intro: 'Podvodníci dnes používajú aj umelú inteligenciu – vedia napodobniť hlas aj tvár. Spoznáš, čo je podvod?',
+    how: ['Prečítaj si správu alebo telefonát.', 'Rozhodni: podvod, alebo v poriadku?', 'Na každú otázku máš 15 sekúnd. Časomieru si môžeš vypnúť.'],
+    learn: 'Znaky podvodu: naliehanie, peniaze, tajnosť a neznáme číslo.',
+    labels: [{ t: 'Podvod', i: '🚨', c: '#FF5F57', s: 'PODVOD' }, { t: 'V poriadku', i: '✅', c: '#28C840', s: 'V PORIADKU' }],
+    badge: 'Lovec podvodov', badgeIco: '🕵️',
+    lesson: 'Znaky podvodu: naliehanie, peniaze, neznáme číslo a sľuby, ktoré sú príliš dobré. Ak ťa okradli, volaj políciu na 158.',
+    talk: 'Máme v rodine „bezpečné slovo“, ktoré by sme si povedali, keby niekto volal o pomoc? Ak nie, dohodnite si ho ešte dnes.' },
+  { id: 'halu', aud: 'trap', type: 'pick', emoji: '🔍', color: '#FF5F57', light: '#FFD6D3', age: '10+', min: 3, size: 3, timer: 25,
+    title: 'Vymyslela si to AI?', short: 'V odpovedi AI je jedna veta, ktorá nie je pravda. Nájdi ju!',
+    intro: 'AI niekedy napíše niečo, čo nie je pravda – a znie pri tom úplne isto. Tomu sa hovorí halucinácia. Nájdeš chybu?',
+    how: ['Prečítaj si otázku a odpoveď AI.', 'Jedna veta je vymyslená. Ťukni na ňu.', 'Máš 25 sekúnd. Časomieru si môžeš vypnúť.'],
+    learn: 'AI sa môže mýliť, aj keď znie isto.',
+    badge: 'Overovač faktov', badgeIco: '✔️',
+    lesson: 'AI píše plynule aj vtedy, keď sa mýli. Dôležité fakty si over a pýtaj sa: „Z akého zdroja to máš?“',
+    talk: 'Kde si overíš, či je niečo pravda? Skúste spolu nájsť jeden fakt z hry v encyklopédii alebo na spoľahlivej stránke.' },
+  { id: 'senior', aud: 'senior', type: 'senior', emoji: '☕', color: '#FEBC2E', light: '#FFF3CF', age: 'pre začiatočníkov', min: 3,
+    title: 'Prvý rozhovor s AI', short: 'Vyskúšajte si to bez registrácie, s veľkým písmom.',
+    intro: 'Dobrý deň! Ukážem vám, ako vyzerá rozhovor s umelou inteligenciou. Nič sa nemôže pokaziť a nikam sa nič neposiela.',
+    how: ['Ťuknite na otázku.', 'Pozrite sa, ako AI odpovedá.', 'Vyskúšajte všetky tri otázky.'],
+    learn: 'Ako sa AI pýtať a čo si overiť.',
+    badge: 'Prvý rozhovor', badgeIco: '💬',
+    lesson: 'Teraz už viete, ako vyzerá rozhovor s AI. Skúste si to naozaj – a dôležité veci si vždy overte.',
+    talk: 'Ukážte to vnúčatám alebo deťom – a opýtajte sa ich, na čo AI používajú oni.' }
 ];
-var GROUPS = [{ name: 'Pre deti', color: '#28C840' }, { name: 'Nástrahy AI', color: '#FF5F57' }, { name: 'AI a seniori', color: '#FEBC2E' }];
-var BADGES = { nauc: 'Ľudkov učiteľ', prezradit: 'Strážca súkromia', robot: 'Detektív textov', podvod: 'Lovec podvodov', halu: 'Overovač faktov', senior: 'Prvý rozhovor' };
+var AUD = {
+  trap: { name: 'Nástrahy AI', color: '#FF5F57', lead: 'Pre tínedžerov, rodičov aj starých rodičov: deepfaky, podvody a vymyslené fakty.' },
+  senior: { name: 'AI a seniori', color: '#FEBC2E', lead: 'Pokojne, bez registrácie a s veľkým písmom.' }
+};
+
 var COLORS = { cervena: '#FF5F57', zlta: '#FEBC2E', oranzova: '#FF9F43', zelena: '#28C840', biela: '#F4F1E8', hneda: '#B07A4F', fialova: '#8E5BD6' };
+var CNAME = { cervena: 'červená', zlta: 'žltá', oranzova: 'oranžová', zelena: 'zelená', biela: 'biela', hneda: 'hnedá', fialova: 'fialová' };
+// f = [sladké, farba, rastie na strome]
 var TRAIN_POOL = [
   { name: 'Jablko', shape: 'round', f: [1, 'cervena', 1], ok: 'Ovocie' }, { name: 'Banán', shape: 'banana', f: [1, 'zlta', 1], ok: 'Ovocie' },
   { name: 'Jahoda', shape: 'straw', f: [1, 'cervena', 0], ok: 'Ovocie' }, { name: 'Slivka', shape: 'round', f: [1, 'fialova', 1], ok: 'Ovocie' },
@@ -436,8 +466,7 @@ var TEST_POOL = [
   { name: 'Zemiak', shape: 'potato', f: [0, 'hneda', 0], ok: 'Zelenina' }, { name: 'Paprika', shape: 'pepper', f: [0, 'cervena', 0], ok: 'Zelenina' },
   { name: 'Brokolica', shape: 'brocc', f: [0, 'zelena', 0], ok: 'Zelenina' }, { name: 'Cesnak', shape: 'onion', f: [0, 'biela', 0], ok: 'Zelenina' }
 ];
-var SHAPES = ['round', 'pear', 'cherry', 'grape', 'banana', 'straw', 'carrot', 'long', 'onion', 'cabbage', 'potato', 'pepper', 'brocc'];
-function pic(item) { var p = { c: COLORS[item.f[1]] }; SHAPES.forEach(function (k) { p[k] = k === item.shape ? 1 : 0; }); return p; }
+
 var POOLS = {
   prezradit: [
     { kind: 'KARTIČKA', text: 'Tvoje obľúbené zviera', a: true, why: 'Pokojne. Je to bežná vec, ktorú by si povedal aj spolužiakovi.' },
@@ -449,7 +478,9 @@ var POOLS = {
     { kind: 'KARTIČKA', text: 'Že ťa niečo veľmi trápi', a: false, why: 'S tým ti najlepšie pomôže mama, ocko, učiteľ alebo iný dospelý, ktorému veríš.' },
     { kind: 'KARTIČKA', text: 'Že ste práve celá rodina na dovolenke', a: false, why: 'Prezradil by si, že doma nikto nie je.' },
     { kind: 'KARTIČKA', text: 'Vtip, ktorý si dnes počul v škole', a: true, why: 'Smiech je v poriadku! AI ti možno povie ďalší.' },
-    { kind: 'KARTIČKA', text: 'Telefónne číslo mamy alebo ocka', a: false, why: 'Čísla rodiny sú súkromné. Nepíš ich do aplikácií ani chatov.' }
+    { kind: 'KARTIČKA', text: 'Telefónne číslo mamy alebo ocka', a: false, why: 'Čísla rodiny sú súkromné. Nepíš ich do aplikácií ani chatov.' },
+    { kind: 'KARTIČKA', text: 'Ktorú rozprávku máš najradšej', a: true, why: 'Pokojne! AI ti môže poradiť ďalšiu podobnú rozprávku.' },
+    { kind: 'KARTIČKA', text: 'Prosba: „Vymysli mi básničku o psíkovi“', a: true, why: 'Výborný nápad! Na vymýšľanie básničiek a príbehov je AI super.' }
   ],
   robot: [
     { kind: 'TEXT', text: 'Včera sme s dedkom chytali ryby a ja som chytil najväčšiu! Teda skoro. Ušla mi.', a: true, why: 'Napísal to človek – je tam zážitok a vtip. Ale AI vie vymyslieť aj takýto príbeh, len ho nikdy nezažila.' },
@@ -457,7 +488,9 @@ var POOLS = {
     { kind: 'TEXT', text: 'Ahoj Ema, zajtra nezabudni pastelky, budeme kresliť jeseň. Pani učiteľka', a: true, why: 'Napísal to človek – krátka správa pre konkrétnu Emu.' },
     { kind: 'TEXT', text: 'Tu sú 3 nápady na daždivé popoludnie:\n1. Postav pevnosť z vankúšov.\n2. Zahraj sa na detektíva.\n3. Upeč s rodičmi muffiny.', a: false, why: 'Toto napísala AI – rada robí očíslované zoznamy. Ale aj ľudia ich robia!' },
     { kind: 'TEXT', text: 'Mami, kúpila si mlieko? Ja som zabudla. A Dorka ma dnes celý deň ignoruje :(', a: true, why: 'Napísal to človek – je to osobné a trochu chaotické, ako bežná správa.' },
-    { kind: 'TEXT', text: 'Mačky spia v priemere 12 až 16 hodín denne. Väčšinu dňa teda trávia odpočinkom.', a: false, why: 'Toto napísala AI – vecný fakt bez osobného zážitku.' }
+    { kind: 'TEXT', text: 'Mačky spia v priemere 12 až 16 hodín denne. Väčšinu dňa teda trávia odpočinkom.', a: false, why: 'Toto napísala AI – vecný fakt bez osobného zážitku.' },
+    { kind: 'TEXT', text: 'OCKO!!! Dostal som jednotku z matiky 🎉 Pôjdeme na zmrzlinu??', a: true, why: 'Napísal to človek – radosť, výkričníky a konkrétna prosba.' },
+    { kind: 'TEXT', text: 'Zmrzlina je mrazený dezert z mlieka, cukru a ochucovadiel. Medzi najobľúbenejšie príchute patrí vanilková, čokoládová a jahodová.', a: false, why: 'Toto napísala AI – všeobecné vysvetlenie bez osobného zážitku.' }
   ],
   podvod: [
     { kind: 'SMS', text: 'Ahoj mami, mám nový mobil, starý sa mi pokazil. Ulož si ma a napíš mi radšej na WhatsApp.', a: true, why: 'Podvodník sa vydáva za tvoje dieťa a čoskoro bude chcieť peniaze alebo zaplatiť „súrnu faktúru“.', signs: 'neznáme číslo, „nový mobil“, presun na WhatsApp.', src: 'Ministerstvo vnútra SR a Polícia SR' },
@@ -477,255 +510,771 @@ var POOLS = {
     { q: 'Čo vieš o Mesiaci?', s: ['Mesiac obieha okolo Zeme.', 'Svetlo z Mesiaca k nám letí len o niečo viac ako sekundu.', 'Prví ľudia na ňom pristáli v roku 1969.', 'Na Mesiaci je rovnaká gravitácia ako na Zemi.'], wrong: 3, why: 'Gravitácia na Mesiaci je asi šesťkrát slabšia ako na Zemi.' }
   ]
 };
-var SENIOR = [
-  { q: 'Ako dlho variť vajce natvrdo?', a: 'Vajce vlož do vriacej vody a var ho asi 9 až 10 minút. Potom ho daj na chvíľu do studenej vody – lepšie sa bude šúpať.', tip: 'Pri recepte nič nepokazíš. Ak by išlo o zdravie, peniaze alebo úrady, over si odpoveď ešte inde.' },
-  { q: 'Čo je to umelá inteligencia?', a: 'Je to počítačový program, ktorý sa naučil z obrovského množstva textov. Vie odpovedať na otázky, písať a prekladať. Nerozmýšľa však ako človek a niekedy sa pomýli.', tip: 'Môžeš sa pýtať aj ďalej, napríklad: „Vysvetli mi to jednoduchšie.“' },
-  { q: 'Volal mi vnuk z nového čísla, že potrebuje peniaze. Čo mám robiť?', a: 'Hovor ukonči a zavolaj vnukovi na číslo, ktoré poznáš. Podvodníci dnes vedia napodobniť aj hlas. Peniaze ani údaje z karty neposielaj, kým si to neoveríš.', tip: 'Dohodnite sa v rodine na tajnom „bezpečnom slove“. Odporúča to aj Európsky orgán pre bankovníctvo.' }
-];
-var CHEERS = ['Super!', 'Presne tak!', 'Výborne!', 'Si šikovný!', 'Bravo!', 'Paráda!'];
-var OOPS = ['Ups! Pozri prečo.', 'Nevadí, učíme sa!', 'Tesne vedľa!'];
-var PIECES = (function () { var c = ['#FF5F57', '#FEBC2E', '#28C840', '#A29BFE', '#17153B']; var a = []; for (var i = 0; i < 22; i++) { a.push({ left: ((i * 37) % 100) + '%', color: c[i % 5], delay: ((i * 7) % 10) / 25 + 's', dur: (1.2 + ((i * 13) % 10) / 12) + 's' }); } return a; })();
-var STORE = 'ludskyoai-hry-v1';
 
+// Doplň ako AI – čísla sú ukážkové (ilustrujú princíp), nie z konkrétneho modelu.
+var WORDS = [
+  { pre: 'Pes robí haf a mačka robí', post: '.', o: [['mňau', 86], ['mú', 6], ['haf', 5], ['píp', 3]], why: 'Slovo „mňau“ AI videla po takejto vete v textoch najčastejšie. Preto si ho vyberie.' },
+  { pre: 'Vianoce oslavujeme v', post: '.', o: [['decembri', 88], ['zime', 9], ['lete', 2], ['škole', 1]], why: 'Ľahké! Keď je odpoveď jasná, AI si je veľmi istá.' },
+  { pre: 'Na raňajky si dám chlieb s', post: '.', o: [['maslom', 41], ['džemom', 33], ['medom', 22], ['ponožkou', 1]], why: 'Tu malo šancu viac slov. AI niekedy vyberie aj druhé alebo tretie – preto ti na rovnakú otázku neodpovie vždy rovnako.' },
+  { pre: 'Slnko vychádza na', post: '.', o: [['východe', 87], ['oblohe', 8], ['západe', 4], ['streche', 1]], why: 'AI pozná veľa viet o slnku, a tak ľahko trafí to najčastejšie slovo.' },
+  { pre: 'Jahody sú', post: '.', o: [['červené', 72], ['sladké', 21], ['zelené', 6], ['modré', 1]], why: 'Obe slová „červené“ aj „sladké“ dávajú zmysel. AI vyberie to, ktoré videla častejšie.' },
+  { pre: 'Najvyšší vrch Slovenska je', post: '.', o: [['Gerlachovský štít', 64], ['Kriváň', 18], ['Lomnický štít', 12], ['Rysy', 6]], why: 'Správne je Gerlachovský štít. Ale pozor: AI nevyberá „pravdu“, vyberá najčastejšiu odpoveď. Keď sa niekde často píše chyba, AI ju môže zopakovať – a znieť pri tom úplne isto.' }
+];
+var TWIST = { pre: 'Moja babka sa volá', post: '.', o: [['Mária', 24], ['Anna', 19], ['Helena', 11]], special: 'AI to nemôže vedieť', why: 'Ľudko nepozná tvoju babku! Len háda mená, ktoré sú časté. Keď AI niečo nevie, často si odpoveď vymyslí – a znie pri tom isto. Tomu sa hovorí halucinácia.' };
+
+var SENIOR = [
+  { q: 'Ako dlho variť vajce natvrdo?', a: 'Vajce vložte do vriacej vody a varte ho asi 9 až 10 minút. Potom ho dajte na chvíľu do studenej vody – lepšie sa bude šúpať.', tip: 'Pri recepte nič nepokazíte. Ak by išlo o zdravie, peniaze alebo úrady, overte si odpoveď ešte inde.' },
+  { q: 'Čo je to umelá inteligencia?', a: 'Je to počítačový program, ktorý sa naučil z obrovského množstva textov. Vie odpovedať na otázky, písať a prekladať. Nerozmýšľa však ako človek a niekedy sa pomýli.', tip: 'Môžete sa pýtať aj ďalej, napríklad: „Vysvetli mi to jednoduchšie.“' },
+  { q: 'Volal mi vnuk z nového čísla, že potrebuje peniaze. Čo mám robiť?', a: 'Hovor ukončite a zavolajte vnukovi na číslo, ktoré poznáte. Podvodníci dnes vedia napodobniť aj hlas. Peniaze ani údaje z karty neposielajte, kým si to neoveríte.', tip: 'Dohodnite sa v rodine na tajnom „bezpečnom slove“. Odporúča to aj Európsky orgán pre bankovníctvo.' }
+];
+
+var CHEERS = ['Super!', 'Presne tak!', 'Výborne!', 'Šikovne!', 'Bravo!', 'Paráda!', 'Trafené!'];
+var OOPS = ['Ups! Pozri prečo.', 'Nevadí, učíme sa!', 'Tesne vedľa!', 'Aj to sa stáva!'];
+var STORE = 'ludskyoai-hry-v1', PREFS = 'ludskyoai-hry-prefs';
+
+/* =====================================================================
+   POMOCNÉ
+   ===================================================================== */
+var $ = function (s, el) { return (el || document).querySelector(s); };
+var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-function sampleIdx(n, k) { return shuffle(Array.from({ length: n }, function (_, i) { return i; })).slice(0, k); }
-function loadSave() { try { var r = window.localStorage.getItem(STORE); return r ? JSON.parse(r) : { best: {}, stars: {} }; } catch (e) { return { best: {}, stars: {} }; } }
-function writeSave(s) { try { window.localStorage.setItem(STORE, JSON.stringify(s)); } catch (e) {} }
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function byId(id) { return GAMES.filter(function (g) { return g.id === id; })[0]; }
+function load(k, d) { try { var r = localStorage.getItem(k); return r ? Object.assign({}, d, JSON.parse(r)) : d; } catch (e) { return d; } }
+function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+var reduce = false; try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+function wait(ms) { return new Promise(function (r) { setTimeout(r, reduce ? Math.min(ms, 60) : ms); }); }
+function plural(n, one, few, many) { return n === 1 ? one : (n > 1 && n < 5 ? few : many); }
+
+var save = load(STORE, { best: {}, stars: {} });
+save.best = save.best || {}; save.stars = save.stars || {};
+var prefs = load(PREFS, { sound: true, read: false, big: false, calm: false });
+
+/* ---------- zvuky (Web Audio, nič sa nesťahuje) ---------- */
+var ac = null;
+function actx() {
+  if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (ac.state === 'suspended') { try { ac.resume(); } catch (e) {} }
+  return ac;
+}
+function tone(f, at, dur, type, vol, f2) {
+  var a = actx(); if (!a) return;
+  var t = a.currentTime + (at || 0), o = a.createOscillator(), g = a.createGain();
+  o.type = type || 'sine'; o.frequency.setValueAtTime(f, t);
+  if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+}
+var SFX = {
+  click: function () { tone(700, 0, 0.06, 'triangle', 0.05); },
+  ok: function () { tone(660, 0, 0.12, 'sine', 0.12); tone(990, 0.09, 0.22, 'sine', 0.12); },
+  bad: function () { tone(320, 0, 0.28, 'triangle', 0.1, 170); },
+  pop: function () { tone(420, 0, 0.12, 'sine', 0.12, 880); },
+  whoosh: function () { tone(900, 0, 0.18, 'sine', 0.05, 300); },
+  tick: function () { tone(1400, 0, 0.03, 'square', 0.025); },
+  star: function (i) { tone([784, 988, 1175][i] || 1175, 0, 0.3, 'sine', 0.12); tone(([784, 988, 1175][i] || 1175) * 2, 0.02, 0.2, 'sine', 0.03); },
+  win: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, i * 0.1, 0.28, 'triangle', 0.08); }); },
+  type: function () { tone(1800 + Math.random() * 400, 0, 0.02, 'square', 0.012); }
+};
+function sfx(n, x) { if (!prefs.sound) return; try { SFX[n](x); } catch (e) {} }
+function buzz(ms) { if (prefs.sound && navigator.vibrate) try { navigator.vibrate(ms); } catch (e) {} }
+
+/* ---------- čítanie nahlas ---------- */
+var canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window, voice = null, speakingBtn = null;
+function pickVoice() {
+  if (!canSpeak) return;
+  var vs = speechSynthesis.getVoices() || [];
+  voice = vs.filter(function (v) { return /^sk/i.test(v.lang); })[0] || vs.filter(function (v) { return /^cs/i.test(v.lang); })[0] || null;
+}
+if (canSpeak) { pickVoice(); try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch (e) {} }
+function stopSpeak() { if (canSpeak) try { speechSynthesis.cancel(); } catch (e) {} if (speakingBtn) { speakingBtn.classList.remove('on'); speakingBtn = null; } }
+function speak(text, btn) {
+  if (!canSpeak || !text) return;
+  stopSpeak();
+  var u = new SpeechSynthesisUtterance(String(text).replace(/[„“"]/g, '').replace(/\n/g, '. '));
+  u.lang = 'sk-SK'; if (voice) u.voice = voice; u.rate = 0.95; u.pitch = 1.05;
+  if (btn) { speakingBtn = btn; btn.classList.add('on'); u.onend = u.onerror = function () { btn.classList.remove('on'); if (speakingBtn === btn) speakingBtn = null; }; }
+  try { speechSynthesis.speak(u); } catch (e) {}
+}
+function autoSpeak(text) { if (prefs.read) speak(text); }
+function spkBtn(text) { return canSpeak ? '<button type="button" class="spk" data-say="' + esc(text) + '" aria-label="Prečítať nahlas">🔊</button>' : ''; }
+function announce(t) { var l = $('#live'); l.textContent = ''; setTimeout(function () { l.textContent = t; }, 30); }
+
+/* ---------- konfety ---------- */
+var cv = $('#fx'), cx = cv.getContext('2d'), parts = [], raf = 0;
+function sizeCv() { var d = window.devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+sizeCv(); addEventListener('resize', sizeCv);
+function confetti(n, x, y, spread) {
+  if (reduce) return;
+  var cols = ['#FF5F57', '#FEBC2E', '#28C840', '#A29BFE', '#17153B', '#FF9F43'];
+  x = x == null ? innerWidth / 2 : x; y = y == null ? innerHeight / 3 : y;
+  for (var i = 0; i < (n || 80); i++) {
+    var a = Math.random() * Math.PI * 2, v = 4 + Math.random() * (spread || 9);
+    parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.4, w: 7 + Math.random() * 6, h: 10 + Math.random() * 8, c: cols[i % cols.length], life: 0, star: Math.random() < 0.18 });
+  }
+  if (!raf) raf = requestAnimationFrame(tick);
+}
+function tick() {
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  parts = parts.filter(function (p) { return p.life < 160 && p.y < innerHeight + 40; });
+  parts.forEach(function (p) {
+    p.life++; p.vy += 0.28; p.vx *= 0.985; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+    cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = Math.max(0, 1 - p.life / 160); cx.fillStyle = p.c;
+    if (p.star) { cx.font = '900 20px sans-serif'; cx.fillText('★', -8, 8); } else { cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2))); }
+    cx.restore();
+  });
+  raf = parts.length ? requestAnimationFrame(tick) : 0;
+}
+function confettiAt(el, n) { if (!el) return confetti(n); var b = el.getBoundingClientRect(); confetti(n || 40, b.left + b.width / 2, b.top + b.height / 2, 7); }
+
+/* ---------- Ľudko (SVG) ---------- */
+function ludko(expr, w, cls) {
+  expr = expr || 'happy';
+  var mouth, badge = '', brow = '', cheeks = 1;
+  if (expr === 'happy' || expr === 'learn' || expr === 'hi') mouth = '<path d="M136 176 Q150 190 164 176" stroke="#17153B" stroke-width="5" fill="none" stroke-linecap="round"/>';
+  if (expr === 'star') mouth = '<path d="M132 172 Q150 198 168 172 Z" fill="#17153B"/><path d="M140 182 Q150 190 160 182" fill="#FF8A8A"/>';
+  if (expr === 'think') { mouth = '<line x1="139" y1="184" x2="160" y2="180" stroke="#17153B" stroke-width="5" stroke-linecap="round"/>'; brow = '<line x1="164" y1="131" x2="184" y2="126" stroke="#17153B" stroke-width="5" stroke-linecap="round"/>'; cheeks = 0; }
+  if (expr === 'oops') { mouth = '<ellipse cx="150" cy="182" rx="6" ry="7" fill="#17153B"/>'; brow = '<line x1="116" y1="128" x2="136" y2="133" stroke="#17153B" stroke-width="5" stroke-linecap="round"/><line x1="164" y1="133" x2="184" y2="128" stroke="#17153B" stroke-width="5" stroke-linecap="round"/>'; cheeks = 0; }
+  if (expr === 'happy') badge = '<g class="badge"><circle cx="258" cy="60" r="22" fill="#28C840" stroke="#17153B" stroke-width="3"/><path d="M247 60 l8 8 l14 -15" stroke="#17153B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>';
+  if (expr === 'oops') badge = '<g class="badge"><circle cx="258" cy="60" r="22" fill="#FF5F57" stroke="#17153B" stroke-width="3"/><line x1="258" y1="48" x2="258" y2="62" stroke="#17153B" stroke-width="6" stroke-linecap="round"/><circle cx="258" cy="72" r="3.6" fill="#17153B"/></g>';
+  if (expr === 'think' || expr === 'learn') badge = '<g class="badge"><circle cx="258" cy="60" r="22" fill="#A29BFE" stroke="#17153B" stroke-width="3"/><text x="258" y="70" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="28" font-weight="900" fill="#17153B">?</text></g>';
+  if (expr === 'star') badge = '<g class="badge"><text x="258" y="76" text-anchor="middle" font-size="50" fill="#FEBC2E" stroke="#17153B" stroke-width="2">★</text></g>';
+  return '<svg class="ludko ' + (cls || '') + '" viewBox="40 30 270 200" width="' + (w || 160) + '" aria-hidden="true">' +
+    '<path d="M76 168 Q48 176 46 214" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"/>' +
+    '<path class="arm" d="M226 156 Q252 128 246 86" stroke="#A29BFE" stroke-width="11" fill="none" stroke-linecap="round"/>' +
+    '<rect x="70" y="70" width="160" height="146" rx="30" fill="#A29BFE" stroke="#17153B" stroke-width="3"/><rect x="73" y="108" width="154" height="105" rx="27" fill="#FFFFFF"/><rect x="73" y="108" width="154" height="40" fill="#FFFFFF"/>' +
+    '<circle cx="97" cy="89" r="6.5" fill="#FF5F57"/><circle cx="117" cy="89" r="6.5" fill="#FEBC2E"/><circle cx="137" cy="89" r="6.5" fill="#28C840"/>' +
+    '<g opacity="' + cheeks + '"><ellipse cx="112" cy="174" rx="9" ry="4.5" fill="#FFB8B8"/><ellipse cx="188" cy="174" rx="9" ry="4.5" fill="#FFB8B8"/></g>' +
+    '<g class="eyes"><ellipse cx="128" cy="152" rx="9.5" ry="12" fill="#17153B"/><ellipse cx="172" cy="152" rx="9.5" ry="12" fill="#17153B"/>' +
+    '<g class="pupil"><circle cx="130" cy="147" r="3.4" fill="#FFFFFF"/><circle cx="174" cy="147" r="3.4" fill="#FFFFFF"/></g></g>' +
+    brow + mouth + badge + '</svg>';
+}
+function followEyes(root) {
+  if (reduce) return;
+  var h = function (e) {
+    $$('.ludko .pupil', root).forEach(function (p) {
+      var b = p.ownerSVGElement.getBoundingClientRect(), cx0 = b.left + b.width * 0.42, cy0 = b.top + b.height * 0.6;
+      var dx = e.clientX - cx0, dy = e.clientY - cy0, d = Math.sqrt(dx * dx + dy * dy) || 1, k = Math.min(1, d / 300);
+      p.setAttribute('transform', 'translate(' + (dx / d * 4 * k).toFixed(1) + ' ' + (dy / d * 4.5 * k).toFixed(1) + ')');
+    });
+  };
+  addEventListener('pointermove', h, { passive: true });
+  return function () { removeEventListener('pointermove', h); };
+}
+
+/* ---------- obrázky ovocia a zeleniny ---------- */
+function food(item, size) {
+  var c = COLORS[item.f[1]], s = '#17153B', sw = 3, shp = {
+    round: '<circle cx="50" cy="58" r="30" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><path d="M50 30 Q52 18 58 12" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="64" cy="20" rx="9" ry="5" fill="#28C840" stroke="' + s + '" stroke-width="2" transform="rotate(-25 64 20)"/><ellipse cx="40" cy="48" rx="6" ry="4" fill="#fff" opacity=".45"/>',
+    pear: '<path d="M50 22 C40 22 38 40 40 48 C28 58 28 88 50 88 C72 88 72 58 60 48 C62 40 60 22 50 22 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><path d="M50 24 Q52 14 56 10" stroke="#6B4A2B" stroke-width="4" fill="none" stroke-linecap="round"/>',
+    cherry: '<path d="M36 58 Q42 30 54 14 M64 60 Q60 34 54 14" stroke="#6B4A2B" stroke-width="3" fill="none"/><circle cx="36" cy="68" r="15" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><circle cx="64" cy="70" r="15" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/>',
+    grape: '<path d="M50 22 Q52 12 58 8" stroke="#6B4A2B" stroke-width="4" fill="none"/>' + [[40, 34], [60, 34], [30, 52], [50, 52], [70, 52], [40, 70], [60, 70], [50, 86]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="11" fill="' + c + '" stroke="' + s + '" stroke-width="2.5"/>'; }).join(''),
+    banana: '<path d="M18 30 Q26 82 82 76 Q88 72 84 66 Q40 66 32 26 Q26 22 18 30 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '" stroke-linejoin="round"/>',
+    straw: '<path d="M50 90 C20 72 18 42 30 34 C40 28 46 32 50 36 C54 32 60 28 70 34 C82 42 80 72 50 90 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><path d="M32 32 L50 18 L68 32 L58 30 L50 24 L42 30 Z" fill="#28C840" stroke="' + s + '" stroke-width="2"/>' + [[40, 50], [58, 48], [48, 62], [62, 64], [50, 76]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.5" fill="#FFE9A8"/>'; }).join(''),
+    carrot: '<path d="M50 32 L42 12 M50 32 L50 8 M50 32 L58 12" stroke="#28C840" stroke-width="5" stroke-linecap="round"/><path d="M36 32 L64 32 L52 92 Q50 96 48 92 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '" stroke-linejoin="round"/><path d="M44 48 L52 48 M46 62 L54 62 M48 76 L53 76" stroke="' + s + '" stroke-width="2"/>',
+    long: '<rect x="14" y="38" width="72" height="26" rx="13" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '" transform="rotate(-25 50 51)"/><circle cx="40" cy="56" r="2" fill="' + s + '"/><circle cx="54" cy="48" r="2" fill="' + s + '"/><circle cx="64" cy="42" r="2" fill="' + s + '"/>',
+    onion: '<path d="M50 14 C52 30 76 44 76 64 C76 82 64 90 50 90 C36 90 24 82 24 64 C24 44 48 30 50 14 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><path d="M50 30 Q38 60 50 88 M50 30 Q62 60 50 88" stroke="' + s + '" stroke-width="2" fill="none"/>',
+    cabbage: '<circle cx="50" cy="56" r="34" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '"/><path d="M50 22 Q30 56 50 90 M50 22 Q70 56 50 90 M18 50 Q50 40 82 50" stroke="' + s + '" stroke-width="2" fill="none"/>',
+    potato: '<ellipse cx="50" cy="58" rx="36" ry="25" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '" transform="rotate(-10 50 58)"/>' + [[36, 54], [58, 50], [64, 66], [44, 68]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.5" fill="#6B4A2B"/>'; }).join(''),
+    pepper: '<path d="M28 40 Q24 88 42 90 Q50 82 58 90 Q76 88 72 40 Q50 30 28 40 Z" fill="' + c + '" stroke="' + s + '" stroke-width="' + sw + '" stroke-linejoin="round"/><path d="M50 36 L50 18 Q50 12 58 12" stroke="#28C840" stroke-width="6" fill="none" stroke-linecap="round"/>',
+    brocc: '<rect x="42" y="56" width="16" height="34" rx="5" fill="#9BD77A" stroke="' + s + '" stroke-width="3"/><circle cx="34" cy="46" r="17" fill="' + c + '" stroke="' + s + '" stroke-width="3"/><circle cx="66" cy="46" r="17" fill="' + c + '" stroke="' + s + '" stroke-width="3"/><circle cx="50" cy="32" r="19" fill="' + c + '" stroke="' + s + '" stroke-width="3"/>'
+  };
+  return '<svg viewBox="0 0 100 100" width="' + size + '" height="' + size + '" role="img" aria-label="' + esc(item.name) + '" style="flex:none;overflow:visible">' + shp[item.shape] + '</svg>';
+}
+function feats(item) {
+  return '<div class="feat"><span><i class="cdot" style="background:' + COLORS[item.f[1]] + '"></i>' + CNAME[item.f[1]] + '</span>' +
+    '<span>' + (item.f[0] ? '🍬 sladké' : '🧂 nie je sladké') + '</span><span>' + (item.f[2] ? '🌳 rastie na strome' : '🌱 nie na strome') + '</span></div>';
+}
+// AI „najbližší sused“: porovná vlastnosti s naučenými príkladmi
 function guess(item, train, labels) {
-  var best = -1, votes = {};
+  var best = -1, votes = {}, like = {};
   train.forEach(function (t, i) {
     var sc = (t.f[0] === item.f[0] ? 1 : 0) + (t.f[1] === item.f[1] ? 1 : 0) + (t.f[2] === item.f[2] ? 1 : 0);
-    if (sc > best) { best = sc; votes = {}; }
-    if (sc === best) { votes[labels[i]] = (votes[labels[i]] || 0) + 1; }
+    if (sc > best) { best = sc; votes = {}; like = {}; }
+    if (sc === best) { votes[labels[i]] = (votes[labels[i]] || 0) + 1; (like[labels[i]] = like[labels[i]] || []).push(t.name); }
   });
-  return (votes['Ovocie'] || 0) > (votes['Zelenina'] || 0) ? 'Ovocie' : ((votes['Zelenina'] || 0) > (votes['Ovocie'] || 0) ? 'Zelenina' : labels[0]);
+  var o = votes['Ovocie'] || 0, z = votes['Zelenina'] || 0;
+  var lab = o > z ? 'Ovocie' : (z > o ? 'Zelenina' : labels[0]);
+  return { label: lab, like: (like[lab] || []).slice(0, 2) };
 }
-function starStr(n) { return { on: '★★★'.slice(0, n), off: '★★★'.slice(0, 3 - n) }; }
 
-class Component extends DCLogic {
-constructor(props) {
-  super(props);
-  this.state = { big: false, screen: 'hub', game: null, phase: 'q', r: null, save: { best: {}, stars: {} }, result: null, shared: '' };
-  this.timer = 0;
+/* =====================================================================
+   NASTAVENIA V HLAVIČKE
+   ===================================================================== */
+function applyPrefs() {
+  document.documentElement.classList.toggle('big', !!prefs.big);
+  $('#tBig').setAttribute('aria-pressed', prefs.big ? 'true' : 'false'); $('#tBig').textContent = prefs.big ? 'A−' : 'A+';
+  $('#tSound').setAttribute('aria-pressed', prefs.sound ? 'true' : 'false'); $('#iSound').textContent = prefs.sound ? '🔊' : '🔇';
+  $('#tRead').setAttribute('aria-pressed', prefs.read ? 'true' : 'false');
 }
-componentDidMount() { this.setState({ save: loadSave() }); }
-componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
-game() { var id = this.state.game; return GAMES.filter(function (g) { return g.id === id; })[0]; }
-start(id) {
-  if (this.timer) { clearInterval(this.timer); this.timer = 0; }
-  var g = GAMES.filter(function (x) { return x.id === id; })[0];
-  var r = { i: 0, pick: null, points: 0, correct: 0, streak: 0, gain: 0, t0: Date.now(), ok: false };
-  if (g.type === 'bin' || g.type === 'pick') r.items = sampleIdx(POOLS[id].length, g.size);
+if (canSpeak) $('#tRead').hidden = false;
+$('#tBig').onclick = function () { prefs.big = !prefs.big; store(PREFS, prefs); applyPrefs(); sfx('click'); };
+$('#tSound').onclick = function () { prefs.sound = !prefs.sound; store(PREFS, prefs); applyPrefs(); sfx('pop'); };
+$('#tRead').onclick = function () { prefs.read = !prefs.read; store(PREFS, prefs); applyPrefs(); if (prefs.read) speak('Budem ti čítať nahlas.'); else stopSpeak(); };
+applyPrefs();
+
+function totalStars() { return GAMES.reduce(function (a, g) { return a + (save.stars[g.id] || 0); }, 0); }
+function updStars(bump) {
+  $('#starcount').textContent = totalStars() + ' / ' + GAMES.length * 3;
+  if (bump) { var p = $('#starpill'); p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
+}
+function starsHtml(n) { return '<span class="stars" aria-label="' + n + ' z 3 hviezdičiek"><span class="on">' + '★★★'.slice(0, n) + '</span><span class="off">' + '★★★'.slice(0, 3 - n) + '</span></span>'; }
+
+/* =====================================================================
+   ROUTER
+   ===================================================================== */
+var main = $('#main'), cleanup = [], G = null, R = null, timerRaf = 0;
+function clearAll() {
+  cleanup.forEach(function (f) { try { f && f(); } catch (e) {} }); cleanup = [];
+  if (timerRaf) { cancelAnimationFrame(timerRaf); timerRaf = 0; }
+  if (R && R.iv) { clearInterval(R.iv); }
+  stopSpeak(); G = null; R = null;
+}
+function route() {
+  var id = (location.hash || '').replace('#', '');
+  clearAll();
+  var g = byId(id);
+  if (g) renderIntro(g); else renderHub(id === 'rodicia' ? 'rodicia' : null);
+}
+addEventListener('hashchange', route);
+function go(id) { if ((location.hash || '').replace('#', '') === id) route(); else location.hash = id; }
+function focusMain(sel) { setTimeout(function () { var el = sel && $(sel); (el || main).focus({ preventScroll: true }); }, 50); try { scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); } catch (e) { scrollTo(0, 0); } }
+
+// delegované kliknutia
+document.addEventListener('click', function (e) {
+  var t = e.target.closest('[data-say]'); if (t) { e.preventDefault(); if (t.classList.contains('on')) stopSpeak(); else speak(t.getAttribute('data-say'), t); return; }
+  var gb = e.target.closest('[data-go]'); if (gb) { e.preventDefault(); sfx('click'); go(gb.getAttribute('data-go')); }
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && (location.hash || '').length > 1) { go(''); return; }
+  if (R && R.keys && !e.altKey && !e.ctrlKey && !e.metaKey && !/INPUT|TEXTAREA/.test((e.target.tagName || ''))) R.keys(e);
+});
+
+/* =====================================================================
+   ROZCESTNÍK
+   ===================================================================== */
+function renderHub(anchor) {
+  document.title = 'Hraj sa a uč sa – Ľudsky o AI';
+  var ts = totalStars(), mx = GAMES.length * 3;
+  var kids = GAMES.filter(function (g) { return g.aud === 'kids'; });
+  var nextKid = kids.filter(function (g) { return !(save.stars[g.id] > 0); })[0];
+  var h = '';
+  h += '<section class="hero"><span class="sparkle" style="left:6%;top:18%">★</span><span class="sparkle" style="left:46%;top:76%;animation-delay:-2s">✦</span><span class="sparkle" style="right:8%;top:12%;animation-delay:-4s">★</span>' +
+    '<div class="wrap"><div style="flex:999 1 440px;min-width:0;display:flex;flex-direction:column;gap:1rem">' +
+    '<span class="kicker">ARKÁDA ĽUDKA · BEZ REGISTRÁCIE · ZADARMO</span>' +
+    '<h1>Hraj sa a uč sa,<br>ako funguje AI</h1>' +
+    '<p>Krátke hry pre deti, rodičov aj starých rodičov. Zbieraj hviezdičky a odomkni všetkých ' + GAMES.length + ' odznakov.</p>' +
+    '<div style="display:flex;flex-direction:column;gap:.45rem;max-width:28rem"><div style="display:flex;justify-content:space-between;font-weight:700"><span>Tvoj postup</span><span>' + ts + ' z ' + mx + ' ★</span></div><div class="prog"><i style="width:0" data-w="' + Math.round(ts / mx * 100) + '%"></i></div></div>' +
+    '<div class="chips"><a class="chip" href="#cesta">🧒 Pre deti</a><a class="chip" href="#nastrahy">🚨 Nástrahy AI</a><a class="chip" href="#seniori">☕ Pre seniorov</a><a class="chip" href="#rodicia" data-scroll="rodicia">👨‍👩‍👧 Pre rodičov</a></div>' +
+    '</div><div class="hero-ludko bob">' + ludko(ts === mx ? 'star' : 'hi', 230) + '</div></div></section>';
+
+  // Ľudkova cesta
+  h += '<section class="sec wrap" id="cesta" style="scroll-margin-top:5rem"><h2><span class="sq" style="background:#28C840"></span>Ľudkova cesta pre deti</h2>' +
+    '<p class="lead">Štyri zastávky, ktoré spolu vysvetľujú, čo je AI. Najlepšie po poradí – a ešte lepšie s rodičom vedľa seba.</p>' +
+    '<div class="path"><svg class="road" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100"><path d="M10 40 C 25 10, 30 80, 50 55 S 75 20, 90 55" fill="none" stroke="#17153B" stroke-width=".5" stroke-dasharray="2 2" vector-effect="non-scaling-stroke" style="stroke-width:3px;stroke-dasharray:10 10"/></svg><ol class="stops">';
+  kids.forEach(function (g, i) {
+    var st = save.stars[g.id] || 0;
+    h += '<li class="stop' + (nextKid === g ? ' has-here' : '') + '">' +
+      (nextKid === g ? '<div class="here" aria-hidden="true">' + ludko('hi', 64, 'bob') + '<span class="say">' + (i === 0 ? 'Začni tu!' : 'Ďalej sem!') + '</span></div>' : '') +
+      '<button type="button" class="stop-btn" style="--c:' + g.light + '" data-go="' + g.id + '" aria-label="' + (i + 1) + '. ' + esc(g.title) + ', ' + st + ' z 3 hviezdičiek"><span class="num">' + (i + 1) + '</span><span aria-hidden="true">' + g.emoji + '</span>' + (st === 3 ? '<span class="done" aria-hidden="true">✓</span>' : '') + '</button>' +
+      '<div class="txt"><strong>' + esc(g.title) + '</strong><span class="sub">' + esc(g.short) + '</span>' + starsHtml(st) + '<span class="tag agetag">' + g.age + ' · ' + g.min + ' min</span></div></li>';
+  });
+  h += '</ol></div></section>';
+
+  ['trap', 'senior'].forEach(function (a) {
+    var A = AUD[a];
+    h += '<section class="sec wrap" id="' + (a === 'trap' ? 'nastrahy' : 'seniori') + '" style="scroll-margin-top:5rem"><h2><span class="sq" style="background:' + A.color + '"></span>' + A.name + '</h2><p class="lead">' + A.lead + '</p><div class="cards">';
+    GAMES.filter(function (g) { return g.aud === a; }).forEach(function (g) {
+      var st = save.stars[g.id] || 0, best = save.best[g.id] || 0;
+      h += '<button type="button" class="gcard" style="--c:' + g.light + '" data-go="' + g.id + '"><div class="head"><span class="emo" aria-hidden="true">' + g.emoji + '</span><span class="tag">' + esc(g.age.toUpperCase()) + (g.timer ? ' · NA ČAS' : '') + '</span></div>' +
+        '<div class="body"><strong>' + esc(g.title) + '</strong><span class="desc">' + esc(g.short) + '</span><div class="row">' + starsHtml(st) + '<span class="best">' + (best ? 'Rekord: ' + best + ' b.' : 'Ešte nehrané') + '</span></div>' +
+        '<span class="cta">' + (st ? (st === 3 ? 'Hrať znova' : 'Získaj viac hviezd') : 'Hrať') + ' →</span></div></button>';
+    });
+    h += '</div></section>';
+  });
+
+  // odznaky
+  h += '<section class="sec wrap"><div class="panel"><h2 style="font-size:1.4rem;margin-bottom:1rem">Tvoje odznaky</h2><div class="badges">';
+  GAMES.forEach(function (g) {
+    var got = (save.stars[g.id] || 0) === 3;
+    h += '<div class="bdg' + (got ? '' : ' off') + '"><span class="ico' + (got ? ' glow' : '') + '" style="background:' + (got ? g.light : '') + '" aria-hidden="true">' + g.badgeIco + '</span><span class="t"><b>' + esc(g.badge) + '</b><span>' + (got ? 'Odomknutý!' : 'Získaj 3 ★ v hre ' + esc(g.title)) + '</span></span></div>';
+  });
+  h += '</div></div></section>';
+
+  // pre rodičov
+  h += '<section class="sec wrap" id="rodicia" style="scroll-margin-top:5rem"><h2><span class="sq" style="background:#FEBC2E"></span>Pre rodičov</h2>' +
+    '<p class="lead">Hry sú krátke (2–3 minúty) a fungujú najlepšie, keď ich hráte spolu. Každá končí jednou otázkou na rozhovor.</p>' +
+    '<div class="parents">' +
+    '<div class="tip"><span class="n">🧒</span><span><b>Pre menšie deti</b> zapnite hore <b>🗣️ Čítať nahlas</b>. Ľudko prečíta otázky aj vysvetlenia (ak má zariadenie slovenský alebo český hlas).</span></div>' +
+    '<div class="tip"><span class="n">🗺️</span><span><b>Začnite Ľudkovou cestou.</b> Dieťa najprv pochopí, že AI sa učí z príkladov a háda slová – potom ľahšie pochopí, prečo sa mýli.</span></div>' +
+    '<div class="tip"><span class="n">💬</span><span><b>Po každej hre</b> sa opýtajte otázku z rámčeka „Porozprávajte sa“. Práve tam vzniká to najdôležitejšie učenie.</span></div>' +
+    '<div class="tip"><span class="n">🔒</span><span><b>Nič sa neodosiela.</b> Žiadna registrácia, reklamy v hrách ani zber údajov. Hviezdičky sa ukladajú len v tomto prehliadači.</span></div>' +
+    '</div><p class="note" style="margin-top:1rem">Ukážkové texty, správy a čísla v hrách sú vytvorené pre tieto hry. Fakty o podvodoch uvádzame so zdrojom. Našli ste chybu? Pozrite <a href="opravy.html">Opravy</a> alebo nám napíšte na Instagrame.</p></section>';
+
+  main.innerHTML = h;
+  requestAnimationFrame(function () { var p = $('.prog i'); if (p) p.style.width = p.getAttribute('data-w'); });
+  cleanup.push(followEyes(main));
+  updStars();
+  if (anchor) setTimeout(function () { var el = document.getElementById(anchor); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 60);
+  else { try { scrollTo(0, 0); } catch (e) {} }
+  $$('.chip', main).forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); var el = document.querySelector(a.getAttribute('href')); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+}
+
+/* =====================================================================
+   ÚVOD HRY
+   ===================================================================== */
+function renderIntro(g) {
+  document.title = g.title + ' – Hry – Ľudsky o AI';
+  var st = save.stars[g.id] || 0, best = save.best[g.id] || 0;
+  var h = '<section class="play" style="max-width:1080px"><div class="bar"><button type="button" class="btn sm" data-go="">← Všetky hry</button>' + (best ? '<span class="pill" style="background:#fff;border:2px solid var(--ink)">' + starsHtml(st) + '&nbsp; Rekord ' + best + ' b.</span>' : '') + '</div>' +
+    '<div class="intro"><div class="art" style="--c:' + g.light + '"><span class="big-emo" aria-hidden="true">' + g.emoji + '</span>' + ludko('hi', 170) + '</div>' +
+    '<div class="info"><span class="tag" style="align-self:flex-start">' + esc(g.age.toUpperCase()) + ' · ' + g.min + ' MIN' + (g.timer ? ' · NA ČAS' : '') + '</span><h1 id="ititle" tabindex="-1">' + esc(g.title) + '</h1>' +
+    '<div class="say-box">' + esc(g.intro) + spkBtn(g.intro) + '</div>' +
+    '<ol class="how">' + g.how.map(function (x, i) { return '<li><span class="n">' + (i + 1) + '</span><span>' + esc(x) + '</span></li>'; }).join('') + '</ol>' +
+    '<div class="learn"><span style="font-size:1.5rem" aria-hidden="true">💡</span><span>Naučíš sa: ' + esc(g.learn) + '</span></div>' +
+    (g.timer ? '<label class="switch"><input type="checkbox" id="calm"' + (prefs.calm ? ' checked' : '') + '><span class="sw" aria-hidden="true"></span><span>Pokojný režim – bez časomiery</span></label>' : '') +
+    '<div style="display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.3rem"><button type="button" class="btn yel" id="startBtn" style="min-height:4rem;font-size:1.3rem;padding:0 2.2rem">▶ ' + (st ? 'Hrať znova' : 'Hrať') + '</button></div>' +
+    '</div></div></section>';
+  main.innerHTML = h;
+  var c = $('#calm'); if (c) c.onchange = function () { prefs.calm = c.checked; store(PREFS, prefs); sfx('click'); };
+  $('#startBtn').onclick = function () { sfx('pop'); start(g); };
+  cleanup.push(followEyes(main));
+  focusMain('#startBtn');
+  autoSpeak(g.intro);
+}
+
+/* =====================================================================
+   HRA – kostra
+   ===================================================================== */
+function start(g) {
+  clearAll(); G = g;
+  R = { i: 0, points: 0, correct: 0, streak: 0, results: [], busy: false };
+  if (g.type === 'bin' || g.type === 'pick') R.items = shuffle(POOLS[g.id]).slice(0, g.size);
+  if (g.type === 'word') R.items = shuffle(WORDS).slice(0, g.size - 1).concat([TWIST]);
   if (g.type === 'nauc') {
     var fr = shuffle(TRAIN_POOL.filter(function (t) { return t.ok === 'Ovocie'; })).slice(0, 3);
     var vg = shuffle(TRAIN_POOL.filter(function (t) { return t.ok === 'Zelenina'; })).slice(0, 3);
-    r.train = shuffle(fr.concat(vg)); r.labels = [];
-    r.test = shuffle(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Ovocie'; })).slice(0, 2).concat(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Zelenina'; })).slice(0, 2)));
+    R.train = shuffle(fr.concat(vg)); R.labels = []; R.items = R.train;
+    R.test = shuffle(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Ovocie'; })).slice(0, 2).concat(shuffle(TEST_POOL.filter(function (t) { return t.ok === 'Zelenina'; })).slice(0, 2)));
   }
-  if (g.type === 'senior') { r.q = null; r.chars = 0; r.asked = {}; }
-  this.setState({ screen: 'play', game: id, phase: 'q', r: r, result: null, shared: '' });
-  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+  if (g.type === 'senior') { R.items = SENIOR; R.asked = {}; R.q = null; }
+  main.innerHTML = '<section class="play"><div class="bar"><button type="button" class="btn sm" data-go="">← Všetky hry</button>' +
+    '<div class="hud"><span class="pill streak" id="streak" hidden></span><span class="pill pts" id="pts" aria-label="Body">0 b.</span></div></div>' +
+    '<div class="ptitle"><span class="e" aria-hidden="true">' + g.emoji + '</span><h1>' + esc(g.title) + '</h1></div>' +
+    '<div class="pdots" id="pdots" role="img"></div>' +
+    '<div class="stage"><div class="side"><div class="lk" id="lk"></div><div class="bubble" id="bubble" aria-live="polite"></div></div><div class="content" id="content"></div></div></section>';
+  try { scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); } catch (e) {}
+  if (g.type === 'nauc') naucStep();
+  else if (g.type === 'senior') seniorRender();
+  else step();
 }
-answer(v) {
-  var s = this.state, g = this.game(), r = s.r;
-  if (s.phase !== 'q') return;
-  var item = POOLS[g.id][r.items[r.i]];
-  var ok = g.type === 'pick' ? v === item.wrong : v === item.a;
-  var secs = (Date.now() - r.t0) / 1000;
-  var tb = g.timer ? Math.max(0, Math.round((g.timer - secs) / g.timer * 50)) : 0;
-  var streak = ok ? r.streak + 1 : 0;
-  var gain = ok ? 100 + Math.min(100, (streak - 1) * 25) + tb : 0;
-  this.setState({ phase: 'a', r: Object.assign({}, r, { pick: v, ok: ok, streak: streak, gain: gain, points: r.points + gain, correct: r.correct + (ok ? 1 : 0) }) });
+function setL(expr, say, bg, anim) {
+  var lk = $('#lk'), b = $('#bubble'); if (!lk) return;
+  lk.innerHTML = ludko(expr, 150, anim || ''); b.style.setProperty('--bb', bg || '#EEECFF');
+  b.innerHTML = say === '…' ? '<span class="dots" aria-label="Ľudko premýšľa"><i></i><i></i><i></i></span>' : esc(say);
 }
-next() {
-  var r = this.state.r;
-  if (r.i + 1 < r.items.length) this.setState({ phase: 'q', r: Object.assign({}, r, { i: r.i + 1, pick: null, gain: 0, t0: Date.now() }) });
-  else this.finish(r.correct, r.items.length, r.points);
+function dots() {
+  var n = R.items.length, h = '';
+  for (var i = 0; i < n; i++) { var r = R.results[i]; h += '<i class="' + (r === true ? 'ok' : r === false ? 'bad' : (i === R.i ? 'cur' : '')) + '"></i>'; }
+  var d = $('#pdots'); if (d) { d.innerHTML = h; d.setAttribute('aria-label', 'Otázka ' + Math.min(R.i + 1, n) + ' z ' + n); }
 }
-finish(correct, total, points) {
-  var id = this.state.game, save = JSON.parse(JSON.stringify(this.state.save));
-  var stars = correct === total ? 3 : (correct / total >= 0.6 ? 2 : (correct > 0 ? 1 : 0));
+function hud(gain) {
+  var p = $('#pts'); if (!p) return;
+  p.innerHTML = R.points + ' b.' + (gain ? '<span class="gain">+' + gain + '</span>' : '');
+  var s = $('#streak');
+  if (R.streak >= 2) { s.hidden = false; s.textContent = '🔥 Séria ×' + R.streak; s.classList.remove('pop'); void s.offsetWidth; s.classList.add('pop'); } else s.hidden = true;
+}
+function score(ok, timeBonus) {
+  R.streak = ok ? R.streak + 1 : 0;
+  var gain = ok ? 100 + Math.min(100, (R.streak - 1) * 25) + (timeBonus || 0) : 0;
+  R.points += gain; if (ok) R.correct++;
+  R.results[R.i] = ok; hud(gain); dots();
+  return gain;
+}
+
+/* ---------- časomiera ---------- */
+function startTimer(sec, onEnd) {
+  var bar = $('#tbar'); if (!bar) return;
+  var t0 = performance.now(), last = sec;
+  R.deadline = t0 + sec * 1000;
+  var loop = function (now) {
+    var left = Math.max(0, R.deadline - now), f = left / (sec * 1000);
+    bar.style.width = (f * 100) + '%';
+    bar.style.background = f > 0.5 ? '#28C840' : (f > 0.25 ? '#FEBC2E' : '#FF5F57');
+    var s = Math.ceil(left / 1000); if (s !== last && s <= 3 && s > 0) sfx('tick'); last = s;
+    if (left <= 0) { timerRaf = 0; onEnd(); return; }
+    timerRaf = requestAnimationFrame(loop);
+  };
+  timerRaf = requestAnimationFrame(loop);
+}
+function stopTimer() { if (timerRaf) { cancelAnimationFrame(timerRaf); timerRaf = 0; } }
+function timeBonus() { if (!G.timer || prefs.calm || !R.deadline) return 0; return Math.max(0, Math.round((R.deadline - performance.now()) / (G.timer * 1000) * 50)); }
+function timed() { return G.timer && !prefs.calm; }
+
+/* =====================================================================
+   BINÁRNE OTÁZKY, VYMYSLENÁ VETA, DOPLŇ SLOVO
+   ===================================================================== */
+function step() {
+  var item = R.items[R.i]; R.busy = false; R.deadline = 0; dots();
+  var c = $('#content'), h = timed() ? '<div class="timer" aria-hidden="true"><i id="tbar"></i></div>' : '';
+  if (G.type === 'bin') {
+    var A = G.labels[0], B = G.labels[1];
+    h += '<div class="qcard swipe slide" id="qcard"><span class="k">' + esc(item.kind) + '</span><p class="qtext">' + esc(item.text) + '</p>' + spkBtn(item.text) +
+      '<span class="lean l" style="background:' + A.c + '">' + A.i + ' ' + esc(A.t) + '</span><span class="lean r" style="background:' + B.c + '">' + esc(B.t) + ' ' + B.i + '</span></div>' +
+      '<div class="swipehint" aria-hidden="true"><span>👈</span> potiahni kartu alebo ťukni <span>👉</span></div>' +
+      '<div class="choices" id="choices"><button type="button" class="choice" style="--c:' + A.c + '" data-a="1"><span class="i" aria-hidden="true">' + A.i + '</span>' + esc(A.t) + '<kbd>1</kbd></button>' +
+      '<button type="button" class="choice" style="--c:' + B.c + '" data-a="0"><span class="i" aria-hidden="true">' + B.i + '</span>' + esc(B.t) + '<kbd>2</kbd></button></div><div id="fbw"></div>';
+    c.innerHTML = h;
+    $$('#choices .choice').forEach(function (b) { b.onclick = function () { binAnswer(b.getAttribute('data-a') === '1'); }; });
+    swipe($('#qcard'));
+    R.keys = function (e) { if (R.busy) return; if (e.key === '1' || e.key === 'ArrowLeft') binAnswer(true); if (e.key === '2' || e.key === 'ArrowRight') binAnswer(false); };
+    setL('think', R.streak >= 2 ? 'Séria! Pokračuj!' : (R.i === 0 ? 'Čo myslíš?' : pick(['Hmm… a toto?', 'Čo povieš?', 'Rozhodni sa!'])), '#EEECFF');
+    autoSpeak(item.text);
+    if (timed()) startTimer(G.timer, function () { binAnswer(null); });
+  } else if (G.type === 'pick') {
+    h += '<div class="slide" style="display:flex;flex-direction:column;gap:.35rem"><span class="mono" style="font-weight:700;font-size:.8rem;color:var(--mut)">OTÁZKA PRE AI</span><strong style="font-size:clamp(1.2rem,3vw,1.45rem)">„' + esc(item.q) + '“</strong></div>' +
+      '<span style="font-weight:700;color:var(--ink2)">🤖 AI odpovedala takto. Jedna veta nie je pravda – ťukni na ňu:</span><div id="sents" style="display:flex;flex-direction:column;gap:.7rem">' +
+      item.s.map(function (t, i) { return '<button type="button" class="sent slide" style="animation-delay:' + (i * 0.08) + 's" data-i="' + i + '"><span class="n">' + (i + 1) + '</span><span class="tx">' + esc(t) + '</span></button>'; }).join('') + '</div><div id="fbw"></div>';
+    c.innerHTML = h;
+    $$('#sents .sent').forEach(function (b) { b.onclick = function () { pickAnswer(+b.getAttribute('data-i')); }; });
+    R.keys = function (e) { if (R.busy) return; var n = parseInt(e.key, 10); if (n >= 1 && n <= item.s.length) pickAnswer(n - 1); };
+    setL('think', 'Hmm… kde je chyba?', '#EEECFF');
+    autoSpeak(item.q + '. ' + item.s.join(' '));
+    if (timed()) startTimer(G.timer, function () { pickAnswer(null); });
+  } else if (G.type === 'word') {
+    var opts = shuffle(item.o.map(function (o) { return o[0]; })); if (item.special) opts.push(item.special);
+    R.opts = opts;
+    h += '<div class="typed slide"><span class="lbl">AI PÍŠE…</span>' + esc(item.pre) + ' <span class="blank" id="blank"><span class="caret"></span></span>' + esc(item.post) + '</div>' +
+      '<span style="font-weight:800;font-size:1.1rem">Ktoré slovo napíše AI ako ďalšie?</span>' +
+      '<div class="words" id="words">' + opts.map(function (o, i) { return '<button type="button" class="word pop' + (o === item.special ? ' special' : '') + '" style="animation-delay:' + (i * 0.07) + 's" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div id="fbw"></div>';
+    c.innerHTML = h;
+    $$('#words .word').forEach(function (b) { b.onclick = function () { wordAnswer(+b.getAttribute('data-i')); }; });
+    R.keys = function (e) { if (R.busy) return; var n = parseInt(e.key, 10); if (n >= 1 && n <= opts.length) wordAnswer(n - 1); };
+    setL('think', R.i === 0 ? 'Ktoré slovo príde?' : pick(['Hádaj so mnou!', 'Hmm… ktoré slovo?', 'Čo by som napísal?']), '#EEECFF');
+    autoSpeak(item.pre + ' … Ktoré slovo napíše AI?');
+  }
+}
+
+function swipe(card) {
+  if (!card) return;
+  var x0 = null, dx = 0, id = null, L = $('.lean.l', card), Rr = $('.lean.r', card);
+  card.addEventListener('pointerdown', function (e) {
+    if (R.busy || e.target.closest('.spk') || e.button > 0) return;
+    x0 = e.clientX; dx = 0; id = e.pointerId; card.classList.add('dragging');
+    try { card.setPointerCapture(id); } catch (x) {}
+  });
+  card.addEventListener('pointermove', function (e) {
+    if (x0 === null || e.pointerId !== id) return;
+    dx = e.clientX - x0;
+    card.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 18) + 'deg)';
+    L.style.opacity = Math.max(0, Math.min(1, -dx / 90)); Rr.style.opacity = Math.max(0, Math.min(1, dx / 90));
+  });
+  var end = function () {
+    if (x0 === null) return;
+    card.classList.remove('dragging'); x0 = null;
+    L.style.opacity = 0; Rr.style.opacity = 0;
+    if (Math.abs(dx) > 90 && !R.busy) {
+      sfx('whoosh');
+      card.style.transition = 'transform .35s ease'; card.style.transform = 'translateX(' + (dx > 0 ? 40 : -40) + 'px) rotate(' + (dx > 0 ? 3 : -3) + 'deg)';
+      binAnswer(dx < 0);
+      setTimeout(function () { card.style.transform = ''; }, 250);
+    } else { card.style.transition = 'transform .3s cubic-bezier(.2,.9,.3,1.4)'; card.style.transform = ''; }
+    setTimeout(function () { card.style.transition = ''; }, 400);
+    dx = 0;
+  };
+  card.addEventListener('pointerup', end); card.addEventListener('pointercancel', end);
+}
+
+function feedback(ok, title, why, extra, gain) {
+  var item = R.items[R.i], last = R.i + 1 >= R.items.length;
+  var h = '<div class="fb ' + (ok ? 'ok' : 'bad') + '" role="status"><span class="t"><span aria-hidden="true">' + (ok ? '🎉' : '💡') + '</span>' + esc(title) + (gain ? ' <span class="mono" style="font-size:1rem">+' + gain + ' b.</span>' : '') + '</span>' +
+    '<span class="w">' + esc(why) + '</span>' + (extra || '') + '</div>' +
+    '<div class="nextrow"><button type="button" class="btn dark" id="nextBtn">' + (last ? 'Výsledok ★' : 'Ďalej →') + '</button></div>';
+  var w = $('#fbw'); w.innerHTML = h;
+  var nb = $('#nextBtn'); nb.onclick = function () { sfx('click'); next(); };
+  setTimeout(function () { nb.focus({ preventScroll: true }); try { w.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' }); } catch (e) {} }, 120);
+  R.keys = function (e) { if (e.key === 'Enter' && document.activeElement !== nb) { e.preventDefault(); next(); } };
+  announce(title + '. ' + why);
+  autoSpeak(title + '. ' + why);
+  if (ok) { sfx('ok'); confettiAt($('#lk'), 26); } else { sfx('bad'); buzz(70); }
+}
+function next() {
+  stopSpeak();
+  if (R.i + 1 < R.items.length) { R.i++; step(); try { $('.stage').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (e) {} }
+  else finish(R.correct, R.items.length, R.points);
+}
+function moodAfter(ok) {
+  if (ok) setL('happy', CHEERS[(R.i + R.streak) % CHEERS.length], '#C9F2D2', 'jump');
+  else setL('oops', OOPS[R.i % OOPS.length], '#FFD6D3', 'shake');
+}
+
+function binAnswer(v) {
+  if (R.busy) return; R.busy = true; stopTimer();
+  var item = R.items[R.i], ok = v === item.a, tb = ok ? timeBonus() : 0, gain = score(ok, tb), timeout = v === null;
+  $$('#choices .choice').forEach(function (b) { b.disabled = true; var isRight = (b.getAttribute('data-a') === '1') === item.a; b.style.opacity = isRight ? '1' : '.35'; if (isRight) b.classList.add('pop'); });
+  var card = $('#qcard'); card.classList.remove('swipe', 'slide'); void card.offsetWidth; card.classList.add(ok ? 'pop' : 'shake');
+  var lab = G.labels[item.a ? 0 : 1];
+  card.insertAdjacentHTML('beforeend', '<span class="stamp" style="background:' + lab.c + '">' + lab.i + ' ' + esc(lab.s) + '</span>');
+  card.style.borderColor = ok ? 'var(--grn)' : 'var(--red)';
+  var hint = $('.swipehint'); if (hint) hint.remove();
+  moodAfter(ok);
+  var title;
+  if (timeout) title = 'Čas vypršal! ' + (G.id === 'podvod' ? (item.a ? 'Bol to podvod.' : 'Toto bolo v poriadku.') : '');
+  else if (G.id === 'podvod') title = (ok ? 'Správne! ' : 'Pozor! ') + (item.a ? 'Je to podvod.' : 'Toto je v poriadku.');
+  else if (G.id === 'robot') title = (ok ? 'Správne! ' : 'Nie celkom. ') + (item.a ? 'Napísal to človek.' : 'Napísala to AI.');
+  else title = (ok ? 'Správne! ' : 'Hmm, zamysli sa. ') + (item.a ? 'Toto môžeš povedať.' : 'Toto si nechaj pre seba.');
+  var extra = (item.signs ? '<span class="s"><b>Znaky: </b>' + esc(item.signs) + '</span>' : '') + (item.src ? '<span class="src">Zdroj: ' + esc(item.src) + '</span>' : '');
+  feedback(ok, title, item.why, extra, gain);
+}
+function pickAnswer(v) {
+  if (R.busy) return; R.busy = true; stopTimer();
+  var item = R.items[R.i], ok = v === item.wrong, tb = ok ? timeBonus() : 0, gain = score(ok, tb);
+  $$('#sents .sent').forEach(function (b, i) {
+    b.disabled = true;
+    if (i === item.wrong) { b.classList.add('wrong', ok ? 'pop' : 'shake'); b.insertAdjacentHTML('beforeend', '<span style="margin-left:auto;font-size:1.3rem" aria-hidden="true">❌</span>'); }
+    else if (i === v) b.classList.add('mine');
+    else b.style.opacity = '.7';
+  });
+  moodAfter(ok);
+  var title = v === null ? 'Čas vypršal! Vymyslená je červená veta.' : (ok ? 'Našiel si ju!' : 'Táto veta bola pravdivá. Vymyslená je tá červená.');
+  feedback(ok, title, item.why, '', gain);
+}
+function wordAnswer(i) {
+  if (R.busy) return; R.busy = true;
+  var item = R.items[R.i], chosen = R.opts[i], topWord = item.special || item.o[0][0], ok = chosen === topWord;
+  var gain = score(ok, 0);
+  $$('#words .word').forEach(function (b, j) { b.disabled = true; b.style.opacity = j === i ? '1' : '.4'; if (j === i) b.classList.add(ok ? 'pop' : 'shake'); });
+  // AI „dopíše“ slovo
+  var blank = $('#blank'), w = item.special ? '???' : item.o[0][0], k = 0;
+  blank.innerHTML = '<span class="caret"></span>';
+  var typeIt = function () {
+    if (!blank.isConnected) return;
+    k++; blank.innerHTML = esc(w.slice(0, k)) + (k < w.length ? '<span class="caret"></span>' : ''); sfx('type');
+    if (k < w.length) setTimeout(typeIt, reduce ? 0 : 70);
+  };
+  setTimeout(typeIt, 250);
+  moodAfter(ok);
+  var rows = item.o.slice().sort(function (a, b) { return b[1] - a[1]; });
+  var bars = '<div class="bars" style="margin-top:.3rem">' + rows.map(function (o, j) {
+    var isTop = !item.special && j === 0, mine = o[0] === chosen;
+    return '<div class="brow' + (isTop ? ' top' : '') + '"><span class="nm">' + esc(o[0]) + (isTop ? '<small>AI vyberie</small>' : '') + (mine ? '<small>tvoj tip</small>' : '') + '</span><span class="tr"><i data-w="' + o[1] + '%"></i></span><span class="pc">' + o[1] + ' %</span></div>';
+  }).join('') + '</div><span class="note">Ako veľmi si AI verí pri každom slove. Čísla sú ukážkové, aby bolo vidieť princíp.</span>';
+  var title = item.special ? (ok ? 'Presne tak! AI to nemôže vedieť.' : 'Pozor – AI tvoju babku nepozná!') : (ok ? 'Trafil si! AI napíše „' + topWord + '“.' : 'AI by napísala „' + topWord + '“.');
+  feedback(ok, title, item.why, bars, gain);
+  setTimeout(function () { $$('.brow .tr i').forEach(function (b, j) { setTimeout(function () { b.style.width = b.getAttribute('data-w'); }, j * 120); }); }, 80);
+}
+
+/* =====================================================================
+   NAUČ ĽUDKA
+   ===================================================================== */
+function naucStep() {
+  var n = R.labels.length, total = R.train.length; R.i = n; R.busy = false;
+  var dd = '';
+  for (var i = 0; i < total; i++) dd += '<i class="' + (i < n ? 'ok' : (i === n ? 'cur' : '')) + '"></i>';
+  $('#pdots').innerHTML = dd; $('#pdots').setAttribute('aria-label', 'Príklad ' + Math.min(n + 1, total) + ' z ' + total);
+  if (n >= total) return naucExam();
+  var it = R.train[n], c = $('#content');
+  var inO = [], inZ = [];
+  R.labels.forEach(function (l, i) { (l === 'Ovocie' ? inO : inZ).push('<span class="' + (l !== R.train[i].ok ? 'x' : '') + '">' + esc(R.train[i].name) + '</span>'); });
+  if (!$('#train')) {
+    c.innerHTML = '<div class="train" id="train"><div id="cardslot" style="min-height:17rem;display:flex;align-items:center;justify-content:center"></div>' +
+      '<span class="hint" id="nhint"></span>' +
+      '<div class="baskets"><button type="button" class="basket" style="--c:#FFD6D3;--c2:#FFB3AE" data-l="Ovocie" aria-label="Košík Ovocie"><span class="bi" aria-hidden="true">🧺</span><strong>Ovocie</strong><span class="got" id="gotO"></span></button>' +
+      '<button type="button" class="basket" style="--c:#C9F2D2;--c2:#9BE5AB" data-l="Zelenina" aria-label="Košík Zelenina"><span class="bi" aria-hidden="true">🧺</span><strong>Zelenina</strong><span class="got" id="gotZ"></span></button></div></div>';
+    $$('.basket').forEach(function (b) { b.onclick = function () { naucLabel(b.getAttribute('data-l'), null); }; });
+  }
+  $('#gotO').innerHTML = inO.join(''); $('#gotZ').innerHTML = inZ.join('');
+  $('#cardslot').innerHTML = '<div class="fcard pop" id="fcard" aria-label="' + esc(it.name) + '">' + food(it, 120) + '<span class="nm">' + esc(it.name) + '</span>' + feats(it) + '</div>';
+  $('#nhint').textContent = n === 0 ? '👆 Potiahni obrázok do košíka – alebo ťukni na košík' : 'Ešte ' + (total - n) + ' ' + plural(total - n, 'príklad', 'príklady', 'príkladov');
+  setL('learn', n === 0 ? 'Nauč ma to!' : (n < 3 ? pick(['Aha! Zapamätám si.', 'Super, ďalší!']) : (n < 5 ? 'Už to skoro viem!' : 'Posledný!')), '#EEECFF');
+  dragCard($('#fcard'));
+  R.keys = function (e) { if (R.busy) return; if (e.key === '1' || e.key === 'ArrowLeft') naucLabel('Ovocie', null); if (e.key === '2' || e.key === 'ArrowRight') naucLabel('Zelenina', null); };
+  autoSpeak(n === 0 ? 'Je ' + it.name + ' ovocie, alebo zelenina? Potiahni obrázok do košíka.' : it.name);
+}
+function dragCard(card) {
+  var sx, sy, id = null, over = null, baskets = $$('.basket');
+  var hit = function (x, y) { var f = null; baskets.forEach(function (b) { var r = b.getBoundingClientRect(); if (x > r.left && x < r.right && y > r.top - 20 && y < r.bottom + 20) f = b; }); return f; };
+  card.addEventListener('pointerdown', function (e) {
+    if (R.busy || e.button > 0) return;
+    sx = e.clientX; sy = e.clientY; id = e.pointerId; card.classList.remove('pop'); card.classList.add('dragging');
+    try { card.setPointerCapture(id); } catch (x) {} sfx('click');
+  });
+  card.addEventListener('pointermove', function (e) {
+    if (id === null || e.pointerId !== id) return;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    card.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (dx / 25) + 'deg) scale(1.04)';
+    var b = hit(e.clientX, e.clientY);
+    if (b !== over) { if (over) over.classList.remove('over'); if (b) { b.classList.add('over'); sfx('tick'); } over = b; }
+  });
+  var up = function () {
+    if (id === null) return; id = null; card.classList.remove('dragging');
+    if (over) { var l = over.getAttribute('data-l'); over.classList.remove('over'); over = null; naucLabel(l, card); }
+    else { card.style.transition = 'transform .35s cubic-bezier(.2,.9,.3,1.4)'; card.style.transform = ''; setTimeout(function () { card.style.transition = ''; }, 380); }
+  };
+  card.addEventListener('pointerup', up); card.addEventListener('pointercancel', up);
+}
+function naucLabel(l, fromCard) {
+  if (R.busy) return; R.busy = true;
+  var card = fromCard || $('#fcard'), basket = $('.basket[data-l="' + l + '"]');
+  sfx('pop');
+  var done = function () { R.labels.push(l); basket.classList.remove('pop'); void basket.offsetWidth; basket.classList.add('pop'); naucStep(); };
+  if (reduce || !card || !card.animate) return done();
+  var cr = card.getBoundingClientRect(), br = basket.getBoundingClientRect();
+  var cur = getComputedStyle(card).transform; cur = cur === 'none' ? '' : cur;
+  var dx = (br.left + br.width / 2) - (cr.left + cr.width / 2), dy = (br.top + br.height / 2) - (cr.top + cr.height / 2);
+  var m = new DOMMatrix(cur || undefined);
+  var anim = card.animate([{ transform: cur || 'none' }, { transform: 'translate(' + (m.e + dx) + 'px,' + (m.f + dy) + 'px) scale(.15) rotate(20deg)', opacity: 0.2 }], { duration: 380, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' });
+  anim.onfinish = done;
+}
+function naucExam() {
+  R.busy = true; R.keys = null;
+  var c = $('#content'), lines = R.train.map(function (t, i) { return '<span style="animation-delay:' + (i * 0.12) + 's">' + esc(t.name) + ' → ' + R.labels[i] + '</span>'; }).join('');
+  c.innerHTML = '<div class="brain"><span class="gear" aria-hidden="true">🧠</span><strong style="font-size:1.3rem">Ľudko sa učí z tvojich príkladov…</strong><div class="lines">' + lines + '</div></div>';
+  setL('think', '…', '#EEECFF');
+  autoSpeak('Ľudko sa učí z tvojich príkladov.');
+  var items = R.test, res = [];
+  wait(1900).then(function () {
+    c.innerHTML = '<strong style="font-size:1.35rem">Skúška! Ľudko háda veci, ktoré ešte nevidel:</strong><div class="exam" id="exam"></div><div id="examEnd"></div>';
+    setL('think', 'Hmm… to poznám?', '#EEECFF');
+    var chain = Promise.resolve();
+    items.forEach(function (t, i) {
+      chain = chain.then(function () {
+        var g = guess(t, R.train, R.labels), ok = g.label === t.ok; res.push(ok);
+        $('#exam').insertAdjacentHTML('beforeend', '<div class="res" id="res' + i + '"><div class="top">' + food(t, 54) + '<strong>' + esc(t.name) + '</strong></div><span class="wait">Ľudko premýšľa…</span></div>');
+        sfx('pop');
+        return wait(850).then(function () {
+          var el = $('#res' + i);
+          el.classList.add(ok ? 'ok' : 'bad');
+          el.innerHTML = '<div class="top">' + food(t, 54) + '<strong>' + esc(t.name) + '</strong></div>' +
+            '<span class="g">Pripomína mu: <b>' + esc(g.like.join(', ')) + '</b></span><span class="g">Dal do košíka: <b>' + g.label + '</b></span>' +
+            '<span class="v">' + (ok ? '✅ Správne!' : '❌ Chyba! Je to ' + t.ok.toLowerCase() + '.') + '</span>';
+          if (ok) { sfx('ok'); setL('happy', pick(['Uhádol som!', 'Juchú!', 'Viem to!']), '#C9F2D2', 'jump'); confettiAt(el, 18); }
+          else { sfx('bad'); setL('oops', 'Ups, popletil som sa!', '#FFD6D3', 'shake'); }
+          return wait(650);
+        });
+      });
+    });
+    chain.then(function () {
+      var cor = res.filter(Boolean).length, mistakes = R.labels.filter(function (l, i) { return l !== R.train[i].ok; }).length;
+      R.correct = cor; R.points = cor * 100; hud(cor ? cor * 100 : 0);
+      var lesson = mistakes > 0
+        ? 'Ľudka si ' + mistakes + '× naučil zle – a on sa to tak naozaj naučil. AI je taká dobrá, aké dobré sú príklady.'
+        : 'Ľudko porovnáva farbu, či je to sladké a či to rastie na strome. Nové veci zaradí podľa toho, čomu sa najviac podobajú. Presne takto sa z príkladov učí aj skutočná AI!';
+      if (mistakes === 0 && cor < 4) lesson += ' Niekedy sa však pomýli aj tak – lebo videl len 6 príkladov. Skutočná AI potrebuje milióny.';
+      $('#examEnd').innerHTML = '<div class="fb ' + (cor >= 3 ? 'ok' : 'bad') + '" style="margin-top:.9rem"><span class="t">Ľudko uhádol ' + cor + ' zo 4</span><span class="w">' + esc(lesson) + '</span></div>' +
+        '<div class="nextrow" style="margin-top:.9rem"><button type="button" class="btn yel" id="nextBtn">Pozrieť hviezdičky ★</button></div>';
+      var nb = $('#nextBtn'); nb.onclick = function () { finish(cor, 4, cor * 100); }; nb.focus({ preventScroll: true });
+      try { nb.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' }); } catch (e) {}
+      autoSpeak('Ľudko uhádol ' + cor + ' zo štyroch. ' + lesson);
+      announce('Ľudko uhádol ' + cor + ' zo 4.');
+    });
+  });
+}
+
+/* =====================================================================
+   SENIORI
+   ===================================================================== */
+function seniorRender() {
+  var c = $('#content'), askedN = Object.keys(R.asked).length;
+  $('#pdots').innerHTML = SENIOR.map(function (_, i) { return '<i class="' + (R.asked[i] ? 'ok' : '') + '"></i>'; }).join('');
+  $('#pdots').setAttribute('aria-label', askedN + ' z 3 otázok');
+  var q = R.q === null ? null : SENIOR[R.q];
+  c.innerHTML = '<strong style="font-size:1.3rem">Ťuknite na otázku a pozrite sa, čo odpovie AI:</strong>' +
+    SENIOR.map(function (x, i) { return '<button type="button" class="sqq' + (R.q === i ? ' cur' : '') + '" data-q="' + i + '"><span>' + esc(x.q) + '</span><span style="flex:none;font-size:1.4rem;color:#E8A400" aria-hidden="true">' + (R.asked[i] ? '★' : '›') + '</span></button>'; }).join('') +
+    (q ? '<div class="chat"><div class="tb" aria-hidden="true"><i style="width:12px;height:12px;border-radius:50%;background:#FF5F57;display:block"></i><i style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;display:block"></i><i style="width:12px;height:12px;border-radius:50%;background:#28C840;display:block"></i></div><div class="in"><div class="me">' + esc(q.q) + '</div><div class="ai" id="ai" aria-live="polite"></div><div id="tip"></div></div></div>' : '') +
+    '<div class="tips3"><div style="background:#C9F2D2"><b>Pýtajte sa normálne,</b> ako by ste sa pýtali človeka.</div><div style="background:#FFF3CF"><b>Dôležité veci si overte</b> – zdravie, peniaze, úrady.</div><div style="background:#FFD6D3"><b>Nikdy nezadávajte</b> heslá, PIN ani čísla kariet.</div></div>' +
+    '<span style="font-size:1.08rem;line-height:1.55;color:var(--ink2)">Vyskúšať môžete napríklad ChatGPT (chatgpt.com), Gemini (gemini.google.com) alebo Copilot (copilot.microsoft.com). Základné verzie sú zadarmo.</span>' +
+    '<div id="sfin"></div>';
+  $$('.sqq', c).forEach(function (b) { b.onclick = function () { seniorAsk(+b.getAttribute('data-q')); }; });
+  if (!q) setL('hi', 'Opýtajte sa ma!', '#EEECFF');
+  seniorFin(!q);
+}
+function seniorFin(show) {
+  var n = Object.keys(R.asked).length, f = $('#sfin'); if (!f) return;
+  f.innerHTML = show && n > 0 ? '<button type="button" class="btn yel pop" id="sDone">Hotovo – pozrieť hviezdičky ★</button>' : '';
+  var d = $('#sDone'); if (d) d.onclick = function () { finish(n, SENIOR.length, n * 100); };
+}
+function seniorAsk(i) {
+  if (R.iv) { clearInterval(R.iv); R.iv = 0; }
+  stopSpeak(); sfx('click');
+  R.q = i; R.asked[i] = true; R.points = Object.keys(R.asked).length * 100; hud(0);
+  seniorRender();
+  var full = SENIOR[i].a, ai = $('#ai'), k = 0;
+  setL('think', 'Píšem odpoveď…', '#EEECFF');
+  try { $('.chat').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' }); } catch (e) {}
+  var done = function () {
+    ai.innerHTML = esc(full);
+    $('#tip').innerHTML = '<div class="pop" style="background:#FFF3CF;border-radius:16px;padding:1rem;font-size:1.15rem;line-height:1.5"><b>Ľudkov tip: </b>' + esc(SENIOR[i].tip) + spkBtnInline(full + ' ' + SENIOR[i].tip) + '</div>';
+    setL('happy', Object.keys(R.asked).length < 3 ? 'Skúste ďalšiu otázku!' : 'Výborne, máte všetky!', '#C9F2D2', 'jump');
+    sfx('ok'); seniorFin(true);
+    autoSpeak(full);
+  };
+  if (reduce) return done();
+  R.iv = setInterval(function () {
+    if (!ai.isConnected) { clearInterval(R.iv); R.iv = 0; return; }
+    k = Math.min(full.length, k + 2);
+    ai.innerHTML = esc(full.slice(0, k)) + '<span class="caret"></span>'; if (k % 6 === 0) sfx('type');
+    if (k >= full.length) { clearInterval(R.iv); R.iv = 0; done(); }
+  }, 32);
+}
+function spkBtnInline(t) { return canSpeak ? ' <button type="button" class="btn sm" data-say="' + esc(t) + '" style="margin-top:.6rem;box-shadow:2px 2px 0 var(--ink)">🔊 Prečítať nahlas</button>' : ''; }
+
+/* =====================================================================
+   KONIEC KOLA
+   ===================================================================== */
+function finish(correct, total, points) {
+  stopTimer(); R.keys = null; R.busy = true;
+  var id = G.id, stars = correct === total ? 3 : (correct / total >= 0.6 ? 2 : (correct > 0 ? 1 : 0));
   var prevBest = save.best[id] || 0, prevStars = save.stars[id] || 0;
-  save.best[id] = Math.max(prevBest, points); save.stars[id] = Math.max(prevStars, stars);
-  writeSave(save);
-  this.setState({ phase: 'end', save: save, result: { stars: stars, correct: correct, total: total, points: points, record: points > prevBest && prevBest > 0, badgeNew: stars === 3 && prevStars < 3 } });
-}
-nauLabel(l) {
-  var r = this.state.r, labels = r.labels.concat([l]);
-  if (labels.length < r.train.length) { this.setState({ r: Object.assign({}, r, { labels: labels }) }); return; }
-  var res = r.test.map(function (t) { return guess(t, r.train, labels) === t.ok; });
-  var c = res.filter(Boolean).length;
-  this.setState({ phase: 'a', r: Object.assign({}, r, { labels: labels, correct: c, points: c * 100, ok: c >= 3 }) });
-}
-ask(i) {
-  var self = this, r = this.state.r;
-  if (this.timer) clearInterval(this.timer);
-  var full = SENIOR[i].a.length, asked = Object.assign({}, r.asked); asked[i] = true;
-  var reduce = false; try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-  this.setState({ r: Object.assign({}, r, { q: i, chars: reduce ? full : 0, asked: asked }) });
-  if (reduce) return;
-  this.timer = setInterval(function () {
-    var rr = self.state.r; if (!rr) return;
-    var c = Math.min(full, rr.chars + 3);
-    if (c >= full) { clearInterval(self.timer); self.timer = 0; }
-    self.setState({ r: Object.assign({}, rr, { chars: c }) });
-  }, 30);
-}
-share(text) {
-  var self = this, url = ''; try { url = window.location.href; } catch (e) {}
-  try {
-    if (navigator.share) { navigator.share({ text: text, url: url }).catch(function () {}); return; }
-    navigator.clipboard.writeText(text + ' ' + url).then(function () { self.setState({ shared: 'Skopírované – pošli to kamarátovi!' }); }, function () {});
-  } catch (e) {}
-}
-renderVals() {
-  var self = this, s = this.state, save = s.save, g = s.game ? this.game() : null, r = s.r;
-  var totalStars = GAMES.reduce(function (a, x) { return a + (save.stars[x.id] || 0); }, 0);
-  var vals = {
-    rootClass: s.big ? 'big' : '', bigLabel: s.big ? 'A−' : 'A+', bigPressed: s.big ? 'true' : 'false',
-    bigBg: s.big ? '#FEBC2E' : 'transparent', bigFg: s.big ? '#17153B' : '#FFFFFF',
-    toggleBig: function () { self.setState({ big: !self.state.big }); },
-    totalStars: totalStars, maxStars: GAMES.length * 3, progressPct: Math.round(totalStars / (GAMES.length * 3) * 100) + '%',
-    isHub: s.screen === 'hub', isPlay: s.screen === 'play',
-    goHub: function () { if (self.timer) { clearInterval(self.timer); self.timer = 0; } self.setState({ screen: 'hub', game: null, r: null }); },
-    groups: GROUPS.map(function (gr, gi) {
-      return { name: gr.name, color: gr.color, games: GAMES.filter(function (x) { return x.group === gi; }).map(function (x) {
-        var st = save.stars[x.id] || 0, ss = starStr(st), best = save.best[x.id] || 0;
-        return { title: x.title, desc: x.desc, tag: x.tag, glyph: x.glyph, starsOn: ss.on, starsOff: ss.off, starsLabel: st + ' z 3 hviezdičiek',
-          bestText: best ? 'Rekord: ' + best + ' b.' : 'Ešte nehrané', cta: st ? (st === 3 ? 'Hrať znova' : 'Získaj viac hviezd') : 'Hrať', open: function () { self.start(x.id); } };
-      }) };
-    }),
-    badges: GAMES.map(function (x) { var got = (save.stars[x.id] || 0) === 3; return { name: BADGES[x.id], glyph: x.glyph, bg: got ? GROUPS[x.group].color : '#EEECFF', opacity: got ? 1 : 0.55, cls: got ? 'glow' : '', state: got ? 'Odomknutý' : 'Získaj 3 ★ v hre ' + x.title }; })
+  save.best[id] = Math.max(prevBest, points); save.stars[id] = Math.max(prevStars, stars); store(STORE, save);
+  var record = points > prevBest && prevBest > 0, badgeNew = stars === 3 && prevStars < 3;
+  var gi = GAMES.indexOf(G), nx = GAMES[(gi + 1) % GAMES.length];
+  if (G.aud === 'kids') { var kids = GAMES.filter(function (g) { return g.aud === 'kids'; }); var ki = kids.indexOf(G); nx = kids[ki + 1] || GAMES.filter(function (g) { return g.aud === 'trap'; })[0]; }
+  var titles = ['Skús to ešte raz!', 'Dobrý začiatok!', 'Skvelá práca!', 'Perfektné!'];
+  var sub = G.type === 'senior' ? 'Vyskúšali ste ' + correct + ' z ' + total + ' otázok' : (G.type === 'nauc' ? 'Ľudko uhádol ' + correct + ' zo ' + total : 'Správne ' + correct + ' z ' + total);
+  $('#pdots').innerHTML = ''; $('#streak').hidden = true;
+  var h = '<div class="end"><div class="bigstars" aria-label="' + stars + ' z 3 hviezdičiek"><span>★</span><span>★</span><span>★</span></div>' +
+    '<span class="tt">' + titles[stars] + '</span><span style="font-size:1.1rem;color:var(--ink2)">' + sub + '</span>' +
+    '<span class="score"><span id="cnt">0</span> b.</span>' +
+    (record ? '<span class="flag pop glow" style="animation-delay:1.1s">🏆 Nový rekord!</span>' : '') +
+    (badgeNew ? '<span class="newbadge pop" style="animation-delay:1.3s"><span class="ico glow" style="background:' + G.light + '" aria-hidden="true">' + G.badgeIco + '</span>Nový odznak: „' + esc(G.badge) + '“!</span>' : '') +
+    '<div class="lesson slide" style="animation-delay:.8s"><b>💡 Zapamätaj si: </b>' + esc(G.lesson) + '</div>' +
+    '<div class="talk slide" style="animation-delay:1s"><b>💬 POROZPRÁVAJTE SA</b>' + esc(G.talk) + '</div>' +
+    '<div class="endbtns"><button type="button" class="btn yel" id="again">↻ Hrať znova</button>' +
+    '<button type="button" class="btn" id="nextG">Ďalej: ' + nx.emoji + ' ' + esc(nx.title) + ' →</button>' +
+    '<button type="button" class="btn lil" id="share">📣 Vyzvi kamaráta</button></div></div>';
+  $('#content').innerHTML = h;
+  setL('star', stars === 3 ? 'Si hviezda!' : (stars ? 'Ide ti to!' : 'Skúsime znova?'), '#FFF3CF', 'jump');
+  // hviezdy postupne so zvukom
+  $$('.bigstars span').forEach(function (s, i) {
+    if (i < stars) setTimeout(function () { s.classList.add('on'); s.style.animationDelay = '0s'; sfx('star', i); if (i === stars - 1 && stars >= 2) { sfx('win'); confetti(stars === 3 ? 160 : 70); } }, reduce ? 0 : 350 + i * 330);
+  });
+  // počítadlo bodov
+  var cnt = $('#cnt'), t0 = performance.now(), dur = reduce ? 1 : 900;
+  (function up(now) { var f = Math.min(1, (now - t0) / dur); cnt.textContent = Math.round(points * (1 - Math.pow(1 - f, 3))); if (f < 1 && cnt.isConnected) requestAnimationFrame(up); })(t0);
+  $('#again').onclick = function () { sfx('pop'); start(G); };
+  $('#nextG').onclick = function () { sfx('click'); go(nx.id); };
+  $('#share').onclick = function () {
+    var txt = 'Získal(a) som ' + points + ' bodov v hre „' + G.title + '“ na Ľudsky o AI. Prekonáš ma?', url = location.href.split('#')[0] + '#' + G.id, b = this;
+    try {
+      if (navigator.share) { navigator.share({ text: txt, url: url }).catch(function () {}); return; }
+      navigator.clipboard.writeText(txt + ' ' + url).then(function () { b.textContent = '✓ Skopírované – pošli to ďalej!'; }, function () {});
+    } catch (e) {}
   };
-  // defaults for play screen
-  var none = { on: false };
-  vals.cur = g ? { title: g.title, tag: g.tag } : { title: '', tag: '' };
-  vals.hud = { points: 0, gain: 0, showGain: false, streak: 0, showStreak: false, showDots: false, dots: [], dotsLabel: '' };
-  vals.bin = none; vals.pick = none; vals.nc = { train: false, exam: false }; vals.sn = none; vals.fb = none; vals.end = none;
-  vals.asking = false; vals.showTimer = false; vals.timerDur = '0s';
-  vals.fx = { confetti: false, pieces: PIECES };
-  vals.ludko = { smile: 1, o: 0, flat: 0, brow: 0, cheeks: 1, bOk: 0, bPozor: 0, bHmm: 0, bStar: 0, say: 'Ahoj!', bubble: '#EEECFF', cls: '' };
-  if (!g || !r) return vals;
-
-  var face = function (kind, say, bubble) {
-    var f = { smile: 0, o: 0, flat: 0, brow: 0, cheeks: 0, bOk: 0, bPozor: 0, bHmm: 0, bStar: 0, say: say, bubble: bubble, cls: '' };
-    if (kind === 'think') { f.flat = 1; f.brow = 1; f.bHmm = 1; }
-    if (kind === 'happy') { f.smile = 1; f.cheeks = 1; f.bOk = 1; f.cls = 'pop'; }
-    if (kind === 'oops') { f.o = 1; f.bPozor = 1; f.cls = 'shake'; }
-    if (kind === 'star') { f.smile = 1; f.cheeks = 1; f.bStar = 1; f.cls = 'bob'; }
-    if (kind === 'learn') { f.smile = 1; f.cheeks = 1; f.bHmm = 1; }
-    return f;
-  };
-
-  vals.hud.points = r.points || 0;
-  vals.hud.gain = r.gain || 0;
-  vals.hud.showGain = s.phase === 'a' && r.gain > 0;
-  vals.hud.streak = r.streak || 0;
-  vals.hud.showStreak = (r.streak || 0) >= 2 && s.phase !== 'end';
-
-  if (s.phase === 'end') {
-    var res = s.result, stars = [0, 1, 2].map(function (i) { return { delay: (0.2 + i * 0.25) + 's', color: i < res.stars ? '#FEBC2E' : '#D6D4EA' }; });
-    var gi = GAMES.indexOf(g), nx = GAMES[(gi + 1) % GAMES.length];
-    var titles = ['Skús to ešte raz!', 'Dobrý začiatok!', 'Skvelá práca!', 'Perfektné!'];
-    var lessons = {
-      nauc: 'AI sa učí z príkladov. Keď sú príklady zlé, aj AI sa naučí zle.',
-      prezradit: 'Ľudkovo pravidlo: AI povedz len to, čo by si pokojne povedal aj cudziemu človeku.',
-      robot: 'Rozoznať text od AI je často veľmi ťažké. Preto je dôležité vedieť, odkiaľ text pochádza.',
-      podvod: 'Znaky podvodu: naliehanie, peniaze, neznáme číslo a sľuby, ktoré sú príliš dobré. Ak ťa okradli, volaj políciu na 158.',
-      halu: 'AI píše plynule aj vtedy, keď sa mýli. Dôležité fakty si over a pýtaj sa: „Z akého zdroja to máš?“',
-      senior: 'Teraz už vieš, ako vyzerá rozhovor s AI. Skús si to naozaj – a dôležité veci si vždy over.'
-    };
-    vals.end = { on: true, stars: stars, starsLabel: res.stars + ' z 3 hviezdičiek', title: titles[res.stars], sub: g.type === 'senior' ? 'Vyskúšal si ' + res.correct + ' z ' + res.total + ' otázok' : (g.type === 'nauc' ? 'Ľudko uhádol ' + res.correct + ' z ' + res.total : 'Správne ' + res.correct + ' z ' + res.total),
-      points: res.points, record: res.record, badgeNew: res.badgeNew, badgeName: '„' + BADGES[g.id] + '“', badgeGlyph: g.glyph, badgeBg: GROUPS[g.group].color,
-      lesson: lessons[g.id], again: function () { self.start(g.id); }, nextGame: function () { self.start(nx.id); }, nextTitle: nx.title,
-      shareLabel: s.shared || 'Vyzvi kamaráta',
-      share: function () { self.share('Získal som ' + res.points + ' bodov v hre „' + g.title + '“ na Ľudsky o AI. Prekonáš ma?'); } };
-    vals.ludko = face('star', res.stars === 3 ? 'Si hviezda!' : 'Ide ti to!', '#FFF3CF');
-    vals.fx.confetti = res.stars >= 2;
-    return vals;
-  }
-
-  if (g.type === 'bin' || g.type === 'pick') {
-    var pool = POOLS[g.id], item = pool[r.items[r.i]];
-    vals.hud.showDots = true; vals.hud.dotsLabel = 'Otázka ' + (r.i + 1) + ' z ' + r.items.length;
-    vals.hud.dots = r.items.map(function (_, i) { return { bg: i < r.i ? '#28C840' : (i === r.i ? '#FEBC2E' : '#FFFFFF') }; });
-    vals.asking = s.phase === 'q';
-    vals.showTimer = !!g.timer && s.phase === 'q'; vals.timerDur = g.timer + 's';
-    if (g.type === 'bin') {
-      vals.bin = { on: true, kind: item.kind, text: item.text, labelA: g.labels[0], labelB: g.labels[1], colA: g.cols[0], colB: g.cols[1],
-        cardCls: s.phase === 'a' ? (r.ok ? 'pop' : 'shake') : 'slide',
-        pickA: function () { self.answer(true); }, pickB: function () { self.answer(false); } };
-    } else {
-      vals.pick = { on: true, q: item.q, sentences: item.s.map(function (t, i) {
-        var ans = s.phase === 'a', isW = i === item.wrong, picked = i === r.pick;
-        return { text: t, bg: ans && isW ? '#FFD6D3' : (ans && picked ? '#EEECFF' : '#FFFFFF'), shadow: ans && isW ? '5px 5px 0 #FF5F57' : '4px 4px 0 #17153B',
-          cls: ans && isW ? (r.ok ? 'pop' : 'shake') : '', choose: function () { self.answer(i); } };
-      }) };
-    }
-    if (s.phase === 'q') vals.ludko = face('think', g.type === 'pick' ? 'Hmm… kde je chyba?' : (r.streak >= 2 ? 'Séria! Pokračuj!' : 'Čo myslíš?'), '#EEECFF');
-    else {
-      vals.ludko = r.ok ? face('happy', CHEERS[(r.i + r.streak) % CHEERS.length], '#C9F2D2') : face('oops', OOPS[r.i % OOPS.length], '#FFD6D3');
-      vals.fx.confetti = r.ok;
-      var title;
-      if (g.id === 'podvod') title = (r.ok ? 'Správne! ' : 'Pozor! ') + (item.a ? 'Je to podvod.' : 'Toto je v poriadku.');
-      else if (g.id === 'robot') title = (r.ok ? 'Správne! ' : 'Nie celkom. ') + (item.a ? 'Napísal to človek.' : 'Napísala to AI.');
-      else if (g.id === 'prezradit') title = (r.ok ? 'Správne! ' : 'Hmm, zamysli sa. ') + (item.a ? 'Toto môžeš povedať.' : 'Toto si nechaj pre seba.');
-      else title = r.ok ? 'Našiel si ju!' : 'Táto veta bola pravdivá. Vymyslená je tá červená.';
-      vals.fb = { on: true, bg: r.ok ? '#C9F2D2' : '#FFD6D3', title: title + (r.ok ? '  +' + r.gain + ' b.' : ''), why: item.why,
-        hasSigns: !!item.signs, signs: item.signs || '', hasSrc: !!item.src, src: item.src || '',
-        nextLabel: r.i + 1 < r.items.length ? 'Ďalej →' : 'Výsledok →', next: function () { self.next(); } };
-    }
-    return vals;
-  }
-
-  if (g.type === 'nauc') {
-    var total = r.train.length, n = r.labels.length;
-    vals.hud.showDots = true; vals.hud.dotsLabel = 'Príklad ' + Math.min(n + 1, total) + ' z ' + total;
-    vals.hud.dots = r.train.map(function (_, i) { return { bg: i < n ? '#28C840' : (i === n ? '#FEBC2E' : '#FFFFFF') }; });
-    if (s.phase === 'q') {
-      var it = r.train[n], over = s.over || null;
-      var inO = [], inZ = [];
-      r.labels.forEach(function (l, i) { (l === 'Ovocie' ? inO : inZ).push(r.train[i].name); });
-      var drop = function (l) { return function (e) { try { e.preventDefault(); } catch (x) {} self.setState({ over: null }); self.nauLabel(l); }; };
-      var dragOver = function (l) { return function (e) { try { e.preventDefault(); } catch (x) {} if (self.state.over !== l) self.setState({ over: l }); }; };
-      vals.nc = { train: true, exam: false, name: it.name, p: pic(it), cardCls: n % 2 ? 'pop2' : 'pop',
-        hint: n === 0 ? 'Potiahni obrázok do správneho košíka (alebo ťukni na košík)' : 'Ďalší! Ešte ' + (total - n) + (total - n === 1 ? ' príklad' : (total - n < 5 ? ' príklady' : ' príkladov')),
-        inO: inO, inZ: inZ,
-        bgO: over === 'Ovocie' ? '#FFB3AE' : '#FFD6D3', bgZ: over === 'Zelenina' ? '#9BE5AB' : '#C9F2D2',
-        borderO: over === 'Ovocie' ? 'dashed' : 'solid', borderZ: over === 'Zelenina' ? 'dashed' : 'solid',
-        dragStart: function (e) { try { e.dataTransfer.setData('text/plain', it.name); e.dataTransfer.effectAllowed = 'move'; } catch (x) {} },
-        overO: dragOver('Ovocie'), overZ: dragOver('Zelenina'), leave: function () { self.setState({ over: null }); },
-        dropO: drop('Ovocie'), dropZ: drop('Zelenina'),
-        ovocie: function () { self.nauLabel('Ovocie'); }, zelenina: function () { self.nauLabel('Zelenina'); } };
-      vals.ludko = face('learn', n === 0 ? 'Nauč ma to!' : (n < 3 ? 'Aha, zapamätám si!' : 'Už to skoro viem!'), '#EEECFF');
-    } else {
-      var mistakes = r.labels.filter(function (l, i) { return l !== r.train[i].ok; }).length;
-      var results = r.test.map(function (t, i) { var gu = guess(t, r.train, r.labels), ok = gu === t.ok;
-        return { name: t.name, p: pic(t), guess: gu, verdict: ok ? 'Správne!' : 'Chyba! Je to ' + t.ok.toLowerCase() + '.', bg: ok ? '#C9F2D2' : '#FFD6D3', delay: (0.15 + i * 0.35) + 's' }; });
-      vals.nc = { train: false, exam: true, results: results,
-        lesson: mistakes > 0 ? 'Ľudka si ' + mistakes + '× naučil zle – a on sa to tak naozaj naučil. AI je taká dobrá, aké dobré sú príklady.' : 'Ľudko porovnáva farbu, sladkosť a či to rastie na strome. Takto sa z príkladov učí aj skutočná AI.',
-        finish: function () { self.finish(r.correct, r.test.length, r.points); } };
-      vals.ludko = r.ok ? face('happy', 'Naučil si ma dobre!', '#C9F2D2') : face('oops', 'Ups, popletil som sa!', '#FFD6D3');
-      vals.fx.confetti = r.correct === 4;
-    }
-    return vals;
-  }
-
-  if (g.type === 'senior') {
-    var sq = r.q === null ? null : SENIOR[r.q], askedN = Object.keys(r.asked).length;
-    vals.sn = { on: true, has: !!sq, q: sq ? sq.q : '', typed: sq ? sq.a.slice(0, r.chars) : '', typing: !!sq && r.chars < sq.a.length, done: !!sq && r.chars >= sq.a.length, tip: sq ? sq.tip : '',
-      canFinish: askedN > 0 && (!sq || r.chars >= sq.a.length),
-      finish: function () { self.finish(askedN, SENIOR.length, askedN * 100); },
-      questions: SENIOR.map(function (x, i) { return { text: x.q, bg: r.q === i ? '#FEBC2E' : '#FFFFFF', mark: r.asked[i] ? '★' : '', ask: function () { self.ask(i); } }; }) };
-    vals.hud.showDots = true; vals.hud.dotsLabel = askedN + ' z 3 otázok';
-    vals.hud.dots = SENIOR.map(function (_, i) { return { bg: r.asked[i] ? '#28C840' : '#FFFFFF' }; });
-    vals.ludko = sq ? (r.chars < sq.a.length ? face('think', 'Píšem odpoveď…', '#EEECFF') : face('happy', 'Skús ďalšiu otázku!', '#C9F2D2')) : face('learn', 'Opýtaj sa ma!', '#EEECFF');
-    return vals;
-  }
-  return vals;
+  updStars(stars > prevStars);
+  try { $('.stage').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (e) {}
+  setTimeout(function () { var a = $('#again'); if (a) a.focus({ preventScroll: true }); }, 300);
+  announce(titles[stars] + ' ' + sub + '. ' + points + ' bodov.');
+  autoSpeak(titles[stars] + ' ' + sub + '. Zapamätaj si: ' + G.lesson);
 }
-}
-mountPage(Component);
+
+/* štart */
+updStars();
+route();
+})();
 </script>
 </body>
 </html>
