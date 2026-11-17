@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Začíname s AI – pokojne, krok za krokom – Ľudsky o AI</title>
+<meta name="description" content="Máš z AI zmiešané pocity? Začni pokojne: 7 malých krokov na 5 minút denne, prvé otázky na skopírovanie, pravidlá bezpečia a slovníček bez strachu.">
+<meta property="og:title" content="Začíname s AI – pokojne, krok za krokom">
+<meta property="og:description" content="Nemusíš vedieť všetko. 7 malých krokov, prvé prompty a slovníček bez strachu. Po slovensky.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/zaciatok.html">
+<meta name="theme-color" content="#17153B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+.feel{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.9rem}
+.fbtn{display:flex;align-items:center;gap:.8rem;text-align:left;min-height:4.6rem;padding:.8rem 1.1rem;border:3px solid var(--ink);border-radius:20px;background:#fff;font-weight:800;font-size:1.08rem;cursor:pointer;box-shadow:5px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s,background .2s}
+.fbtn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.fbtn .e{font-size:2rem}
+.fbtn[aria-pressed="true"]{background:var(--yel)}
+.fans{margin-top:1.4rem;background:#fff;border:3px solid var(--ink);border-radius:24px;padding:1.4rem 1.5rem;display:flex;gap:1.2rem;align-items:flex-start;animation:slideUp .45s ease both}
+.fans .lk{flex:none;width:90px}
+.fans h3{margin:0 0 .4rem;font-size:1.35rem}
+.fans p{margin:0 0 .8rem;font-size:1.08rem;line-height:1.6;color:var(--ink2)}
+@media (max-width:600px){.fans{flex-direction:column}.fans .lk{width:70px}}
+.steps{display:flex;flex-direction:column;gap:1rem}
+.step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;background:#fff;border:3px solid var(--ink);border-radius:22px;padding:1.1rem 1.2rem;box-shadow:5px 5px 0 var(--ink);transition:background .3s}
+.step.done{background:var(--grn2)}
+.chk{width:3rem;height:3rem;border-radius:14px;border:3px solid var(--ink);background:#fff;font-size:1.4rem;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.chk[aria-checked="true"]{background:var(--grn);transform:rotate(-6deg) scale(1.05)}
+.step h3{margin:.2rem 0 .3rem;font-size:1.2rem}
+.step .day{font-family:"JetBrains Mono",monospace;font-size:.75rem;font-weight:700;color:var(--mut);letter-spacing:.06em}
+.step p{margin:0 0 .6rem;line-height:1.55;color:var(--ink2)}
+.prompt{position:relative;background:var(--bg);border:2px dashed var(--ink);border-radius:14px;padding:.8rem 1rem;font-weight:600;line-height:1.5;margin:.3rem 0 .4rem}
+.prompt .btn{margin-top:.6rem}
+.pbar{position:sticky;top:4.6rem;z-index:5;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:.4rem .5rem .4rem 1rem;display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;box-shadow:4px 4px 0 var(--ink)}
+.pbar .tr{flex:1;height:.9rem;border:2px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--bg)}
+.pbar .tr i{display:block;height:100%;width:0;background:var(--grn);transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+.pbar b{white-space:nowrap}
+.yay{display:none;margin-top:1rem;background:var(--yel2);border:3px solid var(--ink);border-radius:20px;padding:1.1rem 1.3rem;font-weight:700;line-height:1.55;animation:popIn .5s both}
+.yay.on{display:block}
+.asst{display:flex;flex-direction:column;gap:.5rem}
+.asst .h{display:flex;align-items:center;gap:.6rem}
+.asst .h .dot{width:2.6rem;height:2.6rem;border-radius:12px;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:900}
+.asst p{margin:0;color:var(--ink2);line-height:1.5}
+.rules{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.rule{border-radius:20px;padding:1.2rem;border:3px solid var(--ink);display:flex;flex-direction:column;gap:.4rem}
+.rule .n{font-size:2rem}
+.rule b{font-size:1.1rem}
+.rule span{line-height:1.5}
+details.term{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:0;margin-bottom:.7rem;overflow:hidden}
+details.term summary{cursor:pointer;padding:1rem 1.2rem;font-weight:800;font-size:1.08rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary:after{content:"+";font-size:1.5rem;font-weight:900;transition:transform .2s}
+details.term[open] summary:after{transform:rotate(45deg)}
+details.term div{padding:0 1.2rem 1.1rem;line-height:1.6;color:var(--ink2)}
+.stat{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:1.3rem;display:flex;flex-direction:column;gap:.6rem;box-shadow:5px 5px 0 var(--ink)}
+.stat b.big{font-size:1.5rem;line-height:1.2}
+.split{display:grid;gap:2rem;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.next{display:flex;flex-direction:column;gap:.6rem;text-decoration:none;padding:1.4rem}
+.next .e{font-size:2.4rem}
+.next b{font-size:1.25rem}
+.next span{color:var(--ink2);line-height:1.5}
+</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main id="obsah">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="txt">
+      <span class="kicker">Začíname s AI · pokojne</span>
+      <h1>Máš z AI zmiešané pocity? To je úplne v poriadku.</h1>
+      <p class="lead">Nemusíš vedieť všetko a nemusíš to stihnúť do piatku. Ukážeme ti, čo AI je, čo nie je a ako ju vyskúšať bezpečne – <b>5 minút denne, jeden malý krok</b>.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.4rem">
+        <a class="btn yel" href="#7dni">Prvý krok →</a>
+        <a class="btn" href="#pribeh">▶ 30-sekundový príbeh</a>
+      </div>
+    </div>
+    <div class="art bob" data-ludko="hi" data-w="250"></div>
+  </div>
+</section>
+
+<section class="sec" id="pribeh" style="scroll-margin-top:4rem">
+  <div class="wrap split">
+    <div><div data-pribeh></div></div>
+    <div style="display:flex;flex-direction:column;gap:1.2rem">
+      <h2>Poznáš to?</h2>
+      <p style="margin:0;font-size:1.1rem;line-height:1.6;color:var(--ink2)">Každý deň nový „prevratný“ model, kurzy „na poslednú chvíľu“ a titulky o tom, koho AI nahradí. Nečudo, že z toho má veľa ľudí ťažkú hlavu.</p>
+      <div class="stat">
+        <span class="kicker" style="font-size:.75rem">Nie si v tom sám</span>
+        <b class="big">Vo väčšine krajín viac ľudí čaká, že AI pracovných miest ubudne, než pribudne.</b>
+        <span style="font-size:.88rem;color:var(--mut)">Prieskum Pew Research Center, 37 krajín, február – jún 2026 (<a href="https://www.euronews.com/next/2026/09/19/fear-of-ai-job-losses-now-outweighs-hope-of-new-jobs-study-finds">Euronews, 19. 9. 2026</a>).</span>
+      </div>
+      <p style="margin:0;line-height:1.6;color:var(--ink2)">Nebudeme ťa presviedčať, že sa nič nedeje. Ale panika nepomáha. Pomáha vedieť, čo sa naozaj zmenilo – a vyskúšať si to na vlastnej koži, v pokoji.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap">
+    <span class="kicker">Začnime od teba</span>
+    <h2>Čo cítiš, keď počuješ „AI“?</h2>
+    <p class="lead">Ťukni na to, čo ti je najbližšie. Ľudko ti odpovie a navrhne jeden konkrétny krok.</p>
+    <div class="feel" role="group" aria-label="Vyber pocit">
+      <button type="button" class="fbtn" data-feel="praca" aria-pressed="false"><span class="e" aria-hidden="true">💼</span>Bojím sa o svoju prácu</button>
+      <button type="button" class="fbtn" data-feel="vela" aria-pressed="false"><span class="e" aria-hidden="true">🌊</span>Je toho na mňa priveľa</button>
+      <button type="button" class="fbtn" data-feel="pokazim" aria-pressed="false"><span class="e" aria-hidden="true">😬</span>Bojím sa, že niečo pokazím</button>
+      <button type="button" class="fbtn" data-feel="nechapem" aria-pressed="false"><span class="e" aria-hidden="true">🤔</span>Vôbec nechápem, o čo ide</button>
+    </div>
+    <div id="fans" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="7dni" style="scroll-margin-top:4rem">
+  <div class="wrap">
+    <span class="kicker">7 dní · 5 minút denne</span>
+    <h2>7 malých krokov k AI</h2>
+    <p class="lead">Jeden krok denne. Kedykoľvek prestaň, kedykoľvek pokračuj – odškrtnuté kroky si stránka zapamätá v tvojom prehliadači.</p>
+    <div class="pbar" aria-live="polite"><b id="pcount">0 zo 7</b><span class="tr" aria-hidden="true"><i id="pfill"></i></span></div>
+    <div class="steps" id="steps"></div>
+    <div class="yay" id="yay">🎉 <b>Máš za sebou všetkých 7 krokov!</b> Už vieš s AI pracovať lepšie než väčšina ľudí okolo teba – a hlavne vieš, kedy jej neveriť. Novinky ti odteraz radi nosíme na <a href="https://www.instagram.com/ludskyoai/">Instagrame @ludskyoai</a>.</div>
+  </div>
+</section>
+
+<section class="sec lil">
+  <div class="wrap">
+    <span class="kicker">Krok 1 podrobnejšie</span>
+    <h2>Ktorého asistenta si vybrať?</h2>
+    <p class="lead">Stačí jeden. Všetky tieto majú bezplatnú verziu a ovládajú slovenčinu. Ak sa nevieš rozhodnúť, vyber ten, ktorého firmu už používaš (napríklad Google alebo Microsoft).</p>
+    <div class="grid">
+      <div class="card asst reveal"><div class="h"><span class="dot" style="background:#C9F2D2">G</span><b style="font-size:1.2rem">ChatGPT</b></div><p>Od firmy OpenAI. Najznámejší, veľa návodov na internete. <span class="mono" style="font-size:.85rem">chatgpt.com</span></p></div>
+      <div class="card asst reveal"><div class="h"><span class="dot" style="background:#EEECFF">✦</span><b style="font-size:1.2rem">Gemini</b></div><p>Od Googlu. Hodí sa, ak používaš Gmail, Android alebo Dokumenty Google. <span class="mono" style="font-size:.85rem">gemini.google.com</span></p></div>
+      <div class="card asst reveal"><div class="h"><span class="dot" style="background:#FFF3CF">C</span><b style="font-size:1.2rem">Copilot</b></div><p>Od Microsoftu. Je vo Windows a v Office (Word, Outlook). <span class="mono" style="font-size:.85rem">copilot.microsoft.com</span></p></div>
+      <div class="card asst reveal"><div class="h"><span class="dot" style="background:#FFD6D3">A</span><b style="font-size:1.2rem">Claude</b></div><p>Od firmy Anthropic. Dobrý na dlhšie texty a vysvetľovanie. <span class="mono" style="font-size:.85rem">claude.ai</span></p></div>
+    </div>
+    <p style="margin:1.4rem 0 0;font-size:.92rem;color:var(--mut)">Vekové hranice sa líšia – väčšina služieb je pre dospelých alebo pre tínedžerov so súhlasom rodiča. Pozri si podmienky konkrétnej služby. Poradie je abecedné podľa firmy, nič neodporúčame za peniaze.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <span class="kicker">Bezpečne</span>
+    <h2>5 pravidiel, ktoré stačí poznať</h2>
+    <p class="lead">Nemusíš rozumieť technike. Tieto pravidlá ťa ochránia pri akomkoľvek AI nástroji.</p>
+    <div class="rules">
+      <div class="rule reveal" style="background:var(--red2)"><span class="n" aria-hidden="true">🔒</span><b>Nič osobné</b><span>Heslá, PIN, čísla kariet, rodné číslo ani zdravotné záznamy do chatu nepíš.</span></div>
+      <div class="rule reveal" style="background:var(--yel2)"><span class="n" aria-hidden="true">🔎</span><b>Dôležité si over</b><span>Pri zdraví, peniazoch a úradoch si odpoveď over u odborníka alebo na oficiálnej stránke.</span></div>
+      <div class="rule reveal" style="background:var(--grn2)"><span class="n" aria-hidden="true">🧠</span><b>Rozhoduješ ty</b><span>AI navrhuje, ty rozhoduješ. Za to, čo pošleš alebo zverejníš, zodpovedáš ty.</span></div>
+      <div class="rule reveal" style="background:var(--lil2)"><span class="n" aria-hidden="true">📞</span><b>Hlas môže klamať</b><span>AI vie napodobniť hlas aj tvár. Pri prosbe o peniaze vždy zavolaj späť na známe číslo.</span></div>
+      <div class="rule reveal" style="background:#FFE3C7"><span class="n" aria-hidden="true">⏸️</span><b>Žiadny zhon</b><span>„Posledná šanca“ a „musíš hneď“ sú znaky predaja alebo podvodu, nie dobrej rady.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap" style="max-width:860px">
+    <span class="kicker">Slovníček bez strachu</span>
+    <h2>Slová, ktoré budeš počuť</h2>
+    <p class="lead">Každé jednou-dvomi vetami. Ťukni a rozbalí sa.</p>
+    <div id="terms"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <span class="kicker">Kam ďalej</span>
+    <h2>Ďalší krok si vyber sám</h2>
+    <div class="grid" style="margin-top:1.4rem">
+      <a class="card lift next" href="https://www.instagram.com/ludskyoai/"><span class="e" aria-hidden="true">📸</span><b>Novinky bez šumu</b><span>Jedna overená novinka denne, so zdrojom a dátumom. Sleduj @ludskyoai.</span></a>
+      <a class="card lift next" href="hry.html#senior"><span class="e" aria-hidden="true">☕</span><b>Vyskúšaj si rozhovor</b><span>Hra Prvý rozhovor s AI – bez registrácie, s veľkým písmom.</span></a>
+      <a class="card lift next" href="hry.html#podvod"><span class="e" aria-hidden="true">🚨</span><b>Spoznaj podvod</b><span>Falošné hlasy, videá a SMS. Hra na pár minút, ktorá môže ušetriť peniaze.</span></a>
+      <a class="card lift next" href="./#zadarmo"><span class="e" aria-hidden="true">📄</span><b>20 promptov zadarmo</b><span>PDF s overenými otázkami po slovensky. Napíš do komentára PROMPTY.</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/ui.js"></script>
+<script src="assets/pribeh.js"></script>
+<script>
+(function () {
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var FEEL = {
+    praca: { t: 'Tvoja obava je rozumná – a nie si s ňou sám.', p: 'AI zatiaľ najčastejšie mení jednotlivé úlohy v práci: písanie, zhrnutia, hľadanie informácií. Najviac ti pomôže zistiť, ktoré úlohy pri tvojej práci zvládne a ktoré nie. Potom o tom rozhoduješ ty, nie titulky.', a: '#krok7', l: 'Krok 7: AI pri mojej práci →' },
+    vela: { t: 'Nemusíš sledovať všetko.', p: 'Väčšina „prevratných“ správ sa ťa reálne netýka. Ignoruj titulky so slovami MUSÍŠ, ŠOKUJÚCE a POSLEDNÁ ŠANCA. Úplne stačí jedna overená novinka denne – a my ti ju radi vyberieme.', a: 'https://www.instagram.com/ludskyoai/', l: 'Sledovať @ludskyoai →' },
+    pokazim: { t: 'Nič nepokazíš. Naozaj.', p: 'Najhoršie, čo sa môže stať, je zlá alebo zvláštna odpoveď – a tú môžeš jednoducho ignorovať a opýtať sa inak. Jediné, na čo si daj pozor: nepíš do chatu osobné údaje, heslá ani čísla kariet.', a: '#krok2', l: 'Krok 2: Prvá otázka →' },
+    nechapem: { t: 'Vysvetlíme to jednou vetou.', p: 'AI (umelá inteligencia) je počítačový program, ktorý sa naučil z obrovského množstva textov, a preto vie odpovedať na otázky, písať a prekladať. Nerozmýšľa však ako človek a niekedy sa mýli.', a: 'hry.html#senior', l: 'Vyskúšať si rozhovor s AI →' }
+  };
+  var fans = document.getElementById('fans');
+  Array.prototype.forEach.call(document.querySelectorAll('.fbtn'), function (b) {
+    b.onclick = function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.fbtn'), function (x) { x.setAttribute('aria-pressed', x === b); });
+      var f = FEEL[b.getAttribute('data-feel')];
+      fans.innerHTML = '<div class="fans"><div class="lk">' + window.ludkoSVG('hi', 90) + '</div><div><h3>' + esc(f.t) + '</h3><p>' + esc(f.p) + '</p><a class="btn dark sm" href="' + f.a + '">' + esc(f.l) + '</a></div></div>';
+    };
+  });
+
+  var STEPS = [
+    { d: 'DEŇ 1', h: 'Vyber si jedného asistenta', p: 'Otvor ChatGPT, Gemini, Copilot alebo Claude a prihlás sa. Stačí jeden – ostatné neskôr, alebo nikdy. Nižšie na stránke nájdeš krátke porovnanie.', tip: 'Tip: na počítači je písanie pohodlnejšie, na mobile zas môžeš rozprávať hlasom.' },
+    { d: 'DEŇ 2', h: 'Prvá otázka z bežného života', p: 'Začni niečím, čo nič nestojí. Skopíruj otázku, vlož ju do chatu a uprav podľa seba.', q: 'Mám doma zemiaky, vajcia a cibuľu. Navrhni mi jednoduchú večeru do 20 minút. Napíš postup krok po kroku.' },
+    { d: 'DEŇ 3', h: 'Nechaj si niečo vysvetliť', p: 'AI je trpezlivý učiteľ. Pýtaj sa, kým to nepochopíš – aj „vysvetli to ešte jednoduchšie“.', q: 'Vysvetli mi, čo je inflácia, tak ako by si to vysvetľoval 12-ročnému. Potom mi daj jeden príklad z obchodu.' },
+    { d: 'DEŇ 4', h: 'Pomoc s textom', p: 'Nechaj AI napísať prvú verziu e-mailu alebo správy. Potom si ju prečítaj a uprav, aby znela ako ty.', q: 'Pomôž mi napísať krátky a zdvorilý e-mail kolegovi, že sa porada presúva na štvrtok o 10:00. Tón: priateľský, bez zbytočných fráz.' },
+    { d: 'DEŇ 5', h: 'Over si odpoveď', p: 'Opýtaj sa na niečo, čo vieš overiť (napríklad otváracie hodiny úradu). Potom porovnaj odpoveď s oficiálnou stránkou. Uvidíš, kedy AI pomáha a kedy háda.', q: 'Z akých zdrojov vychádza tvoja odpoveď? Ktoré časti by som si mal radšej overiť a kde?' },
+    { d: 'DEŇ 6', h: 'Nastav si súkromie', p: 'V nastaveniach svojho asistenta pozri časť Súkromie alebo Údaje. Zisti, či sa tvoje rozhovory ukladajú a či sa môžu použiť na zlepšovanie modelu – a nastav to tak, ako ti to vyhovuje.', tip: 'Návod pre ChatGPT máme v PDF: na Instagrame napíš do komentára SUKROMIE.' },
+    { d: 'DEŇ 7', h: 'AI pri mojej práci', p: 'Najväčší rozdiel spravíš pri vlastnej práci. Nechaj si navrhnúť malé úlohy, pri ktorých ti AI ušetrí čas – a pri ktorých radšej nie.', q: 'Pracujem ako [tvoja práca]. Navrhni mi 5 malých úloh, pri ktorých mi AI môže ušetriť čas. Pri každej napíš, na čo si mám dať pozor.' }
+  ];
+  var KEY = 'ludskyoai-7dni', done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  var box = document.getElementById('steps');
+  box.innerHTML = STEPS.map(function (s, i) {
+    return '<div class="step reveal' + (done[i] ? ' done' : '') + '" id="krok' + (i + 1) + '" style="scroll-margin-top:9rem"><button type="button" class="chk" role="checkbox" aria-checked="' + !!done[i] + '" aria-label="Hotovo: ' + esc(s.h) + '" data-i="' + i + '">' + (done[i] ? '✓' : (i + 1)) + '</button>' +
+      '<div><span class="day">' + s.d + ' · ~5 MIN</span><h3>' + esc(s.h) + '</h3><p>' + esc(s.p) + '</p>' +
+      (s.q ? '<div class="prompt">„' + esc(s.q) + '“<br><button type="button" class="btn sm" data-copy="' + esc(s.q) + '">📋 Skopírovať</button></div>' : '') +
+      (s.tip ? '<p style="font-size:.95rem;margin:0">' + esc(s.tip) + '</p>' : '') + '</div></div>';
+  }).join('');
+  function upd(bump) {
+    var n = Object.keys(done).filter(function (k) { return done[k]; }).length;
+    document.getElementById('pcount').textContent = n + ' zo 7';
+    document.getElementById('pfill').style.width = (n / 7 * 100) + '%';
+    document.getElementById('yay').classList.toggle('on', n === 7);
+  }
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('.chk'); if (!b) return;
+    var i = +b.getAttribute('data-i'); done[i] = !done[i];
+    try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (x) {}
+    b.setAttribute('aria-checked', !!done[i]); b.textContent = done[i] ? '✓' : (i + 1);
+    b.closest('.step').classList.toggle('done', !!done[i]); upd();
+  });
+  upd();
+  Array.prototype.forEach.call(box.querySelectorAll('.reveal'), function (el) { el.classList.add('in'); });
+
+  var TERMS = [
+    ['Umelá inteligencia (AI)', 'Počítačové programy, ktoré sa učia z príkladov a potom vedia samy rozpoznávať, odpovedať alebo tvoriť. Nie sú živé a nemyslia ako človek.'],
+    ['Chatbot / AI asistent', 'Program, s ktorým si píšeš (alebo hovoríš) ako s človekom. Napríklad ChatGPT, Gemini, Copilot alebo Claude.'],
+    ['Prompt', 'Tvoja otázka alebo zadanie pre AI. Čím jasnejšie napíšeš, čo chceš (pre koho, ako dlho, akým tónom), tým lepšia odpoveď.'],
+    ['Model', '„Mozog“ za chatbotom – naučený program. Keď počuješ „vyšiel nový model“, znamená to novú, väčšinou schopnejšiu verziu.'],
+    ['Halucinácia', 'Keď si AI vymyslí niečo, čo nie je pravda, a napíše to úplne isto. Preto si dôležité veci overuj.'],
+    ['Deepfake', 'Falošné video, fotka alebo hlas vyrobený pomocou AI. Môže vyzerať ako skutočný človek, ktorý to nikdy nepovedal.'],
+    ['Dáta', 'Texty, obrázky a čísla, z ktorých sa AI učí. Keď sú v dátach chyby alebo predsudky, AI ich môže zopakovať.'],
+    ['AI agent', 'AI, ktorá nielen odpovedá, ale aj sama robí kroky – napríklad vyhľadá, vyplní formulár alebo pošle správu. Pri agentoch si o to viac stráž, čo im dovolíš.']
+  ];
+  document.getElementById('terms').innerHTML = TERMS.map(function (t) { return '<details class="term"><summary>' + esc(t[0]) + '</summary><div>' + esc(t[1]) + '</div></details>'; }).join('');
+})();
+</script>
+</body>
+</html>
