@@ -1,0 +1,68 @@
+{
+  "_info": "Obsah webu ludskyoai.sk. Aktualizuje ho naplánovaná úloha po schválení príspevkov.",
+  "updated": "2026-11-17",
+  "triad": {
+    "date": "16. 11. 2026",
+    "posts": [
+      {
+        "color": "#FF5F57",
+        "tag": "NOVINKA",
+        "title": "Hľadáš cez ChatGPT namiesto Googlu?",
+        "body": "OpenAI tvrdí, že ChatGPT už zvláda pätinu toľkých vyhľadávaní ako Google. Nezávislé odhady sú však nižšie.",
+        "prompt": "",
+        "meta": "bigtechnology.com · 3. 11. 2026",
+        "link": "https://www.instagram.com/ludskyoai/"
+      },
+      {
+        "color": "#28C840",
+        "tag": "AI RADA #5",
+        "title": "Pýtaj si 3 verzie naraz",
+        "body": "Z troch možností si vyberieš rýchlejšie ako z jednej. Hodí sa na e-mail, pozvánku či odpoveď na recenziu.",
+        "prompt": "Napíš mi [čo potrebuješ] v troch verziách: formálne, priateľsky a úplne stručne.",
+        "meta": "Ľudkov tip",
+        "link": "https://www.instagram.com/ludskyoai/"
+      },
+      {
+        "color": "#FEBC2E",
+        "tag": "NÁVOD · 1 MINÚTA",
+        "title": "Pozri, čo si o tebe ChatGPT pamätá",
+        "body": "Nastavenia → Personalizácia → Pamäť. Pozor: keď zmažeš chat, spomienka z neho v Pamäti zostane.",
+        "prompt": "",
+        "meta": "help.openai.com · overené 13. 11. 2026",
+        "link": "https://www.instagram.com/ludskyoai/"
+      }
+    ]
+  },
+  "tyzden": {
+    "range": "",
+    "verified": "",
+    "items": []
+  },
+  "quiz": [
+    {
+      "q": "Keď zmažeš chat, ChatGPT zabudne aj všetko, čo si z neho zapamätal.",
+      "fakt": false,
+      "why": "Uložená spomienka zostáva. Treba ju zmazať aj v Nastaveniach → Personalizácia → Pamäť.",
+      "src": "help.openai.com · overené 13. 11. 2026"
+    },
+    {
+      "q": "Tvoje rozhovory s ChatGPT sa môžu použiť na zlepšovanie modelov, ale dá sa to vypnúť.",
+      "fakt": true,
+      "why": "V nastaveniach Ovládanie údajov môžeš vypnúť možnosť „Zlepšovať model pre všetkých“.",
+      "src": "help.openai.com"
+    },
+    {
+      "q": "Keď AI odpovedá sebaisto, odpoveď je určite pravdivá.",
+      "fakt": false,
+      "why": "Jazykové modely sa môžu mýliť aj vtedy, keď znejú presvedčivo. Dôležité informácie si vždy over.",
+      "src": "upozornenie pod oknom chatu v ChatGPT"
+    },
+    {
+      "q": "Gemini je AI asistent od Googlu.",
+      "fakt": true,
+      "why": "Gemini vyvíja Google. Asistent od OpenAI je ChatGPT a od Microsoftu Copilot.",
+      "src": "gemini.google.com"
+    }
+  ],
+  "opravy": []
+}
