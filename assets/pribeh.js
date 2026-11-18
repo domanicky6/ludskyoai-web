@@ -73,6 +73,10 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
 '.st-prog i{display:block;height:100%;width:0;background:#A29BFE}' +
 '.st-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:5.2rem;height:5.2rem;border-radius:50%;border:3px solid #17153B;background:#FEBC2E;font-size:2rem;cursor:pointer;box-shadow:5px 5px 0 #17153B;display:flex;align-items:center;justify-content:center;z-index:5;color:#17153B}' +
 '.st-big:hover{transform:translate(-52%,-52%)}' +
+'.st-ctl button.skp{font-size:.9rem;white-space:nowrap}' +
+'.st.end .st-ctl .skp,.st-ctl .skp[hidden]{display:none}' +
+'.st-cta{display:inline-block;margin-top:.7rem;font-weight:800;font-size:1rem;color:#17153B;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}' +
+'.st.end .st-cta{display:none}' +
 '.st-note{font-size:.8rem;color:#4A4775;margin:.5rem 0 0}' +
 '@media (prefers-reduced-motion:reduce){.st *{animation-duration:.01ms!important;transition-duration:.01ms!important}}';
 
@@ -152,10 +156,11 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
       '<h3>AI novinky bez strachu a bez šumu.</h3><ul><li>✅ 1 overená novinka denne, nie 47</li><li>✅ vždy so zdrojom a dátumom</li><li>✅ po slovensky, ľudsky, bez strašenia</li><li>✅ čo sa zmenilo a ako to môžeš využiť</li></ul>' +
       '<div class="row"><a class="st-b dark" href="https://www.instagram.com/ludskyoai/">📸 Sleduj @ludskyoai</a><a class="st-b" href="zaciatok.html">Začni pokojne →</a><button type="button" class="st-b st-rep">↻ Znova</button></div></div></div>' +
       '<button type="button" class="st-big" aria-label="Prehrať príbeh">▶</button>' +
-      '</div><div class="st-ctl"><button type="button" class="pl" aria-label="Prehrať">▶</button><div class="st-prog" aria-hidden="true"><i></i></div><button type="button" class="snd" aria-pressed="false" aria-label="Zapnúť zvuk">🔇</button></div>' +
+      '</div><div class="st-ctl"><button type="button" class="pl" aria-label="Prehrať">▶</button><div class="st-prog" aria-hidden="true"><i></i></div><button type="button" class="snd" aria-pressed="false" aria-label="Zapnúť zvuk">🔇</button><button type="button" class="skp" aria-label="Preskočiť na koniec príbehu">Preskočiť ⏭</button></div>' +
+      '<a class="st-cta" href="https://www.instagram.com/ludskyoai/">📸 Nechceš čakať? Sleduj @ludskyoai na Instagrame →</a>' +
       '<p class="st-note">Ilustračný príbeh. Titulky v ňom sú vymyslené, ale také poznáš zo sociálnych sietí. Trvá asi 30 sekúnd.</p></div>';
     var root = el.querySelector('.st'), cards = el.querySelectorAll('.st-card'), cap = el.querySelector('.st-cap span'), say = el.querySelector('.st-say'),
-      br = el.querySelector('.st-breath'), prog = el.querySelector('.st-prog i'), pl = el.querySelector('.st-ctl .pl'), snd = el.querySelector('.snd'), big = el.querySelector('.st-big');
+      br = el.querySelector('.st-breath'), prog = el.querySelector('.st-prog i'), pl = el.querySelector('.st-ctl .pl'), snd = el.querySelector('.snd'), skp = el.querySelector('.skp'), big = el.querySelector('.st-big');
     var sound = false, autoPaused = false, playing = false, t = 0, last = 0, idx = 0, raf = 0, played = false, beatT = 0;
     function place() {
       Array.prototype.forEach.call(cards, function (c, i) { var p = mob() ? { x: MCARDS[i][0], y: MCARDS[i][1] } : CARDS[i]; c.style.left = p.x + '%'; c.style.top = p.y + '%'; });
@@ -189,7 +194,7 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
     function play() {
       if (playing) return;
       if (t >= DUR || idx >= TL.length) reset();
-      playing = true; played = true; big.hidden = true; pl.textContent = '❚❚'; pl.setAttribute('aria-label', 'Pozastaviť');
+      playing = true; played = true; big.hidden = true; skp.hidden = false; pl.textContent = '❚❚'; pl.setAttribute('aria-label', 'Pozastaviť');
       root.style.setProperty('--ps', 'running'); Array.prototype.forEach.call(el.querySelectorAll('.st *'), function (n) { n.style.animationPlayState = ''; });
       last = performance.now(); raf = requestAnimationFrame(frame);
     }
@@ -200,6 +205,7 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
     pl.onclick = function () { autoPaused = false; if (playing) stop(); else play(); };
     big.onclick = function () { play(); };
     el.querySelector('.st-rep').onclick = function () { reset(); play(); };
+    skp.onclick = function () { var s0 = sound; sound = false; stop(); autoPaused = false; played = true; big.hidden = true; while (idx < TL.length) act(TL[idx++]); sound = s0; t = DUR; prog.style.width = '100%'; skp.hidden = true; var b = el.querySelector('.st-endc a'); if (b) b.focus({ preventScroll: true }); };
     snd.onclick = function () { sound = !sound; snd.textContent = sound ? '🔊' : '🔇'; snd.setAttribute('aria-pressed', sound); snd.setAttribute('aria-label', sound ? 'Vypnúť zvuk' : 'Zapnúť zvuk'); if (sound) tone(880, 0, 0.1, 'sine', 0.05); };
     var reduce = false; try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
     if (reduce) { TL.forEach(act); t = DUR; prog.style.width = '100%'; big.hidden = true; return; }
