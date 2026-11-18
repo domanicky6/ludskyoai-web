@@ -450,7 +450,6 @@ footer.bot nav{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
     <div class="tools">
       <span class="pill starpill" id="starpill" aria-label="Získané hviezdičky"><b aria-hidden="true">★</b><span id="starcount">0 / 0</span></span>
       <button type="button" class="tog" id="tSound" aria-pressed="true" title="Zvuky"><span aria-hidden="true" id="iSound">🔊</span><span class="lbl">Zvuky</span></button>
-      <button type="button" class="tog" id="tRead" aria-pressed="false" title="Čítať nahlas" hidden><span aria-hidden="true">🗣️</span><span class="lbl">Čítať nahlas</span></button>
       <button type="button" class="tog" id="tBig" aria-pressed="false" title="Väčšie písmo">A+</button>
     </div>
   </div>
@@ -700,25 +699,11 @@ var SFX = {
 function sfx(n, x) { if (!prefs.sound) return; try { SFX[n](x); } catch (e) {} }
 function buzz(ms) { if (prefs.sound && navigator.vibrate) try { navigator.vibrate(ms); } catch (e) {} }
 
-/* ---------- čítanie nahlas ---------- */
-var canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window, voice = null, speakingBtn = null;
-function pickVoice() {
-  if (!canSpeak) return;
-  var vs = speechSynthesis.getVoices() || [];
-  voice = vs.filter(function (v) { return /^sk/i.test(v.lang); })[0] || vs.filter(function (v) { return /^cs/i.test(v.lang); })[0] || null;
-}
-if (canSpeak) { pickVoice(); try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch (e) {} }
-function stopSpeak() { if (canSpeak) try { speechSynthesis.cancel(); } catch (e) {} if (speakingBtn) { speakingBtn.classList.remove('on'); speakingBtn = null; } }
-function speak(text, btn) {
-  if (!canSpeak || !text) return;
-  stopSpeak();
-  var u = new SpeechSynthesisUtterance(String(text).replace(/[„“"]/g, '').replace(/\n/g, '. '));
-  u.lang = 'sk-SK'; if (voice) u.voice = voice; u.rate = 0.95; u.pitch = 1.05;
-  if (btn) { speakingBtn = btn; btn.classList.add('on'); u.onend = u.onerror = function () { btn.classList.remove('on'); if (speakingBtn === btn) speakingBtn = null; }; }
-  try { speechSynthesis.speak(u); } catch (e) {}
-}
-function autoSpeak(text) { if (prefs.read) speak(text); }
-function spkBtn(text) { return canSpeak ? '<button type="button" class="spk" data-say="' + esc(text) + '" aria-label="Prečítať nahlas">🔊</button>' : ''; }
+/* čítanie nahlas bolo odstránené (18. 11. 2026) – ponechané prázdne funkcie, aby sa nemuselo meniť volanie v hrách */
+function stopSpeak() {}
+function speak() {}
+function autoSpeak() {}
+function spkBtn() { return ''; }
 function announce(t) { var l = $('#live'); l.textContent = ''; setTimeout(function () { l.textContent = t; }, 30); }
 
 /* ---------- konfety ---------- */
@@ -826,12 +811,9 @@ function applyPrefs() {
   document.documentElement.classList.toggle('big', !!prefs.big);
   $('#tBig').setAttribute('aria-pressed', prefs.big ? 'true' : 'false'); $('#tBig').textContent = prefs.big ? 'A−' : 'A+';
   $('#tSound').setAttribute('aria-pressed', prefs.sound ? 'true' : 'false'); $('#iSound').textContent = prefs.sound ? '🔊' : '🔇';
-  $('#tRead').setAttribute('aria-pressed', prefs.read ? 'true' : 'false');
 }
-if (canSpeak) $('#tRead').hidden = false;
 $('#tBig').onclick = function () { prefs.big = !prefs.big; store(PREFS, prefs); applyPrefs(); sfx('click'); };
 $('#tSound').onclick = function () { prefs.sound = !prefs.sound; store(PREFS, prefs); applyPrefs(); sfx('pop'); };
-$('#tRead').onclick = function () { prefs.read = !prefs.read; store(PREFS, prefs); applyPrefs(); if (prefs.read) speak('Budem ti čítať nahlas.'); else stopSpeak(); };
 applyPrefs();
 
 function totalStars() { return GAMES.reduce(function (a, g) { return a + (save.stars[g.id] || 0); }, 0); }
@@ -940,7 +922,7 @@ function renderHub(anchor) {
   h += '<section class="sec wrap" id="rodicia" style="scroll-margin-top:5rem"><h2><span class="sq" style="background:#FEBC2E"></span>Pre rodičov</h2>' +
     '<p class="lead">Hry sú krátke (2–3 minúty) a fungujú najlepšie, keď ich hráte spolu. Každá končí jednou otázkou na rozhovor.</p>' +
     '<div class="parents">' +
-    '<div class="tip"><span class="n">🧒</span><span><b>Pre menšie deti</b> zapnite hore <b>🗣️ Čítať nahlas</b>. Ľudko prečíta otázky aj vysvetlenia (ak má zariadenie slovenský alebo český hlas).</span></div>' +
+    '<div class="tip"><span class="n">🧒</span><span><b>Pre menšie deti</b> čítajte otázky a vysvetlenia nahlas vy. Spoločné čítanie je zároveň najlepší začiatok rozhovoru.</span></div>' +
     '<div class="tip"><span class="n">🗺️</span><span><b>Začnite Ľudkovou cestou.</b> Dieťa najprv pochopí, že AI sa učí z príkladov a háda slová – potom ľahšie pochopí, prečo sa mýli.</span></div>' +
     '<div class="tip"><span class="n">💬</span><span><b>Po každej hre</b> sa opýtajte otázku z rámčeka „Porozprávajte sa“. Práve tam vzniká to najdôležitejšie učenie.</span></div>' +
     '<div class="tip"><span class="n">🏫</span><span><b>Ste učiteľ?</b> Hotové hodiny podľa veku žiakov nájdete na stránke <a href="skoly.html">Pre školy</a>.</span></div>' +
@@ -1363,7 +1345,7 @@ function seniorAsk(i) {
     if (k >= full.length) { clearInterval(R.iv); R.iv = 0; done(); }
   }, 32);
 }
-function spkBtnInline(t) { return canSpeak ? ' <button type="button" class="btn sm" data-say="' + esc(t) + '" style="margin-top:.6rem;box-shadow:2px 2px 0 var(--ink)">🔊 Prečítať nahlas</button>' : ''; }
+function spkBtnInline() { return ''; }
 
 /* =====================================================================
    ĽUDKOV BEH (runner v štýle chrome://dino)
