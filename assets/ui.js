@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var PAGES = [
-    { href: './#najnovsie', t: 'Novinky' },
+    { href: 'novinky/', t: 'Novinky' },
     { href: 'zaciatok.html', t: 'Začíname s AI' },
     { href: 'hry.html', t: 'Hry' },
     { href: 'skoly.html', t: 'Pre školy' },
@@ -19,7 +19,7 @@
     head.className = 'top';
     head.innerHTML = '<a class="skip" href="#obsah">Preskočiť na obsah</a><div class="wrap" style="position:relative">' +
       '<a class="logo" href="' + u('./') + '"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a>' +
-      '<nav class="nav" id="nav" aria-label="Hlavná navigácia">' + PAGES.map(function (p) { return '<a href="' + u(p.href) + '"' + (p.href === here ? ' aria-current="page"' : '') + '>' + p.t + '</a>'; }).join('') + '</nav>' +
+      '<nav class="nav" id="nav" aria-label="Hlavná navigácia">' + PAGES.map(function (p) { return '<a href="' + u(p.href) + '"' + (p.href === here || (p.href === 'novinky/' && /\/novinky\//.test(location.pathname)) ? ' aria-current="page"' : '') + '>' + p.t + '</a>'; }).join('') + '</nav>' +
       '<div class="tools"><button type="button" class="round" id="bigBtn" aria-pressed="false" aria-label="Väčšie písmo">A+</button>' +
       '<a class="round dark" href="https://www.instagram.com/ludskyoai/" aria-label="Sleduj @ludskyoai na Instagrame">' + ig + '<span class="igtxt">@ludskyoai</span></a>' +
       '<button type="button" class="round burger" id="burger" aria-controls="nav" aria-expanded="false" aria-label="Otvoriť menu">☰</button></div></div>';

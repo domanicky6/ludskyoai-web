@@ -1,0 +1,96 @@
+{
+  "_info": "Príspevky, ktoré podľa Zernia naozaj vyšli (status published). Zdroj pre tools/novinky-build.mjs.",
+  "overene": "2026-11-18",
+  "posts": [
+    {
+      "zernio_id": "6af6c0ec384e2e59228a78f3",
+      "published_at": "2026-11-13T08:45:59.235Z",
+      "url": "https://www.instagram.com/p/DfrO8EUDCnp/"
+    },
+    {
+      "zernio_id": "6af649845d6da052d82f1b35",
+      "published_at": "2026-11-13T08:47:51.401Z",
+      "url": "https://www.instagram.com/p/DfrPJmXjLQI/"
+    },
+    {
+      "zernio_id": "6af649852a03608b5832c4b7",
+      "published_at": "2026-11-13T08:50:11.530Z",
+      "url": "https://www.instagram.com/p/DfrPa7XjBnh/"
+    },
+    {
+      "zernio_id": "6af6c0f0384e2e59228a790e",
+      "published_at": "2026-11-13T10:21:04.343Z",
+      "url": "https://www.instagram.com/p/DfrZy9piCYS/"
+    },
+    {
+      "zernio_id": "6af6498d2a03608b5832c4fe",
+      "published_at": "2026-11-13T10:22:57.753Z",
+      "url": "https://www.instagram.com/p/DfraB5ACF17/"
+    },
+    {
+      "zernio_id": "6af6498a2a03608b5832c4ef",
+      "published_at": "2026-11-13T10:25:16.916Z",
+      "url": "https://www.instagram.com/p/DfraTPijcY7/"
+    },
+    {
+      "zernio_id": "6af6c0f3384e2e59228a792c",
+      "published_at": "2026-11-14T11:02:14.250Z",
+      "url": "https://www.instagram.com/p/DfuDSnhAnzI/"
+    },
+    {
+      "zernio_id": "6af649935d6da052d82f1b7c",
+      "published_at": "2026-11-14T14:01:24.607Z",
+      "url": "https://www.instagram.com/p/DfuX08vjLsO/"
+    },
+    {
+      "zernio_id": "6af6499027d0bac70759bdbb",
+      "published_at": "2026-11-14T17:04:40.600Z",
+      "url": "https://www.instagram.com/p/DfusxNSDTat/"
+    },
+    {
+      "zernio_id": "6af8f1b44db46b2c06f70c75",
+      "published_at": "2026-11-15T07:16:35.698Z",
+      "url": "https://www.instagram.com/p/DfwOR7TCrry/"
+    },
+    {
+      "zernio_id": "6af8f1bb4c6783cd40d6826f",
+      "published_at": "2026-11-15T07:18:40.623Z",
+      "url": "https://www.instagram.com/p/DfwOheYiOqw/"
+    },
+    {
+      "zernio_id": "6af6c3d2b0489c617dbc17ed",
+      "published_at": "2026-11-15T11:02:44.011Z",
+      "url": "https://www.instagram.com/p/DfwoJ4WEXJL/"
+    },
+    {
+      "zernio_id": "6af6c3d7186a47c3afe63c37",
+      "published_at": "2026-11-15T14:04:03.688Z",
+      "url": "https://www.instagram.com/p/Dfw8vyTCNJE/"
+    },
+    {
+      "zernio_id": "6af6c3dd44d54ee3d9a4fca3",
+      "published_at": "2026-11-15T17:03:49.881Z",
+      "url": "https://www.instagram.com/p/DfxRUt6gMgC/"
+    },
+    {
+      "zernio_id": "6af6c3e4a4ccd9a1cf6f3935",
+      "published_at": "2026-11-16T11:01:37.529Z",
+      "url": "https://www.instagram.com/p/DfzM0ihivP9/"
+    },
+    {
+      "zernio_id": "6af9f3bb2098a0fa44a2417b",
+      "published_at": "2026-11-16T11:17:28.046Z",
+      "url": "https://www.instagram.com/p/DfzOpMeCvKr/"
+    },
+    {
+      "zernio_id": "6af6c3e7dea11d9cd894521a",
+      "published_at": "2026-11-16T14:03:34.656Z",
+      "url": "https://www.instagram.com/p/DfzhjDlDcM3/"
+    },
+    {
+      "zernio_id": "6af6c3edb0489c617dbc1893",
+      "published_at": "2026-11-16T17:05:07.249Z",
+      "url": "https://www.instagram.com/p/Dfz2TjBCl4T/"
+    }
+  ]
+}
