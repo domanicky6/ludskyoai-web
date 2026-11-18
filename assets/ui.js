@@ -9,14 +9,17 @@
     { href: './#rodicia', t: 'Pre rodičov' },
     { href: './#zadarmo', t: 'PDF zadarmo' }
   ];
+  // Na stránke 404 (body data-root="/") musia byť odkazy absolútne, lebo GitHub Pages ju servuje aj pre hlboké cesty.
+  var ROOT = (document.body && document.body.getAttribute('data-root')) || '';
+  var u = function (h) { return ROOT ? ROOT + h.replace(/^\.\//, '') : h; };
   var here = (location.pathname.split('/').pop() || 'index.html');
   var ig = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6"></circle></svg>';
   var head = document.getElementById('site-header');
   if (head) {
     head.className = 'top';
     head.innerHTML = '<a class="skip" href="#obsah">Preskočiť na obsah</a><div class="wrap" style="position:relative">' +
-      '<a class="logo" href="./"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a>' +
-      '<nav class="nav" id="nav" aria-label="Hlavná navigácia">' + PAGES.map(function (p) { return '<a href="' + p.href + '"' + (p.href === here ? ' aria-current="page"' : '') + '>' + p.t + '</a>'; }).join('') + '</nav>' +
+      '<a class="logo" href="' + u('./') + '"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a>' +
+      '<nav class="nav" id="nav" aria-label="Hlavná navigácia">' + PAGES.map(function (p) { return '<a href="' + u(p.href) + '"' + (p.href === here ? ' aria-current="page"' : '') + '>' + p.t + '</a>'; }).join('') + '</nav>' +
       '<div class="tools"><button type="button" class="round" id="bigBtn" aria-pressed="false" aria-label="Väčšie písmo">A+</button>' +
       '<a class="round dark" href="https://www.instagram.com/ludskyoai/" aria-label="Sleduj @ludskyoai na Instagrame">' + ig + '<span class="igtxt">@ludskyoai</span></a>' +
       '<button type="button" class="round burger" id="burger" aria-controls="nav" aria-expanded="false" aria-label="Otvoriť menu">☰</button></div></div>';
@@ -33,11 +36,11 @@
   if (foot) {
     foot.className = 'foot';
     foot.innerHTML = '<div class="wrap"><div class="cols">' +
-      '<div><a class="logo" href="./" style="color:#fff"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a><p style="margin:.8rem 0 0;line-height:1.6">Umelá inteligencia vysvetlená ľudsky. Novinky so zdrojom a dátumom, bez strašenia.</p></div>' +
-      '<div><h3>Pre koho</h3><ul><li><a href="zaciatok.html">Začíname s AI</a></li><li><a href="./#rodicia">Pre rodičov</a></li><li><a href="skoly.html">Pre školy</a></li><li><a href="hry.html">Hry pre deti</a></li></ul></div>' +
-      '<div><h3>Dôvera</h3><ul><li><a href="./#overujeme">Ako overujeme</a></li><li><a href="opravy.html">Opravy</a></li><li><a href="sukromie.html">Súkromie</a></li></ul></div>' +
+      '<div><a class="logo" href="' + u('./') + '" style="color:#fff"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a><p style="margin:.8rem 0 0;line-height:1.6">Umelá inteligencia vysvetlená ľudsky. Novinky so zdrojom a dátumom, bez strašenia.</p></div>' +
+      '<div><h3>Pre koho</h3><ul><li><a href="' + u('zaciatok.html') + '">Začíname s AI</a></li><li><a href="' + u('./#rodicia') + '">Pre rodičov</a></li><li><a href="' + u('skoly.html') + '">Pre školy</a></li><li><a href="' + u('hry.html') + '">Hry pre deti</a></li></ul></div>' +
+      '<div><h3>Dôvera</h3><ul><li><a href="' + u('./#overujeme') + '">Ako overujeme</a></li><li><a href="' + u('opravy.html') + '">Opravy</a></li><li><a href="' + u('sukromie.html') + '">Súkromie</a></li></ul></div>' +
       '<div><h3>Kontakt</h3><ul><li><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></li><li><a href="mailto:info@ludskyoai.sk">info@ludskyoai.sk</a></li></ul></div>' +
-      '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="sukromie.html" style="color:inherit">Viac o súkromí</a></small></div>';
+      '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="' + u('sukromie.html') + '" style="color:inherit">Viac o súkromí</a></small></div>';
   }
   // jemné odhaľovanie sekcií
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 }) : null;
