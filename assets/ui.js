@@ -35,9 +35,9 @@
     foot.innerHTML = '<div class="wrap"><div class="cols">' +
       '<div><a class="logo" href="./" style="color:#fff"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a><p style="margin:.8rem 0 0;line-height:1.6">Umelá inteligencia vysvetlená ľudsky. Novinky so zdrojom a dátumom, bez strašenia.</p></div>' +
       '<div><h3>Pre koho</h3><ul><li><a href="zaciatok.html">Začíname s AI</a></li><li><a href="./#rodicia">Pre rodičov</a></li><li><a href="skoly.html">Pre školy</a></li><li><a href="hry.html">Hry pre deti</a></li></ul></div>' +
-      '<div><h3>Dôvera</h3><ul><li><a href="./#overujeme">Ako overujeme</a></li><li><a href="opravy.html">Opravy</a></li></ul></div>' +
+      '<div><h3>Dôvera</h3><ul><li><a href="./#overujeme">Ako overujeme</a></li><li><a href="opravy.html">Opravy</a></li><li><a href="sukromie.html">Súkromie</a></li></ul></div>' +
       '<div><h3>Sleduj nás</h3><ul><li><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></li></ul></div>' +
-      '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači.</small></div>';
+      '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="sukromie.html" style="color:inherit">Viac o súkromí</a></small></div>';
   }
   // jemné odhaľovanie sekcií
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 }) : null;
