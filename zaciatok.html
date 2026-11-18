@@ -93,7 +93,7 @@ details.term div{padding:0 1.2rem 1.1rem;line-height:1.6;color:var(--ink2)}
       <p style="margin:0;font-size:1.1rem;line-height:1.6;color:var(--ink2)">Každý deň nový „prevratný“ model, kurzy „na poslednú chvíľu“ a titulky o tom, koho AI nahradí. Nečudo, že z toho má veľa ľudí ťažkú hlavu.</p>
       <div class="stat">
         <span class="kicker" style="font-size:.75rem">Nie si v tom sám</span>
-        <b class="big">Vo väčšine krajín viac ľudí čaká, že AI pracovných miest ubudne, než pribudne.</b>
+        <b class="big">Vo väčšine krajín viac ľudí očakáva, že pracovných miest kvôli AI ubudne, než pribudne.</b>
         <span style="font-size:.88rem;color:var(--mut)">Prieskum Pew Research Center, 37 krajín, február – jún 2026 (<a href="https://www.euronews.com/next/2026/09/19/fear-of-ai-job-losses-now-outweighs-hope-of-new-jobs-study-finds">Euronews, 19. 9. 2026</a>).</span>
       </div>
       <p style="margin:0;line-height:1.6;color:var(--ink2)">Nebudeme ťa presviedčať, že sa nič nedeje. Ale panika nepomáha. Pomáha vedieť, čo sa naozaj zmenilo – a vyskúšať si to na vlastnej koži, v pokoji.</p>
@@ -203,12 +203,12 @@ details.term div{padding:0 1.2rem 1.1rem;line-height:1.6;color:var(--ink2)}
 
   var STEPS = [
     { d: 'DEŇ 1', h: 'Vyber si jedného asistenta', p: 'Otvor ChatGPT, Gemini, Copilot alebo Claude a prihlás sa. Stačí jeden – ostatné neskôr, alebo nikdy. Nižšie na stránke nájdeš krátke porovnanie.', tip: 'Tip: na počítači je písanie pohodlnejšie, na mobile zas môžeš rozprávať hlasom.' },
-    { d: 'DEŇ 2', h: 'Prvá otázka z bežného života', p: 'Začni niečím, čo nič nestojí. Skopíruj otázku, vlož ju do chatu a uprav podľa seba.', q: 'Mám doma zemiaky, vajcia a cibuľu. Navrhni mi jednoduchú večeru do 20 minút. Napíš postup krok po kroku.' },
+    { d: 'DEŇ 2', h: 'Prvá otázka z bežného života', p: 'Začni niečím jednoduchým, pri čom nič nepokazíš. Skopíruj otázku, vlož ju do chatu a uprav podľa seba.', q: 'Mám doma zemiaky, vajcia a cibuľu. Navrhni mi jednoduchú večeru do 20 minút. Napíš postup krok po kroku.' },
     { d: 'DEŇ 3', h: 'Nechaj si niečo vysvetliť', p: 'AI je trpezlivý učiteľ. Pýtaj sa, kým to nepochopíš – aj „vysvetli to ešte jednoduchšie“.', q: 'Vysvetli mi, čo je inflácia, tak ako by si to vysvetľoval 12-ročnému. Potom mi daj jeden príklad z obchodu.' },
     { d: 'DEŇ 4', h: 'Pomoc s textom', p: 'Nechaj AI napísať prvú verziu e-mailu alebo správy. Potom si ju prečítaj a uprav, aby znela ako ty.', q: 'Pomôž mi napísať krátky a zdvorilý e-mail kolegovi, že sa porada presúva na štvrtok o 10:00. Tón: priateľský, bez zbytočných fráz.' },
     { d: 'DEŇ 5', h: 'Over si odpoveď', p: 'Opýtaj sa na niečo, čo vieš overiť (napríklad otváracie hodiny úradu). Potom porovnaj odpoveď s oficiálnou stránkou. Uvidíš, kedy AI pomáha a kedy háda.', q: 'Z akých zdrojov vychádza tvoja odpoveď? Ktoré časti by som si mal radšej overiť a kde?' },
     { d: 'DEŇ 6', h: 'Nastav si súkromie', p: 'V nastaveniach svojho asistenta pozri časť Súkromie alebo Údaje. Zisti, či sa tvoje rozhovory ukladajú a či sa môžu použiť na zlepšovanie modelu – a nastav to tak, ako ti to vyhovuje.', tip: 'Návod pre ChatGPT máme v PDF: na Instagrame napíš do komentára SUKROMIE.' },
-    { d: 'DEŇ 7', h: 'AI pri mojej práci', p: 'Najväčší rozdiel spravíš pri vlastnej práci. Nechaj si navrhnúť malé úlohy, pri ktorých ti AI ušetrí čas – a pri ktorých radšej nie.', q: 'Pracujem ako [tvoja práca]. Navrhni mi 5 malých úloh, pri ktorých mi AI môže ušetriť čas. Pri každej napíš, na čo si mám dať pozor.' }
+    { d: 'DEŇ 7', h: 'AI pri mojej práci', p: 'Najviac ti AI pomôže pri tvojej vlastnej práci. Nechaj si navrhnúť malé úlohy, pri ktorých ti AI ušetrí čas – a pri ktorých radšej nie.', q: 'Pracujem ako [tvoja práca]. Navrhni mi 5 malých úloh, pri ktorých mi AI môže ušetriť čas. Pri každej napíš, na čo si mám dať pozor.' }
   ];
   var KEY = 'ludskyoai-7dni', done = {};
   try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
