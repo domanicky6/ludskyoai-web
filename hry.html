@@ -58,6 +58,18 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .starpill b{color:var(--yel);font-size:1.2rem}
 .starpill.bump{animation:bump .5s ease}
 @media (max-width:420px){.logo span.t{display:none}}
+.hnav{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem;font-weight:700;font-size:.95rem}
+.hnav a{color:#fff;text-decoration:none;padding:.55rem 0;border-bottom:2px solid transparent}
+.hnav a:hover,.hnav a[aria-current="page"]{border-bottom-color:var(--yel)}
+.hburg{display:none}
+@media (max-width:1060px){
+  header.top .wrap{position:relative}
+  .hburg{display:inline-flex;justify-content:center}
+  .hnav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;gap:0;padding:.4rem 1.2rem 1rem;box-shadow:0 10px 20px rgba(0,0,0,.25)}
+  .hnav.open{display:flex}
+  .hnav a{padding:.8rem 0;border-bottom:1px solid #3A3770;font-size:1.05rem}
+  .hnav a[aria-current="page"]{color:var(--yel);border-bottom-color:#3A3770}
+}
 
 /* ---------- animácie ---------- */
 @keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:none;opacity:1}}
@@ -535,10 +547,12 @@ footer.bot nav{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
 <header class="top">
   <div class="wrap">
     <a class="logo" href="./" aria-label="Ľudsky o AI – úvod"><span class="dots3" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="t">Ľudsky o AI</span></a>
+    <nav class="hnav" id="hnav" aria-label="Hlavná navigácia"><a href="novinky/">Novinky</a><a href="zaciatok.html">Začíname s AI</a><a href="hry.html" aria-current="page">Hry</a><a href="skoly.html">Pre školy</a><a href="rodicia.html">Pre rodičov</a><a href="./#zadarmo">PDF zadarmo</a></nav>
     <div class="tools">
       <span class="pill starpill" id="starpill" aria-label="Získané hviezdičky"><b aria-hidden="true">★</b><span id="starcount">0 / 0</span></span>
       <button type="button" class="tog" id="tSound" aria-pressed="true" title="Zvuky"><span aria-hidden="true" id="iSound">🔊</span><span class="lbl">Zvuky</span></button>
       <button type="button" class="tog" id="tBig" aria-pressed="false" title="Väčšie písmo">A+</button>
+      <button type="button" class="tog hburg" id="hburg" aria-controls="hnav" aria-expanded="false" aria-label="Otvoriť menu">☰</button>
     </div>
   </div>
 </header>
@@ -926,6 +940,7 @@ function applyPrefs() {
   $('#tBig').setAttribute('aria-pressed', prefs.big ? 'true' : 'false'); $('#tBig').textContent = prefs.big ? 'A−' : 'A+';
   $('#tSound').setAttribute('aria-pressed', prefs.sound ? 'true' : 'false'); $('#iSound').textContent = prefs.sound ? '🔊' : '🔇';
 }
+(function () { var n = document.getElementById('hnav'), b = document.getElementById('hburg'); function set(o) { n.classList.toggle('open', o); b.setAttribute('aria-expanded', o); b.textContent = o ? '✕' : '☰'; b.setAttribute('aria-label', o ? 'Zavrieť menu' : 'Otvoriť menu'); } b.onclick = function () { set(!n.classList.contains('open')); }; n.addEventListener('click', function (e) { if (e.target.tagName === 'A') set(false); }); document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); }); })();
 $('#tBig').onclick = function () { prefs.big = !prefs.big; store(PREFS, prefs); applyPrefs(); sfx('click'); };
 $('#tSound').onclick = function () { prefs.sound = !prefs.sound; store(PREFS, prefs); applyPrefs(); sfx('pop'); };
 applyPrefs();
