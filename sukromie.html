@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Súkromie – Ľudsky o AI</title>
-<meta name="description" content="Čo o tebe stránka Ľudsky o AI vie? Takmer nič. Žiadne cookies, žiadne sledovanie, postup v hrách zostáva len v tvojom prehliadači.">
+<meta name="description" content="Čo o tebe stránka Ľudsky o AI vie? Takmer nič. Žiadne cookies ani registrácia, postup v hrách zostáva len v tvojom prehliadači.">
 <meta property="og:title" content="Súkromie: čo o tebe vieme? Takmer nič.">
-<meta property="og:description" content="Žiadne cookies, žiadne sledovanie, žiadna registrácia. Postup v hrách zostáva len v tvojom prehliadači.">
+<meta property="og:description" content="Žiadne cookies, žiadna registrácia. Postup v hrách zostáva len v tvojom prehliadači.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ludskyoai.sk/sukromie.html">
 <meta property="og:image" content="https://ludskyoai.sk/assets/og/sukromie.png">
@@ -42,7 +42,9 @@
 #wipe.sure{background:#FFD6D3}
 #wipeMsg{margin:.9rem 0 0;font-weight:700;min-height:1.5em}
 .upd{font-size:.95rem;color:var(--mut)}
+html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:none!important}
 </style>
+<script src="assets/stats.js"></script>
 </head>
 <body>
 <div class="beta-bar" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
@@ -54,7 +56,8 @@
     <div class="txt">
       <span class="kicker">Súkromie</span>
       <h1>Čo o tebe vieme? Takmer nič.</h1>
-      <p class="lead">Nemáme registráciu, cookies ani sledovanie. Tu je presne a bez právničiny, čo sa kde ukladá a čo s tým robíme.</p>
+      <p class="lead" data-stats="off">Nemáme registráciu, cookies ani sledovanie. Tu je presne a bez právničiny, čo sa kde ukladá a čo s tým robíme.</p>
+      <p class="lead" data-stats="on">Nemáme registráciu ani cookies. Počítame len anonymné návštevy. Tu je presne a bez právničiny, čo sa kde ukladá a čo s tým robíme.</p>
     </div>
     <div class="art bob" data-ludko="hi" data-w="230"></div>
   </div>
@@ -65,8 +68,10 @@
     <h2>Stručne</h2>
     <div class="facts">
       <div class="fact" style="background:#C9F2D2"><span class="e" aria-hidden="true">🍪</span><b>Žiadne cookies</b><span>Stránka nepoužíva cookies. Preto sa ťa ani na nič nepýtame.</span></div>
-      <div class="fact" style="background:#EEECFF"><span class="e" aria-hidden="true">🙈</span><b>Žiadne sledovanie</b><span>Nemeriame, kto si a čo tu robíš. Nemáme reklamné ani analytické nástroje.</span></div>
-      <div class="fact" style="background:#FFF3CF"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo aj ostatné súbory sú priamo na ludskyoai.sk. Nenačítavame nič od Googlu ani iných firiem.</span></div>
+      <div class="fact" style="background:#EEECFF" data-stats="off"><span class="e" aria-hidden="true">🙈</span><b>Žiadne sledovanie</b><span>Nemeriame, kto si a čo tu robíš. Nemáme reklamné ani analytické nástroje.</span></div>
+      <div class="fact" style="background:#EEECFF" data-stats="on"><span class="e" aria-hidden="true">📊</span><b>Len súčty, nie ty</b><span>Počítame, koľko ľudí si pozrie stránky a hry. Nevieme, kto si, a nesledujeme ťa na iných weboch.</span></div>
+      <div class="fact" style="background:#FFF3CF" data-stats="off"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo aj ostatné súbory sú priamo na ludskyoai.sk. Nenačítavame nič od Googlu ani iných firiem.</span></div>
+      <div class="fact" style="background:#FFF3CF" data-stats="on"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo, skripty aj obrázky sú priamo na ludskyoai.sk. Jediná výnimka je anonymné počítanie návštev.</span></div>
       <div class="fact" style="background:#FFD6D3"><span class="e" aria-hidden="true">📱</span><b>Hry si pamätá tvoj prehliadač</b><span>Hviezdičky a odznaky zostávajú u teba. K nám sa nedostanú.</span></div>
     </div>
   </div>
@@ -110,6 +115,16 @@
     <div class="prose">
       <p>Stránka beží na službe GitHub Pages. Ako pri každom webe, aj server GitHubu pri návšteve vidí tvoju IP adresu a používa ju na bezpečnosť a prevádzku. My k týmto údajom prístup nemáme.</p>
       <p>Na niektorých miestach odkazujeme na iné weby: na Instagram, na zdroje noviniek alebo na nástroje pre školy. Keď na odkaz klikneš, platia tam už ich pravidlá.</p>
+    </div>
+    <div data-stats="on">
+    <h2 style="margin-top:2.4rem">Počítanie návštev</h2>
+    <div class="prose">
+      <p>Chceme vedieť, ktoré stránky a hry ľudí bavia. Preto počítame návštevy cez službu <a href="https://www.goatcounter.com/">GoatCounter</a>. Nepoužíva cookies a do tvojho prehliadača si nič neukladá.</p>
+      <p><b>Pri návšteve sa pošle:</b> adresa stránky, web, z ktorého prichádzaš, a šírka obrazovky. Počítame aj niektoré kliknutia, napríklad na Instagram, na e-mail alebo spustenie hry.</p>
+      <p>GoatCounter z tvojej IP adresy zistí krajinu. Z identifikátora prehliadača zistí jeho názov a systém. Samotnú IP adresu ani tento identifikátor do databázy neukladá. Aby jednu návštevu nezarátal dvakrát, drží ich v pamäti najviac 8 hodín.</p>
+      <p>My vidíme len súčty, napríklad koľkí si dnes spustili hru Ľudko na vrchol. Nevieme, kto si. Nič nepredávame a nikomu to nedávame.</p>
+      <p>Počíta sa len na ludskyoai.sk. Ak máš v prehliadači zapnuté „Nesledovať“ (Do Not Track) alebo Global Privacy Control, nepošle sa nič.</p>
+    </div>
     </div>
   </div>
 </section>

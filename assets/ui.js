@@ -40,7 +40,7 @@
       '<div><h3>Pre koho</h3><ul><li><a href="' + u('zaciatok.html') + '">Začíname s AI</a></li><li><a href="' + u('./#rodicia') + '">Pre rodičov</a></li><li><a href="' + u('skoly.html') + '">Pre školy</a></li><li><a href="' + u('hry.html') + '">Hry pre deti</a></li></ul></div>' +
       '<div><h3>Dôvera</h3><ul><li><a href="' + u('./#overujeme') + '">Ako overujeme</a></li><li><a href="' + u('opravy.html') + '">Opravy</a></li><li><a href="' + u('sukromie.html') + '">Súkromie</a></li></ul></div>' +
       '<div><h3>Kontakt</h3><ul><li><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></li><li><a href="mailto:info@ludskyoai.sk">info@ludskyoai.sk</a></li></ul></div>' +
-      '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="' + u('sukromie.html') + '" style="color:inherit">Viac o súkromí</a></small></div>';
+      '</div><small>Bez registrácie a bez cookies. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="' + u('sukromie.html') + '" style="color:inherit">Viac o súkromí</a></small></div>';
   }
   // jemné odhaľovanie sekcií
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 }) : null;

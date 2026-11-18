@@ -528,6 +528,7 @@ footer.bot nav{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
 }
 .beta-bar{background:#C62828;color:#FFFFFF;text-align:center;font:600 13px/1.4 Montserrat,system-ui,sans-serif;padding:6px 16px}
 </style>
+<script src="assets/stats.js"></script>
 </head>
 <body>
 <div class="beta-bar" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
@@ -948,7 +949,7 @@ function route() {
   var id = (location.hash || '').replace('#', '');
   clearAll();
   var g = byId(id);
-  if (g) renderIntro(g); else renderHub(['rodicia', 'dobrodruzstva', 'cesta', 'nastrahy', 'seniori'].indexOf(id) >= 0 ? id : null);
+  if (g) { if (window.ludStat) ludStat('hra-otvorena/' + g.id); renderIntro(g); } else renderHub(['rodicia', 'dobrodruzstva', 'cesta', 'nastrahy', 'seniori'].indexOf(id) >= 0 ? id : null);
 }
 addEventListener('hashchange', route);
 function go(id) { if ((location.hash || '').replace('#', '') === id) route(); else location.hash = id; }
@@ -1087,6 +1088,7 @@ function renderIntro(g) {
    ===================================================================== */
 function start(g) {
   clearAll(); G = g;
+  if (window.ludStat) ludStat('hra-start/' + g.id);
   R = { i: 0, points: 0, correct: 0, streak: 0, results: [], busy: false };
   if (g.type === 'bin' || g.type === 'pick') R.items = shuffle(POOLS[g.id]).slice(0, g.size);
   if (g.type === 'word') R.items = shuffle(WORDS).slice(0, g.size - 1).concat([TWIST]);
@@ -1951,6 +1953,7 @@ function pasGame() {
    ===================================================================== */
 function finish(correct, total, points, opt) {
   stopTimer(); R.keys = null; R.busy = true; opt = opt || {};
+  if (window.ludStat) ludStat('hra-koniec/' + G.id);
   var st0 = $('.stage'); if (st0) st0.classList.remove('runmode');
   var id = G.id, stars = opt.stars != null ? opt.stars : (correct === total ? 3 : (correct / total >= 0.6 ? 2 : (correct > 0 ? 1 : 0)));
   var prevBest = save.best[id] || 0, prevStars = save.stars[id] || 0;
