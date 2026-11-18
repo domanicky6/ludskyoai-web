@@ -188,7 +188,7 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
       while (idx < TL.length && TL[idx][0] <= t) act(TL[idx++]);
       if (beatT && sound) { beatT -= dt; if (beatT <= 0) { tone(70, 0, 0.12, 'sine', 0.18, 50); tone(70, 0.18, 0.12, 'sine', 0.12, 50); beatT = 0.9; } }
       prog.style.width = Math.min(100, t / DUR * 100) + '%';
-      if (t >= DUR) { stop(); return; }
+      if (t >= DUR) { stop(); if (window.ludStat) ludStat('pribeh-dohrany'); return; }
       raf = requestAnimationFrame(frame);
     }
     function play() {
