@@ -122,7 +122,7 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
     [13.2, 'dark', 0], [13.2, 'lk', 1], [13.4, 'say', 'Ahoj, Peter. Stop. Poďme sa spolu nadýchnuť.'], [13.4, 'cap', 'Vtedy prišiel Ľudko.'],
     [15.4, 'say', ''], [15.6, 'breath', 'Nádych…'], [15.6, 'cap', 'Pomaly sa nadýchni…'], [15.7, 'drop', 0], [16.3, 'drop', 1], [16.9, 'drop', 2],
     [18.6, 'breath', 'Výdych…'], [18.6, 'cap', '…a pomaly vydýchni.'], [18.7, 'drop', 3], [19.3, 'drop', 4], [19.9, 'drop', 5], [20.5, 'drop', 6], [21.0, 'drop', 7], [21.4, 'drop', 8],
-    [21.8, 'breath', ''], [21.9, 'mood', 'smile'], [21.9, 'say', 'Nemusíš vedieť všetko. Stačí vedieť, čo sa naozaj zmenilo – a čo to znamená pre teba.'],
+    [21.8, 'breath', ''], [21.9, 'mood', 'smile'], [21.9, 'say', 'Nemusíš vedieť všetko. Stačí vedieť, čo sa naozaj zmenilo a čo to znamená pre teba.'],
     [22.0, 'cap', 'Obavy sú normálne. Strašiť ťa však nemusí nikto.'], [26.0, 'say', 'Novinky ti budem nosiť ja. Ľudsky.'], [26.0, 'cap', 'Každý deň jedna overená novinka. So zdrojom a dátumom.'],
     [29.5, 'end', 1]
   ];
@@ -153,7 +153,7 @@ M('.st-breath{width:50%;margin-left:-25%;margin-top:-25%;top:40%}') +
       '<div class="row"><a class="st-b dark" href="https://www.instagram.com/ludskyoai/">📸 Sleduj @ludskyoai</a><a class="st-b" href="zaciatok.html">Začni pokojne →</a><button type="button" class="st-b st-rep">↻ Znova</button></div></div></div>' +
       '<button type="button" class="st-big" aria-label="Prehrať príbeh">▶</button>' +
       '</div><div class="st-ctl"><button type="button" class="pl" aria-label="Prehrať">▶</button><div class="st-prog" aria-hidden="true"><i></i></div><button type="button" class="snd" aria-pressed="false" aria-label="Zapnúť zvuk">🔇</button></div>' +
-      '<p class="st-note">Ilustračný príbeh. Titulky v ňom sú vymyslené – také, aké poznáš zo sociálnych sietí. Trvá asi 30 sekúnd.</p></div>';
+      '<p class="st-note">Ilustračný príbeh. Titulky v ňom sú vymyslené, ale také poznáš zo sociálnych sietí. Trvá asi 30 sekúnd.</p></div>';
     var root = el.querySelector('.st'), cards = el.querySelectorAll('.st-card'), cap = el.querySelector('.st-cap span'), say = el.querySelector('.st-say'),
       br = el.querySelector('.st-breath'), prog = el.querySelector('.st-prog i'), pl = el.querySelector('.st-ctl .pl'), snd = el.querySelector('.snd'), big = el.querySelector('.st-big');
     var sound = false, autoPaused = false, playing = false, t = 0, last = 0, idx = 0, raf = 0, played = false, beatT = 0;
