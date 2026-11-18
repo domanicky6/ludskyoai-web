@@ -285,6 +285,7 @@ ${CSS}
 <script type="application/ld+json">
 ${JSON.stringify(jsonld, null, 1).replace(/</g, '\\u003c')}
 </script>
+<script src="../assets/stats.js"></script>
 </head>
 <body data-root="../">
 <div class="beta-bar" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
