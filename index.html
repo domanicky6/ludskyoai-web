@@ -133,7 +133,7 @@ a{color:#17153B}a:hover{color:#3A3770}
 <a href="zaciatok.html" style="text-decoration: none; padding: 12px 0">Začíname s AI</a>
 <a href="hry.html" style="text-decoration: none; padding: 12px 0">Hry</a>
 <a href="skoly.html" style="text-decoration: none; padding: 12px 0">Pre školy</a>
-<a href="#rodicia" @click="closeMenu" style="text-decoration: none; padding: 12px 0">Pre rodičov</a>
+<a href="rodicia.html" style="text-decoration: none; padding: 12px 0">Pre rodičov</a>
 <a href="#zadarmo" @click="closeMenu" style="text-decoration: none; padding: 12px 0">PDF zadarmo</a>
 </nav>
 <div style="display: flex; align-items: center; gap: 10px">
@@ -215,7 +215,7 @@ a{color:#17153B}a:hover{color:#3A3770}
 <span class="pk-kick">Kde chceš začať?</span>
 <div class="pk-grid">
 <a class="pk-tile" href="zaciatok.html" style="--c:#C9F2D2"><span class="pk-e" aria-hidden="true">🌱</span><b>Začínam s AI</b><span>Pokojný štart: 7 malých krokov, prvé otázky na skopírovanie a slovníček bez strachu.</span><i>Začíname s AI →</i></a>
-<a class="pk-tile" href="#rodicia" style="--c:#FFF3CF"><span class="pk-e" aria-hidden="true">👨‍👩‍👧</span><b>Mám deti</b><span>Ako sa s deťmi rozprávať o AI, čo im dovoliť a hry, pri ktorých sa naučia, ako AI funguje.</span><i>Pre rodičov →</i></a>
+<a class="pk-tile" href="rodicia.html" style="--c:#FFF3CF"><span class="pk-e" aria-hidden="true">👨‍👩‍👧</span><b>Mám deti</b><span>Ako sa s deťmi rozprávať o AI, čo im dovoliť a hry, pri ktorých sa naučia, ako AI funguje.</span><i>Pre rodičov →</i></a>
 <a class="pk-tile" href="skoly.html" style="--c:#EEECFF"><span class="pk-e" aria-hidden="true">🏫</span><b>Učím</b><span>Hodiny na 45 minút podľa veku žiakov a hry na projektor. Bez registrácie.</span><i>Pre školy →</i></a>
 </div>
 <p class="pk-more">Chceš si len zahrať? <a href="hry.html">12 hier o AI pre deti aj dospelých →</a></p>
@@ -451,31 +451,13 @@ a{color:#17153B}a:hover{color:#3A3770}
 
 <!-- Pre rodičov -->
 <section id="rodicia">
-<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
-<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px">
+<div class="sec" style="max-width: 1180px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 420px; max-width: 720px; display: flex; flex-direction: column; gap: 16px">
 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; color: #4A4775">SÉRIA PRE RODIČOV</span>
 <h2 style="margin: 0; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; font-weight: 800">AI a deti</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Deti stretávajú AI v mobile, v škole aj v hrách. Pomôžeme ti zorientovať sa, nastaviť bezpečné pravidlá a vysvetliť im, čo AI je a čo nie je.</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #36335E">Deti stretávajú AI v mobile, v škole aj v hrách. Ukážeme ti, ako sa s nimi o AI rozprávať podľa veku a čo im dovoliť. Nájdeš tam aj rodinnú dohodu na vytlačenie a hry pre deti.</p>
 </div>
-<div style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
-<div class="lift" style="background: #FEBC2E; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">NÁVOD</span>
-<h3 style="margin: 0; font-size: 22px; font-weight: 800">Rodičovská kontrola v AI aplikáciách</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.55">Krok za krokom, kde ju nájdeš a čo nastaviť.</p>
-</div>
-<div class="lift" style="background: #28C840; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em">RADA</span>
-<h3 style="margin: 0; font-size: 22px; font-weight: 800">AI a deti – 5 vecí, ktoré treba vedieť</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.55">Podľa odporúčaní AACAP (7/2026) a Common Sense Media (6/2026).</p>
-</div>
-<div style="grid-column: 1 / -1; border: 2px solid #17153B; border-radius: 24px; padding: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 300px">
-<strong style="font-size: 20px">Sprievodca pre rodičov v PDF</strong>
-<span style="font-size: 16px; line-height: 1.5; color: #36335E">Napíš do komentára na Instagrame slovo <strong style="font-family: 'JetBrains Mono', monospace; color: #17153B">RODICIA</strong> a pošleme ti ho do správ.</span>
-</div>
-<a class="cta" href="https://www.instagram.com/ludskyoai/" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #17153B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 16px; box-sizing: border-box">Na Instagram</a>
-</div>
-</div>
+<a class="cta" href="rodicia.html" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; border-radius: 999px; background: #FEBC2E; color: #17153B; border: 3px solid #17153B; box-shadow: 5px 5px 0 #17153B; text-decoration: none; font-weight: 800; font-size: 17px; box-sizing: border-box">Celá stránka pre rodičov →</a>
 </div>
 </section>
 

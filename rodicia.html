@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre rodičov – AI a deti – Ľudsky o AI</title>
+<meta name="description" content="Ako sa s deťmi rozprávať o AI podľa veku, čo im dovoliť a na čo si dať pozor. Rodinná dohoda o AI na vytlačenie a hry pre deti od 6 rokov.">
+<meta property="og:title" content="Pre rodičov: AI a deti, pokojne a spolu">
+<meta property="og:description" content="Ako sa s deťmi rozprávať o AI, čo im dovoliť a na čo si dať pozor. Rodinná dohoda na vytlačenie a hry podľa veku.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/rodicia.html">
+<meta property="og:image" content="https://ludskyoai.sk/assets/og/rodicia.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pre rodičov: AI a deti, pokojne a spolu. Maskot Ľudko.">
+<meta property="og:site_name" content="Ľudsky o AI">
+<meta property="og:locale" content="sk_SK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17153B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="assets/site.webmanifest">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+.beta-bar{background:#C62828;color:#FFFFFF;text-align:center;font:600 13px/1.4 Montserrat,system-ui,sans-serif;padding:6px 16px}
+.btns{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.4rem}
+.ages{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.agec{display:flex;flex-direction:column;gap:.6rem;border-radius:22px;border:3px solid var(--ink);padding:1.3rem;background:#fff}
+.agec .yr{align-self:flex-start;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;border-radius:999px;padding:.25rem .75rem}
+.agec b{font-size:1.15rem;line-height:1.3}
+.agec p{margin:0;line-height:1.55;color:var(--ink2)}
+.agec .say{background:var(--yel2);border:2px dashed var(--ink);border-radius:14px;padding:.6rem .8rem;line-height:1.5;font-size:.97rem}
+.yesno{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.yesno .col{border:3px solid var(--ink);border-radius:22px;padding:1.4rem 1.5rem}
+.yesno h3{margin:0 0 .8rem;font-size:1.3rem}
+.yesno ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.yesno li{display:grid;grid-template-columns:1.8rem 1fr;gap:.4rem;line-height:1.5}
+.watch{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,195px),1fr))}
+.watch .card{display:flex;flex-direction:column;gap:.5rem}
+.watch .e{font-size:2.1rem;line-height:1}
+.watch b{font-size:1.15rem}
+.watch p{margin:0;line-height:1.55;color:var(--ink2)}
+.deal{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:1.8rem;box-shadow:7px 7px 0 var(--ink);max-width:760px}
+.deal h3{margin:0 0 .3rem;font-size:1.6rem}
+.deal ol{margin:.8rem 0;padding-left:1.4rem;display:flex;flex-direction:column;gap:.55rem;line-height:1.55;font-size:1.05rem}
+.deal .sign{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.8rem}
+.deal .sign span{border-top:2px solid var(--ink);padding-top:.3rem;font-size:.85rem;color:var(--mut)}
+.games{display:flex;flex-direction:column;gap:1.4rem}
+.grow h3{margin:0 0 .7rem;font-size:1.2rem}
+.glist{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.glist a{display:grid;grid-template-columns:auto 1fr;gap:.2rem .8rem;align-items:center;text-decoration:none;background:#fff;border:3px solid var(--ink);border-radius:18px;padding:.9rem 1rem;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.glist a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.glist .e{grid-row:span 2;font-size:1.9rem;width:3rem;height:3rem;border-radius:14px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.glist b{font-size:1.02rem}
+.glist small{color:var(--ink2);line-height:1.4}
+.box{border:3px solid var(--ink);border-radius:24px;padding:1.5rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;background:#fff}
+.box p{margin:.3rem 0 0;color:var(--ink2);line-height:1.5}
+@media print{
+  body *{visibility:hidden}
+  .beta-bar,.top,.foot{display:none!important}
+  #dohoda .deal,#dohoda .deal *{visibility:visible}
+  #dohoda .deal{position:absolute;left:0;top:0;width:100%;box-shadow:none;border-width:2px;max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="beta-bar" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
+<header id="site-header"></header>
+<main id="obsah">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="txt">
+      <span class="kicker">Pre rodičov</span>
+      <h1>AI a deti. Pokojne a&nbsp;spolu.</h1>
+      <p class="lead">Deti stretávajú AI v mobile, v škole aj v hrách. Netreba sa báť ani všetko zakázať. Stačí sa s nimi rozprávať a dohodnúť sa na pár pravidlách.</p>
+      <div class="btns">
+        <a class="btn yel" href="#vek">Ako o AI hovoriť podľa veku →</a>
+        <a class="btn" href="#dohoda">Rodinná dohoda o AI</a>
+      </div>
+    </div>
+    <div class="art bob" data-ludko="hi" data-w="230"></div>
+  </div>
+</section>
+
+<section class="sec" id="vek" style="scroll-margin-top:4rem">
+  <div class="wrap">
+    <span class="kicker">Rozhovor podľa veku</span>
+    <h2>Ako sa s deťmi rozprávať o AI</h2>
+    <p class="lead">Nemusíš byť odborník. Najlepšie funguje spoločná hra a jedna otázka po nej. Tu je, čo dieťa v akom veku pochopí.</p>
+    <div class="ages">
+      <div class="agec reveal" style="background:#C9F2D2"><span class="yr">6 – 8 rokov</span><b>AI sa učí z príkladov</b>
+        <p>Porovnaj to s tým, ako sa učí samo dieťa. Keď sú príklady dobré, AI sa učí dobre. Keď sú zlé, naučí sa zle.</p>
+        <p>Pridaj Ľudkovo pravidlo: „AI povedz len to, čo by si povedal aj cudziemu človeku na ulici.“</p>
+        <div class="say">💬 Čo by si Ľudko myslel o zelenom jablku, keby videl len červené?</div></div>
+      <div class="agec reveal" style="background:#EEECFF"><span class="yr">8 – 10 rokov</span><b>AI háda ďalšie slovo</b>
+        <p>Keď AI píše, stále háda, ktoré slovo sa najviac hodí. Väčšinou trafí. Ale aj keď niečo nevie, aj tak niečo napíše.</p>
+        <p>Preto znie isto, aj keď sa mýli. Dôležité veci si overujeme.</p>
+        <div class="say">💬 Keď ti AI niečo povie, ako zistíš, či je to pravda?</div></div>
+      <div class="agec reveal" style="background:#FFF3CF"><span class="yr">10 – 13 rokov</span><b>Over si to</b>
+        <p>Nauč dieťa tri otázky. Kto to tvrdí? Čo hovoria iné spoľahlivé zdroje? Odkedy to platí?</p>
+        <p>Pri obrázkoch pomôžu chyby, napríklad divné prsty. Istotu však dá až to, odkiaľ obrázok pochádza.</p>
+        <div class="say">💬 Ktorému zdroju veríš a prečo?</div></div>
+      <div class="agec reveal" style="background:#FFE3C7"><span class="yr">13+ rokov</span><b>Deepfaky, podvody a férovosť</b>
+        <p>AI vie napodobniť hlas aj tvár. Podvodníci tlačia na čas, peniaze a tajnosť.</p>
+        <p>Pri úlohách do školy sa porozprávajte, kde je hranica. Čo sa dieťa naučí, keď úlohu napíše AI?</p>
+        <div class="say">💬 Keď za mňa píše AI, kto sa učí?</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap">
+    <span class="kicker">Čo dovoliť</span>
+    <h2>Áno, alebo radšej nie?</h2>
+    <p class="lead">AI nemusí byť doma zakázaná. Záleží na tom, na čo ju dieťa používa. Mladšie deti nech ju skúšajú s tebou.</p>
+    <div class="yesno">
+      <div class="col" style="background:#C9F2D2"><h3>👍 Pokojne áno</h3><ul>
+        <li><span aria-hidden="true">❓</span><span>Pýtať sa na veci, ktoré ho zaujímajú. Napríklad prečo je obloha modrá.</span></li>
+        <li><span aria-hidden="true">✏️</span><span>Vymýšľať s AI básničky a príbehy.</span></li>
+        <li><span aria-hidden="true">📘</span><span>Nechať si vysvetliť látku, ktorej v škole nerozumelo.</span></li>
+        <li><span aria-hidden="true">👨‍👧</span><span>Skúšať AI spolu s tebou a potom sa o tom porozprávať.</span></li>
+      </ul></div>
+      <div class="col" style="background:#FFD6D3"><h3>🤐 Radšej nie</h3><ul>
+        <li><span aria-hidden="true">🏠</span><span>Písať do AI celé meno, školu, adresu ani telefónne čísla rodiny.</span></li>
+        <li><span aria-hidden="true">🔑</span><span>Prezrádzať heslá. Heslo nepatrí nikomu, ani AI.</span></li>
+        <li><span aria-hidden="true">📷</span><span>Nahrávať fotky kamarátov bez ich dovolenia.</span></li>
+        <li><span aria-hidden="true">📝</span><span>Nechať AI napísať celú úlohu namiesto seba.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <span class="kicker">Na čo si dať pozor</span>
+    <h2>Päť vecí, o ktorých sa oplatí hovoriť</h2>
+    <div class="watch" style="margin-top:1.4rem">
+      <div class="card reveal"><span class="e" aria-hidden="true">🔒</span><b>Súkromie</b><p>Podľa mena a školy sa dá zistiť, kde dieťa nájsť. Kde bývate alebo že ste na dovolenke, nepatrí do žiadneho chatu.</p></div>
+      <div class="card reveal"><span class="e" aria-hidden="true">📷</span><b>Fotky</b><p>Fotka patrí tomu, kto je na nej. Bez jeho dovolenia ju dieťa nikam nenahráva. To platí aj pre AI aplikácie.</p></div>
+      <div class="card reveal"><span class="e" aria-hidden="true">📝</span><b>Úlohy do školy</b><p>AI môže látku vysvetliť. Keď však napíše celú slohovku, dieťa sa nič nenaučí. Ak AI pomohla, nech to v škole povie.</p></div>
+      <div class="card reveal"><span class="e" aria-hidden="true">🎭</span><b>Deepfake</b><p>Falošné video môže niekto vyrobiť aj o spolužiakovi. Dieťa ho nemá šíriť. Nech ho nahlási a povie to tebe alebo učiteľovi.</p></div>
+      <div class="card reveal"><span class="e" aria-hidden="true">🤖</span><b>Chatbot ako „kamarát“</b><p>Chatbot odpovedá milo a vždy má čas. Pripomeň dieťaťu, že je to program a nerozmýšľa ako človek. Keď ho niečo trápi, nech príde za tebou.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec lil" id="dohoda" style="scroll-margin-top:4rem">
+  <div class="wrap">
+    <span class="kicker">Na vytlačenie</span>
+    <h2>Rodinná dohoda o AI</h2>
+    <p class="lead">Prečítajte si ju spolu a body si upravte. Dôležité je, aby boli vaše. Potom ju podpíšte a dajte na chladničku.</p>
+    <div class="deal">
+      <span class="kicker" style="font-size:.75rem">Ľudsky o AI · rodinná dohoda</span>
+      <h3>Takto používame AI u nás doma</h3>
+      <ol>
+        <li>AI je náš <b>pomocník</b>. Myslíme však sami.</li>
+        <li>Do AI <b>nepíšeme</b> meno, adresu, školu, heslá ani telefónne čísla.</li>
+        <li>Fotky iných ľudí <b>nenahrávame</b> bez ich dovolenia.</li>
+        <li>Dôležité veci si <b>overíme</b> v inom zdroji alebo sa opýtame.</li>
+        <li>Keď nám AI pomôže s úlohou, <b>povieme to</b>.</li>
+        <li>Keď nás niečo vystraší alebo zmätie, <b>povieme to doma</b>. Nikto sa nebude hnevať.</li>
+        <li>Máme <b>rodinné heslo</b>. Keď niekto volá o pomoc a chce peniaze, opýtame sa naň.</li>
+      </ol>
+      <div class="sign"><span>Podpisy detí</span><span>Podpisy rodičov a dátum</span></div>
+    </div>
+    <div style="margin-top:1.4rem;display:flex;gap:.8rem;flex-wrap:wrap"><button type="button" class="btn yel" onclick="window.print()">🖨️ Vytlačiť dohodu</button></div>
+  </div>
+</section>
+
+<section class="sec" id="hry-vek" style="scroll-margin-top:4rem">
+  <div class="wrap">
+    <span class="kicker">Hry podľa veku</span>
+    <h2>Zahrajte sa spolu</h2>
+    <p class="lead">Hry trvajú pár minút a nič sa v nich neodosiela. Každá končí otázkou na rozhovor. Práve tá je najdôležitejšia.</p>
+    <div class="games">
+      <div class="grow"><h3>Od 6 rokov</h3><div class="glist">
+        <a href="hry.html#nauc"><span class="e" style="background:#C9F2D2" aria-hidden="true">🍎</span><b>Nauč Ľudka</b><small>Ako sa AI učí z príkladov.</small></a>
+        <a href="hry.html#prezradit"><span class="e" style="background:#FFF3CF" aria-hidden="true">🤫</span><b>Čo prezradiť AI?</b><small>Čo je súkromné a nepatrí do chatu.</small></a>
+        <a href="hry.html#vrchol"><span class="e" style="background:#C9F2D2" aria-hidden="true">🧗</span><b>Ľudko na vrchol</b><small>Trasa Kopec za školou je od 6 rokov.</small></a>
+      </div></div>
+      <div class="grow"><h3>Od 7 – 8 rokov</h3><div class="glist">
+        <a href="hry.html#chyby"><span class="e" style="background:#FFE3C7" aria-hidden="true">🔍</span><b>Nájdi chyby AI</b><small>Ako spoznať obrázok od AI.</small></a>
+        <a href="hry.html#pexeso"><span class="e" style="background:#EEECFF" aria-hidden="true">🃏</span><b>Pexeso o AI</b><small>Slová ako prompt, deepfake a halucinácia.</small></a>
+        <a href="hry.html#slovo"><span class="e" style="background:#EEECFF" aria-hidden="true">💬</span><b>Doplň ako AI</b><small>Prečo AI znie múdro, aj keď sa mýli.</small></a>
+        <a href="hry.html#robot"><span class="e" style="background:#FFE3C7" aria-hidden="true">🤖</span><b>Robot, či človek?</b><small>Spoznáš, kto napísal text?</small></a>
+        <a href="hry.html#riskuj"><span class="e" style="background:#FFF3CF" aria-hidden="true">🏆</span><b>Riskuj o AI</b><small>Súťaž pre celú rodinu, až 4 tímy.</small></a>
+      </div></div>
+      <div class="grow"><h3>Od 9 – 10 rokov</h3><div class="glist">
+        <a href="hry.html#pas"><span class="e" style="background:#C9F2D2" aria-hidden="true">📦</span><b>Triediaci pás</b><small>Je správa v poriadku, alebo podvod?</small></a>
+        <a href="hry.html#halu"><span class="e" style="background:#FFD6D3" aria-hidden="true">🔍</span><b>Vymyslela si to AI?</b><small>Nájdi vetu, ktorá nie je pravda.</small></a>
+        <a href="hry.html#vrchol"><span class="e" style="background:#C9F2D2" aria-hidden="true">🧗</span><b>Gerlachovský štít</b><small>Ťažšia trasa v hre Ľudko na vrchol.</small></a>
+      </div></div>
+      <div class="grow"><h3>Pre celú rodinu</h3><div class="glist">
+        <a href="hry.html#podvod"><span class="e" style="background:#FFD6D3" aria-hidden="true">🚨</span><b>Odhaľ podvod</b><small>Falošný hlas, video aj SMS. Zahrajte si to aj so starými rodičmi.</small></a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:1.2rem">
+    <div class="box">
+      <div style="flex:1 1 300px"><b style="font-size:1.2rem">Sprievodca pre rodičov v PDF</b><p>Napíš do komentára na Instagrame slovo <b class="mono">RODICIA</b> a pošleme ti ho do správ.</p></div>
+      <a class="btn dark" href="https://www.instagram.com/ludskyoai/">Na Instagram</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/ui.js"></script>
+</body>
+</html>

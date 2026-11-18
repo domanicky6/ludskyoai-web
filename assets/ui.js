@@ -6,7 +6,7 @@
     { href: 'zaciatok.html', t: 'Začíname s AI' },
     { href: 'hry.html', t: 'Hry' },
     { href: 'skoly.html', t: 'Pre školy' },
-    { href: './#rodicia', t: 'Pre rodičov' },
+    { href: 'rodicia.html', t: 'Pre rodičov' },
     { href: './#zadarmo', t: 'PDF zadarmo' }
   ];
   // Na stránke 404 (body data-root="/") musia byť odkazy absolútne, lebo GitHub Pages ju servuje aj pre hlboké cesty.
@@ -37,7 +37,7 @@
     foot.className = 'foot';
     foot.innerHTML = '<div class="wrap"><div class="cols">' +
       '<div><a class="logo" href="' + u('./') + '" style="color:#fff"><span class="d" aria-hidden="true"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>Ľudsky o AI</a><p style="margin:.8rem 0 0;line-height:1.6">Umelá inteligencia vysvetlená ľudsky. Novinky so zdrojom a dátumom, bez strašenia.</p></div>' +
-      '<div><h3>Pre koho</h3><ul><li><a href="' + u('zaciatok.html') + '">Začíname s AI</a></li><li><a href="' + u('./#rodicia') + '">Pre rodičov</a></li><li><a href="' + u('skoly.html') + '">Pre školy</a></li><li><a href="' + u('hry.html') + '">Hry pre deti</a></li></ul></div>' +
+      '<div><h3>Pre koho</h3><ul><li><a href="' + u('zaciatok.html') + '">Začíname s AI</a></li><li><a href="' + u('rodicia.html') + '">Pre rodičov</a></li><li><a href="' + u('skoly.html') + '">Pre školy</a></li><li><a href="' + u('hry.html') + '">Hry pre deti</a></li></ul></div>' +
       '<div><h3>Dôvera</h3><ul><li><a href="' + u('./#overujeme') + '">Ako overujeme</a></li><li><a href="' + u('opravy.html') + '">Opravy</a></li><li><a href="' + u('sukromie.html') + '">Súkromie</a></li></ul></div>' +
       '<div><h3>Kontakt</h3><ul><li><a href="https://www.instagram.com/ludskyoai/">Instagram @ludskyoai</a></li><li><a href="mailto:info@ludskyoai.sk">info@ludskyoai.sk</a></li></ul></div>' +
       '</div><small>Žiadna registrácia, žiadne sledovanie. Hry a pokrok sa ukladajú len v tvojom prehliadači. <a href="' + u('sukromie.html') + '" style="color:inherit">Viac o súkromí</a></small></div>';
