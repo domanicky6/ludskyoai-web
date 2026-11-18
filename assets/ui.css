@@ -17,7 +17,8 @@ button{font-family:inherit;color:inherit}
 /* hlavička */
 .top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid #E6E5F0}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.7rem;padding-bottom:.7rem}
-.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:800;font-size:1.2rem}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:800;font-size:1.2rem;white-space:nowrap}
+@media (max-width:400px){.top .logo{font-size:1.05rem;gap:.5rem}}
 .logo .d{display:flex;gap:6px}.logo .d i{width:12px;height:12px;border-radius:50%;display:block}
 .nav{display:flex;flex-wrap:wrap;gap:.2rem 1.3rem;font-weight:600;font-size:.95rem}
 .nav a{text-decoration:none;padding:.7rem 0;border-bottom:3px solid transparent}
