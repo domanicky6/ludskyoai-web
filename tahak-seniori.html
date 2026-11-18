@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ťahák proti podvodom pre seniorov – Ľudsky o AI</title>
+<meta name="description" content="Ťahák na jednu stranu A4 s veľkým písmom: ako spoznať podvod s AI, čo nikdy nepovedať do telefónu a čo urobiť hneď. Vytlač ho babke alebo dedkovi.">
+<meta property="og:title" content="Ťahák proti podvodom pre seniorov">
+<meta property="og:description" content="Jedna strana A4 s veľkým písmom. Falošný hlas vnuka, falošné video, SMS s odkazom. Vytlač ho a daj ho k telefónu.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/tahak-seniori.html">
+<meta property="og:image" content="https://ludskyoai.sk/assets/og/tahak-seniori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ťahák proti podvodom pre seniorov na vytlačenie. Maskot Ľudko.">
+<meta property="og:site_name" content="Ľudsky o AI">
+<meta property="og:locale" content="sk_SK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17153B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="assets/site.webmanifest">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/ui.css">
+<style>
+.beta-bar{background:#C62828;color:#FFFFFF;text-align:center;font:600 13px/1.4 Montserrat,system-ui,sans-serif;padding:6px 16px}
+.btns{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.4rem}
+.note{color:var(--ink2);line-height:1.6;max-width:46rem}
+
+/* ťahák: veľkosti v em, aby sa dal zväčšiť naraz */
+.sheet{font-size:clamp(16px,2.1vw,19px);background:#fff;color:#000;border:3px solid var(--ink);border-radius:24px;box-shadow:7px 7px 0 var(--ink);padding:1.6em;max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:1em;line-height:1.35}
+.sheet h2{margin:0;font-size:2em;line-height:1.1;font-weight:900;letter-spacing:-.01em}
+.sheet .sub{margin:.35em 0 0;font-size:1.1em;font-weight:600}
+.sheet h3{margin:0 0 .5em;font-size:1.3em;font-weight:900}
+.sheet .four{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15em),1fr));gap:.7em}
+.sheet .sc{border:3px solid #000;border-radius:16px;padding:.6em .8em;display:grid;grid-template-columns:auto 1fr;gap:.1em .6em;align-items:start;align-content:start}
+.sheet .sc .e{font-size:1.7em;line-height:1;grid-row:span 2}
+.sheet .sc b{font-size:1.05em}
+.sheet .sc span{font-size:1em}
+.sheet .never{background:#FFE0DD;border:3px solid #000;border-radius:16px;padding:.8em 1em}
+.sheet .never ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45em}
+.sheet .never li{background:#fff;border:2px solid #000;border-radius:999px;padding:.2em .8em;font-weight:900;font-size:1.05em}
+.sheet .never p{margin:.6em 0 0;font-weight:700}
+.sheet .now{background:#D8F5DE;border:3px solid #000;border-radius:16px;padding:.8em 1em}
+.sheet .now ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.4em;counter-reset:n}
+.sheet .now li{display:grid;grid-template-columns:1.8em 1fr;gap:.5em;align-items:start;font-size:1.05em}
+.sheet .now li::before{counter-increment:n;content:counter(n);width:1.6em;height:1.6em;border-radius:50%;background:#000;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.95em}
+.sheet .now li b{font-weight:900}
+.sheet .call{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11em),1fr));gap:.7em}
+.sheet .call div{border:3px solid #000;border-radius:16px;padding:.6em .9em;display:flex;flex-direction:column}
+.sheet .call span{font-weight:700}
+.sheet .call strong{font-size:2em;line-height:1.1;font-weight:900}
+.sheet .call .fam{justify-content:space-between}
+.sheet .call .line{border-bottom:2px solid #000;height:1.6em}
+.sheet .brand{text-align:center;font-weight:700;color:#333;padding-top:.2em}
+@media (max-width:600px){.sheet-sec .wrap{padding:0 .9rem}.sheet{padding:1.1em}}
+
+@media print{
+  @page{size:A4;margin:0}
+  html,body{background:#fff!important;margin:0;padding:0}
+  .beta-bar,.top,.foot,.noprint{display:none!important}
+  html.big{font-size:100%}
+  main,.sheet-sec,.sheet-sec .wrap{padding:0!important;margin:0!important;max-width:none!important;background:#fff!important}
+  .sheet{box-sizing:border-box;width:210mm;height:296mm;overflow:hidden;font-size:15pt;line-height:1.28;border:0;border-radius:0;box-shadow:none;padding:10mm 13mm 8mm;max-width:none;gap:3.6mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet .four{grid-template-columns:1fr 1fr}
+  .sheet .call{grid-template-columns:1fr 1fr 1.4fr}
+  .sheet .brand{margin-top:auto;font-size:14pt}
+  .sheet h2{font-size:1.9em}
+  .sheet h3{margin-bottom:.35em}
+  .sheet .never,.sheet .now{padding:.6em .9em}
+  .sheet .call strong{font-size:1.8em}
+}
+</style>
+</head>
+<body>
+<div class="beta-bar noprint" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
+<header id="site-header"></header>
+<main id="obsah">
+
+<section class="hero noprint">
+  <div class="wrap">
+    <div class="txt">
+      <span class="kicker">Pre seniorov · na vytlačenie</span>
+      <h1>Ťahák proti podvodom</h1>
+      <p class="lead">Podvodníci dnes vedia napodobniť hlas aj tvár. Vytlač ťahák babke alebo dedkovi a daj ho k telefónu. Prejdite ho spolu a dohodnite si rodinné heslo.</p>
+      <div class="btns">
+        <a class="btn yel" href="assets/tahak-seniori.pdf" download>📄 Stiahnuť PDF</a>
+        <button type="button" class="btn" onclick="window.print()">🖨️ Vytlačiť</button>
+      </div>
+    </div>
+    <div class="art bob" data-ludko="hi" data-w="220"></div>
+  </div>
+</section>
+
+<section class="sec tint sheet-sec">
+  <div class="wrap">
+    <article class="sheet" aria-label="Ťahák proti podvodom">
+      <header>
+        <h2>⚠️ Pozor na podvodníkov</h2>
+        <p class="sub">Podvodníci dnes používajú aj umelú inteligenciu. Vedia napodobniť hlas aj tvár.</p>
+      </header>
+
+      <section>
+        <h3>Takto vyzerá podvod</h3>
+        <div class="four">
+          <div class="sc"><span class="e" aria-hidden="true">📞</span><b>Volá „vnuk“ a chce hneď peniaze.</b><span>Hlas môže byť falošný.</span></div>
+          <div class="sc"><span class="e" aria-hidden="true">🎬</span><b>Známa osobnosť vo videu sľubuje istý zisk.</b><span>Video je falošné.</span></div>
+          <div class="sc"><span class="e" aria-hidden="true">💬</span><b>SMS s odkazom, napríklad doplatok za balík.</b><span>Na odkaz neklikajte.</span></div>
+          <div class="sc"><span class="e" aria-hidden="true">🏦</span><b>Volá „banka“ a pýta sa na váš účet.</b><span>Hovor ukončite.</span></div>
+        </div>
+      </section>
+
+      <section class="never">
+        <h3>Do telefónu nikdy nehovorte</h3>
+        <ul><li>PIN</li><li>heslo</li><li>číslo karty</li><li>kód z SMS</li></ul>
+        <p>Banka sa vás na PIN ani heslo nikdy nepýta.</p>
+      </section>
+
+      <section class="now">
+        <h3>Čo urobiť hneď</h3>
+        <ol>
+          <li><span><b>Zložte.</b> Nemusíte byť zdvorilí.</span></li>
+          <li><span><b>Zavolajte späť</b> na číslo, ktoré poznáte.</span></li>
+          <li><span><b>Opýtajte sa na rodinné heslo.</b> Podvodník ho nevie.</span></li>
+          <li><span><b>Nič neplaťte pod tlakom.</b> Najprv sa poraďte s rodinou.</span></li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>Kam volať</h3>
+        <div class="call">
+          <div><span>Polícia</span><strong>158</strong></div>
+          <div><span>Tiesňová linka</span><strong>112</strong></div>
+          <div class="fam"><span>Moja rodina</span><span class="line" aria-hidden="true"></span></div>
+        </div>
+      </section>
+
+      <footer class="brand">Ľudsky o AI · ludskyoai.sk</footer>
+    </article>
+    <p class="note noprint" style="margin:1.6rem auto 0;max-width:860px">Čísla 158 (polícia) a 112 (tiesňová linka) uvádza štátny portál <a href="https://www.slovensko.sk/sk/zivotne-situacie/zivotna-situacia/_sluzby-poskytovane-prostrednic/">slovensko.sk</a>. Do riadku „Moja rodina“ napíš svoje číslo. Rodinné heslo na papier nepíš.</p>
+    <p class="note noprint" style="margin:1rem auto 0;max-width:860px">Chceš si to aj vyskúšať? Zahrajte si spolu hru <a href="hry.html#podvod">🚨 Odhaľ podvod</a>.</p>
+  </div>
+</section>
+
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/ui.js"></script>
+</body>
+</html>

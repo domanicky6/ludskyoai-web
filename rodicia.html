@@ -57,10 +57,9 @@
 .box{border:3px solid var(--ink);border-radius:24px;padding:1.5rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;background:#fff}
 .box p{margin:.3rem 0 0;color:var(--ink2);line-height:1.5}
 @media print{
-  body *{visibility:hidden}
-  .beta-bar,.top,.foot{display:none!important}
-  #dohoda .deal,#dohoda .deal *{visibility:visible}
-  #dohoda .deal{position:absolute;left:0;top:0;width:100%;box-shadow:none;border-width:2px;max-width:none}
+  .beta-bar,.top,.foot,main > section:not(#dohoda),#dohoda .wrap > :not(.deal){display:none!important}
+  #dohoda{background:#fff;padding:0}
+  #dohoda .deal{box-shadow:none;border-width:2px;max-width:none}
 }
 </style>
 </head>
@@ -204,6 +203,10 @@
     <div class="box">
       <div style="flex:1 1 300px"><b style="font-size:1.2rem">Sprievodca pre rodičov v PDF</b><p>Napíš do komentára na Instagrame slovo <b class="mono">RODICIA</b> a pošleme ti ho do správ.</p></div>
       <a class="btn dark" href="https://www.instagram.com/ludskyoai/">Na Instagram</a>
+    </div>
+    <div class="box">
+      <div style="flex:1 1 300px"><b style="font-size:1.2rem">Máš doma aj starých rodičov?</b><p>Vytlač im ťahák proti podvodom. Je na jednu stranu a s veľkým písmom.</p></div>
+      <a class="btn yel" href="tahak-seniori.html">Ťahák pre seniorov →</a>
     </div>
   </div>
 </section>

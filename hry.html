@@ -760,6 +760,8 @@ var SENIOR = [
 
 var CHEERS = ['Super!', 'Presne tak!', 'Výborne!', 'Šikovne!', 'Bravo!', 'Paráda!', 'Trafené!'];
 var OOPS = ['Ups! Pozri prečo.', 'Nevadí, učíme sa!', 'Tesne vedľa!', 'Aj to sa stáva!'];
+// odkaz na ťahák po dohraní (senior vyká, podvod tyká)
+var TAHAK = { senior: '🖨️ Ťahák proti podvodom si môžete vytlačiť a dať k telefónu →', podvod: '🖨️ Vytlač ťahák proti podvodom pre babku alebo dedka →' };
 var STORE = 'ludskyoai-hry-v1', PREFS = 'ludskyoai-hry-prefs';
 
 /* =====================================================================
@@ -1024,7 +1026,7 @@ function renderHub(anchor) {
         '<div class="body"><strong>' + esc(g.title) + '</strong><span class="desc">' + esc(g.short) + '</span><div class="row">' + starsHtml(st) + '<span class="best">' + (best ? 'Rekord: ' + best + ' b.' : 'Ešte nehrané') + '</span></div>' +
         '<span class="cta">' + (st ? (st === 3 ? 'Hrať znova' : 'Získaj viac hviezd') : 'Hrať') + ' →</span></div></button>';
     });
-    h += '</div></section>';
+    h += '</div>' + (a === 'senior' ? '<p class="note" style="margin-top:1.2rem"><a href="tahak-seniori.html" style="font-weight:700">🖨️ Ťahák proti podvodom na vytlačenie →</a> Jedna strana A4 s veľkým písmom.</p>' : '') + '</section>';
   });
 
   // odznaky
@@ -1971,6 +1973,7 @@ function finish(correct, total, points, opt) {
     (badgeNew ? '<span class="newbadge pop" style="animation-delay:1.3s"><span class="ico glow" style="background:' + G.light + '" aria-hidden="true">' + G.badgeIco + '</span>Nový odznak: „' + esc(G.badge) + '“!</span>' : '') +
     '<div class="lesson slide" style="animation-delay:.8s"><b>💡 Zapamätaj si: </b>' + esc(G.lesson) + '</div>' +
     '<div class="talk slide" style="animation-delay:1s"><b>💬 POROZPRÁVAJTE SA</b>' + esc(G.talk) + '</div>' +
+    (TAHAK[G.id] ? '<a class="note slide" href="tahak-seniori.html" style="animation-delay:1.1s;font-weight:700;font-size:1rem">' + TAHAK[G.id] + '</a>' : '') +
     '<div class="endbtns"><button type="button" class="btn yel" id="again">↻ Hrať znova</button>' +
     '<button type="button" class="btn" id="nextG">Ďalej: ' + nx.emoji + ' ' + esc(nx.title) + ' →</button>' +
     '<button type="button" class="btn lil" id="share">📣 Vyzvi kamaráta</button></div></div>';
