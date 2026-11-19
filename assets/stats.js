@@ -9,7 +9,7 @@
    Požiadavky zodpovedajú API /count podľa https://www.goatcounter.com/help/pixel (p, t, r, e, q, s, b, rnd). */
 (function () {
   'use strict';
-  var KOD = '';
+  var KOD = 'ludskyoai';
 
   var d = document, w = window, n = navigator || {};
   var configured = /^[a-z0-9-]+$/.test(KOD);
