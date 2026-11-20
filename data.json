@@ -1,42 +1,73 @@
 {
   "_info": "Obsah webu ludskyoai.sk. Aktualizuje ho naplánovaná úloha po schválení príspevkov.",
-  "updated": "2026-11-17",
+  "updated": "2026-11-20",
   "triad": {
-    "date": "16. 11. 2026",
+    "date": "19. – 20. 11. 2026",
     "posts": [
       {
         "color": "#FF5F57",
         "tag": "NOVINKA",
-        "title": "Hľadáš cez ChatGPT namiesto Googlu?",
-        "body": "OpenAI tvrdí, že ChatGPT už zvláda pätinu toľkých vyhľadávaní ako Google. Nezávislé odhady sú však nižšie.",
+        "title": "AI pre učiteľov zadarmo cez DigiEdu",
+        "body": "Ministerstvo školstva dáva učiteľom základných a stredných škôl platené verzie AI nástrojov. Objednáva ich riaditeľ v aplikácii DigiEdu.",
         "prompt": "",
-        "meta": "bigtechnology.com · 3. 11. 2026",
-        "link": "https://www.instagram.com/ludskyoai/"
+        "meta": "TASR · 19. 10. 2026",
+        "link": "https://www.instagram.com/p/Df7kqHKDmET/"
       },
       {
         "color": "#28C840",
-        "tag": "AI RADA #5",
-        "title": "Pýtaj si 3 verzie naraz",
-        "body": "Z troch možností si vyberieš rýchlejšie ako z jednej. Hodí sa na e-mail, pozvánku či odpoveď na recenziu.",
-        "prompt": "Napíš mi [čo potrebuješ] v troch verziách: formálne, priateľsky a úplne stručne.",
-        "meta": "Ľudkov tip",
-        "link": "https://www.instagram.com/ludskyoai/"
+        "tag": "AI A DETI",
+        "title": "5 vecí, na ktoré si daj pozor",
+        "body": "Vek, súkromie a overovanie. AI nie je kamarát, a tak ju s deťmi používaj spolu, nie potajomky.",
+        "prompt": "",
+        "meta": "AACAP · Common Sense Media",
+        "link": "https://www.instagram.com/p/Df90ltyjuUl/"
       },
       {
         "color": "#FEBC2E",
-        "tag": "NÁVOD · 1 MINÚTA",
-        "title": "Pozri, čo si o tebe ChatGPT pamätá",
-        "body": "Nastavenia → Personalizácia → Pamäť. Pozor: keď zmažeš chat, spomienka z neho v Pamäti zostane.",
+        "tag": "NÁVOD · 2 MINÚTY",
+        "title": "Rodičovská kontrola v ChatGPT",
+        "body": "Nastavenia › Rodičovská kontrola › Pridať člena rodiny. Nastavíš tiché hodiny aj obmedzenie citlivého obsahu. Rozhovory dieťaťa však čítať nemôžeš.",
         "prompt": "",
         "meta": "help.openai.com · overené 13. 11. 2026",
-        "link": "https://www.instagram.com/ludskyoai/"
+        "link": "https://www.instagram.com/p/Df9gAwGCNVQ/"
       }
     ]
   },
   "tyzden": {
-    "range": "",
-    "verified": "",
-    "items": []
+    "range": "5. – 10. 11. 2026",
+    "verified": "16. 11. 2026",
+    "items": [
+      {
+        "num": 1,
+        "h": "Claude Fable 5.2 od Anthropicu",
+        "t": "Najvýkonnejší model Anthropicu na náročnú technickú prácu. Na bežné písanie ho netreba.",
+        "meta": "Anthropic · 9. 11."
+      },
+      {
+        "num": 2,
+        "h": "Gemini 4 Carbon je tu",
+        "t": "Najsilnejší model Googlu. Zatiaľ ho majú len predplatitelia plánu Ultra.",
+        "meta": "blog.google · 10. 11."
+      },
+      {
+        "num": 3,
+        "h": "Gboard vyčistí diktovaný text",
+        "t": "Na Pixeli 10 odstráni z diktovania „ehm“. Len vo vybraných krajinách a jazykoch.",
+        "meta": "blog.google"
+      },
+      {
+        "num": 4,
+        "h": "Aplikácie z Grok Build bez ochrany",
+        "t": "Vyše 35 000 aplikácií sa dalo otvoriť bez prihlásenia. Kontroluj, komu zdieľaš odkaz.",
+        "meta": "Claroc, Ars Technica · 10. 11."
+      },
+      {
+        "num": 5,
+        "h": "Google Vids: AI videá zadarmo",
+        "t": "3 videá po 15 sekúnd mesačne, stačí Google účet.",
+        "meta": "blog.google"
+      }
+    ]
   },
   "quiz": [
     {
