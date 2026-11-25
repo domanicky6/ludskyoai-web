@@ -60,3 +60,17 @@
 .pq-num{width:100%;font:900 2.2rem "JetBrains Mono",monospace;text-align:center;border:3px solid var(--ink);border-radius:16px;padding:.5rem;background:var(--yel2)}
 .pq-state{margin-top:1rem;font-weight:800;text-align:center}
 .pq-score{font:900 3rem Montserrat,sans-serif;text-align:center;margin:.3rem 0}
+/* setup wizard */
+.wz-steps{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;list-style:none;margin:0 0 1.6rem;padding:0;counter-reset:none}
+.wz-steps li>span,.wz-steps li>button{display:inline-flex;align-items:center;gap:.5rem;font:inherit;font-weight:800;color:var(--mut);background:none;border:0;padding:0}
+.wz-steps li>button{cursor:pointer;color:var(--ink)}
+.wz-steps li>button:hover{text-decoration:underline}
+.wz-steps i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border:3px solid currentColor;border-radius:50%;font-size:.9rem}
+.wz-steps li.now>span{color:var(--ink)}
+.wz-steps li.now i{background:var(--yel);border-color:var(--ink)}
+.wz-steps li.done i{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wz-h{margin:0 0 1rem;font-size:1.6rem}
+.wz-h:focus{outline:none}
+.wz-big .cr-opt{min-width:12rem;min-height:4.6rem;font-size:1.2rem;padding:.8rem 1.3rem}
+.wz-sum{margin:-.4rem 0 1.4rem;font-weight:800;color:var(--mut)}
+.wz-nav{margin-top:.6rem}
