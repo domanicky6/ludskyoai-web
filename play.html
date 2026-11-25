@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/ui.css">
 <link rel="stylesheet" href="assets/classroom/classroom.css">
+<link rel="stylesheet" href="assets/classroom/quiz.css">
 <style>
 body{background:var(--bg)}
 body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
@@ -47,8 +48,8 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
 
 <!-- name -->
 <section id="sName" class="cr-screen" hidden>
-  <h1 class="cr-h1">Vyber si zvieratko</h1>
-  <p class="cr-lead">Takto ťa uvidí celá trieda. Svoje skutočné meno nepíš.</p>
+  <h1 class="cr-h1" id="nameH1">Vyber si zvieratko</h1>
+  <p class="cr-lead" id="nameLead">Takto ťa uvidí celá trieda. Svoje skutočné meno nepíš.</p>
   <div class="pl-card">
     <div class="pl-me"><span class="av" id="meAv"></span><span id="meName"></span></div>
     <span class="pl-label">Zvieratko</span>
@@ -56,7 +57,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     <span class="pl-label">Aké je?</span>
     <div class="pl-adjs" role="radiogroup" aria-label="Vlastnosť" id="adjs"></div>
     <div id="customBox" hidden>
-      <label class="pl-label" for="customIn">Alebo si napíš vlastnú prezývku</label>
+      <label class="pl-label" for="customIn" id="customLbl">Alebo si napíš vlastnú prezývku</label>
       <input class="pl-input" id="customIn" maxlength="18" autocomplete="off" placeholder="napr. Kapitán Ľudko">
     </div>
     <div class="pl-err" id="nameErr" hidden></div>
@@ -90,6 +91,9 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
   <div class="pl-mini mt-wrap" id="miniMt"></div>
 </section>
 
+<!-- quiz (rendered by assets/classroom/play-quiz.js) -->
+<section id="sQuiz" class="cr-screen" hidden></section>
+
 <!-- end / messages -->
 <section id="sEnd" class="cr-screen pl-center" hidden>
   <div class="pl-big" id="eIcon">🏁</div>
@@ -106,6 +110,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
 <script src="assets/ui.js"></script>
 <script src="assets/classroom/shared.js"></script>
 <script src="assets/classroom/realtime.js"></script>
+<script src="assets/classroom/play-quiz.js"></script>
 <script>
 (function () {
   'use strict';
@@ -115,14 +120,18 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
   var stat = function (n) { try { window.ludStat && window.ludStat(n); } catch (e) {} };
 
   var me = { code: '', pid: '', ai: Math.floor(Math.random() * C.AVATARS.length), adj: Math.floor(Math.random() * C.ADJECTIVES.length), name: '', custom: false };
-  var S = { joined: false, phase: '', mode: 'race', goal: 6, names: 'list', round: 0, q: null, answered: false, ledge: 0, board: null, done: false, lastHost: 0 };
-  var rt = null, main = null, own = null, helloTimer = 0, helloTries = 0, probeTimer = 0, pingTimer = 0, resendTimer = 0, nextTimer = 0;
+  var S = { joined: false, game: 'race', phase: '', mode: 'race', goal: 6, names: 'list', round: 0, q: null, answered: false, ledge: 0, board: null, done: false, lastHost: 0 };
+  var rt = null, main = null, own = null, helloTimer = 0, helloTries = 0, probeTimer = 0, probeRetry = 0, pingTimer = 0, resendTimer = 0, nextTimer = 0;
   var mini = null, endMini = null;
+  var quiz = window.QuizClient({ $: function (s) { return document.querySelector(s); }, C: C, esc: esc,
+    me: function () { return { pid: me.pid, avatar: C.AVATARS[me.ai].e, name: me.name }; },
+    send: function (ev, m) { if (own) own.send(ev, m); }, show: function (id) { show(id); }, end: function (i, t, l) { end(i, t, l); } });
 
   function show(id) {
-    ['sCode', 'sName', 'sWait', 'sGame', 'sEnd'].forEach(function (s) { $('#' + s).hidden = s !== id; });
-    document.body.classList.toggle('ingame', id === 'sGame' || id === 'sWait');
-    window.scrollTo(0, 0);
+    var was = !$('#' + id).hidden;
+    ['sCode', 'sName', 'sWait', 'sGame', 'sQuiz', 'sEnd'].forEach(function (s) { $('#' + s).hidden = s !== id; });
+    document.body.classList.toggle('ingame', id === 'sGame' || id === 'sWait' || id === 'sQuiz');
+    if (!was) window.scrollTo(0, 0);
   }
   function save() { try { sessionStorage.setItem(STORE, JSON.stringify({ code: me.code, pid: me.pid, ai: me.ai, name: me.name, custom: me.custom, t: Date.now() })); } catch (e) {} }
   function forget() { try { sessionStorage.removeItem(STORE); } catch (e) {} }
@@ -131,7 +140,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     el.querySelector('span').textContent = s === 'online' ? '' : (s === 'connecting' ? 'Pripájam sa…' : 'Bez internetu, skúšam znova…');
   }
   function disconnect() {
-    clearInterval(helloTimer); clearInterval(pingTimer); clearTimeout(probeTimer); clearTimeout(resendTimer); clearTimeout(nextTimer);
+    clearInterval(helloTimer); clearInterval(pingTimer); clearTimeout(probeTimer); clearTimeout(probeRetry); clearTimeout(resendTimer); clearTimeout(nextTimer);
     if (rt) rt.close(); rt = main = own = null;
   }
 
@@ -147,7 +156,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     me.code = code;
     connectMain(function (b) {
       if (b.phase === 'closed' || b.phase === 'finished') return codeErr('Táto hra už skončila. Opýtaj sa učiteľa na nový kód.');
-      S.names = b.names || 'list';
+      S.names = b.names || 'list'; S.game = b.game || 'race';
       codeErr(''); renderName(); show('sName');
     }, function () { disconnect(); codeErr('Hru s kódom ' + code + ' sme nenašli. Skontroluj kód a či má učiteľ hru otvorenú.'); });
   });
@@ -156,13 +165,14 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     disconnect();
     rt = LudRealtime.connect({ onStatus: setNet });
     var found = false;
-    main = rt.channel('race-' + me.code, { onJoin: function () { main.send('probe', {}); } });
+    var probes = 0, probe = function () { if (found || !main) return; main.send('probe', {}); if (++probes < 5) probeRetry = setTimeout(probe, 1500); };
+    main = rt.channel('game-' + me.code, { onJoin: probe });
     main.on('board', function (b) {
       S.lastHost = Date.now();
       if (!found) { found = true; clearTimeout(probeTimer); if (onFound) onFound(b); }
       onBoard(b);
     });
-    probeTimer = setTimeout(function () { if (!found && onMissing) onMissing(); }, 6000);
+    probeTimer = setTimeout(function () { if (!found && onMissing) onMissing(); }, 8000);
   }
 
   /* ---------- 2. name ---------- */
@@ -170,6 +180,10 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     $('#avatars').innerHTML = C.AVATARS.map(function (a, i) { return '<button type="button" role="radio" class="pl-av" data-av="' + i + '" aria-checked="' + (i === me.ai) + '" aria-label="' + esc(a.n) + '">' + a.e + '</button>'; }).join('');
     $('#adjs').innerHTML = C.ADJECTIVES.map(function (a, i) { return '<button type="button" role="radio" class="pl-adj" data-adj="' + i + '" aria-checked="' + (i === me.adj) + '">' + esc(a[C.AVATARS[me.ai].g === 'f' ? 1 : 0]) + '</button>'; }).join('');
     $('#customBox').hidden = S.names !== 'custom';
+    var qz = S.game === 'quiz';
+    $('#nameH1').textContent = qz ? 'Vyberte meno tímu' : 'Vyber si zvieratko';
+    $('#nameLead').textContent = qz ? 'Hráte za tím, alebo každý sám. Takto vás uvidí celá trieda. Skutočné mená nepíšte.' : 'Takto ťa uvidí celá trieda. Svoje skutočné meno nepíš.';
+    $('#customLbl').textContent = qz ? 'Alebo si napíšte vlastný názov tímu' : 'Alebo si napíš vlastnú prezývku';
     preview();
   }
   function chosenName() { var c = S.names === 'custom' ? $('#customIn').value.trim() : ''; return c || C.nickname(me.ai, me.adj); }
@@ -180,7 +194,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
   function nameErr(t) { var e = $('#nameErr'); e.hidden = !t; e.textContent = t || ''; $('#enterBtn').disabled = false; }
   $('#enterBtn').onclick = function () {
     var custom = S.names === 'custom' && $('#customIn').value.trim();
-    var name = custom ? C.cleanNickname(custom) : C.nickname(me.ai, me.adj);
+    var name = custom ? C.cleanNickname(custom) : C.nickname(me.ai, me.adj); // list names are not filtered
     if (!name) return nameErr('Táto prezývka sa nedá použiť. Skús inú alebo si vyber z ponuky.');
     me.name = name; me.custom = !!custom;
     if (!me.pid) me.pid = C.randomId(12);
@@ -191,7 +205,8 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
   /* ---------- 3. join ---------- */
   function joinGame() {
     if (!rt || !main) connectMain(null, null);
-    own = rt.channel('race-' + me.code + '-' + me.pid, { onJoin: sendHello });
+    own = rt.channel('game-' + me.code + '-' + me.pid, { onJoin: sendHello });
+    own.on('ack', function (m) { quiz.onAck(m); });
     own.on('welcome', onWelcome).on('reject', onReject).on('question', onQuestion).on('result', onResult)
       .on('kick', onKick).on('renamed', function (m) { me.name = m.name; save(); renderMe(); });
     clearInterval(pingTimer);
@@ -209,10 +224,11 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
   function onWelcome(m) {
     S.joined = true; clearInterval(helloTimer);
     me.name = m.name; save();
-    S.mode = m.mode; S.goal = m.goal; S.phase = m.phase; S.lastHost = Date.now();
+    S.mode = m.mode; S.goal = m.goal; S.phase = m.phase; S.lastHost = Date.now(); S.game = m.game || 'race';
     stat('play/join');
     renderMe();
-    if (m.phase === 'running') { if (!S.q) showWaitingQuestion(); }
+    if (m.phase === 'running' && S.game === 'quiz') { show('sWait'); $('#wTitle').textContent = 'Si v kvíze!'; $('#wLead').textContent = 'Hneď sa pripojíme k aktuálnej otázke.'; if (S.board && S.board.quiz) quiz.onBoard(S.board); }
+    else if (m.phase === 'running') { if (!S.q) showWaitingQuestion(); }
     else if (m.phase === 'lobby') { lobby(); if (S.board) lobbyInfo(S.board); }
   }
   function onReject(m) {
@@ -229,10 +245,10 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     $('#gMe').textContent = a + ' ' + me.name;
   }
   function lobby() {
-    S.q = null; S.done = false; S.ledge = 0;
+    S.q = null; S.done = false; S.ledge = 0; quiz.reset();
     show('sWait');
-    $('#wTitle').textContent = 'Si v hre!';
-    $('#wLead').textContent = 'Počkaj, kým učiteľ spustí hru. Pozri sa na tabuľu, či vidíš svoje zvieratko.';
+    $('#wTitle').textContent = S.game === 'quiz' ? 'Váš tím je v kvíze!' : 'Si v hre!';
+    $('#wLead').textContent = S.game === 'quiz' ? 'Počkajte, kým učiteľ spustí kvíz. Pozrite sa na tabuľu, či vidíte svoj tím.' : 'Počkaj, kým učiteľ spustí hru. Pozri sa na tabuľu, či vidíš svoje zvieratko.';
   }
 
   /* ---------- board from teacher ---------- */
@@ -243,6 +259,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     var prev = S.phase; S.phase = b.phase;
     var mine = (b.players || []).filter(function (p) { return p.pid === me.pid; })[0];
     if (b.round !== S.round) { var newRound = S.round && b.round > S.round; S.round = b.round; if (newRound && b.phase === 'lobby') { lobby(); return; } }
+    if ((b.game || S.game) === 'quiz' && b.phase !== 'lobby') { S.game = 'quiz'; quiz.onBoard(b); return; }
     if (b.phase === 'lobby') {
       if (prev !== 'lobby' || $('#sWait').hidden) lobby();
       lobbyInfo(b);
@@ -362,7 +379,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     $('#endMt').hidden = true; $('#leaveBtn').hidden = false;
     show('sEnd');
   }
-  $('#leaveBtn').onclick = function () { disconnect(); forget(); me.pid = ''; S = { joined: false, phase: '', mode: 'race', goal: 6, names: 'list', round: 0, q: null, answered: false, ledge: 0, board: null, done: false, lastHost: 0 }; mini = endMini = null; $('#codeIn').value = ''; codeErr(''); show('sCode'); };
+  $('#leaveBtn').onclick = function () { disconnect(); forget(); me.pid = ''; quiz.reset(); S = { joined: false, game: 'race', phase: '', mode: 'race', goal: 6, names: 'list', round: 0, q: null, answered: false, ledge: 0, board: null, done: false, lastHost: 0 }; mini = endMini = null; $('#codeIn').value = ''; codeErr(''); show('sCode'); };
 
   /* ---------- start ---------- */
   var saved = null; try { saved = JSON.parse(sessionStorage.getItem(STORE) || 'null'); } catch (e) {}
