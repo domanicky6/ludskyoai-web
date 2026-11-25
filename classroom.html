@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hra pre celú triedu: Ľudko na vrchol – Ľudsky o AI</title>
+<meta name="description" content="Žaivá hra o umelej inteligencii pre celú triedu. Žiaci sa pripoja z mobilu kódom, bez registrácie. Kto prvý vylezie na vrchol? Alebo to dáte spolu. Zadarmo, po slovensky.">
+<meta property="og:title" content="Ľudko na vrchol – hra o AI pre celú triedu">
+<meta property="og:description" content="Žiaci sa pripoja kódom z mobilu, odpovedajú na otázky o AI a lezú na horu. Bez registrácie, zadarmo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ludskyoai.sk/classroom.html">
+<meta property="og:image" content="https://ludskyoai.sk/assets/og/skoly.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pre školy: hry a hodiny o AI. Maskot Ľudko.">
+<meta property="og:site_name" content="Ľudsky o AI">
+<meta property="og:locale" content="sk_SK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17153B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="assets/site.webmanifest">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/ui.css">
+<link rel="stylesheet" href="assets/classroom/classroom.css">
+<script src="assets/stats.js"></script>
+</head>
+<body>
+<div class="beta-bar" role="note">Toto je beta verzia stránky. Stále na nej pracujeme.</div>
+<header id="site-header"></header>
+<main id="obsah" class="cr-main">
+
+<!-- 1. SETUP -->
+<section id="setup" class="cr-screen" hidden>
+  <div class="hero" style="padding:3rem 0 2.5rem">
+    <div class="wrap">
+      <div class="txt">
+        <span class="kicker">Pre školy · živá hra · bez registrácie</span>
+        <h1>Ľudko na vrchol pre celú triedu</h1>
+        <p class="lead">Na projektore je hora. Žiaci sa pripoja z mobilu alebo tabletu kódom a odpovedajú na otázky o AI. Každá správna odpoveď ich posunie o rímsu vyššie.</p>
+      </div>
+      <div class="art bob" data-ludko="hi" data-w="220"></div>
+    </div>
+  </div>
+  <div class="wrap cr-pad">
+    <div class="grid" style="margin-bottom:2.4rem">
+      <div class="card"><b>1. Založte hru</b><br><span class="cr-muted">Vyberte vek a režim. Dostanete kód hry.</span></div>
+      <div class="card"><b>2. Žiaci sa pripoja</b><br><span class="cr-muted">Na <b>ludskyoai.sk/play</b> zadajú kód a vyberú si zvieratko. Žiadne mená ani e-maily.</span></div>
+      <div class="card"><b>3. Lezieme!</b><br><span class="cr-muted">Každý dostáva vlastné otázky. Na projektore vidíte, kto je kde.</span></div>
+    </div>
+
+    <fieldset class="cr-field"><legend>Vek žiakov</legend><div class="cr-opts" role="radiogroup" data-opt="level"></div></fieldset>
+    <fieldset class="cr-field"><legend>Režim</legend><div class="cr-opts" role="radiogroup" data-opt="mode"></div></fieldset>
+    <fieldset class="cr-field"><legend>Výška hory</legend><div class="cr-opts" role="radiogroup" data-opt="goal"></div></fieldset>
+    <fieldset class="cr-field"><legend>Časový limit</legend><div class="cr-opts" role="radiogroup" data-opt="limit"></div></fieldset>
+    <fieldset class="cr-field"><legend>Prezývky</legend><div class="cr-opts" role="radiogroup" data-opt="names"></div></fieldset>
+
+    <div class="cr-row" style="margin-top:.6rem">
+      <button type="button" class="btn yel" id="createBtn">🧗 Založiť hru</button>
+      <a class="btn" href="skoly.html">← Pre školy</a>
+    </div>
+    <p class="cr-muted" style="margin-top:1.6rem;max-width:44rem;line-height:1.6">Potrebujete projektor alebo veľkú obrazovku a pre žiakov zariadenia s internetom. Žiaci môžu hrať aj vo dvojiciach. Hra beží, kým máte túto stránku otvorenú. Nič neukladáme: žiaci vystupujú len pod prezývkou a správy počas hry idú cez server v EÚ. <a href="sukromie.html#trieda">Viac o súkromí</a></p>
+  </div>
+</section>
+
+<!-- 2. LOBBY -->
+<section id="lobby" class="cr-screen" hidden>
+  <div class="wrap cr-pad">
+    <div class="cr-row" style="justify-content:space-between;margin-bottom:1rem">
+      <span class="cr-status" id="netLobby"><i></i><span>Pripájam…</span></span>
+      <div class="cr-row">
+        <button type="button" class="btn sm" data-action="fullscreen">⛶ Celá obrazovka</button>
+        <button type="button" class="btn sm" data-action="new">Nová hra</button>
+      </div>
+    </div>
+    <div class="cr-join">
+      <div>
+        <span class="kicker" id="lobbyInfo"></span>
+        <p class="cr-url">Otvorte <span style="background:var(--lil2);padding:0 .3rem;border-radius:8px">ludskyoai.sk/play</span><br>a zadajte kód:</p>
+        <div class="cr-code" id="codeBig" aria-live="polite"></div>
+      </div>
+      <div class="cr-qr"><img src="assets/classroom/qr-play.svg" alt="QR kód na stránku ludskyoai.sk/play" width="240" height="240" style="width:100%;height:auto"><div style="margin-top:.4rem">Naskenujte a zadajte kód</div></div>
+    </div>
+    <h2 style="margin:2rem 0 0;font-size:1.5rem"><span id="lobbyCount">0</span> v hre</h2>
+    <div class="cr-roster" id="roster"></div>
+    <div class="cr-row">
+      <button type="button" class="btn yel" id="startBtn" disabled>▶ Spustiť hru</button>
+      <span class="cr-muted" id="startHint">Čakáme na prvého hráča…</span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. GAME -->
+<section id="game" class="cr-screen" hidden>
+  <div class="wrap cr-pad">
+    <div class="cr-hud">
+      <span class="cr-pill big" id="hudCode"></span>
+      <span class="cr-pill big" id="hudTime" hidden></span>
+      <span class="cr-pill" id="hudPlayers"></span>
+      <span class="cr-status" id="netGame"><i></i><span></span></span>
+      <span style="flex:1"></span>
+      <button type="button" class="btn sm" data-action="fullscreen">⛶</button>
+      <button type="button" class="btn sm" id="endBtn">🏁 Ukončiť hru</button>
+    </div>
+    <div class="cr-game">
+      <div class="mt-wrap" id="mountain"></div>
+      <aside class="cr-board">
+        <div class="cr-team" id="teamBox" hidden>
+          <h2>Spolu na vrchol</h2>
+          <div class="cr-bar"><i id="teamBar" style="width:0"></i></div>
+          <p class="cr-muted" id="teamTxt" style="margin:.4rem 0 0;font-weight:700"></p>
+        </div>
+        <h2 id="boardTitle">Poradie</h2>
+        <ol id="board"></ol>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FINISH -->
+<section id="finish" class="cr-screen" hidden>
+  <div class="wrap cr-pad">
+    <span class="kicker">Koniec hry</span>
+    <h1 class="cr-h1" id="finishTitle"></h1>
+    <p class="cr-lead" id="finishLead"></p>
+    <div class="cr-podium" id="podium"></div>
+    <div class="cr-row" style="margin-bottom:2rem">
+      <button type="button" class="btn yel" id="againBtn">🔁 Hrať znova s tými istými žiakmi</button>
+      <button type="button" class="btn" id="printBtn">🖨️ Vytlačiť diplomy</button>
+      <button type="button" class="btn" data-action="new">Nová hra</button>
+    </div>
+    <div class="card" style="overflow-x:auto">
+      <table class="cr-results"><thead><tr><th>#</th><th>Hráč</th><th>Rímsa</th><th>Správne</th><th>Chyby</th></tr></thead><tbody id="results"></tbody></table>
+    </div>
+    <div class="card" style="margin-top:1.6rem;background:var(--yel2)">
+      <b>Na rozhovor po hre</b>
+      <ul style="margin:.5rem 0 0;padding-left:1.2rem;line-height:1.6">
+        <li>Ktorá otázka vás prekvapila?</li>
+        <li>Kedy sa oplatí odpoveď AI overiť? Ako to urobíte?</li>
+        <li>Čo do chatu s AI nepatrí?</li>
+      </ul>
+      <p style="margin:.7rem 0 0">Hotové hodiny o AI nájdete na stránke <a href="skoly.html">Pre školy</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer id="site-footer"></footer>
+<div class="dip-sheet" id="diplomas" aria-hidden="true"></div>
+
+<script src="assets/ui.js"></script>
+<script src="assets/classroom/questions.js"></script>
+<script src="assets/classroom/shared.js"></script>
+<script src="assets/classroom/realtime.js"></script>
+<script>
+(function () {
+  'use strict';
+  var C = window.LudClass, QB = window.CLASSROOM_QUESTIONS, esc = C.esc;
+  var STORE = 'ludskyoai-classroom-v1';
+  var OFFLINE_MS = 25000, WRONG_PAUSE_MS = 2500, BOARD_MS = 1000;
+  var $ = function (s) { return document.querySelector(s); };
+  var stat = function (n) { try { window.ludStat && window.ludStat(n); } catch (e) {} };
+
+  var OPTIONS = {
+    level: [['young', '1. stupeň', '6 – 10 rokov'], ['middle', '2. stupeň', '10 – 15 rokov'], ['high', 'Stredná škola', '15+ rokov']],
+    mode: [['race', '🏁 Preteky', 'kto bude prvý na vrchole'], ['team', '🤝 Spolu na vrchol', 'každá správna odpoveď pomôže celej triede']],
+    goal: [['6', 'Kopec', '6 ríms · asi 5 minút'], ['10', 'Veľká hora', '10 ríms · asi 8 minút']],
+    limit: [['0', 'Bez limitu', 'ukončíte sami'], ['5', '5 minút', ''], ['8', '8 minút', ''], ['12', '12 minút', '']],
+    names: [['list', 'Len z ponuky', 'napr. Odvážna Líška'], ['custom', 'Aj vlastné', 's filtrom nevhodných slov']]
+  };
+  var setup = { level: 'young', mode: 'race', goal: '6', limit: '0', names: 'list' };
+  try { var sv = JSON.parse(localStorage.getItem('ludskyoai-classroom-setup') || 'null'); if (sv) Object.keys(setup).forEach(function (k) { if (sv[k]) setup[k] = sv[k]; }); } catch (e) {}
+
+  /* ---------- state ---------- */
+  var G = null;          // game state (saved to sessionStorage)
+  var rt = null, main = null, pch = {};   // realtime connection, main channel, per-player channels
+  var lastProbe = 0, boardDirty = false, tick = 0, wakeLock = null;
+
+  function newGame() {
+    var code = C.randomId(6, C.CODE_ALPHABET).toUpperCase();
+    return { v: 1, code: code, level: setup.level, mode: setup.mode, goal: +setup.goal, limit: +setup.limit, names: setup.names,
+      phase: 'lobby', created: Date.now(), startedAt: 0, endsAt: 0, finishedAt: 0, round: 1,
+      players: {}, order: [], banned: {}, finishCount: 0, team: { points: 0, per: 2, ledge: 0 } };
+  }
+  function save() { try { sessionStorage.setItem(STORE, JSON.stringify(G)); } catch (e) {} }
+  function load() {
+    try { var g = JSON.parse(sessionStorage.getItem(STORE) || 'null'); if (g && g.v === 1 && Date.now() - g.created < 4 * 3600e3) return g; } catch (e) {}
+    return null;
+  }
+
+  /* ---------- screens ---------- */
+  function show(id) {
+    ['setup', 'lobby', 'game', 'finish'].forEach(function (s) { $('#' + s).hidden = s !== id; });
+    window.scrollTo(0, 0);
+  }
+
+  function renderSetup() {
+    Object.keys(OPTIONS).forEach(function (k) {
+      var box = document.querySelector('[data-opt="' + k + '"]');
+      box.innerHTML = OPTIONS[k].map(function (o) {
+        return '<button type="button" role="radio" class="cr-opt" data-k="' + k + '" data-v="' + o[0] + '" aria-checked="' + (setup[k] === o[0]) + '">' + esc(o[1]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</button>';
+      }).join('');
+    });
+    show('setup');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.cr-opt'); if (!b) return;
+    setup[b.dataset.k] = b.dataset.v;
+    if (b.dataset.k === 'level' && b.dataset.v === 'young') setup.names = 'list';
+    try { localStorage.setItem('ludskyoai-classroom-setup', JSON.stringify(setup)); } catch (x) {}
+    renderSetup();
+  });
+
+  /* ---------- networking ---------- */
+  function setNet(s) {
+    var txt = { online: 'Spojenie je v poriadku', connecting: 'Pripájam…', offline: 'Bez spojenia, skúšam znova…' }[s] || s;
+    ['#netLobby', '#netGame'].forEach(function (id) { var el = $(id); if (!el) return; el.className = 'cr-status ' + s; el.querySelector('span').textContent = txt; });
+  }
+  function startNetwork() {
+    if (rt) rt.close();
+    pch = {};
+    rt = LudRealtime.connect({ onStatus: setNet });
+    main = rt.channel('race-' + G.code, { onJoin: function () { sendBoard(true); } });
+    main.on('hello', onHello);
+    main.on('probe', function () { var now = Date.now(); if (now - lastProbe > 500) { lastProbe = now; sendBoard(true); } });
+    G.order.forEach(function (pid) { if (!G.banned[pid]) openPlayer(pid); });
+  }
+  function openPlayer(pid) {
+    if (pch[pid]) return pch[pid];
+    var ch = rt.channel('race-' + G.code + '-' + pid);
+    ch.on('answer', function (m) { seen(pid); onAnswer(pid, m); });
+    ch.on('next', function () { seen(pid); onNext(pid); });
+    ch.on('ping', function () { seen(pid); });
+    pch[pid] = ch;
+    return ch;
+  }
+  function toPlayer(pid, ev, payload) { var ch = pch[pid] || openPlayer(pid); ch.send(ev, payload); }
+  function seen(pid) { var p = G.players[pid]; if (!p) return; var was = online(p); p.seen = Date.now(); if (!was) dirty(); }
+  function online(p) { return Date.now() - (p.seen || 0) < OFFLINE_MS; }
+
+  /* ---------- players ---------- */
+  function uniqueName(name, pid) {
+    var taken = {}; G.order.forEach(function (id) { if (id !== pid && G.players[id] && !G.banned[id]) taken[G.players[id].name] = 1; });
+    if (!taken[name]) return name;
+    for (var i = 2; i < 100; i++) if (!taken[name + ' ' + i]) return name + ' ' + i;
+    return name;
+  }
+  function onHello(m) {
+    var pid = String(m.pid || '');
+    if (!/^[a-z0-9]{8,20}$/.test(pid)) return;
+    if (G.banned[pid]) { toPlayer(pid, 'kick', {}); return; }
+    var p = G.players[pid];
+    if (p) { p.seen = Date.now(); welcome(p); dirty(); return; }
+    if (G.phase === 'finished') { toPlayer(pid, 'reject', { reason: 'closed' }); return; }
+    if (activeCount() >= C.MAX_PLAYERS) { toPlayer(pid, 'reject', { reason: 'full' }); return; }
+    var ai = +m.avatar;
+    if (!(ai >= 0 && ai < C.AVATARS.length)) ai = Math.floor(Math.random() * C.AVATARS.length);
+    var name = C.cleanNickname(m.name);
+    if (!name || (G.names === 'list' && !C.isListNickname(name, ai))) { toPlayer(pid, 'reject', { reason: 'name' }); return; }
+    p = G.players[pid] = { pid: pid, name: uniqueName(name, pid), ai: ai, ledge: 0, ok: 0, bad: 0, rank: 0, reachedAt: 0,
+      seen: Date.now(), pool: [], q: null, last: null, wrongAt: 0, joinedRound: G.round };
+    G.order.push(pid);
+    welcome(p);
+    if (G.phase === 'running') sendQuestion(p);
+    dirty(); save();
+  }
+  function welcome(p) {
+    toPlayer(p.pid, 'welcome', { name: p.name, avatar: C.AVATARS[p.ai].e, mode: G.mode, goal: G.goal, level: QB[G.level].label, phase: G.phase });
+    if (G.phase === 'running' && p.q) sendQuestion(p, true);
+  }
+  function activeCount() { return G.order.filter(function (id) { return !G.banned[id]; }).length; }
+  function activePlayers() { return G.order.filter(function (id) { return !G.banned[id]; }).map(function (id) { return G.players[id]; }); }
+  function kick(pid) {
+    G.banned[pid] = 1; toPlayer(pid, 'kick', {});
+    setTimeout(function () { if (pch[pid]) { pch[pid].leave(); delete pch[pid]; } }, 1500);
+    dirty(); save(); renderLobby();
+  }
+  function rename(pid) {
+    var p = G.players[pid]; if (!p) return;
+    p.name = uniqueName(C.randomNickname(p.ai), pid);
+    toPlayer(pid, 'renamed', { name: p.name });
+    dirty(); save(); renderLobby();
+  }
+
+  /* ---------- questions ---------- */
+  function nextItem(p) {
+    if (!p.pool.length) p.pool = C.shuffle(QB[G.level].items.map(function (x) { return x.id; }));
+    var id = p.pool.shift();
+    return QB[G.level].items.filter(function (x) { return x.id === id; })[0];
+  }
+  function itemById(id) { return QB[G.level].items.filter(function (x) { return x.id === id; })[0]; }
+  function sendQuestion(p, resend) {
+    if (G.phase !== 'running' || (G.mode === 'race' && p.rank)) return;
+    if (!p.q || (!resend && p.q.answered)) {
+      var it = nextItem(p);
+      p.q = { id: it.id, order: C.shuffle(it.a.map(function (_, i) { return i; })), answered: false, n: (p.ok + p.bad + 1) };
+    }
+    var item = itemById(p.q.id);
+    toPlayer(p.pid, 'question', { qid: p.q.id, n: p.q.n, q: item.q, options: p.q.order.map(function (i) { return item.a[i]; }), ledge: p.ledge });
+  }
+  function onNext(pid) {
+    var p = G.players[pid]; if (!p || G.banned[pid] || G.phase !== 'running') return;
+    if (p.q && !p.q.answered) return sendQuestion(p, true);
+    var wait = p.wrongAt + WRONG_PAUSE_MS - Date.now();
+    if (wait > 0) return setTimeout(function () { onNext(pid); }, wait);
+    sendQuestion(p);
+  }
+  function onAnswer(pid, m) {
+    var p = G.players[pid]; if (!p || G.banned[pid] || G.phase !== 'running') return;
+    if (p.last && p.last.qid === m.qid && p.q && p.q.answered) { toPlayer(pid, 'result', p.last); return; } // resend after reconnect
+    if (!p.q || p.q.answered || p.q.id !== m.qid) return;
+    var choice = +m.choice; if (!(choice >= 0 && choice < p.q.order.length)) return;
+    var item = itemById(p.q.id), correct = p.q.order[choice] === 0;
+    p.q.answered = true;
+    if (correct) {
+      p.ok++;
+      if (G.mode === 'race') {
+        p.ledge = Math.min(G.goal, p.ledge + 1); p.reachedAt = Date.now();
+        if (p.ledge >= G.goal && !p.rank) { p.rank = ++G.finishCount; announce(p); }
+      } else {
+        G.team.points++;
+        var l = Math.min(G.goal, Math.floor(G.team.points / G.team.per));
+        if (l > G.team.ledge) { G.team.ledge = l; if (l < G.goal) toast('⬆️ Rímsa ' + l + '!'); }
+        p.ledge = G.team.ledge;
+      }
+    } else { p.bad++; p.wrongAt = Date.now(); }
+    p.last = { qid: p.q.id, correct: correct, right: p.q.order.indexOf(0), why: item.w, ledge: G.mode === 'race' ? p.ledge : G.team.ledge, done: !!p.rank };
+    toPlayer(pid, 'result', p.last);
+    dirty(); save();
+    checkEnd();
+  }
+  function announce(p) {
+    var medal = ['🥇', '🥈', '🥉'][p.rank - 1] || '🚩';
+    toast(medal + ' ' + C.AVATARS[p.ai].e + ' ' + p.name + ' je na vrchole!');
+  }
+  function checkEnd() {
+    if (G.phase !== 'running') return;
+    if (G.mode === 'team' && G.team.ledge >= G.goal) return finish('top');
+    if (G.mode === 'race') {
+      var act = activePlayers().filter(function (p) { return online(p) || p.rank; });
+      if (act.length && act.every(function (p) { return p.rank; })) return finish('all');
+    }
+    if (G.endsAt && Date.now() >= G.endsAt) finish('time');
+  }
+
+  /* ---------- game flow ---------- */
+  function startGame() {
+    var list = activePlayers(); if (!list.length) return;
+    G.phase = 'running'; G.startedAt = Date.now(); G.endsAt = G.limit ? G.startedAt + G.limit * 60000 : 0;
+    G.finishCount = 0; G.team = { points: 0, per: Math.max(2, Math.ceil(list.length * 1.5)), ledge: 0 };
+    list.forEach(function (p) { p.ledge = 0; p.ok = 0; p.bad = 0; p.rank = 0; p.reachedAt = 0; p.q = null; p.last = null; p.pool = []; });
+    save(); stat('classroom/start/' + G.mode);
+    renderGame(true);
+    sendBoard(true);
+    list.forEach(function (p) { sendQuestion(p); });
+    keepAwake();
+  }
+  function finish(why) {
+    if (G.phase === 'finished') return;
+    G.phase = 'finished'; G.finishedAt = Date.now(); G.finishWhy = why;
+    save(); sendBoard(true);
+    var n = activeCount(); stat('classroom/finish/' + G.mode + '/' + (n < 10 ? '1-9' : n < 20 ? '10-19' : n < 30 ? '20-29' : '30+'));
+    renderFinish();
+  }
+  function playAgain() {
+    G.phase = 'lobby'; G.round++; G.startedAt = 0; G.endsAt = 0; G.finishCount = 0; G.team = { points: 0, per: 2, ledge: 0 };
+    activePlayers().forEach(function (p) { p.ledge = 0; p.ok = 0; p.bad = 0; p.rank = 0; p.reachedAt = 0; p.q = null; p.last = null; });
+    save(); sendBoard(true); renderLobby(); show('lobby');
+  }
+
+  function ranking() {
+    return activePlayers().slice().sort(function (a, b) {
+      if (G.mode === 'team') return b.ok - a.ok || a.name.localeCompare(b.name, 'sk');
+      if (a.rank && b.rank) return a.rank - b.rank;
+      if (a.rank || b.rank) return a.rank ? -1 : 1;
+      return b.ledge - a.ledge || a.reachedAt - b.reachedAt || b.ok - a.ok || a.name.localeCompare(b.name, 'sk');
+    });
+  }
+
+  /* ---------- board broadcast ---------- */
+  function dirty() { boardDirty = true; }
+  function sendBoard(now) {
+    if (!main || !G) return;
+    var r = ranking();
+    main.send('board', {
+      phase: G.phase, mode: G.mode, goal: G.goal, names: G.names, level: QB[G.level].label, round: G.round,
+      remaining: G.endsAt && G.phase === 'running' ? Math.max(0, G.endsAt - Date.now()) : null,
+      team: G.mode === 'team' ? { l: G.team.ledge, p: G.team.points, need: G.team.per * G.goal } : null,
+      players: r.map(function (p, i) { return { pid: p.pid, n: p.name, a: C.AVATARS[p.ai].e, l: p.ledge, d: p.rank || 0, o: online(p) ? 1 : 0, pos: i + 1 }; })
+    });
+    boardDirty = false;
+  }
+
+  /* ---------- rendering ---------- */
+  var mountain = null;
+  function renderLobby() {
+    $('#codeBig').textContent = G.code;
+    $('#lobbyInfo').textContent = QB[G.level].label + ' · ' + (G.mode === 'race' ? 'Preteky' : 'Spolu na vrchol') + ' · ' + G.goal + ' ríms' + (G.limit ? ' · ' + G.limit + ' min' : '');
+    var list = activePlayers();
+    $('#lobbyCount').textContent = list.length;
+    var html = list.length ? list.map(function (p) {
+      return '<span class="cr-chip' + (online(p) ? '' : ' off') + '"><span class="av">' + C.AVATARS[p.ai].e + '</span>' + esc(p.name) +
+        '<button type="button" data-rename="' + p.pid + '" title="Dať inú prezývku" aria-label="Dať hráčovi ' + esc(p.name) + ' inú prezývku">✎</button>' +
+        '<button type="button" data-kick="' + p.pid + '" title="Odstrániť z hry" aria-label="Odstrániť hráča ' + esc(p.name) + ' z hry">✕</button></span>';
+    }).join('') : '<span class="cr-empty">Zatiaľ nikto. Žiaci zadajú kód ' + esc(G.code) + ' na ludskyoai.sk/play.</span>';
+    var roster = $('#roster');
+    if (roster._html !== html) { roster.innerHTML = html; roster._html = html; }
+    $('#startBtn').disabled = !list.length;
+    $('#startHint').textContent = list.length ? 'Ďalší sa môžu pridať aj počas hry.' : 'Čakáme na prvého hráča…';
+  }
+  function renderGame(reset) {
+    show('game');
+    if (reset || !mountain || mountain.goal !== G.goal) mountain = C.Mountain($('#mountain'), G.goal);
+    $('#hudCode').textContent = '🔑 ' + G.code;
+    $('#teamBox').hidden = G.mode !== 'team';
+    $('#boardTitle').textContent = G.mode === 'team' ? 'Najviac správnych odpovedí' : 'Poradie';
+    updateGame();
+  }
+  function updateGame() {
+    var r = ranking();
+    $('#hudPlayers').textContent = '👥 ' + r.length + ' ' + C.plural(r.length, 'hráč', 'hráči', 'hráčov');
+    if (G.endsAt) { $('#hudTime').hidden = false; $('#hudTime').textContent = '⏱ ' + C.fmtTime(G.endsAt - Date.now()); }
+    else { $('#hudTime').hidden = false; $('#hudTime').textContent = '⏱ ' + C.fmtTime(Date.now() - G.startedAt); }
+    if (G.mode === 'team') {
+      var need = G.team.per * G.goal, pct = Math.min(100, Math.round(G.team.points / need * 100));
+      $('#teamBar').style.width = pct + '%';
+      $('#teamTxt').textContent = 'Rímsa ' + G.team.ledge + ' z ' + G.goal + ' · ' + G.team.points + ' z ' + need + ' správnych odpovedí';
+      mountain.update([], { ledge: G.team.ledge });
+    } else {
+      mountain.update(r.map(function (p) { return { pid: p.pid, avatar: C.AVATARS[p.ai].e, name: p.name, ledge: p.ledge, offline: !online(p) && !p.rank }; }));
+    }
+    $('#board').innerHTML = r.map(function (p, i) {
+      var right = G.mode === 'team' ? '<span class="lv">' + p.ok + ' ✓</span>' : (p.rank ? '<span class="lv">' + (['🥇', '🥈', '🥉'][p.rank - 1] || '🚩') + '</span>' : '<span class="lv">' + p.ledge + '/' + G.goal + '</span>');
+      return '<li class="' + (i < 3 && (G.mode === 'team' ? p.ok : p.ledge) ? 'top' : '') + (online(p) || p.rank ? '' : ' off') + '"><span class="pl">' + (i + 1) + '.</span><span>' + C.AVATARS[p.ai].e + '</span><span>' + esc(p.name) + '</span>' + right + '</li>';
+    }).join('');
+  }
+  function renderFinish() {
+    show('finish');
+    var r = ranking(), team = G.mode === 'team';
+    if (team) {
+      var top = G.team.ledge >= G.goal;
+      $('#finishTitle').textContent = top ? '🚩 Spolu ste vyliezli na vrchol!' : 'Spolu ste vyliezli na rímsu ' + G.team.ledge + ' z ' + G.goal;
+      $('#finishLead').textContent = 'Trieda dala dokopy ' + G.team.points + ' správnych odpovedí. Pochváľte všetkých, každá odpoveď pomohla.';
+      $('#podium').innerHTML = '<div class="pl-big" style="width:100%">' + (window.ludkoSVG ? '<div style="display:flex;justify-content:center">' + window.ludkoSVG('star', 200) + '</div>' : '🚩') + '</div>';
+    } else {
+      var first = r[0];
+      $('#finishTitle').textContent = first && first.rank ? C.AVATARS[first.ai].e + ' ' + first.name + ' vyhráva!' : 'Koniec hry';
+      $('#finishLead').textContent = G.finishWhy === 'time' ? 'Čas vypršal. Poradie podľa toho, kto vyliezol najvyššie.' : 'Takto ste liezli. Gratulujeme všetkým, ktorí sa dostali aspoň o rímsu vyššie.';
+      var pod = [r[1], r[0], r[2]];
+      $('#podium').innerHTML = pod.map(function (p, i) {
+        if (!p) return '';
+        var place = [2, 1, 3][i];
+        return '<div class="cr-step p' + place + '"><span class="av">' + C.AVATARS[p.ai].e + '</span><b>' + esc(p.name) + '</b><span class="cr-muted">' + (p.rank ? 'na vrchole' : 'rímsa ' + p.ledge) + '</span><div class="blk">' + place + '.</div></div>';
+      }).join('');
+    }
+    $('#results').innerHTML = r.map(function (p, i) {
+      return '<tr><td>' + (i + 1) + '.</td><td>' + C.AVATARS[p.ai].e + ' ' + esc(p.name) + '</td><td>' + p.ledge + ' / ' + G.goal + '</td><td>' + p.ok + '</td><td>' + p.bad + '</td></tr>';
+    }).join('');
+    buildDiplomas(r);
+  }
+  function buildDiplomas(r) {
+    var d = new Date(G.finishedAt || Date.now()), date = d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear();
+    $('#diplomas').innerHTML = r.map(function (p, i) {
+      var line = G.mode === 'team' ? (G.team.ledge >= G.goal ? 'Spolu s triedou vyliezol(a) až na vrchol.' : 'Spolu s triedou vyliezol(a) na rímsu ' + G.team.ledge + '.') + ' Správnych odpovedí: ' + p.ok + '.'
+        : (p.rank ? (i + 1) + '. miesto. Vyliezol(a) až na vrchol!' : 'Vyliezol(a) na rímsu ' + p.ledge + ' z ' + G.goal + '.');
+      return '<div class="dip"><span class="k">DIPLOM · ĽUDKO NA VRCHOL</span><h2>Výborne!</h2><span class="av">' + C.AVATARS[p.ai].e + '</span><div class="nm">' + esc(p.name) + '</div><p>' + esc(line) + '</p><p>Vie, že AI sa môže mýliť, a odpovede si overuje.</p><div class="ft">' + date + ' · ludskyoai.sk</div></div>';
+    }).join('');
+  }
+
+  function toast(t) {
+    var el = document.createElement('div'); el.className = 'cr-toast'; el.setAttribute('role', 'status'); el.textContent = t;
+    document.body.appendChild(el); setTimeout(function () { el.remove(); }, 3200);
+  }
+  function keepAwake() { try { if (navigator.wakeLock && !wakeLock) navigator.wakeLock.request('screen').then(function (l) { wakeLock = l; l.addEventListener('release', function () { wakeLock = null; }); }); } catch (e) {} }
+
+  /* ---------- buttons ---------- */
+  $('#createBtn').onclick = function () {
+    G = newGame(); save(); stat('classroom/create/' + G.level);
+    startNetwork(); renderLobby(); show('lobby');
+  };
+  $('#startBtn').onclick = startGame;
+  $('#endBtn').onclick = function () { finish('teacher'); };
+  $('#againBtn').onclick = playAgain;
+  $('#printBtn').onclick = function () {
+    document.body.classList.add('print-diplomas');
+    setTimeout(function () { window.print(); }, 50);
+  };
+  window.addEventListener('afterprint', function () { document.body.classList.remove('print-diplomas'); });
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-kick],[data-rename],[data-action]'); if (!t) return;
+    if (t.dataset.kick) kick(t.dataset.kick);
+    else if (t.dataset.rename) rename(t.dataset.rename);
+    else if (t.dataset.action === 'fullscreen') {
+      var on = !document.body.classList.contains('projector');
+      document.body.classList.toggle('projector', on);
+      try { if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); else if (!on && document.fullscreenElement) document.exitFullscreen(); } catch (x) {}
+    } else if (t.dataset.action === 'new') {
+      if (G && G.phase === 'running' && !confirmEnd()) return;
+      if (main) main.send('board', { phase: 'closed' });
+      setTimeout(function () { if (rt) rt.close(); rt = null; main = null; }, 300);
+      G = null; try { sessionStorage.removeItem(STORE); } catch (x) {}
+      document.body.classList.remove('projector');
+      renderSetup();
+    }
+  });
+  function confirmEnd() { var b = $('#endBtn'); if (b.dataset.sure) return true; b.dataset.sure = '1'; b.textContent = 'Naozaj? Kliknite znova'; setTimeout(function () { delete b.dataset.sure; b.textContent = '🏁 Ukončiť hru'; }, 3000); return false; }
+  document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement) document.body.classList.remove('projector'); });
+
+  /* ---------- loop ---------- */
+  tick = setInterval(function () {
+    if (!G) return;
+    if (G.phase === 'running') { checkEnd(); if (G.phase === 'running') updateGame(); }
+    if (G.phase === 'lobby') renderLobby();
+    if (boardDirty || (G.phase === 'running' && G.endsAt)) sendBoard();
+  }, BOARD_MS);
+  window.addEventListener('beforeunload', function (e) { if (G && G.phase === 'running') { e.preventDefault(); e.returnValue = ''; } });
+
+  /* ---------- start ---------- */
+  G = load();
+  if (G) {
+    startNetwork();
+    if (G.phase === 'lobby') { renderLobby(); show('lobby'); }
+    else if (G.phase === 'running') { renderGame(true); keepAwake(); }
+    else renderFinish();
+  } else renderSetup();
+})();
+</script>
+</body>
+</html>
