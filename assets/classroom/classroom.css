@@ -80,6 +80,8 @@
 /* fullscreen / projector mode */
 body.projector .top,body.projector .beta-bar,body.projector .foot{display:none}
 body.projector .cr-pad{padding-top:1rem}
+body.projector .wrap{max-width:none}
+body.projector .cr-board{max-height:85vh}
 
 /* student */
 .pl-wrap{max-width:640px;margin:0 auto;padding:1.4rem 1.1rem 3rem}
