@@ -30,7 +30,7 @@
   function randomNickname(avatarIndex) { return nickname(avatarIndex, Math.floor(Math.random() * ADJECTIVES.length)); }
 
   // Nickname filter: normalised substring check against a short list of Slovak, Czech and English insults and slurs.
-  var BAD = ['kurv', 'pica', 'picu', 'pici', 'pice', 'jeb', 'kokot', 'chuj', 'hovn', 'debil', 'idiot', 'kreten', 'sracka', 'srat', 'prdel',
+  var BAD = ['kurv', '^pic', 'jeb', 'kokot', 'chuj', 'hovn', 'debil', 'idiot', 'kreten', 'sracka', 'srat', 'prdel',
     'fuck', 'shit', 'bitch', 'dick', 'cunt', 'nigg', 'negr', 'cigan', 'buzn', 'teplos', 'hitler', 'nazi', 'sex', 'porn', 'kokso', 'zmrd'];
   function normalise(s) {
     return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -38,10 +38,14 @@
       .replace(/[^a-z]/g, '');
   }
   function cleanNickname(s) {
-    s = String(s || '').replace(/[<>"'`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 18);
+    s = String(s || '').replace(/[<>"'`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24); // list names reach 19 chars, custom input is capped at 18
     if (s.length < 2) return null;
-    var n = normalise(s);
-    for (var i = 0; i < BAD.length; i++) if (n.indexOf(BAD[i]) !== -1) return null;
+    // check word by word, so that e.g. "Šikovná Žirafa" is not read as "...nazi..."
+    var words = s.split(' ').map(normalise);
+    for (var w = 0; w < words.length; w++) for (var i = 0; i < BAD.length; i++) {
+      var b = BAD[i], at = b.charAt(0) === '^';
+      if (at ? words[w].indexOf(b.slice(1)) === 0 : words[w].indexOf(b) !== -1) return null;
+    }
     return s;
   }
 
