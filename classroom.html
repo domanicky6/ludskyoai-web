@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hra pre celú triedu: Ľudko na vrchol – Ľudsky o AI</title>
-<meta name="description" content="Živá hra o umelej inteligencii pre celú triedu. Žiaci sa pripoja z mobilu kódom, bez registrácie. Kto prvý vylezie na vrchol? Alebo to dáte spolu. Zadarmo, po slovensky.">
+<title>Hry o AI pre celú triedu: Ľudko na vrchol a Kvíz o AI – Ľudsky o AI</title>
+<meta name="description" content="Živé hry o umelej inteligencii pre celú triedu: preteky na vrchol a kvíz v štýle pub kvízu. Žiaci sa pripoja z mobilu kódom, bez registrácie. Zadarmo, po slovensky.">
 <meta property="og:title" content="Ľudko na vrchol – hra o AI pre celú triedu">
 <meta property="og:description" content="Žiaci sa pripoja kódom z mobilu, odpovedajú na otázky o AI a lezú na horu. Bez registrácie, zadarmo.">
 <meta property="og:type" content="website">
@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/ui.css">
 <link rel="stylesheet" href="assets/classroom/classroom.css">
+<link rel="stylesheet" href="assets/classroom/quiz.css">
 <script src="assets/stats.js"></script>
 </head>
 <body>
@@ -35,24 +36,29 @@
   <div class="hero" style="padding:3rem 0 2.5rem">
     <div class="wrap">
       <div class="txt">
-        <span class="kicker">Pre školy · živá hra · bez registrácie</span>
-        <h1>Ľudko na vrchol pre celú triedu</h1>
-        <p class="lead">Na projektore je hora. Žiaci sa pripoja z mobilu alebo tabletu kódom a odpovedajú na otázky o AI. Každá správna odpoveď ich posunie o rímsu vyššie.</p>
+        <span class="kicker">Pre školy · živé hry · bez registrácie</span>
+        <h1>Hry o AI pre celú triedu</h1>
+        <p class="lead">Na projektore beží hra, žiaci sa pripoja z mobilu alebo tabletu kódom. Vyberte si preteky na horu alebo kvíz ako v bare, s kolami, žolíkom a finálnou stávkou.</p>
       </div>
       <div class="art bob" data-ludko="hi" data-w="220"></div>
     </div>
   </div>
   <div class="wrap cr-pad">
     <div class="grid" style="margin-bottom:2.4rem">
-      <div class="card"><b>1. Založte hru</b><br><span class="cr-muted">Vyberte vek a režim. Dostanete kód hry.</span></div>
+      <div class="card"><b>1. Založte hru</b><br><span class="cr-muted">Vyberte hru, vek a dĺžku. Dostanete kód hry.</span></div>
       <div class="card"><b>2. Žiaci sa pripoja</b><br><span class="cr-muted">Na <b>ludskyoai.sk/play</b> zadajú kód a vyberú si zvieratko. Žiadne mená ani e-maily.</span></div>
-      <div class="card"><b>3. Lezieme!</b><br><span class="cr-muted">Každý dostáva vlastné otázky. Na projektore vidíte, kto je kde.</span></div>
+      <div class="card"><b>3. Hráme!</b><br><span class="cr-muted">Na projektore vidíte otázky, poradie a výsledky. Na konci máte podklad na rozhovor.</span></div>
     </div>
 
-    <fieldset class="cr-field"><legend>Vek žiakov</legend><div class="cr-opts" role="radiogroup" data-opt="level"></div></fieldset>
-    <fieldset class="cr-field"><legend>Režim</legend><div class="cr-opts" role="radiogroup" data-opt="mode"></div></fieldset>
-    <fieldset class="cr-field"><legend>Výška hory</legend><div class="cr-opts" role="radiogroup" data-opt="goal"></div></fieldset>
-    <fieldset class="cr-field"><legend>Časový limit</legend><div class="cr-opts" role="radiogroup" data-opt="limit"></div></fieldset>
+    <h2 style="margin:0 0 .8rem;font-size:1.5rem">Vyberte hru</h2>
+    <div class="cr-games" role="radiogroup" aria-label="Hra" id="gamePick"></div>
+
+    <fieldset class="cr-field"><legend>Pre koho</legend><div class="cr-opts" role="radiogroup" data-opt="level"></div></fieldset>
+    <fieldset class="cr-field" data-for="race"><legend>Režim</legend><div class="cr-opts" role="radiogroup" data-opt="mode"></div></fieldset>
+    <fieldset class="cr-field" data-for="race"><legend>Výška hory</legend><div class="cr-opts" role="radiogroup" data-opt="goal"></div></fieldset>
+    <fieldset class="cr-field" data-for="race"><legend>Časový limit</legend><div class="cr-opts" role="radiogroup" data-opt="limit"></div></fieldset>
+    <fieldset class="cr-field" data-for="quiz"><legend>Dĺžka kvízu</legend><div class="cr-opts" role="radiogroup" data-opt="length"></div></fieldset>
+    <fieldset class="cr-field" data-for="quiz"><legend>Čas na otázku</legend><div class="cr-opts" role="radiogroup" data-opt="qtime"></div></fieldset>
     <fieldset class="cr-field"><legend>Prezývky</legend><div class="cr-opts" role="radiogroup" data-opt="names"></div></fieldset>
 
     <div class="cr-row" style="margin-top:.6rem">
@@ -117,6 +123,9 @@
   </div>
 </section>
 
+<!-- 3b. QUIZ (rendered by assets/classroom/host-quiz.js) -->
+<section id="quizSec" class="cr-screen" hidden></section>
+
 <!-- 4. FINISH -->
 <section id="finish" class="cr-screen" hidden>
   <div class="wrap cr-pad">
@@ -130,8 +139,9 @@
       <button type="button" class="btn" data-action="new">Nová hra</button>
     </div>
     <div class="card" style="overflow-x:auto">
-      <table class="cr-results"><thead><tr><th>#</th><th>Hráč</th><th>Rímsa</th><th>Správne</th><th>Chyby</th></tr></thead><tbody id="results"></tbody></table>
+      <table class="cr-results"><thead><tr><th>#</th><th id="colName">Hráč</th><th id="colMain">Rímsa</th><th>Správne</th><th>Chyby</th></tr></thead><tbody id="results"></tbody></table>
     </div>
+    <div class="card qz-report" id="reportBox" hidden><b>Otázky, ktoré boli najťažšie</b><ol id="report" style="margin:.5rem 0 0;padding-left:1.3rem"></ol><p class="cr-muted" style="margin:.6rem 0 0">Vráťte sa k nim v rozhovore. Nech tím, ktorý odpovedal správne, vysvetlí prečo.</p></div>
     <div class="card" style="margin-top:1.6rem;background:var(--yel2)">
       <b>Na rozhovor po hre</b>
       <ul style="margin:.5rem 0 0;padding-left:1.2rem;line-height:1.6">
@@ -150,35 +160,50 @@
 
 <script src="assets/ui.js"></script>
 <script src="assets/classroom/questions.js"></script>
+<script src="assets/classroom/quiz-questions.js"></script>
 <script src="assets/classroom/shared.js"></script>
 <script src="assets/classroom/realtime.js"></script>
+<script src="assets/classroom/host-quiz.js"></script>
 <script>
 (function () {
   'use strict';
-  var C = window.LudClass, QB = window.CLASSROOM_QUESTIONS, esc = C.esc;
+  var C = window.LudClass, QB = window.CLASSROOM_QUESTIONS, QD = window.QUIZ_DATA, esc = C.esc;
   var STORE = 'ludskyoai-classroom-v1';
   var OFFLINE_MS = 25000, WRONG_PAUSE_MS = 2500, BOARD_MS = 1000;
   var $ = function (s) { return document.querySelector(s); };
   var stat = function (n) { try { window.ludStat && window.ludStat(n); } catch (e) {} };
 
+  var GAMES = [
+    ['race', '🧗', 'Ľudko na vrchol', 'Každý dostáva vlastné otázky a lezie na horu. Preteky alebo spolu ako tím. Asi 5 – 8 minút.'],
+    ['quiz', '🍻', 'Kvíz o AI', 'Ako kvíz v bare: tímy, tematické kolá, žolík, odhady a finálna stávka. Otázky bežia na projektore. Asi 15 – 25 minút.']
+  ];
   var OPTIONS = {
-    level: [['young', '1. stupeň', '6 – 10 rokov'], ['middle', '2. stupeň', '10 – 15 rokov'], ['high', 'Stredná škola', '15+ rokov']],
+    level: [['young', '1. stupeň', '6 – 10 rokov'], ['middle', '2. stupeň', '10 – 15 rokov'], ['high', 'Stredná škola', '15+ rokov'], ['adults', 'Dospelí', 'firma, knižnica, beseda']],
+    length: [['short', 'Kratší', '3 kolá a finále · asi 15 minút'], ['long', 'Dlhší', '4 kolá, odhady a finále · asi 25 minút']],
+    qtime: [['15', '15 sekúnd', ''], ['20', '20 sekúnd', ''], ['30', '30 sekúnd', '']],
     mode: [['race', '🏁 Preteky', 'kto bude prvý na vrchole'], ['team', '🤝 Spolu na vrchol', 'každá správna odpoveď pomôže celej triede']],
     goal: [['6', 'Kopec', '6 ríms · asi 5 minút'], ['10', 'Veľká hora', '10 ríms · asi 8 minút']],
     limit: [['0', 'Bez limitu', 'ukončíte sami'], ['5', '5 minút', ''], ['8', '8 minút', ''], ['12', '12 minút', '']],
     names: [['list', 'Len z ponuky', 'napr. Odvážna Líška'], ['custom', 'Aj vlastné', 's filtrom nevhodných slov']]
   };
-  var setup = { level: 'young', mode: 'race', goal: '6', limit: '0', names: 'list' };
+  var setup = { game: 'race', level: 'young', mode: 'race', goal: '6', limit: '0', names: 'list', length: 'short', qtime: '20' };
   try { var sv = JSON.parse(localStorage.getItem('ludskyoai-classroom-setup') || 'null'); if (sv) Object.keys(setup).forEach(function (k) { if (sv[k]) setup[k] = sv[k]; }); } catch (e) {}
 
   /* ---------- state ---------- */
   var G = null;          // game state (saved to sessionStorage)
   var rt = null, main = null, pch = {};   // realtime connection, main channel, per-player channels
-  var lastProbe = 0, boardDirty = false, tick = 0, wakeLock = null;
+  var lastProbe = 0, probeTimer = 0, boardDirty = false, tick = 0, wakeLock = null, quiz = null;
+  function isQuiz() { return G && G.game === 'quiz'; }
+  function levelLabel() { return (isQuiz() ? QD.audiences[G.level] : QB[G.level]).label; }
+  function makeQuiz() {
+    quiz = isQuiz() ? window.QuizHost({ G: G, C: C, $: $, esc: esc, players: activePlayers, online: online, toPlayer: toPlayer,
+      dirty: dirty, save: save, toast: toast, stat: stat, finish: finish }) : null;
+  }
 
   function newGame() {
     var code = C.randomId(6, C.CODE_ALPHABET).toUpperCase();
-    return { v: 1, code: code, level: setup.level, mode: setup.mode, goal: +setup.goal, limit: +setup.limit, names: setup.names,
+    return { v: 1, code: code, game: setup.game, level: setup.level, mode: setup.game === 'quiz' ? 'quiz' : setup.mode, goal: +setup.goal, limit: setup.game === 'quiz' ? 0 : +setup.limit, names: setup.names,
+      length: setup.length, qtime: +setup.qtime, quiz: null,
       phase: 'lobby', created: Date.now(), startedAt: 0, endsAt: 0, finishedAt: 0, round: 1,
       players: {}, order: [], banned: {}, finishCount: 0, team: { points: 0, per: 2, ledge: 0 } };
   }
@@ -190,20 +215,27 @@
 
   /* ---------- screens ---------- */
   function show(id) {
-    ['setup', 'lobby', 'game', 'finish'].forEach(function (s) { $('#' + s).hidden = s !== id; });
+    ['setup', 'lobby', 'game', 'quizSec', 'finish'].forEach(function (s) { $('#' + s).hidden = s !== id; });
     window.scrollTo(0, 0);
   }
 
   function renderSetup() {
+    if (setup.game !== 'quiz' && setup.level === 'adults') setup.level = 'high';
+    $('#gamePick').innerHTML = GAMES.map(function (g) {
+      return '<button type="button" role="radio" class="cr-game-opt" data-game="' + g[0] + '" aria-checked="' + (setup.game === g[0]) + '"><span class="e" aria-hidden="true">' + g[1] + '</span><b>' + esc(g[2]) + '</b><span>' + esc(g[3]) + '</span></button>';
+    }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('[data-for]'), function (f) { f.hidden = f.getAttribute('data-for') !== setup.game; });
     Object.keys(OPTIONS).forEach(function (k) {
       var box = document.querySelector('[data-opt="' + k + '"]');
-      box.innerHTML = OPTIONS[k].map(function (o) {
+      box.innerHTML = OPTIONS[k].filter(function (o) { return !(k === 'level' && o[0] === 'adults' && setup.game !== 'quiz'); }).map(function (o) {
         return '<button type="button" role="radio" class="cr-opt" data-k="' + k + '" data-v="' + o[0] + '" aria-checked="' + (setup[k] === o[0]) + '">' + esc(o[1]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</button>';
       }).join('');
     });
     show('setup');
   }
   document.addEventListener('click', function (e) {
+    var g = e.target.closest('.cr-game-opt');
+    if (g) { setup.game = g.dataset.game; try { localStorage.setItem('ludskyoai-classroom-setup', JSON.stringify(setup)); } catch (x) {} renderSetup(); return; }
     var b = e.target.closest('.cr-opt'); if (!b) return;
     setup[b.dataset.k] = b.dataset.v;
     if (b.dataset.k === 'level' && b.dataset.v === 'young') setup.names = 'list';
@@ -220,16 +252,27 @@
     if (rt) rt.close();
     pch = {};
     rt = LudRealtime.connect({ onStatus: setNet });
-    main = rt.channel('race-' + G.code, { onJoin: function () { sendBoard(true); } });
+    main = rt.channel('game-' + G.code, { onJoin: function () { sendBoard(true); } });
     main.on('hello', onHello);
-    main.on('probe', function () { var now = Date.now(); if (now - lastProbe > 500) { lastProbe = now; sendBoard(true); } });
+    // many students enter the code at once: answer every probe, but at most one board per 400 ms
+    main.on('probe', function () {
+      var wait = lastProbe + 400 - Date.now();
+      if (wait <= 0) { lastProbe = Date.now(); sendBoard(true); }
+      else if (!probeTimer) probeTimer = setTimeout(function () { probeTimer = 0; lastProbe = Date.now(); sendBoard(true); }, wait);
+    });
     G.order.forEach(function (pid) { if (!G.banned[pid]) openPlayer(pid); });
   }
   function openPlayer(pid) {
     if (pch[pid]) return pch[pid];
-    var ch = rt.channel('race-' + G.code + '-' + pid);
-    ch.on('answer', function (m) { seen(pid); onAnswer(pid, m); });
-    ch.on('next', function () { seen(pid); onNext(pid); });
+    var ch = rt.channel('game-' + G.code + '-' + pid);
+    ['answer', 'next', 'joker', 'wager'].forEach(function (ev) {
+      ch.on(ev, function (m) {
+        seen(pid);
+        if (isQuiz()) { if (quiz && G.quiz && G.phase === 'running') quiz.onMsg(pid, ev, m); }
+        else if (ev === 'answer') onAnswer(pid, m);
+        else if (ev === 'next') onNext(pid);
+      });
+    });
     ch.on('ping', function () { seen(pid); });
     pch[pid] = ch;
     return ch;
@@ -255,18 +298,20 @@
     if (activeCount() >= C.MAX_PLAYERS) { toPlayer(pid, 'reject', { reason: 'full' }); return; }
     var ai = +m.avatar;
     if (!(ai >= 0 && ai < C.AVATARS.length)) ai = Math.floor(Math.random() * C.AVATARS.length);
-    var name = C.cleanNickname(m.name);
-    if (!name || (G.names === 'list' && !C.isListNickname(name, ai))) { toPlayer(pid, 'reject', { reason: 'name' }); return; }
+    var raw = String(m.name || '').trim(), listName = C.isListNickname(raw, ai);
+    var name = listName ? raw : (G.names === 'custom' ? C.cleanNickname(raw) : null);
+    if (!name) { toPlayer(pid, 'reject', { reason: 'name' }); return; }
     p = G.players[pid] = { pid: pid, name: uniqueName(name, pid), ai: ai, ledge: 0, ok: 0, bad: 0, rank: 0, reachedAt: 0,
       seen: Date.now(), pool: [], q: null, last: null, wrongAt: 0, joinedRound: G.round };
     G.order.push(pid);
     welcome(p);
-    if (G.phase === 'running') sendQuestion(p);
+    if (G.phase === 'running' && !isQuiz()) sendQuestion(p);
     dirty(); save();
   }
   function welcome(p) {
-    toPlayer(p.pid, 'welcome', { name: p.name, avatar: C.AVATARS[p.ai].e, mode: G.mode, goal: G.goal, level: QB[G.level].label, phase: G.phase });
-    if (G.phase === 'running' && p.q) sendQuestion(p, true);
+    toPlayer(p.pid, 'welcome', { game: G.game || 'race', name: p.name, avatar: C.AVATARS[p.ai].e, mode: G.mode, goal: G.goal, level: levelLabel(), phase: G.phase });
+    if (isQuiz()) { if (quiz && G.quiz) quiz.onWelcome(p); dirty(); }
+    else if (G.phase === 'running' && p.q) sendQuestion(p, true);
   }
   function activeCount() { return G.order.filter(function (id) { return !G.banned[id]; }).length; }
   function activePlayers() { return G.order.filter(function (id) { return !G.banned[id]; }).map(function (id) { return G.players[id]; }); }
@@ -346,6 +391,12 @@
   /* ---------- game flow ---------- */
   function startGame() {
     var list = activePlayers(); if (!list.length) return;
+    if (isQuiz()) {
+      G.phase = 'running'; G.startedAt = Date.now(); G.endsAt = 0;
+      stat('classroom/start/quiz');
+      show('quizSec'); quiz.start(); sendBoard(true); keepAwake();
+      return;
+    }
     G.phase = 'running'; G.startedAt = Date.now(); G.endsAt = G.limit ? G.startedAt + G.limit * 60000 : 0;
     G.finishCount = 0; G.team = { points: 0, per: Math.max(2, Math.ceil(list.length * 1.5)), ledge: 0 };
     list.forEach(function (p) { p.ledge = 0; p.ok = 0; p.bad = 0; p.rank = 0; p.reachedAt = 0; p.q = null; p.last = null; p.pool = []; });
@@ -363,12 +414,13 @@
     renderFinish();
   }
   function playAgain() {
-    G.phase = 'lobby'; G.round++; G.startedAt = 0; G.endsAt = 0; G.finishCount = 0; G.team = { points: 0, per: 2, ledge: 0 };
+    G.phase = 'lobby'; G.round++; G.startedAt = 0; G.endsAt = 0; G.finishCount = 0; G.team = { points: 0, per: 2, ledge: 0 }; G.quiz = null;
     activePlayers().forEach(function (p) { p.ledge = 0; p.ok = 0; p.bad = 0; p.rank = 0; p.reachedAt = 0; p.q = null; p.last = null; });
     save(); sendBoard(true); renderLobby(); show('lobby');
   }
 
   function ranking() {
+    if (isQuiz() && quiz && G.quiz) return quiz.ranking();
     return activePlayers().slice().sort(function (a, b) {
       if (G.mode === 'team') return b.ok - a.ok || a.name.localeCompare(b.name, 'sk');
       if (a.rank && b.rank) return a.rank - b.rank;
@@ -382,12 +434,14 @@
   function sendBoard(now) {
     if (!main || !G) return;
     var r = ranking();
-    main.send('board', {
-      phase: G.phase, mode: G.mode, goal: G.goal, names: G.names, level: QB[G.level].label, round: G.round,
+    var payload = {
+      game: G.game || 'race', phase: G.phase, mode: G.mode, goal: G.goal, names: G.names, level: levelLabel(), round: G.round,
       remaining: G.endsAt && G.phase === 'running' ? Math.max(0, G.endsAt - Date.now()) : null,
       team: G.mode === 'team' ? { l: G.team.ledge, p: G.team.points, need: G.team.per * G.goal } : null,
-      players: r.map(function (p, i) { return { pid: p.pid, n: p.name, a: C.AVATARS[p.ai].e, l: p.ledge, d: p.rank || 0, o: online(p) ? 1 : 0, pos: i + 1 }; })
-    });
+      players: r.map(function (p, i) { return { pid: p.pid, n: p.name, a: C.AVATARS[p.ai].e, l: p.ledge, d: p.rank || 0, o: online(p) ? 1 : 0, pos: i + 1, s: p.score || 0 }; })
+    };
+    if (isQuiz() && quiz && G.quiz && G.phase !== 'lobby') { var qb = quiz.board(); payload.quiz = qb.quiz; payload.players = qb.players; }
+    main.send('board', payload);
     boardDirty = false;
   }
 
@@ -395,7 +449,8 @@
   var mountain = null;
   function renderLobby() {
     $('#codeBig').textContent = G.code;
-    $('#lobbyInfo').textContent = QB[G.level].label + ' · ' + (G.mode === 'race' ? 'Preteky' : 'Spolu na vrchol') + ' · ' + G.goal + ' ríms' + (G.limit ? ' · ' + G.limit + ' min' : '');
+    $('#lobbyInfo').textContent = isQuiz() ? 'Kvíz o AI · ' + levelLabel() + ' · ' + (G.length === 'long' ? 'dlhší' : 'kratší') + ' · ' + G.qtime + ' s na otázku'
+      : levelLabel() + ' · ' + (G.mode === 'race' ? 'Preteky' : 'Spolu na vrchol') + ' · ' + G.goal + ' ríms' + (G.limit ? ' · ' + G.limit + ' min' : '');
     var list = activePlayers();
     $('#lobbyCount').textContent = list.length;
     var html = list.length ? list.map(function (p) {
@@ -437,6 +492,29 @@
   function renderFinish() {
     show('finish');
     var r = ranking(), team = G.mode === 'team';
+    $('#colName').textContent = isQuiz() ? 'Tím' : 'Hráč';
+    $('#colMain').textContent = isQuiz() ? 'Body' : 'Rímsa';
+    $('#reportBox').hidden = true;
+    if (isQuiz()) {
+      var w = r[0];
+      $('#finishTitle').textContent = w && w.score > 0 ? '🏆 ' + C.AVATARS[w.ai].e + ' ' + w.name + ' vyhráva!' : 'Koniec kvízu';
+      $('#finishLead').textContent = 'Kvíz o AI skončil. Gratulujeme všetkým tímom!';
+      $('#podium').innerHTML = [r[1], r[0], r[2]].map(function (p, i) {
+        if (!p) return '';
+        var place = [2, 1, 3][i], s = p.score || 0;
+        return '<div class="cr-step p' + place + '"><span class="av">' + C.AVATARS[p.ai].e + '</span><b>' + esc(p.name) + '</b><span class="cr-muted">' + s + ' ' + C.plural(s, 'bod', 'body', 'bodov') + '</span><div class="blk">' + place + '.</div></div>';
+      }).join('');
+      $('#results').innerHTML = r.map(function (p, i) {
+        return '<tr><td>' + (i + 1) + '.</td><td>' + C.AVATARS[p.ai].e + ' ' + esc(p.name) + '</td><td>' + (p.score || 0) + '</td><td>' + (p.ok || 0) + '</td><td>' + (p.bad || 0) + '</td></tr>';
+      }).join('');
+      var rep = quiz ? quiz.report() : [];
+      if (rep.length) {
+        $('#reportBox').hidden = false;
+        $('#report').innerHTML = rep.map(function (x) { return '<li>' + esc(x.q) + ' <span class="cr-muted">(správne ' + x.ok + ' z ' + x.n + ')</span></li>'; }).join('');
+      }
+      buildDiplomas(r);
+      return;
+    }
     if (team) {
       var top = G.team.ledge >= G.goal;
       $('#finishTitle').textContent = top ? '🚩 Spolu ste vyliezli na vrchol!' : 'Spolu ste vyliezli na rímsu ' + G.team.ledge + ' z ' + G.goal;
@@ -461,9 +539,9 @@
   function buildDiplomas(r) {
     var d = new Date(G.finishedAt || Date.now()), date = d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear();
     $('#diplomas').innerHTML = r.map(function (p, i) {
-      var line = G.mode === 'team' ? (G.team.ledge >= G.goal ? 'Spolu s triedou vyliezol(a) až na vrchol.' : 'Spolu s triedou vyliezol(a) na rímsu ' + G.team.ledge + '.') + ' Správnych odpovedí: ' + p.ok + '.'
+      var line = isQuiz() ? (i + 1) + '. miesto v Kvíze o AI. Body: ' + (p.score || 0) + '.' : G.mode === 'team' ? (G.team.ledge >= G.goal ? 'Spolu s triedou vyliezol(a) až na vrchol.' : 'Spolu s triedou vyliezol(a) na rímsu ' + G.team.ledge + '.') + ' Správnych odpovedí: ' + p.ok + '.'
         : (p.rank ? (i + 1) + '. miesto. Vyliezol(a) až na vrchol!' : 'Vyliezol(a) na rímsu ' + p.ledge + ' z ' + G.goal + '.');
-      return '<div class="dip"><span class="k">DIPLOM · ĽUDKO NA VRCHOL</span><h2>Výborne!</h2><span class="av">' + C.AVATARS[p.ai].e + '</span><div class="nm">' + esc(p.name) + '</div><p>' + esc(line) + '</p><p>Vie, že AI sa môže mýliť, a odpovede si overuje.</p><div class="ft">' + date + ' · ludskyoai.sk</div></div>';
+      return '<div class="dip"><span class="k">DIPLOM · ' + (isQuiz() ? 'KVÍZ O AI' : 'ĽUDKO NA VRCHOL') + '</span><h2>Výborne!</h2><span class="av">' + C.AVATARS[p.ai].e + '</span><div class="nm">' + esc(p.name) + '</div><p>' + esc(line) + '</p><p>Vie, že AI sa môže mýliť, a odpovede si overuje.</p><div class="ft">' + date + ' · ludskyoai.sk</div></div>';
     }).join('');
   }
 
@@ -475,7 +553,7 @@
 
   /* ---------- buttons ---------- */
   $('#createBtn').onclick = function () {
-    G = newGame(); save(); stat('classroom/create/' + G.level);
+    G = newGame(); save(); stat('classroom/create/' + (G.game === 'quiz' ? 'quiz-' : '') + G.level); makeQuiz();
     startNetwork(); renderLobby(); show('lobby');
   };
   $('#startBtn').onclick = startGame;
@@ -509,17 +587,20 @@
   /* ---------- loop ---------- */
   tick = setInterval(function () {
     if (!G) return;
-    if (G.phase === 'running') { checkEnd(); if (G.phase === 'running') updateGame(); }
+    if (G.phase === 'running' && isQuiz()) { if (quiz && G.quiz) quiz.tick(); }
+    else if (G.phase === 'running') { checkEnd(); if (G.phase === 'running') updateGame(); }
     if (G.phase === 'lobby') renderLobby();
-    if (boardDirty || (G.phase === 'running' && G.endsAt)) sendBoard();
+    if (boardDirty || (G.phase === 'running' && (G.endsAt || (isQuiz() && G.quiz && G.quiz.phase === 'question')))) sendBoard();
   }, BOARD_MS);
   window.addEventListener('beforeunload', function (e) { if (G && G.phase === 'running') { e.preventDefault(); e.returnValue = ''; } });
 
   /* ---------- start ---------- */
   G = load();
   if (G) {
+    makeQuiz();
     startNetwork();
     if (G.phase === 'lobby') { renderLobby(); show('lobby'); }
+    else if (G.phase === 'running' && isQuiz() && G.quiz) { show('quizSec'); quiz.render(true); keepAwake(); }
     else if (G.phase === 'running') { renderGame(true); keepAwake(); }
     else renderFinish();
   } else renderSetup();
