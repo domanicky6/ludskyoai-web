@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hra pre celú triedu: Ľudko na vrchol – Ľudsky o AI</title>
-<meta name="description" content="Žaivá hra o umelej inteligencii pre celú triedu. Žiaci sa pripoja z mobilu kódom, bez registrácie. Kto prvý vylezie na vrchol? Alebo to dáte spolu. Zadarmo, po slovensky.">
+<meta name="description" content="Živá hra o umelej inteligencii pre celú triedu. Žiaci sa pripoja z mobilu kódom, bez registrácie. Kto prvý vylezie na vrchol? Alebo to dáte spolu. Zadarmo, po slovensky.">
 <meta property="og:title" content="Ľudko na vrchol – hra o AI pre celú triedu">
 <meta property="og:description" content="Žiaci sa pripoja kódom z mobilu, odpovedajú na otázky o AI a lezú na horu. Bez registrácie, zadarmo.">
 <meta property="og:type" content="website">
@@ -444,7 +444,7 @@
       $('#podium').innerHTML = '<div class="pl-big" style="width:100%">' + (window.ludkoSVG ? '<div style="display:flex;justify-content:center">' + window.ludkoSVG('star', 200) + '</div>' : '🚩') + '</div>';
     } else {
       var first = r[0];
-      $('#finishTitle').textContent = first && first.rank ? C.AVATARS[first.ai].e + ' ' + first.name + ' vyhráva!' : 'Koniec hry';
+      $('#finishTitle').textContent = first && (first.rank || first.ledge) ? C.AVATARS[first.ai].e + ' ' + first.name + ' vyhráva!' : 'Koniec hry';
       $('#finishLead').textContent = G.finishWhy === 'time' ? 'Čas vypršal. Poradie podľa toho, kto vyliezol najvyššie.' : 'Takto ste liezli. Gratulujeme všetkým, ktorí sa dostali aspoň o rímsu vyššie.';
       var pod = [r[1], r[0], r[2]];
       $('#podium').innerHTML = pod.map(function (p, i) {
