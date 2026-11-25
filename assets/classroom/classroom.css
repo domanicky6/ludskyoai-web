@@ -1,0 +1,129 @@
+/* Ľudsky o AI – classroom games (classroom.html, play.html). Builds on assets/ui.css. */
+.beta-bar{background:#C62828;color:#FFFFFF;text-align:center;font:600 13px/1.4 Montserrat,system-ui,sans-serif;padding:6px 16px}
+.cr-main{min-height:70vh}
+.cr-screen{animation:slideUp .4s ease both}
+.cr-pad{padding:2.2rem 0 3.5rem}
+.cr-h1{margin:0 0 .4rem;font-size:clamp(1.9rem,5vw,3rem);font-weight:900;line-height:1.08;letter-spacing:-.01em}
+.cr-lead{margin:0 0 1.6rem;font-size:1.1rem;line-height:1.6;color:var(--ink2);max-width:44rem}
+.cr-row{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.cr-muted{color:var(--mut)}
+.cr-status{display:inline-flex;align-items:center;gap:.4rem;font:700 .8rem "JetBrains Mono",monospace;padding:.3rem .7rem;border-radius:999px;border:2px solid var(--ink);background:#fff}
+.cr-status i{width:10px;height:10px;border-radius:50%;background:#bbb;display:block}
+.cr-status.online i{background:var(--grn)}.cr-status.connecting i{background:var(--yel)}.cr-status.offline i{background:var(--red)}
+
+/* option groups (setup) */
+.cr-field{margin:0 0 1.6rem;border:0;padding:0}
+.cr-field legend{font-weight:900;font-size:1.15rem;margin-bottom:.6rem;padding:0}
+.cr-opts{display:flex;flex-wrap:wrap;gap:.6rem}
+.cr-opt{display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;min-height:3.6rem;padding:.6rem 1.1rem;border:3px solid var(--ink);border-radius:18px;background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink);font-weight:900;font-size:1.05rem;text-align:left;transition:transform .15s,background .2s}
+.cr-opt small{font-weight:700;font-size:.8rem;color:var(--mut)}
+.cr-opt:hover{transform:translate(-2px,-2px)}
+.cr-opt[aria-checked="true"]{background:var(--ink);color:#fff;box-shadow:4px 4px 0 var(--yel)}
+.cr-opt[aria-checked="true"] small{color:#D6D4EA}
+
+/* lobby */
+.cr-join{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center}
+@media (max-width:860px){.cr-join{grid-template-columns:1fr}}
+.cr-url{font-size:clamp(1.4rem,3.4vw,2.4rem);font-weight:900;margin:.2rem 0 1rem;word-break:break-word}
+.cr-code{font:900 clamp(3rem,10vw,6.5rem)/1 "JetBrains Mono",monospace;letter-spacing:.12em;background:var(--yel);border:4px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--ink);padding:.9rem 1.4rem;display:inline-block}
+.cr-qr{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:1rem;max-width:280px;justify-self:center;text-align:center;font-weight:700;font-size:.9rem}
+.cr-qr svg{width:100%;height:auto;display:block}
+.cr-roster{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0;min-height:3rem}
+.cr-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .4rem .35rem .75rem;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:800;animation:popIn .35s ease both}
+.cr-chip .av{font-size:1.25rem}
+.cr-chip.off{opacity:.45}
+.cr-chip button{border:0;background:var(--bg);border-radius:999px;width:1.9rem;height:1.9rem;cursor:pointer;font-size:.85rem}
+.cr-chip button:hover{background:var(--red2)}
+.cr-empty{color:var(--mut);font-weight:700;padding:.6rem 0}
+
+/* game (teacher) */
+.cr-game{display:grid;gap:1.2rem;grid-template-columns:minmax(0,2.2fr) minmax(260px,1fr);align-items:start}
+@media (max-width:900px){.cr-game{grid-template-columns:1fr}}
+.cr-hud{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.8rem}
+.cr-pill{display:inline-flex;align-items:center;gap:.35rem;font-weight:800;padding:.4rem .9rem;border:2px solid var(--ink);border-radius:999px;background:#fff}
+.cr-pill.big{font-size:1.2rem}
+.cr-board{background:#fff;border:3px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);padding:1rem;max-height:72vh;overflow:auto}
+.cr-board h2{margin:0 0 .6rem;font-size:1.2rem}
+.cr-board ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.3rem}
+.cr-board li{display:grid;grid-template-columns:2rem 1.8rem 1fr auto;gap:.4rem;align-items:center;padding:.3rem .4rem;border-radius:12px;font-weight:700}
+.cr-board li.top{background:var(--yel2)}
+.cr-board li.off{opacity:.45}
+.cr-board .pl{font:800 .85rem "JetBrains Mono",monospace;color:var(--mut);text-align:right}
+.cr-board .lv{font:800 .85rem "JetBrains Mono",monospace;background:var(--lil2);border:2px solid var(--ink);border-radius:999px;padding:0 .5rem}
+.cr-team{margin-bottom:.8rem}
+.cr-bar{height:22px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}
+.cr-bar i{display:block;height:100%;background:var(--grn);transition:width .6s ease}
+.cr-toast{position:fixed;left:50%;top:1.2rem;transform:translateX(-50%);z-index:60;background:var(--ink);color:#fff;font-weight:900;font-size:1.3rem;padding:.8rem 1.4rem;border-radius:999px;box-shadow:5px 5px 0 var(--yel);animation:popIn .4s ease both}
+
+/* mountain */
+.mt-wrap{background:#E8F6FF;border:3px solid var(--ink);border-radius:22px;overflow:hidden;box-shadow:6px 6px 0 var(--ink)}
+.mt{display:block;width:100%;height:auto}
+.mt-p{transition:transform .9s cubic-bezier(.34,1.3,.64,1)}
+.mt-p.off{opacity:.4}
+.mt-cloud{animation:drift 16s ease-in-out infinite alternate}
+.mt-cloud.c2{animation-duration:22s}
+@keyframes drift{from{transform:translateX(-20px)}to{transform:translateX(30px)}}
+.mt-flag path{transform-box:fill-box;transform-origin:0 50%;animation:flag 1.4s ease-in-out infinite}
+@keyframes flag{0%,100%{transform:skewY(0)}50%{transform:skewY(-8deg)}}
+
+/* podium */
+.cr-podium{display:flex;justify-content:center;align-items:flex-end;gap:1rem;margin:1.5rem 0 2rem;flex-wrap:wrap}
+.cr-step{display:flex;flex-direction:column;align-items:center;gap:.4rem;width:min(30%,210px);min-width:150px;text-align:center}
+.cr-step .av{font-size:3.2rem;animation:popIn .5s ease both}
+.cr-step b{font-size:1.1rem;line-height:1.2}
+.cr-step .blk{width:100%;border:3px solid var(--ink);border-radius:16px 16px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:.5rem;font:900 2rem Montserrat,sans-serif}
+.cr-step.p1 .blk{height:150px;background:var(--yel)}.cr-step.p2 .blk{height:110px;background:var(--lil2)}.cr-step.p3 .blk{height:80px;background:var(--org)}
+.cr-results{width:100%;border-collapse:collapse;font-weight:700}
+.cr-results th,.cr-results td{text-align:left;padding:.45rem .6rem;border-bottom:2px solid #E6E5F0}
+.cr-results th{font:800 .8rem "JetBrains Mono",monospace;text-transform:uppercase;color:var(--mut)}
+
+/* fullscreen / projector mode */
+body.projector .top,body.projector .beta-bar,body.projector .foot{display:none}
+body.projector .cr-pad{padding-top:1rem}
+
+/* student */
+.pl-wrap{max-width:640px;margin:0 auto;padding:1.4rem 1.1rem 3rem}
+.pl-card{background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink);padding:1.3rem}
+.pl-code{width:100%;font:900 2.4rem "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase;text-align:center;border:3px solid var(--ink);border-radius:18px;padding:.6rem;background:var(--yel2)}
+.pl-code:focus{outline:3px solid var(--lil);outline-offset:2px}
+.pl-input{width:100%;font:700 1.15rem Montserrat,sans-serif;border:3px solid var(--ink);border-radius:14px;padding:.7rem .9rem}
+.pl-avatars{display:grid;grid-template-columns:repeat(auto-fill,minmax(3.4rem,1fr));gap:.45rem;margin:.6rem 0 1.2rem}
+.pl-av{font-size:1.9rem;height:3.4rem;border:3px solid var(--ink);border-radius:16px;background:#fff;cursor:pointer}
+.pl-av[aria-checked="true"]{background:var(--yel);box-shadow:3px 3px 0 var(--ink)}
+.pl-adjs{display:flex;flex-wrap:wrap;gap:.45rem;margin:.6rem 0 1.2rem}
+.pl-adj{font-weight:800;font-size:1rem;padding:.55rem .9rem;border:2px solid var(--ink);border-radius:999px;background:#fff;cursor:pointer}
+.pl-adj[aria-checked="true"]{background:var(--ink);color:#fff}
+.pl-me{display:flex;align-items:center;gap:.7rem;font-size:1.35rem;font-weight:900;background:var(--lil2);border:3px solid var(--ink);border-radius:18px;padding:.7rem 1rem;margin:.4rem 0 1rem}
+.pl-me .av{font-size:2.2rem}
+.pl-label{display:block;font-weight:900;margin:.8rem 0 .2rem}
+.pl-err{background:var(--red2);border:2px solid var(--ink);border-radius:14px;padding:.6rem .8rem;font-weight:700;margin:.8rem 0 0}
+.pl-hud{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.pl-q{font-size:1.35rem;font-weight:900;line-height:1.3;margin:.2rem 0 1rem}
+.pl-answers{display:flex;flex-direction:column;gap:.6rem}
+.pl-ans{display:flex;align-items:center;gap:.7rem;width:100%;min-height:3.6rem;text-align:left;font-weight:800;font-size:1.08rem;line-height:1.3;padding:.7rem 1rem;border:3px solid var(--ink);border-radius:16px;background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .1s}
+.pl-ans:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.pl-ans .k{flex:none;width:2rem;height:2rem;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--lil2);border:2px solid var(--ink);font:800 .95rem "JetBrains Mono",monospace}
+.pl-ans.ok{background:var(--grn2)}.pl-ans.bad{background:var(--red2)}
+.pl-ans[disabled]{cursor:default}
+.pl-fb{margin-top:1rem;border:3px solid var(--ink);border-radius:16px;padding:.8rem 1rem;line-height:1.5;animation:popIn .3s ease both}
+.pl-fb.ok{background:var(--grn2)}.pl-fb.bad{background:var(--yel2)}
+.pl-fb b{display:block;font-size:1.15rem;margin-bottom:.2rem}
+.pl-mini{margin-top:1.2rem}
+.pl-big{font-size:4rem;text-align:center;margin:.4rem 0}
+.pl-center{text-align:center}
+
+/* diplomas (print only) */
+.dip-sheet{display:none}
+@media print{
+  body.print-diplomas > *:not(.dip-sheet){display:none!important}
+  body.print-diplomas .dip-sheet{display:block}
+  .dip{height:138mm;box-sizing:border-box;border:3px solid #17153B;border-radius:16px;margin:0 0 6mm;padding:10mm 12mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;page-break-inside:avoid;font-family:Montserrat,sans-serif}
+  .dip:nth-child(2n){page-break-after:always}
+  .dip .k{font:700 11pt "JetBrains Mono",monospace;letter-spacing:.1em;color:#4A4775}
+  .dip h2{font-size:30pt;margin:2mm 0}
+  .dip .av{font-size:40pt}
+  .dip .nm{font-size:22pt;font-weight:900;margin:2mm 0}
+  .dip p{font-size:12pt;margin:1mm 0;max-width:150mm}
+  .dip .ft{margin-top:5mm;font-size:10pt;color:#4A4775}
+  @page{size:A4;margin:10mm}
+}
