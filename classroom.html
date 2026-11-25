@@ -45,25 +45,38 @@
   </div>
   <div class="wrap cr-pad">
     <div class="grid" style="margin-bottom:2.4rem">
-      <div class="card"><b>1. Založte hru</b><br><span class="cr-muted">Vyberte hru, vek a dĺžku. Dostanete kód hry.</span></div>
+      <div class="card"><b>1. Založte hru</b><br><span class="cr-muted">V troch krokoch vyberiete hru, vek a nastavenie. Dostanete kód hry.</span></div>
       <div class="card"><b>2. Žiaci sa pripoja</b><br><span class="cr-muted">Na <b>ludskyoai.sk/play</b> zadajú kód a vyberú si zvieratko. Žiadne mená ani e-maily.</span></div>
       <div class="card"><b>3. Hráme!</b><br><span class="cr-muted">Na projektore vidíte otázky, poradie a výsledky. Na konci máte podklad na rozhovor.</span></div>
     </div>
 
-    <h2 style="margin:0 0 .8rem;font-size:1.5rem">Vyberte hru</h2>
-    <div class="cr-games" role="radiogroup" aria-label="Hra" id="gamePick"></div>
+    <ol class="wz-steps" id="wzSteps" aria-label="Kroky"></ol>
 
-    <fieldset class="cr-field"><legend>Pre koho</legend><div class="cr-opts" role="radiogroup" data-opt="level"></div></fieldset>
-    <fieldset class="cr-field" data-for="race"><legend>Režim</legend><div class="cr-opts" role="radiogroup" data-opt="mode"></div></fieldset>
-    <fieldset class="cr-field" data-for="race"><legend>Výška hory</legend><div class="cr-opts" role="radiogroup" data-opt="goal"></div></fieldset>
-    <fieldset class="cr-field" data-for="race"><legend>Časový limit</legend><div class="cr-opts" role="radiogroup" data-opt="limit"></div></fieldset>
-    <fieldset class="cr-field" data-for="quiz"><legend>Dĺžka kvízu</legend><div class="cr-opts" role="radiogroup" data-opt="length"></div></fieldset>
-    <fieldset class="cr-field" data-for="quiz"><legend>Čas na otázku</legend><div class="cr-opts" role="radiogroup" data-opt="qtime"></div></fieldset>
-    <fieldset class="cr-field"><legend>Prezývky</legend><div class="cr-opts" role="radiogroup" data-opt="names"></div></fieldset>
+    <div class="wz-step" data-step="1">
+      <h2 class="wz-h">Ktorú hru si zahráte?</h2>
+      <div class="cr-games" role="radiogroup" aria-label="Hra" id="gamePick"></div>
+    </div>
 
-    <div class="cr-row" style="margin-top:.6rem">
-      <button type="button" class="btn yel" id="createBtn">🧗 Založiť hru</button>
-      <a class="btn" href="skoly.html">← Pre školy</a>
+    <div class="wz-step" data-step="2" hidden>
+      <h2 class="wz-h">Pre koho bude hra?</h2>
+      <div class="cr-opts wz-big" role="radiogroup" aria-label="Pre koho" data-opt="level"></div>
+    </div>
+
+    <div class="wz-step" data-step="3" hidden>
+      <h2 class="wz-h">Posledné nastavenia</h2>
+      <p class="wz-sum" id="wzSum"></p>
+      <fieldset class="cr-field" data-for="race"><legend>Režim</legend><div class="cr-opts" role="radiogroup" data-opt="mode"></div></fieldset>
+      <fieldset class="cr-field" data-for="race"><legend>Výška hory</legend><div class="cr-opts" role="radiogroup" data-opt="goal"></div></fieldset>
+      <fieldset class="cr-field" data-for="race"><legend>Časový limit</legend><div class="cr-opts" role="radiogroup" data-opt="limit"></div></fieldset>
+      <fieldset class="cr-field" data-for="quiz"><legend>Dĺžka kvízu</legend><div class="cr-opts" role="radiogroup" data-opt="length"></div></fieldset>
+      <fieldset class="cr-field" data-for="quiz"><legend>Čas na otázku</legend><div class="cr-opts" role="radiogroup" data-opt="qtime"></div></fieldset>
+      <fieldset class="cr-field"><legend>Prezývky</legend><div class="cr-opts" role="radiogroup" data-opt="names"></div></fieldset>
+    </div>
+
+    <div class="cr-row wz-nav">
+      <button type="button" class="btn" id="wzBack">← Späť</button>
+      <button type="button" class="btn yel" id="wzNext">Ďalej →</button>
+      <button type="button" class="btn yel" id="createBtn" hidden>🧗 Založiť hru</button>
     </div>
     <p class="cr-muted" style="margin-top:1.6rem;max-width:44rem;line-height:1.6">Potrebujete projektor alebo veľkú obrazovku a pre žiakov zariadenia s internetom. Žiaci môžu hrať aj vo dvojiciach. Hra beží, kým máte túto stránku otvorenú. Nič neukladáme: žiaci vystupujú len pod prezývkou a správy počas hry idú cez server v EÚ. <a href="sukromie.html#trieda">Viac o súkromí</a></p>
   </div>
@@ -219,8 +232,16 @@
     window.scrollTo(0, 0);
   }
 
-  function renderSetup() {
+  var wzStep = 1, WZ = ['Hra', 'Pre koho', 'Nastavenie'];
+  function optLabel(k, v) { var o = OPTIONS[k].filter(function (x) { return x[0] === v; })[0]; return o ? o[1] : ''; }
+  function saveSetup() { try { localStorage.setItem('ludskyoai-classroom-setup', JSON.stringify(setup)); } catch (x) {} }
+  function renderSetup(focus) {
     if (setup.game !== 'quiz' && setup.level === 'adults') setup.level = 'high';
+    $('#wzSteps').innerHTML = WZ.map(function (t, i) {
+      var n = i + 1, st = n < wzStep ? 'done' : n === wzStep ? 'now' : '';
+      return '<li class="' + st + '"' + (n === wzStep ? ' aria-current="step"' : '') + '>' + (n < wzStep ? '<button type="button" data-wz="' + n + '">' : '<span>') + '<i>' + (n < wzStep ? '✓' : n) + '</i>' + esc(t) + (n < wzStep ? '</button>' : '</span>') + '</li>';
+    }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('.wz-step'), function (el) { el.hidden = +el.dataset.step !== wzStep; });
     $('#gamePick').innerHTML = GAMES.map(function (g) {
       return '<button type="button" role="radio" class="cr-game-opt" data-game="' + g[0] + '" aria-checked="' + (setup.game === g[0]) + '"><span class="e" aria-hidden="true">' + g[1] + '</span><b>' + esc(g[2]) + '</b><span>' + esc(g[3]) + '</span></button>';
     }).join('');
@@ -231,16 +252,27 @@
         return '<button type="button" role="radio" class="cr-opt" data-k="' + k + '" data-v="' + o[0] + '" aria-checked="' + (setup[k] === o[0]) + '">' + esc(o[1]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</button>';
       }).join('');
     });
-    show('setup');
+    var g = GAMES.filter(function (x) { return x[0] === setup.game; })[0];
+    $('#wzSum').textContent = g[1] + ' ' + g[2] + ' · ' + optLabel('level', setup.level);
+    $('#wzBack').hidden = wzStep === 1;
+    $('#wzNext').hidden = wzStep === WZ.length;
+    $('#createBtn').hidden = wzStep !== WZ.length;
+    if ($('#setup').hidden) show('setup');
+    if (focus) { var h = document.querySelector('.wz-step[data-step="' + wzStep + '"] .wz-h'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } $('#wzSteps').scrollIntoView({ block: 'nearest' }); }
   }
+  function goStep(n) { wzStep = Math.max(1, Math.min(WZ.length, n)); renderSetup(true); }
+  $('#wzBack').onclick = function () { goStep(wzStep - 1); };
+  $('#wzNext').onclick = function () { goStep(wzStep + 1); };
   document.addEventListener('click', function (e) {
+    var w = e.target.closest('[data-wz]');
+    if (w) { goStep(+w.dataset.wz); return; }
     var g = e.target.closest('.cr-game-opt');
-    if (g) { setup.game = g.dataset.game; try { localStorage.setItem('ludskyoai-classroom-setup', JSON.stringify(setup)); } catch (x) {} renderSetup(); return; }
+    if (g) { setup.game = g.dataset.game; saveSetup(); goStep(2); return; }
     var b = e.target.closest('.cr-opt'); if (!b) return;
     setup[b.dataset.k] = b.dataset.v;
     if (b.dataset.k === 'level' && b.dataset.v === 'young') setup.names = 'list';
-    try { localStorage.setItem('ludskyoai-classroom-setup', JSON.stringify(setup)); } catch (x) {}
-    renderSetup();
+    saveSetup();
+    if (b.dataset.k === 'level') goStep(3); else renderSetup();
   });
 
   /* ---------- networking ---------- */
@@ -578,7 +610,7 @@
       setTimeout(function () { if (rt) rt.close(); rt = null; main = null; }, 300);
       G = null; try { sessionStorage.removeItem(STORE); } catch (x) {}
       document.body.classList.remove('projector');
-      renderSetup();
+      wzStep = 1; renderSetup();
     }
   });
   function confirmEnd() { var b = $('#endBtn'); if (b.dataset.sure) return true; b.dataset.sure = '1'; b.textContent = 'Naozaj? Kliknite znova'; setTimeout(function () { delete b.dataset.sure; b.textContent = '🏁 Ukončiť hru'; }, 3000); return false; }
