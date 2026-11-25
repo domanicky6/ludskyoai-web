@@ -71,7 +71,7 @@ html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:n
       <div class="fact" style="background:#EEECFF" data-stats="off"><span class="e" aria-hidden="true">🙈</span><b>Žiadne sledovanie</b><span>Nemeriame, kto si a čo tu robíš. Nemáme reklamné ani analytické nástroje.</span></div>
       <div class="fact" style="background:#EEECFF" data-stats="on"><span class="e" aria-hidden="true">📊</span><b>Len súčty, nie ty</b><span>Počítame, koľko ľudí si pozrie stránky a hry. Nevieme, kto si, a nesledujeme ťa na iných weboch.</span></div>
       <div class="fact" style="background:#FFF3CF" data-stats="off"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo aj ostatné súbory sú priamo na ludskyoai.sk. Nenačítavame nič od Googlu ani iných firiem.</span></div>
-      <div class="fact" style="background:#FFF3CF" data-stats="on"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo, skripty aj obrázky sú priamo na ludskyoai.sk. Jediná výnimka je anonymné počítanie návštev.</span></div>
+      <div class="fact" style="background:#FFF3CF" data-stats="on"><span class="e" aria-hidden="true">🏠</span><b>Všetko na jednom mieste</b><span>Písmo, skripty aj obrázky sú priamo na ludskyoai.sk. Výnimky sú len dve: anonymné počítanie návštev a spojenie pri hre pre celú triedu.</span></div>
       <div class="fact" style="background:#FFD6D3"><span class="e" aria-hidden="true">📱</span><b>Hry si pamätá tvoj prehliadač</b><span>Hviezdičky a odznaky zostávajú u teba. K nám sa nedostanú.</span></div>
     </div>
   </div>
@@ -88,6 +88,7 @@ html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:n
       <li><span class="e" aria-hidden="true">🔊</span><span><b>Nastavenia hier</b><small>Zvuk, väčšie písmo a pokojný režim.</small><span class="have" data-key="ludskyoai-hry-prefs"></span></span></li>
       <li><span class="e" aria-hidden="true">✅</span><span><b>Odškrtnuté kroky</b><small>Ktoré zo 7 krokov na stránke Začíname s AI máš hotové.</small><span class="have" data-key="ludskyoai-7dni"></span></span></li>
       <li><span class="e" aria-hidden="true">🔠</span><span><b>Väčšie písmo</b><small>Či máš zapnuté tlačidlo A+.</small><span class="have" data-key="ludskyoai-big"></span></span></li>
+      <li><span class="e" aria-hidden="true">🧗</span><span><b>Nastavenie hry pre triedu</b><small>Vek, režim a dĺžku, ktoré učiteľ naposledy zvolil.</small><span class="have" data-key="ludskyoai-classroom-setup"></span></span></li>
     </ul>
     <button type="button" class="btn" id="wipe">🗑 Vymazať všetko, čo si stránka pamätá</button>
     <p id="wipeMsg" aria-live="polite"></p>
@@ -110,6 +111,13 @@ html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:n
     <h2>Deti a školy</h2>
     <div class="prose">
       <p>Hry sú bez registrácie, bez chatu a bez písania mena. Dieťa o sebe nemusí nič vyplniť. V triede ich môžete spustiť na projektore bez akéhokoľvek účtu.</p>
+    </div>
+    <h2 id="trieda" style="margin-top:2.4rem;scroll-margin-top:5rem">Hra pre celú triedu</h2>
+    <div class="prose">
+      <p>V hre <a href="classroom.html">Ľudko na vrchol pre celú triedu</a> sa žiaci pripájajú z vlastných zariadení. Ich prehliadače sa s prehliadačom učiteľa spájajú cez službu <a href="https://supabase.com/">Supabase</a>. Jej server beží vo Frankfurte v Nemecku.</p>
+      <p><b>Čo sa posiela:</b> kód hry, prezývka, zvolené zvieratko, otázky a odpovede. Žiak nepíše meno ani e-mail a nepotrebuje účet. Prezývku si vyberie z ponuky. Vlastnú si môže napísať, len ak to učiteľ povolí.</p>
+      <p>Server správy len prepošle ostatným v tej istej hre. Do databázy ich neukladá. Ako každý server, aj tento pri spojení vidí IP adresu.</p>
+      <p>Výsledky vidí len učiteľ na svojej obrazovke. Prehliadač si stav hry drží v pamäti otvorenej karty, aby sa dalo pokračovať po náhodnom obnovení stránky. Po zatvorení karty zmizne.</p>
     </div>
     <h2 style="margin-top:2.4rem">Kde web beží a odkazy von</h2>
     <div class="prose">
@@ -134,7 +142,7 @@ html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:n
     <h2>Máš otázku?</h2>
     <div class="prose">
       <p>Napíš nám správu na Instagrame <a href="https://www.instagram.com/ludskyoai/">@ludskyoai</a>. Ak niečo z toho zmeníme, upravíme túto stránku a dátum pod ňou.</p>
-      <p class="upd">Naposledy upravené 18. 11. 2026.</p>
+      <p class="upd">Naposledy upravené 25. 11. 2026.</p>
     </div>
   </div>
 </section>
@@ -144,7 +152,7 @@ html:not(.stats-on) [data-stats="on"],html.stats-on [data-stats="off"]{display:n
 <script src="assets/ui.js"></script>
 <script>
 (function () {
-  var KEYS = ['ludskyoai-hry-v1', 'ludskyoai-hry-prefs', 'ludskyoai-7dni', 'ludskyoai-big'];
+  var KEYS = ['ludskyoai-hry-v1', 'ludskyoai-hry-prefs', 'ludskyoai-7dni', 'ludskyoai-big', 'ludskyoai-classroom-setup'];
   function has(k) { try { return localStorage.getItem(k) !== null; } catch (e) { return false; } }
   function show() {
     Array.prototype.forEach.call(document.querySelectorAll('.have'), function (el) {
