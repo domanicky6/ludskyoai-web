@@ -213,7 +213,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     stat('play/join');
     renderMe();
     if (m.phase === 'running') { if (!S.q) showWaitingQuestion(); }
-    else if (m.phase === 'lobby') lobby();
+    else if (m.phase === 'lobby') { lobby(); if (S.board) lobbyInfo(S.board); }
   }
   function onReject(m) {
     clearInterval(helloTimer);
@@ -245,7 +245,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     if (b.round !== S.round) { var newRound = S.round && b.round > S.round; S.round = b.round; if (newRound && b.phase === 'lobby') { lobby(); return; } }
     if (b.phase === 'lobby') {
       if (prev !== 'lobby' || $('#sWait').hidden) lobby();
-      $('#wInfo').textContent = '👥 ' + b.players.length + ' ' + C.plural(b.players.length, 'hráč', 'hráči', 'hráčov') + ' · ' + b.level;
+      lobbyInfo(b);
       return;
     }
     if (b.phase === 'running') {
@@ -258,6 +258,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
     }
     if (b.phase === 'finished' && prev !== 'finished') finalScreen(b, mine);
   }
+  function lobbyInfo(b) { var n = (b.players || []).length; $('#wInfo').textContent = '👥 ' + n + ' ' + C.plural(n, 'hráč', 'hráči', 'hráčov') + ' · ' + b.level; }
   function hud(b, mine) {
     $('#gLedge').textContent = (S.mode === 'team' ? '🤝 Rímsa ' + (b.team ? b.team.l : 0) : '🧗 Rímsa ' + S.ledge) + ' / ' + S.goal;
     var r = $('#gRank');
@@ -349,7 +350,7 @@ body.ingame .top,body.ingame .beta-bar,body.ingame .foot{display:none}
       var pos = mine ? mine.pos : 0;
       icon = ['🥇', '🥈', '🥉'][pos - 1] || '🏁';
       title = pos ? 'Si ' + pos + '. z ' + b.players.length : 'Koniec hry';
-      lead = mine ? (mine.d ? 'Vyliezol si až na vrchol. Super!' : 'Dostal si sa na rímsu ' + mine.l + ' z ' + b.goal + '.') : '';
+      lead = mine ? (mine.d ? 'Vyliezol si až na vrchol. Super!' : mine.l ? 'Dostal si sa na rímsu ' + mine.l + ' z ' + b.goal + '.' : 'Tentoraz si zostal pri štarte. Nabudúce to vyjde!') : '';
     }
     end(icon, title, lead + ' Ďakujeme za hranie! Počkaj, či učiteľ spustí ďalšie kolo.');
     $('#eTitle').dataset.k = 'final';
